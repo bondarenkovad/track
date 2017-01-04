@@ -22,8 +22,27 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+//        $request->user()->hasRole();
+
+        if($request->user() != null)
+        {
+            if($request->user()->hasRole())
+            {
+//                return $request->user()->group()->get();
+               return view('home');
+            }
+            else{
+                return view('welcome');
+//                return "Походу нет роли у юзера!";
+            }
+        }
+        else
+        {
+            return view('auth.login');
+        }
+
+//        return view('home');
     }
 }
