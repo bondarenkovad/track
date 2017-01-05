@@ -12,7 +12,7 @@ class CreateUsersRelationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_relations', function (Blueprint $table) {
+        Schema::create('group_user', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')
@@ -37,6 +37,6 @@ class CreateUsersRelationsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('users_relations');
+        Schema::drop('group_user');
     }
 }

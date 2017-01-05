@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
@@ -30,12 +31,11 @@ class HomeController extends Controller
         {
             if($request->user()->hasRole())
             {
-//                return $request->user()->group()->get();
-               return view('home');
+                $users = User::all();
+               return view('home', ['users'=>$users]);
             }
             else{
                 return view('welcome');
-//                return "Походу нет роли у юзера!";
             }
         }
         else
