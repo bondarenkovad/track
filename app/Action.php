@@ -9,6 +9,6 @@ class Action extends Model
 {
     public function property_groups()
     {
-        return $this->hasMany('App/Property_Group');
+        return $this->hasMany('App\Property_Group');
     }
 }
