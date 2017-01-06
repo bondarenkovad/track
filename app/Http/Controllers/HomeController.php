@@ -35,7 +35,8 @@ class HomeController extends Controller
                return view('home', ['users'=>$users]);
             }
             else{
-                return view('welcome');
+                $user = $request->user();
+                return view('welcome', ['user'=>$user]);
             }
         }
         else
