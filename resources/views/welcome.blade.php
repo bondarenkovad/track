@@ -8,7 +8,14 @@
                 <div class="panel-heading">Welcome</div>
 
                 <div class="panel-body">
-                    Any user may came to this page!!!
+                    <p>You are {{$user->name}} and your groups is:</p>
+                    <ul>
+                        @foreach($user->groups()->get() as $group)
+                            <li>{{$group->name}}</li>
+                            @endforeach
+                    </ul>
+
+                    {{$user->getMethod()->get()}}
                 </div>
             </div>
         </div>

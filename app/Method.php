@@ -6,15 +6,15 @@ use App\Action;
 use App\Group;
 use Illuminate\Database\Eloquent\Model;
 
-class Property_Group extends Model
+class Method extends Model
 {
     public function actions()
     {
         return $this->hasMany('App\Action');
     }
 
-    public function propGroup()
+    public function group()
     {
-        return $this->hasOne('App\Group');
+        return $this->belongsTo('App\Group');
     }
 }

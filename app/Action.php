@@ -3,12 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Property_Group;
+use App\Method;
 
 class Action extends Model
 {
-    public function property_groups()
+    public function methods()
     {
-        return $this->hasMany('App\Property_Group');
+        return $this->hasMany('App\Method');
     }
 }

@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Group;
+use App\Method;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -46,78 +48,17 @@ class User extends Authenticatable
             }
 
         return false;
-
-//        if(is_array($allRoles))
-//        {
-//            foreach($allRoles as $group)
-//            {
-//                echo $group->name;
-//            }
-//        }
-//        else if(is_string($allRoles))
-//        {
-//            echo $allRoles;
-//        }
-//        else
-//        {
-//            echo "Что то другое вернулось!";
-//        }
-//        $role = "Administrator";
-//
-//        $u = $this->groups()->get();
-//
-//        if(is_array($u))
-//        {
-//            foreach($u as $group)
-//            {
-//                if($group->name === $role)
-//                {
-//                    return true;
-//                }
-////                echo $group->name;
-//            }
-//        }
-//        else
-//        {
-//            if($u === $role)
-//            {
-//                return true;
-//            }
-//        }
-//
-//        return false;
-
-//        dd($this->groups()->get());
-//        foreach($this->groups() as $group)
-//        {
-//            dd($group);
-//        }
-//      echo $this->groups()->find();
-
-//        if($this->hasRole())
-//        {
-//
-//        }
-
-//        if(is_array($this->groups()))
-//        {
-//            foreach($this->groups() as $group)
-//            {
-//                if($group->where('name', $role)->first())
-//                {
-//                    return true;
-//                }
-//            }
-//        }
-//        else
-//        {
-//            if($this->groups()->where('name', $role)->first())
-//            {
-//                return true;
-//            }
-//        }
-//
-//
-//        return false;
    }
+
+    public function methods()
+    {
+        return $this->belongsToMany('App\Method');
+    }
+
+    public function getMethod()
+    {
+//        return $this->groups()->methods()->get();
+//       dd($this->groups()->with('group_method')->get());
+        return DB::table('actions')->get();
+    }
 }
