@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGroupRelations extends Migration
+class CreateGroupUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateGroupRelations extends Migration
      */
     public function up()
     {
-        Schema::create('group_relations', function (Blueprint $table) {
+        Schema::create('group_user', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('group_id')->unsigned();
             $table->foreign('group_id')
@@ -20,10 +20,10 @@ class CreateGroupRelations extends Migration
                 ->on('groups')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->integer('action_id')->unsigned();
-            $table->foreign('action_id')
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')
                 ->references('id')
-                ->on('actions')
+                ->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->timestamps();
@@ -37,6 +37,6 @@ class CreateGroupRelations extends Migration
      */
     public function down()
     {
-        Schema::drop('group_relations');
+        Schema::drop('group_user');
     }
 }

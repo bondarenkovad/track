@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateActionsTable extends Migration
+class CreateMethodsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,8 @@ class CreateActionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('actions', function (Blueprint $table) {
+        Schema::create('methods', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('method_key', 50)->unique();
             $table->string('name', 50);
             $table->timestamps();
         });
@@ -27,6 +26,6 @@ class CreateActionsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('actions');
+        Schema::drop('methods');
     }
 }
