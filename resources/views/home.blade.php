@@ -3,6 +3,12 @@
 @section('content')
 <div class="container">
     <div class="row">
+        And you also may:
+        <ul>@foreach($user->getActions() as $action)</ul>
+        <li>{{$action->name}}</li>
+        @endforeach
+    </div>
+    <div class="row">
         <table class="table table-hover">
             <thead>
             <th>Name</th>

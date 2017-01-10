@@ -31,8 +31,9 @@ class HomeController extends Controller
         {
             if($request->user()->hasRole())
             {
+                $user = $request->user();
                 $users = User::all();
-               return view('home', ['users'=>$users]);
+               return view('home', ['users'=>$users, 'user'=>$user]);
             }
             else{
                 $user = $request->user();

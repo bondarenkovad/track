@@ -55,10 +55,23 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Method');
     }
 
-    public function getMethod()
+    public function getActions()
     {
 //        return $this->groups()->methods()->get();
 //       dd($this->groups()->with('group_method')->get());
-        return DB::table('actions')->get();
+//        return DB::table('actions')->get();
+
+        return $actions = DB::table('users')
+            ->join('group_user', 'users.id', '=', 'group_user.user_id')
+            ->join('groups', 'groups.id', '=', 'group_user.group_id')
+            ->join('group_method', 'groups.id', '=', 'group_method.group_id')
+            ->join('methods', 'methods.id', '=', 'group_method.method_id')
+            ->join('action_method', 'methods.id', '=', 'action_method.method_id')
+            ->join('actions', 'actions.id', '=', 'action_method.action_id')
+            ->where('users.name', '=', $this->name)
+            ->select('users.name', 'actions.name')
+            ->get();
+
+//        dd($actions);
     }
 }

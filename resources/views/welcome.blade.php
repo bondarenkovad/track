@@ -14,8 +14,10 @@
                             <li>{{$group->name}}</li>
                             @endforeach
                     </ul>
-
-                    {{$user->getMethod()->get()}}
+                    <p>You may:</p>
+                    <ul>@foreach($user->getActions() as $action)</ul>
+                    <li>{{$action->name}}</li>
+                    @endforeach
                 </div>
             </div>
         </div>
