@@ -21,7 +21,7 @@
             <tbody>
             @foreach($users as $user)
                 <tr>
-                    <form action="" method="post">
+                    <form action="store" method="post">
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}} <input type="hidden" name="email" value="{{$user->email}}"></td>
                         <td>
@@ -29,9 +29,9 @@
                             <li>{{$group->name}}</li>
                             @endforeach
                         </td>
-                        <td><input type="checkbox" {{$user->hasGroup('Administrator') ? 'checked' : ''}} name="group_user"></td>
+                        <td><input type="checkbox" {{$user->hasGroup('Administrator') ? 'checked' : ''}} name="group_admin"></td>
                         <td><input type="checkbox" {{$user->hasGroup('PM') ? 'checked' : ''}} name="group_pm"></td>
-                        <td><input type="checkbox" {{$user->hasGroup('User') ? 'checked' : ''}} name="group_admin"></td>
+                        <td><input type="checkbox" {{$user->hasGroup('User') ? 'checked' : ''}} name="group_user"></td>
                         {{--<td></td>--}}
                         {{--<td></td>--}}
                         {{csrf_field()}}

@@ -44,12 +44,23 @@
                 </a>
             </div>
 
-            <div class="collapse navbar-collapse" id="app-navbar-collapse">
+            <div class="collapse navbar-collapse data" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
+
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/') }}">Home</a></li>
-                </ul>
 
+                    <li class="dropdown">
+                        <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            User
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dLabel">
+                            <li><a href="{{ url('/user') }}">List</a></li>
+                            <li><a href="{{ url('/user') }}">Group</a></li>
+                        </ul>
+                    </li>
+                </ul>
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->

@@ -50,4 +50,28 @@ class HomeController extends Controller
 
 //        return view('home');
     }
+
+    public function store(Request $request)
+    {
+        $user = User::all()->where('email', $request->email)->first();
+
+        if($request->group_user)
+        {
+
+            echo $user->name." У нас присвоены права юзера!";
+        }
+
+        if($request->group_pm)
+        {
+            echo $user->name."...и Прожект Менеджера!";
+        }
+
+        if($request->group_admin)
+        {
+            echo $user->name."...и админа! Надо что-то с этим делать!";
+        }
+
+
+//        echo "Типа этот метод выполняется!";
+    }
 }

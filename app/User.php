@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Group;
-use App\Method;
 use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
@@ -59,11 +58,6 @@ class User extends Authenticatable
             return false;
     }
 
-    public function methods()
-    {
-        return $this->belongsToMany('App\Method');
-    }
-
     public function getActions()
     {
 //        return $this->groups()->methods()->get();
@@ -73,10 +67,8 @@ class User extends Authenticatable
         return $actions = DB::table('users')
             ->join('group_user', 'users.id', '=', 'group_user.user_id')
             ->join('groups', 'groups.id', '=', 'group_user.group_id')
-            ->join('group_method', 'groups.id', '=', 'group_method.group_id')
-            ->join('methods', 'methods.id', '=', 'group_method.method_id')
-            ->join('action_method', 'methods.id', '=', 'action_method.method_id')
-            ->join('actions', 'actions.id', '=', 'action_method.action_id')
+            ->join('action_group', 'groups.id', '=', 'action_group.group_id')
+            ->join('actions', 'actions.id', '=', 'action_group.action_id')
             ->where('users.name', '=', $this->name)
             ->select('users.name', 'actions.name')
             ->get();

@@ -18,8 +18,10 @@ Route::auth();
 
 Route::get('/', 'HomeController@index');
 
-Route::any('{all}', function(){
-    return view('auth.login');
-})
-    ->where('all', '.*');
+Route::post('/store', 'HomeController@store');
+
+//Route::any('{all}', function(){
+//    return view('auth.login');
+//})
+//    ->where('all', '.*');
 
