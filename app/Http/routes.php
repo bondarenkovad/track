@@ -11,8 +11,15 @@
 |
 */
 
+
+
+
 Route::auth();
 
 Route::get('/', 'HomeController@index');
 
+Route::any('{all}', function(){
+    return view('auth.login');
+})
+    ->where('all', '.*');
 
