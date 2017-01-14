@@ -13,7 +13,10 @@
             <thead>
             <th>Name</th>
             <th>E-mail</th>
-            <th>Group</th>
+            <th>Groups</th>
+            <th>Administrator</th>
+            <th>PM</th>
+            <th>User</th>
             </thead>
             <tbody>
             @foreach($users as $user)
@@ -22,16 +25,13 @@
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}} <input type="hidden" name="email" value="{{$user->email}}"></td>
                         <td>
-                            <ul>
-                                @foreach($user->groups()->get() as $group)
-                            </ul>
-
+                           <ul> @foreach($user->groups()->get() as $group)</ul>
                             <li>{{$group->name}}</li>
                             @endforeach
                         </td>
-                        {{--<td><input type="checkbox" {{$user->hasRole('User') ? 'checked' : ''}} name="role_user"></td>--}}
-                        {{--<td><input type="checkbox" {{$user->hasRole('Author') ? 'checked' : ''}} name="role_author"></td>--}}
-                        {{--<td><input type="checkbox" {{$user->hasRole('Admin') ? 'checked' : ''}} name="role_admin"></td>--}}
+                        <td><input type="checkbox" {{$user->hasGroup('Administrator') ? 'checked' : ''}} name="group_user"></td>
+                        <td><input type="checkbox" {{$user->hasGroup('PM') ? 'checked' : ''}} name="group_pm"></td>
+                        <td><input type="checkbox" {{$user->hasGroup('User') ? 'checked' : ''}} name="group_admin"></td>
                         {{--<td></td>--}}
                         {{--<td></td>--}}
                         {{csrf_field()}}

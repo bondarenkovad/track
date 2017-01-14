@@ -15,7 +15,7 @@
                             @endforeach
                     </ul>
                     <p>You may:</p>
-                    @if($user->hasRole())
+                    @if($user->hasAnyGroup())
                         <ul>@foreach($user->getActions() as $action)</ul>
                         <li>{{$action->name}}</li>
                         @endforeach

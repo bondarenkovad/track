@@ -50,7 +50,7 @@ class User extends Authenticatable
         return false;
    }
 
-    public function hasRole()
+    public function hasAnyGroup()
     {
         if( (!$this->groups()->get()) === [] )
         {
@@ -82,5 +82,22 @@ class User extends Authenticatable
             ->get();
 
 //        dd($actions);
+    }
+
+    public function getAllGroups()
+    {
+        return $groups = DB::table('groups')
+            ->select('groups.name')
+            ->get();
+    }
+
+    public function hasGroup($group)
+    {
+        if($this->groups()->where('name', $group)->first())
+        {
+            return true;
+        }
+
+        return false;
     }
 }
