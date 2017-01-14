@@ -26,17 +26,20 @@ class HomeController extends Controller
     public function index(Request $request)
     {
 //        $request->user()->hasRole();
+        $user = $request->user();
 
         if($request->user() != null)
         {
-            if($request->user()->hasRole())
+            if($request->user()->ifAdmin())
             {
-                $user = $request->user();
                 $users = User::all();
                return view('home', ['users'=>$users, 'user'=>$user]);
             }
+//            else if(!$request->user()->hasRole())
+//            {
+//                return "У вас не назначены роли, обратитесь к администратору!";
+//            }
             else{
-                $user = $request->user();
                 return view('welcome', ['user'=>$user]);
             }
         }

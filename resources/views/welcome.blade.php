@@ -15,9 +15,13 @@
                             @endforeach
                     </ul>
                     <p>You may:</p>
-                    <ul>@foreach($user->getActions() as $action)</ul>
-                    <li>{{$action->name}}</li>
-                    @endforeach
+                    @if($user->hasRole())
+                        <ul>@foreach($user->getActions() as $action)</ul>
+                        <li>{{$action->name}}</li>
+                        @endforeach
+                            @else
+                         You not have any role, contact to Administrator!
+                     @endif
                 </div>
             </div>
         </div>

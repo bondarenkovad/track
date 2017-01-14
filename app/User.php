@@ -32,7 +32,7 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Group');
     }
 
-    public function hasRole()
+    public function ifAdmin()
     {
         $role = "Administrator";
 
@@ -49,6 +49,15 @@ class User extends Authenticatable
 
         return false;
    }
+
+    public function hasRole()
+    {
+        if( (!$this->groups()->get()) === [] )
+        {
+            return true;
+        }
+            return false;
+    }
 
     public function methods()
     {
