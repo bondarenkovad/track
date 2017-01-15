@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateActionMethodTable extends Migration
+class CreateActionGroupTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateActionMethodTable extends Migration
      */
     public function up()
     {
-        Schema::create('action_method', function (Blueprint $table) {
+        Schema::create('action_group', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('action_id')->unsigned();
             $table->foreign('action_id')
@@ -20,10 +20,10 @@ class CreateActionMethodTable extends Migration
                 ->on('actions')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->integer('method_id')->unsigned();
-            $table->foreign('method_id')
+            $table->integer('group_id')->unsigned();
+            $table->foreign('group_id')
                 ->references('id')
-                ->on('methods')
+                ->on('groups')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->timestamps();
@@ -37,6 +37,6 @@ class CreateActionMethodTable extends Migration
      */
     public function down()
     {
-        Schema::drop('action_method');
+        Schema::drop('action_group');
     }
 }
