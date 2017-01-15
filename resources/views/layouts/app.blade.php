@@ -56,8 +56,18 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dLabel">
-                            <li><a href="{{ url('/user') }}">List</a></li>
-                            <li><a href="{{ url('/user') }}">Group</a></li>
+                            <li><a href="{{ url('/user/index') }}">Users List</a></li>
+                            <li><a href="{{ url('/') }}">Add User</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Group
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dLabel">
+                            <li><a href="{{ url('/') }}">Group List</a></li>
+                            <li><a href="{{ url('/') }}">Group Add</a></li>
                         </ul>
                     </li>
                 </ul>
