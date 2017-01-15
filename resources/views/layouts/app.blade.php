@@ -57,7 +57,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dLabel">
                             <li><a href="{{ url('/user/index') }}">Users List</a></li>
-                            <li><a href="{{ url('/') }}">Add User</a></li>
+                            <li><a href="{{ url('/user/add') }}">Add User</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
