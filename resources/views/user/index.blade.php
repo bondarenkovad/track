@@ -7,6 +7,7 @@
                 <thead>
                 <th>Name</th>
                 <th>E-mail</th>
+                <th>Active</th>
                 <th>Groups</th>
                 </thead>
                 <tbody>
@@ -15,6 +16,7 @@
                         {{--<form action="" method="post">--}}
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}} <input type="hidden" name="email" value="{{$user->email}}"></td>
+                            <td>{{$user->active}}</td>
                             <td>
                                 <ul> @foreach($user->groups()->get() as $group)</ul>
                                 <li>{{$group->name}}</li>
