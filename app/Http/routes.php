@@ -18,6 +18,8 @@ Route::auth();
 
 Route::get('/', 'HomeController@index');
 
+Route::get('/user', 'UserController@index');
+
 Route::post('/store', 'HomeController@store');
 
 //Route::any('{all}', function(){
