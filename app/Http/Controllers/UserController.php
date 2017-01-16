@@ -37,6 +37,7 @@ class UserController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|max:255',
+            'active' => 'required|integer|between:0,1',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
@@ -44,10 +45,13 @@ class UserController extends Controller
 
     protected function create(Request $request)
     {
+
+//        dd((int)$request['active']);
          User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => bcrypt($request['password']),
+             'active'=>(int)$request['active'],
         ]);
 
         return redirect('user/index');

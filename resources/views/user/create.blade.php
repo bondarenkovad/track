@@ -35,6 +35,14 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="active" class="col-md-4 control-label">Active status</label>
+
+                        <div class="col-md-6">
+                            <input type="number" class="form-control" name="active" min="0" max="1">
+                        </div>
+                    </div>
+
                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                         <label for="password" class="col-md-4 control-label">Password</label>
 
