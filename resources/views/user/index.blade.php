@@ -9,6 +9,7 @@
                 <th>E-mail</th>
                 <th>Active</th>
                 <th>Groups</th>
+                <th>Edit</th>
                 </thead>
                 <tbody>
                 @foreach($users as $user)
@@ -22,6 +23,7 @@
                                 <li>{{$group->name}}</li>
                                 @endforeach
                             </td>
+                            <td><a  href="/user/edit/{{$user->id}}" class="btn btn-success" >Edit</a> </td>
                             {{--{{csrf_field()}}--}}
                             {{--<td><button type="submit">Assign Roles</button> </td>--}}
                         {{--</form>--}}

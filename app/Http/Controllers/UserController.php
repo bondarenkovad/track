@@ -43,7 +43,7 @@ class UserController extends Controller
         ]);
     }
 
-    protected function create(Request $request)
+    public function create(Request $request)
     {
 
 //        dd((int)$request['active']);
@@ -56,4 +56,32 @@ class UserController extends Controller
 
         return redirect('user/index');
     }
+
+    public function edit($id)
+    {
+        $user = User::find($id);
+        return view('user.edit', ['user'=>$user]);
+    }
+
+    public function update($id, Request $request)
+    {
+        $user = User::findOrFail($id);
+
+        dd($id);
+//        $this->validate($request, [
+//            'name' => 'required|max:255',
+//            'email' => 'required|email|max:255|unique:users',
+//            'active'=>'required|between:0,1',
+//        ]);
+//
+//        $input = $request->all();
+//
+//        $user->fill($input)->save();
+//
+//        Session::flash('flash_message', 'Task successfully added!');
+//
+//        return redirect()->back();
+    }
+
+
 }
