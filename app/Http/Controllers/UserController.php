@@ -65,22 +65,16 @@ class UserController extends Controller
 
     public function update($id, Request $request)
     {
-        $user = User::findOrFail($id);
-
-        dd($id);
+        dd($request->user());
 //        $this->validate($request, [
 //            'name' => 'required|max:255',
+//            'active' => 'required|integer|between:0,1',
 //            'email' => 'required|email|max:255|unique:users',
-//            'active'=>'required|between:0,1',
 //        ]);
 //
-//        $input = $request->all();
-//
-//        $user->fill($input)->save();
-//
-//        Session::flash('flash_message', 'Task successfully added!');
-//
-//        return redirect()->back();
+//        User::find($id)->update($request->all());
+//        return redirect()->route('user.index')
+//            ->with('success','User updated successfully!');
     }
 
 

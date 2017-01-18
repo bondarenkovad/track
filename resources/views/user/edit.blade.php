@@ -4,14 +4,29 @@
     <div class="container">
         <div class="row">
             <div class="panel-body">
-                <form class="form-horizontal" role="form" method="PUT" action="update">
+                <form class="form-horizontal" role="form" method="PUT" action="/user/edit/{{$user->id}}">
                     {{ csrf_field() }}
 
-                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                    {{--<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">--}}
+
+                        {{--<div class="col-md-6">--}}
+                            {{--<input type="hidden" value="{{ $user->id }}" name="id">--}}
+
+                            {{--@if ($errors->has('name'))--}}
+                            {{--<span class="help-block">--}}
+                            {{--<strong>{{ $errors->first('name') }}</strong>--}}
+                            {{--</span>--}}
+                            {{--@endif--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+
+
+
+                    <div class="form-group">
                         <label for="name" class="col-md-4 control-label">Name</label>
 
                         <div class="col-md-6">
-                            <input id="name" type="text" class="form-control" name="name" value="{{ $user->name }}">
+                            <input type="text" class="form-control" name="name" value="{{$user->name}}">
 
                             {{--@if ($errors->has('name'))--}}
                                 {{--<span class="help-block">--}}
@@ -21,7 +36,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                    <div class="form-group">
                         <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
                         <div class="col-md-6">
@@ -40,6 +55,7 @@
 
                         <div class="col-md-6">
                             <input type="number" class="form-control" name="active" min="0" max="1" value="{{$user->active}}">
+
                         </div>
                     </div>
 
@@ -73,9 +89,9 @@
 
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
-                            <a href="/user/edit/{{$user->id}}" type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-primary">
                                 <i class="fa fa-btn fa-user"></i> Update
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </form>
