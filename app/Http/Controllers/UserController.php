@@ -28,7 +28,7 @@ class UserController extends Controller
         }
     }
 
-    public function add()
+    public function create()
     {
         return view('user.create');
     }
@@ -43,7 +43,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
 
 //        dd((int)$request['active']);
@@ -65,7 +65,13 @@ class UserController extends Controller
 
     public function update($id, Request $request)
     {
-        dd($request->user());
+
+        $user=User::find($id);
+        $user->update($request->all());
+        $user->save();
+        session()->flash('status', 'User successfully saved!');
+        return redirect('user/index');
+//        dd($request->user());
 //        $this->validate($request, [
 //            'name' => 'required|max:255',
 //            'active' => 'required|integer|between:0,1',

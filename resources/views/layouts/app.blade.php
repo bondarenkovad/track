@@ -56,8 +56,8 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dLabel">
-                            <li><a href="{{ url('/user/index') }}">Users List</a></li>
-                            <li><a href="{{ url('/user/add') }}">Add User</a></li>
+                            <li><a href="/user/index">Users List</a></li>
+                            <li><a href="/user/add">Add User</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -92,10 +92,17 @@
             </div>
         </div>
     </nav>
-
+    @if(Session::has('status'))
+        <h3 id="flash" class="alert alert-success">{{Session::get('status')}}</h3>
+        @endif
     @yield('content')
 
     <!-- JavaScripts -->
+        <script>
+            setTimeout(function(){
+                $('#flash').fadeOut('fast');
+            }, 2000);
+        </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}

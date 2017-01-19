@@ -17,10 +17,10 @@
 Route::auth();
 
 Route::get('/', 'HomeController@index');
-
+//Route::resource('Users', 'UserController');
 Route::get('/user/index', 'UserController@index');
-Route::get('/user/add', 'UserController@add');
-Route::post('/user/create', 'UserController@create');
+Route::get('/user/add', 'UserController@create');
+Route::post('/user/create', 'UserController@store');
 Route::get('/user/edit/{id}', 'UserController@edit');
 Route::put('/user/edit/{id}', 'UserController@update');
 

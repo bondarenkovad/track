@@ -4,7 +4,17 @@
     <div class="container">
         <div class="row">
             <div class="panel-body">
-                <form class="form-horizontal" role="form" method="PUT" action="/user/edit/{{$user->id}}">
+                <form class="form-horizontal" role="form" method="POST" action="{{action('UserController@update', ['user'=>$user->id])}}">
+                    {{--<form method="POST" action="{{action('CategoriesController@update',['categories'=>$category->id])}}"/>--}}
+                    {{--Название категории<br>--}}
+                    {{--<input type="text" name="title" value="{{$category->title}}"/><br>--}}
+                    <input type="hidden" name="_method" value="put"/>
+                    {{--<input type="hidden" name="_token" value="{{csrf_token()}}"/>--}}
+                    {{--<input type="submit" value="Сохранить">--}}
+                {{--</form>--}}
+                {{--@if(Session::has('message'))--}}
+                    {{--{{Session::get('message')}}--}}
+                {{--@endif--}}
                     {{ csrf_field() }}
 
                     {{--<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">--}}
