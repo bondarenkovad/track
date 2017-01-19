@@ -67,20 +67,24 @@ class UserController extends Controller
     {
 
         $user=User::find($id);
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'active' => 'required|integer|between:0,1',
+            'email' => 'required|email|max:255',
+        ]);
         $user->update($request->all());
         $user->save();
         session()->flash('status', 'User successfully saved!');
         return redirect('user/index');
 //        dd($request->user());
-//        $this->validate($request, [
-//            'name' => 'required|max:255',
-//            'active' => 'required|integer|between:0,1',
-//            'email' => 'required|email|max:255|unique:users',
-//        ]);
-//
-//        User::find($id)->update($request->all());
-//        return redirect()->route('user.index')
-//            ->with('success','User updated successfully!');
+
+////
+//        $user=User::find($id);
+//        $user->update($request->all());
+//        $user->save();
+////        User::find($id)->update($request->all());
+//        session()->flash('status', 'User successfully saved!');
+//        return redirect('user/index');
     }
 
 
