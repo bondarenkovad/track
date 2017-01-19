@@ -67,6 +67,11 @@ class UserController extends Controller
     {
 
         $user=User::find($id);
+
+//        $user->addGroupToUser();
+
+
+//
         $this->validate($request, [
             'name' => 'required|max:255',
             'active' => 'required|integer|between:0,1',
@@ -76,6 +81,9 @@ class UserController extends Controller
         $user->save();
         session()->flash('status', 'User successfully saved!');
         return redirect('user/index');
+
+
+//        ==============================
 //        dd($request->user());
 
 ////

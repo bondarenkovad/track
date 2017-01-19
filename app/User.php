@@ -92,4 +92,16 @@ class User extends Authenticatable
 
         return false;
     }
+
+    public function addGroupToUser()
+    {
+//        dd($this->id);
+
+        $groupID = DB::table('groups')->first()->id;
+//        dd($groupID);
+        DB::table('group_user')
+            ->insert([
+             ['group_id'=>$groupID, 'user_id'=>$this->id]
+            ]);
+    }
 }
