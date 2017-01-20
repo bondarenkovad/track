@@ -51,7 +51,9 @@ class User extends Authenticatable
 
     public function hasAnyGroup()
     {
-        if( (!$this->groups()->get()) === [] )
+//        dd($this->groups()->exists());
+
+        if( ($this->groups()->exists()) )
         {
             return true;
         }

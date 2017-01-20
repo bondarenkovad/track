@@ -21,6 +21,7 @@ Route::get('/', 'HomeController@index');
 Route::get('/user/index', 'UserController@index');
 Route::get('/user/add', 'UserController@create');
 Route::post('/user/create', 'UserController@store');
+Route::get('/user/show/{id}', 'UserController@show');
 Route::get('/user/edit/{id}', 'UserController@edit');
 Route::put('/user/edit/{id}', 'UserController@update');
 

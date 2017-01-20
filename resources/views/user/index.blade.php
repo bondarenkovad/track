@@ -9,6 +9,7 @@
                 <th>E-mail</th>
                 <th>Active</th>
                 <th>Groups</th>
+                <th>Show</th>
                 <th>Edit</th>
                 </thead>
                 <tbody>
@@ -23,7 +24,8 @@
                                 <li>{{$group->name}}</li>
                                 @endforeach
                             </td>
-                            <td><a  href="/user/edit/{{$user->id}}" class="btn btn-success" >Edit</a> </td>
+                        <td><a  href="/user/show/{{$user->id}}" class="btn btn-default" >Show</a> </td>
+                            <td><a  href="/user/edit/{{$user->id}}" class="btn btn-success" >Edit</a></td>
                             {{--{{csrf_field()}}--}}
                             {{--<td><button type="submit">Assign Roles</button> </td>--}}
                         {{--</form>--}}
