@@ -5,7 +5,15 @@
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">{{$user->name}} ({{$user->email}})</h3>
+                    <h3 class="panel-title">{{$user->name}} ({{$user->email}}) |
+                        @if($user->active)
+                            <img src="/img/status_icon/on.png">
+                            {{--<i class="glyphicon glyphicon-ok-sign"></i>--}}
+                        @else
+                            <img src="/img/status_icon/off.png">
+                        {{--<i class="glyphicon glyphicon-remove-sign"></i>--}}
+                        @endif
+                    </h3>
                 </div>
                 <div class="panel-body">
                     <p><b>Group is:</b></p>
@@ -19,19 +27,18 @@
                         @endif
                     </ul>
                     <p><b>And may:</b></p>
-
                 </div>
                 <ul class="list-group">
                     @if($user->hasAnyGroup())
                         @foreach($user->getActions() as $action)
                                 <li class="list-group-item">{{$action->name}}</li>
-
                         @endforeach
                     @else
-                        You not have any role, contact to Administrator!
+                        <li class="list-group-item">You not have any role, contact to Administrator!</li>
                     @endif
                 </ul>
             </div>
+            <a href="/user/index" class="btn btn-primary">Back to List</a>
         </div>
     </div>
 @endsection

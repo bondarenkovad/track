@@ -18,7 +18,15 @@
                         {{--<form action="" method="post">--}}
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}} <input type="hidden" name="email" value="{{$user->email}}"></td>
-                            <td>{{$user->active}}</td>
+                            <td>
+                                @if($user->active)
+                                    <img src="/img/status_icon/on.png">
+                                    {{--<i class="glyphicon glyphicon-ok-sign"></i>--}}
+                                @else
+                                    <img src="/img/status_icon/off.png">
+                                    {{--<i class="glyphicon glyphicon-remove-sign"></i>--}}
+                                @endif
+                            </td>
                             <td>
                                 <ul> @foreach($user->groups()->get() as $group)</ul>
                                 <li>{{$group->name}}</li>
