@@ -25,6 +25,11 @@ Route::get('/user/show/{id}', 'UserController@show');
 Route::get('/user/edit/{id}', 'UserController@edit');
 Route::put('/user/edit/{id}', 'UserController@update');
 
+//Group routing
+Route::get('/group/index', 'GroupController@index');
+Route::get('/group/add', 'GroupController@create');
+Route::post('/group/create', 'GroupController@store');
+
 Route::post('/store', 'HomeController@store');
 
 //Route::any('{all}', function(){

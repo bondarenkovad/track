@@ -4,17 +4,21 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
-use App\Method;
+use App\Action;
 
 class Group extends Model
 {
+    protected $fillable = [
+        'name'
+    ];
+
     public function users()
     {
         return $this->belongsToMany('App\User');
     }
 
-    public function methods()
+    public function actions()
     {
-        return $this->belongsToMany('App\Method');
+        return $this->belongsToMany('App\Action');
     }
 }

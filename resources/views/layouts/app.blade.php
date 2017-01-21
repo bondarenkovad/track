@@ -66,8 +66,8 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dLabel">
-                            <li><a href="{{ url('/') }}">Group List</a></li>
-                            <li><a href="{{ url('/') }}">Group Add</a></li>
+                            <li><a href="/group/index">Group List</a></li>
+                            <li><a href="/group/add">Group Add</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -94,6 +94,9 @@
     </nav>
     @if(Session::has('status'))
         <h3 id="flash" class="alert alert-success">{{Session::get('status')}}</h3>
+        @endif
+    @if(Session::has('danger'))
+        <h3 id="flash" class="alert alert-danger">{{Session::get('danger')}}</h3>
         @endif
     @yield('content')
 
