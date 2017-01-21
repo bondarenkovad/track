@@ -82,7 +82,7 @@ class User extends Authenticatable
     public function getAllGroups()
     {
         return $groups = DB::table('groups')
-            ->select('groups.name')
+            ->select('groups.name', 'groups.id')
             ->get();
     }
 
@@ -96,18 +96,18 @@ class User extends Authenticatable
         return false;
     }
 
-    public function addGroupToUser($groupName)
+    public function addGroupToUser($groupId)
     {
-        $groupId = DB::table('groups')->where('name', $groupName)->first()->id;
+//        $groupId = DB::table('groups')->where('name', $groupName)->first()->id;
 
         DB::table('group_user')->insert(
             array('group_id' => $groupId, 'user_id' => $this->id)
         );
     }
 
-    public function deleteGroupToUser($groupName)
+    public function deleteGroupToUser($groupId)
     {
-        $groupId = DB::table('groups')->where('name', $groupName)->first()->id;
+//        $groupId = DB::table('groups')->where('name', $groupName)->first()->id;
 
         $id = DB::table('group_user')
             ->where('group_user.user_id', '=', $this->id)

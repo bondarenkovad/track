@@ -76,7 +76,7 @@
                             <ul class="list-group">
                                 @foreach($user->getAllGroups() as $group)
                                     <li class="list-group-item" name="{{$group->name}}">
-                                        {{$group->name}}| <input type="checkbox"  {{ old('type',$user->hasGroup($group->name) )  ? 'checked' : '' }} name="{{$group->name}}">
+                                        {{$group->name}}| <input type="checkbox"  {{ old('type',$user->hasGroup($group->name) )  ? 'checked' : '' }} name="group[{{$group->id}}]">
                                     </li>
                                 @endforeach
                             </ul>

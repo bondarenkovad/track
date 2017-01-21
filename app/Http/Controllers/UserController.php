@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Group;
 use Validator;
 use App\Http\Requests;
 
@@ -71,91 +72,105 @@ class UserController extends Controller
 
     public function update($id, Request $request)
     {
-
+        $allGroup = Group::all();
         $user=User::find($id);
 
-        $admin = $request->Administrator;
-        $us = $request->User;
-        $pm = $request->PM;
+//        $admin = $request->Administrator;
+        $groups = $request->group;
+//        $pm = $request->PM;
 
-        $isAdmin = $user->hasGroup('Administrator');
-        $isUser = $user->hasGroup('User');
-        $isPM = $user->hasGroup('PM');
-
-      //  dd($isAdmin, $isUser, $isPM,$admin, $us, $pm);
-//        dd($request->Administrator);
-
-        //==========================
-        if($isAdmin && ($admin == null))
+        foreach($allGroup as $group)
         {
-            $user->deleteGroupToUser('Administrator');
-        }
-
-        if($isUser && ($us == null))
-        {
-            $user->deleteGroupToUser('User');
-        }
-
-        if($isPM && ($pm == null))
-        {
-            $user->deleteGroupToUser('PM');
-        }
-
-        if(!$admin == null)
-        {
-            if($user->hasGroup('Administrator'))
+  //         dd($group->id);
+            if(array_key_exists($group->id, $groups))
             {
-//                echo "Админ права уже есть!";
+                $user->addGroupToUser($group->id);
             }
             else
             {
-                $user->addGroupToUser('Administrator');
-            }
+               $user->deleteGroupToUser($group->id);
 
-        }
-        else
-        {
-//            echo "Aдмин чекбокс не выбран!";
+            }
         }
 
-         if(!$us == null)
-         {
-             if($user->hasGroup('User'))
-             {
-//                 echo "Юзер права уже есть!";
-             }
-             else
-             {
-                 $user->addGroupToUser('User');
-             }
-         }
-         else
-         {
-//             echo "Юзер чекбокс не выбран!";
-         }
+//        $isAdmin = $user->hasGroup('Administrator');
+//        $isUser = $user->hasGroup('User');
+//        $isPM = $user->hasGroup('PM');
+//
+//      //  dd($isAdmin, $isUser, $isPM,$admin, $us, $pm);
+////        dd($request->Administrator);
+//
+//        //==========================
+//        if($isAdmin && ($admin == null))
+//        {
+//            $user->deleteGroupToUser('Administrator');
+//        }
+//
+//        if($isUser && ($us == null))
+//        {
+//            $user->deleteGroupToUser('User');
+//        }
+//
+//        if($isPM && ($pm == null))
+//        {
+//            $user->deleteGroupToUser('PM');
+//        }
+//
+//        if(!$admin == null)
+//        {
+//            if($user->hasGroup('Administrator'))
+//            {
+////                echo "Админ права уже есть!";
+//            }
+//            else
+//            {
+//                $user->addGroupToUser('Administrator');
+//            }
+//
+//        }
+//        else
+//        {
+////            echo "Aдмин чекбокс не выбран!";
+//        }
 
-         if(!$pm == null)
-         {
-            if($user->hasGroup('PM'))
-            {
-//                echo "PM права уже есть!";
-            }
-            else
-            {
-                $user->addGroupToUser('PM');
-            }
-         }
-         else
-         {
-//             echo "Пм чекбокс не выбран!";
-         }
+//         if(!$us == null)
+//         {
+//             if($user->hasGroup('User'))
+//             {
+////                 echo "Юзер права уже есть!";
+//             }
+//             else
+//             {
+//                 $user->addGroupToUser('User');
+//             }
+//         }
+//         else
+//         {
+////             echo "Юзер чекбокс не выбран!";
+//         }
+//
+//         if(!$pm == null)
+//         {
+//            if($user->hasGroup('PM'))
+//            {
+////                echo "PM права уже есть!";
+//            }
+//            else
+//            {
+//                $user->addGroupToUser('PM');
+//            }
+//         }
+//         else
+//         {
+////             echo "Пм чекбокс не выбран!";
+//         }
 
         //dd($admin, $us, $pm);
 
 //        $user->addGroupToUser();
 
 
-//
+
         $this->validate($request, [
             'name' => 'required|max:255',
             'active' => 'required|integer|between:0,1',
