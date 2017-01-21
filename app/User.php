@@ -73,6 +73,7 @@ class User extends Authenticatable
             ->join('actions', 'actions.id', '=', 'action_group.action_id')
             ->where('users.name', '=', $this->name)
             ->select('users.name', 'actions.name')
+            ->distinct()
             ->get();
 
 //        dd($actions);
@@ -95,15 +96,15 @@ class User extends Authenticatable
         return false;
     }
 
-    public function addGroupToUser()
+    public function addGroupToUser($groupName)
     {
 //        dd($this->id);
 
-        $groupID = DB::table('groups')->first()->id;
-//        dd($groupID);
+        $groupId = DB::table('groups')->where('name', $groupName)->first()->id;
+//        dd($groupId);
         DB::table('group_user')
             ->insert([
-             ['group_id'=>$groupID, 'user_id'=>$this->id]
+             ['group_id'=>$groupId, 'user_id'=>$this->id]
             ]);
     }
 }

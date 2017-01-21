@@ -74,6 +74,63 @@ class UserController extends Controller
 
         $user=User::find($id);
 
+        $admin = $request->Administrator;
+        $us = $request->User;
+        $pm = $request->PM;
+
+//        dd($request->Administrator);
+
+        if(!$admin == null)
+        {
+            if($user->hasGroup('Administrator'))
+            {
+//                echo "Админ права уже есть!";
+            }
+            else
+            {
+                $user->addGroupToUser('Administrator');
+            }
+
+        }
+        else
+        {
+//            echo "Aдмин чекбокс не выбран!";
+        }
+
+         if(!$us == null)
+         {
+             if($user->hasGroup('User'))
+             {
+//                 echo "Юзер права уже есть!";
+             }
+             else
+             {
+                 $user->addGroupToUser('User');
+             }
+         }
+         else
+         {
+//             echo "Юзер чекбокс не выбран!";
+         }
+
+         if(!$pm == null)
+         {
+            if($user->hasGroup('PM'))
+            {
+//                echo "PM права уже есть!";
+            }
+            else
+            {
+                $user->addGroupToUser('PM');
+            }
+         }
+         else
+         {
+//             echo "Пм чекбокс не выбран!";
+         }
+
+        //dd($admin, $us, $pm);
+
 //        $user->addGroupToUser();
 
 

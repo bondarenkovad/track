@@ -38,11 +38,11 @@
                         <div class="col-md-6">
                             <input type="text" class="form-control" name="name" value="{{$user->name}}">
 
-                            {{--@if ($errors->has('name'))--}}
-                                {{--<span class="help-block">--}}
-                                        {{--<strong>{{ $errors->first('name') }}</strong>--}}
-                                    {{--</span>--}}
-                            {{--@endif--}}
+                            @if ($errors->has('name'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                            @endif
                         </div>
                     </div>
 
@@ -52,11 +52,11 @@
                         <div class="col-md-6">
                             <input id="email" type="email" class="form-control" name="email" value="{{ $user->email }}">
 
-                            {{--@if ($errors->has('email'))--}}
-                                {{--<span class="help-block">--}}
-                                        {{--<strong>{{ $errors->first('email') }}</strong>--}}
-                                    {{--</span>--}}
-                            {{--@endif--}}
+                            @if ($errors->has('email'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                            @endif
                         </div>
                     </div>
 
@@ -66,6 +66,20 @@
                         <div class="col-md-6">
                             <input type="number" class="form-control" name="active" min="0" max="1" value="{{$user->active}}">
 
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="active" class="col-md-4 control-label">Groups</label>
+
+                        <div class="col-md-6">
+                            <ul class="list-group">
+                                @foreach($user->getAllGroups() as $group)
+                                    <li class="list-group-item" name="{{$group->name}}">
+                                        {{$group->name}}| <input type="checkbox"  {{ old('type',$user->hasGroup($group->name) )  ? 'checked' : '' }} name="{{$group->name}}">
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
                     </div>
 
