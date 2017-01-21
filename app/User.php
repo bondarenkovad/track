@@ -98,13 +98,22 @@ class User extends Authenticatable
 
     public function addGroupToUser($groupName)
     {
-//        dd($this->id);
-
         $groupId = DB::table('groups')->where('name', $groupName)->first()->id;
-//        dd($groupId);
-        DB::table('group_user')
-            ->insert([
-             ['group_id'=>$groupId, 'user_id'=>$this->id]
-            ]);
+
+        DB::table('group_user')->insert(
+            array('group_id' => $groupId, 'user_id' => $this->id)
+        );
+    }
+
+    public function deleteGroupToUser($groupName)
+    {
+        $groupId = DB::table('groups')->where('name', $groupName)->first()->id;
+
+        $id = DB::table('group_user')
+            ->where('group_user.user_id', '=', $this->id)
+            ->where('group_user.group_id', '=', $groupId)
+            ->pluck('id');
+
+        DB::table('group_user')->delete($id);
     }
 }

@@ -78,7 +78,28 @@ class UserController extends Controller
         $us = $request->User;
         $pm = $request->PM;
 
+        $isAdmin = $user->hasGroup('Administrator');
+        $isUser = $user->hasGroup('User');
+        $isPM = $user->hasGroup('PM');
+
+      //  dd($isAdmin, $isUser, $isPM,$admin, $us, $pm);
 //        dd($request->Administrator);
+
+        //==========================
+        if($isAdmin && ($admin == null))
+        {
+            $user->deleteGroupToUser('Administrator');
+        }
+
+        if($isUser && ($us == null))
+        {
+            $user->deleteGroupToUser('User');
+        }
+
+        if($isPM && ($pm == null))
+        {
+            $user->deleteGroupToUser('PM');
+        }
 
         if(!$admin == null)
         {
