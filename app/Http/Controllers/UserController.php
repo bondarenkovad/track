@@ -70,28 +70,72 @@ class UserController extends Controller
         return view('user.edit', ['user'=>$user]);
     }
 
+    /**
+     * @param $id
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function update($id, Request $request)
     {
         $allGroup = Group::all();
         $user=User::find($id);
 
-//        $admin = $request->Administrator;
         $groups = $request->group;
-//        $pm = $request->PM;
+        //dd(array_keys($groups));
 
-        foreach($allGroup as $group)
+        if($groups === null)
         {
-  //         dd($group->id);
-            if(array_key_exists($group->id, $groups))
-            {
-                $user->addGroupToUser($group->id);
-            }
-            else
-            {
-               $user->deleteGroupToUser($group->id);
+           foreach($user->groups()->get() as $group)
+           {
+               if($user->hasGroup($group->name))
+               {
 
-            }
+                   $user->deleteGroupToUser($group->id);
+               }
+           }
         }
+        else
+        {
+            foreach($allGroup as $group)
+                {
+                    if(array_key_exists($group->id, $groups))
+                    {
+                        if(!$user->hasGroup($group->name))
+                        {
+                            $user->addGroupToUser($group->id);
+                        }
+                    }
+                    else
+                    {
+
+                        if($user->hasGroup($group->name))
+                        {
+                            $user->deleteGroupToUser($group->id);
+                        }
+                    }
+                }
+        }
+
+//        dd($user->hasUserHaveGroupId(2));
+
+//        foreach($allGroup as $group)
+//        {
+//            if($groups === null)
+//            {
+//
+//                print_r($user->hasUserHaveGroupId(1));
+////
+//            }
+//            if(array_key_exists($group->id, $groups))
+//            {
+//                $user->addGroupToUser($group->id);
+//            }
+//            else
+//            {
+//               $user->deleteGroupToUser($group->id);
+//
+//            }
+//        }
 
 //        $isAdmin = $user->hasGroup('Administrator');
 //        $isUser = $user->hasGroup('User');
@@ -171,27 +215,16 @@ class UserController extends Controller
 
 
 
-        $this->validate($request, [
-            'name' => 'required|max:255',
-            'active' => 'required|integer|between:0,1',
-            'email' => 'required|email|max:255',
-        ]);
-        $user->update($request->all());
-        $user->save();
-        session()->flash('status', 'User successfully saved!');
-        return redirect('user/index');
-
-
-//        ==============================
-//        dd($request->user());
-
-////
-//        $user=User::find($id);
+//        $this->validate($request, [
+//            'name' => 'required|max:255',
+//            'active' => 'required|integer|between:0,1',
+//            'email' => 'required|email|max:255',
+//        ]);
 //        $user->update($request->all());
 //        $user->save();
-////        User::find($id)->update($request->all());
 //        session()->flash('status', 'User successfully saved!');
-//        return redirect('user/index');
+        return redirect('user/index');
+
     }
 
 

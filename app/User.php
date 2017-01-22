@@ -98,8 +98,6 @@ class User extends Authenticatable
 
     public function addGroupToUser($groupId)
     {
-//        $groupId = DB::table('groups')->where('name', $groupName)->first()->id;
-
         DB::table('group_user')->insert(
             array('group_id' => $groupId, 'user_id' => $this->id)
         );
@@ -107,8 +105,6 @@ class User extends Authenticatable
 
     public function deleteGroupToUser($groupId)
     {
-//        $groupId = DB::table('groups')->where('name', $groupName)->first()->id;
-
         $id = DB::table('group_user')
             ->where('group_user.user_id', '=', $this->id)
             ->where('group_user.group_id', '=', $groupId)
