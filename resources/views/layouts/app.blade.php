@@ -58,16 +58,17 @@
                         <ul class="dropdown-menu" aria-labelledby="dLabel">
                             <li><a href="/user/index">Users List</a></li>
                             <li><a href="/user/add">Add User</a></li>
+                            <li><a href="/user/group/index">Group List</a></li>
+                            <li><a href="/user/group/add">Group Add</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Group
+                           Issues
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dLabel">
-                            <li><a href="/group/index">Group List</a></li>
-                            <li><a href="/group/add">Group Add</a></li>
+                            <li><a href="">Issues</a></li>
                         </ul>
                     </li>
                 </ul>

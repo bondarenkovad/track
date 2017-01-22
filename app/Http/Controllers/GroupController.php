@@ -16,12 +16,12 @@ class GroupController extends Controller
     public function index()
     {
             $groups= Group::all();
-            return view('group.index', ['groups' => $groups]);
+            return view('user.group.index', ['groups' => $groups]);
     }
 
     public function create()
     {
-        return view('group.create');
+        return view('user.group.create');
     }
 
     public function store(Request $request)
@@ -36,7 +36,7 @@ class GroupController extends Controller
             'name' => $request['name'],
         ]);
 
-        return redirect('group/index');
+        return redirect('user/group/index');
     }
 
 }
