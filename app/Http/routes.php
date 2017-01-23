@@ -31,6 +31,7 @@ Route::get('/user/group/add', 'GroupController@create');
 Route::post('/user/group/create', 'GroupController@store');
 Route::get('/user/group/edit/{id}', 'GroupController@edit');
 Route::put('/user/group/edit/{id}', 'GroupController@update');
+Route::get('/user/group/show/{id}', 'GroupController@showUser');
 
 Route::post('/store', 'HomeController@store');
 

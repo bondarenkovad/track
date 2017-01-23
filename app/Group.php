@@ -56,4 +56,16 @@ class Group extends Model
 
         DB::table('action_group')->delete($id);
     }
+
+    public function getAllUserWithThisGroup()
+    {
+       return $users = DB::table('users')
+            ->join('group_user', 'users.id', '=', 'group_user.user_id')
+            ->join('groups', 'groups.id', '=', 'group_user.group_id')
+            ->where('groups.name', '=', $this->name)
+            ->select('users.name','users.email','users.active')
+//            ->distinct()
+            ->get();
+
+    }
 }

@@ -27,6 +27,12 @@ class GroupController extends Controller
         return view('user.group.create', ['actions'=>$actions]);
     }
 
+    public function showUser($id)
+    {
+        $group = Group::find($id);
+        return view('user.group.show', ['group'=>$group]);
+    }
+
     public function store(Request $request)
     {
         $allActions = Action::all();
