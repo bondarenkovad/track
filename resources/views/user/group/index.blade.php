@@ -19,8 +19,8 @@
                             <li>{{$action->name}}</li>
                             @endforeach
                         </td>
-                        <td><a  href="/group/show/{{$group->id}}" class="btn btn-default" >Show</a> </td>
-                        <td><a  href="/group/edit/{{$group->id}}" class="btn btn-success" >Edit</a></td>
+                        <td><a  href="/user/group/show/{{$group->id}}" class="btn btn-default" >Show</a> </td>
+                        <td><a  href="/user/group/edit/{{$group->id}}" class="btn btn-success" >Edit</a></td>
                     </tr>
                 @endforeach
                 </tbody>

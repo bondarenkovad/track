@@ -79,4 +79,63 @@ class GroupController extends Controller
         return redirect('user/group/index');
     }
 
+    public function edit($id)
+    {
+        $group = Group::find($id);
+        return view('user.group.edit', ['group'=>$group]);
+    }
+
+    public function update($id, Request $request)
+    {
+        $allActions = Action::all();
+        $group=Group::find($id);
+        $actions = $request->action;
+
+        if($actions === null)
+        {
+            foreach($group->actions()->get() as $action)
+            {
+                if($group->hasAction($action->name))
+                {
+                    $group->deleteActionInGroup($action->id);
+                }
+            }
+        }
+        else
+        {
+            foreach($allActions as $action)
+            {
+                if(array_key_exists($action->id, $actions))
+                {
+                    if(!$group->hasAction($action->name))
+                    {
+                        $group->addActionToGroup($action->id);
+                    }
+                }
+                else
+                {
+
+                    if($group->hasAction($action->name))
+                    {
+                        $group->deleteActionInGroup($action->id);
+                    }
+                }
+            }
+        }
+
+        $this->validate($request, [
+            'name' => 'required|max:255',
+        ]);
+
+        $group->update([
+            [$group->name = $request->name],
+        ]);
+
+
+        $group->save();
+        session()->flash('status', 'Group successfully update!');
+
+        return redirect('user/group/index');
+    }
+
 }

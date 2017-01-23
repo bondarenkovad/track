@@ -26,9 +26,11 @@ Route::get('/user/edit/{id}', 'UserController@edit');
 Route::put('/user/edit/{id}', 'UserController@update');
 
 //Group routing
-Route::get('user/group/index', 'GroupController@index');
-Route::get('user/group/add', 'GroupController@create');
-Route::post('user/group/create', 'GroupController@store');
+Route::get('/user/group/index', 'GroupController@index');
+Route::get('/user/group/add', 'GroupController@create');
+Route::post('/user/group/create', 'GroupController@store');
+Route::get('/user/group/edit/{id}', 'GroupController@edit');
+Route::put('/user/group/edit/{id}', 'GroupController@update');
 
 Route::post('/store', 'HomeController@store');
 
