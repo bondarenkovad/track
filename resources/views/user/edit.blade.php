@@ -116,6 +116,7 @@
                             <button type="submit" class="btn btn-primary">
                                 <i class="fa fa-btn fa-user"></i> Update
                             </button>
+                            <a href="/user/index" class="btn btn-success">Back to User List</a>
                         </div>
                     </div>
                 </form>

@@ -38,7 +38,7 @@
                     @endif
                 </ul>
             </div>
-            <a href="/user/index" class="btn btn-primary">Back to List</a>
+            <a href="/user/index" class="btn btn-success">Back to User List</a>
         </div>
     </div>
 @endsection
