@@ -68,7 +68,8 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dLabel">
-                            <li><a href="">Issues</a></li>
+                            <li><a href="/issue/type/index">Issues Type List</a></li>
+                            <li><a href="/issue/type/add">Issues Type Add</a></li>
                         </ul>
                     </li>
                 </ul>

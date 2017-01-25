@@ -33,6 +33,13 @@ Route::get('/user/group/edit/{id}', 'GroupController@edit');
 Route::put('/user/group/edit/{id}', 'GroupController@update');
 Route::get('/user/group/show/{id}', 'GroupController@showUser');
 
+//Issues routing
+Route::get('/issue/type/index', 'IssueTypeController@index');
+Route::get('/issue/type/add', 'IssueTypeController@create');
+Route::post('/issue/type/create', 'IssueTypeController@store');
+Route::get('/issue/type/delete/{id}', 'IssueTypeController@destroy');
+
+
 Route::post('/store', 'HomeController@store');
 
 //Route::any('{all}', function(){
