@@ -37,6 +37,8 @@ Route::get('/user/group/show/{id}', 'GroupController@showUser');
 Route::get('/issue/type/index', 'IssueTypeController@index');
 Route::get('/issue/type/add', 'IssueTypeController@create');
 Route::post('/issue/type/create', 'IssueTypeController@store');
+Route::get('/issue/type/edit/{id}', 'IssueTypeController@edit');
+Route::put('/issue/type/edit/{id}', 'IssueTypeController@update');
 Route::get('/issue/type/delete/{id}', 'IssueTypeController@destroy');
 
 

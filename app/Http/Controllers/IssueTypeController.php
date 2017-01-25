@@ -48,4 +48,29 @@ class IssueTypeController extends Controller
 
         return redirect('issue/type/index');
     }
+
+    public function edit($id)
+    {
+        $issueType = IssueType::find($id);
+        return view('issue.type.edit', ['issueType'=>$issueType]);
+    }
+
+    public function update($id, Request $request)
+    {
+        $issueType=IssueType::find($id);
+
+        $this->validate($request, [
+            'name' => 'required|max:255',
+        ]);
+
+        $issueType->update([
+            [$issueType->name = $request->name],
+        ]);
+
+
+        $issueType->save();
+        session()->flash('status', 'Issue Type successfully updated!');
+
+        return redirect('issue/type/index');
+    }
 }
