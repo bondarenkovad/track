@@ -49,6 +49,14 @@ Route::get('/issue/priority/edit/{id}', 'IssuesPriorityController@edit');
 Route::put('/issue/priority/edit/{id}', 'IssuesPriorityController@update');
 Route::get('/issue/priority/delete/{id}', 'IssuesPriorityController@destroy');
 
+//IssuesStatus routing
+Route::get('/issue/status/index', 'IssueStatusController@index');
+Route::get('/issue/status/add', 'IssueStatusController@create');
+Route::post('/issue/status/create', 'IssueStatusController@store');
+Route::get('/issue/status/edit/{id}', 'IssueStatusController@edit');
+Route::put('/issue/status/edit/{id}', 'IssueStatusController@update');
+Route::get('/issue/status/delete/{id}', 'IssueStatusController@destroy');
+
 Route::post('/store', 'HomeController@store');
 
 //Route::any('{all}', function(){
