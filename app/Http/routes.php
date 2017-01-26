@@ -33,7 +33,7 @@ Route::get('/user/group/edit/{id}', 'GroupController@edit');
 Route::put('/user/group/edit/{id}', 'GroupController@update');
 Route::get('/user/group/show/{id}', 'GroupController@showUser');
 
-//Issues routing
+//IssueTypes routing
 Route::get('/issue/type/index', 'IssueTypeController@index');
 Route::get('/issue/type/add', 'IssueTypeController@create');
 Route::post('/issue/type/create', 'IssueTypeController@store');
@@ -41,6 +41,13 @@ Route::get('/issue/type/edit/{id}', 'IssueTypeController@edit');
 Route::put('/issue/type/edit/{id}', 'IssueTypeController@update');
 Route::get('/issue/type/delete/{id}', 'IssueTypeController@destroy');
 
+//IssuesPriority routing
+Route::get('/issue/priority/index', 'IssuesPriorityController@index');
+Route::get('/issue/priority/add', 'IssuesPriorityController@create');
+Route::post('/issue/priority/create', 'IssuesPriorityController@store');
+Route::get('/issue/priority/edit/{id}', 'IssuesPriorityController@edit');
+Route::put('/issue/priority/edit/{id}', 'IssuesPriorityController@update');
+Route::get('/issue/priority/delete/{id}', 'IssuesPriorityController@destroy');
 
 Route::post('/store', 'HomeController@store');
 
