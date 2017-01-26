@@ -1,0 +1,24 @@
+@extends('layouts.app')
+
+@section('content')
+    <div class="container">
+        <div class="row">
+            <table class="table table-hover">
+                <thead>
+                <th>Name</th>
+                <th>Short key</th>
+                </thead>
+                <tbody>
+                @foreach($projects as $project)
+                    <tr>
+                        <td>{{$project->name}}</td>
+                        <td>{{$project->key}}</td>
+                        <td><a  href="/project/edit/{{$project->id}}" class="btn btn-success" >Edit</a></td>
+                        <td><a  href="/project/delete/{{$project->id}}" class="btn btn-danger" >Delete</a></td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+@endsection

@@ -57,6 +57,14 @@ Route::get('/issue/status/edit/{id}', 'IssueStatusController@edit');
 Route::put('/issue/status/edit/{id}', 'IssueStatusController@update');
 Route::get('/issue/status/delete/{id}', 'IssueStatusController@destroy');
 
+//Projects routing
+Route::get('/project/index', 'ProjectController@index');
+Route::get('/project/add', 'ProjectController@create');
+Route::post('/project/create', 'ProjectController@store');
+Route::get('/project/edit/{id}', 'ProjectController@edit');
+Route::put('/project/edit/{id}', 'ProjectController@update');
+Route::get('/project/delete/{id}', 'ProjectController@destroy');
+
 Route::post('/store', 'HomeController@store');
 
 //Route::any('{all}', function(){

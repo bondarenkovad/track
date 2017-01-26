@@ -76,6 +76,17 @@
                             <li><a href="/issue/status/add">Issue Status Add</a></li>
                         </ul>
                     </li>
+
+                    <li class="dropdown">
+                        <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Project
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dLabel">
+                            <li><a href="/project/index">Project List</a></li>
+                            <li><a href="/project/add">Project Add</a></li>
+                        </ul>
+                    </li>
                 </ul>
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
