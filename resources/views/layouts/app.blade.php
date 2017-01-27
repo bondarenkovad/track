@@ -74,6 +74,8 @@
                             <li><a href="/issue/priority/add">Issue Priority Add</a></li>
                             <li><a href="/issue/status/index">Issues Statuses List</a></li>
                             <li><a href="/issue/status/add">Issue Status Add</a></li>
+                            <li><a href="/issue/index">Issues List</a></li>
+                            <li><a href="/issue/add">Issue Add</a></li>
                         </ul>
                     </li>
 
