@@ -22,11 +22,11 @@
                         <td>{{$issue->summary}}</td>
                         <td>{{$issue->description}}</td>
                         <td>{{$issue->status['name']}}</td>
-                        <td>{{$issue->project_id}}</td>
-                        <td>{{$issue->type_id}}</td>
-                        <td>{{$issue->priority_id}}</td>
-                        <td>{{$issue->reporter_id}}</td>
-                        <td>{{$issue->assigned_id}}</td>
+                        <td>{{$issue->project['name']}}</td>
+                        <td>{{$issue->type['name']}}</td>
+                        <td>{{$issue->priority['name']}}</td>
+                        <td>{{$issue->reporter['name']}}</td>
+                        <td>{{$issue->assigned['name']}}</td>
                         <td>{{$issue->original_estimate}}</td>
                         <td>{{$issue->remaining_estimate}}</td>
                         {{--<td><a  href="/issue/edit/{{$issue->id}}" class="btn btn-success" >Edit</a></td>--}}

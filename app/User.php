@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Group;
+use App\Issue;
 use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
@@ -29,6 +30,16 @@ class User extends Authenticatable
     public function groups()
     {
         return $this->belongsToMany('App\Group');
+    }
+
+    public function issue_reporter()
+    {
+        return $this->hasMany('App\Issue');
+    }
+
+    public function issue_assigned()
+    {
+        return $this->hasMany('App\Issue');
     }
 
     public function ifAdmin()
