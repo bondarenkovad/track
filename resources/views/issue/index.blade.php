@@ -29,7 +29,7 @@
                         <td>{{$issue->assigned['name']}}</td>
                         <td>{{$issue->original_estimate}}</td>
                         <td>{{$issue->remaining_estimate}}</td>
-                        {{--<td><a  href="/issue/edit/{{$issue->id}}" class="btn btn-success" >Edit</a></td>--}}
+                        <td><a  href="/issue/edit/{{$issue->id}}" class="btn btn-success" >Edit</a></td>
                     </tr>
                 @endforeach
                 </tbody>

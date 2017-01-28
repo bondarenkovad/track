@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Issue;
+use App\IssueStatus;
+use App\Project;
+use App\IssueType;
+use App\IssuesPriority;
+use App\User;
 use Illuminate\Support\Facades\DB;
 
 class IssueController extends Controller
@@ -23,23 +28,46 @@ class IssueController extends Controller
 
     public function create()
     {
-        return view('issue.create');
+        $statuses = IssueStatus::all();
+        $projects = Project::all();
+        $types = IssueType::all();
+        $priorities = IssuesPriority::all();
+        $users = User::all();
+        return view('issue.create', ['statuses'=>$statuses,
+            'projects'=>$projects, 'types'=>$types,
+            'priorities'=>$priorities, 'users'=>$users]);
     }
 
-//    public function store(Request $request)
-//    {
-//        $this->validate($request, [
-//            'name' => 'required|max:50',
-//            'key' => 'required|max:5|unique:projects',
-//        ]);
-//
-//        Project::create([
-//            'name' => $request['name'],
-//            'key' => $request['key'],
-//        ]);
-//
-//        return redirect('project/index');
-//    }
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'summary' => 'required|max:50',
+            'description' => 'required|max:50',
+            'status_id' => 'required|not_in:0',
+            'project_id' => 'required|not_in:0',
+            'type_id' => 'required|not_in:0',
+            'priority_id' => 'required|not_in:0',
+            'reporter_id' => 'required|not_in:0',
+            'assigned_id' => 'required|not_in:0',
+            'original_estimate' => 'required|integer|not_in:0',
+            'remaining_estimate' => 'required|integer|not_in:0',
+        ]);
+
+        Issue::create([
+        'summary' => $request['summary'],
+        'description' => $request['description'],
+            'status_id' => $request['status_id'],
+            'project_id' =>(int)$request['project_id'],
+            'type_id' => (int)$request['type_id'],
+            'priority_id' => (int)$request['priority_id'],
+            'reporter_id' => (int)$request['reporter_id'],
+            'assigned_id' => (int)$request['assigned_id'],
+            'original_estimate' => (int)$request['original_estimate'],
+            'remaining_estimate' =>(int)$request['remaining_estimate'],
+    ]);
+
+       return redirect('issue/index');
+    }
 //
 //    public function destroy($id)
 //    {
@@ -48,30 +76,54 @@ class IssueController extends Controller
 //        return redirect('project/index');
 //    }
 //
-//    public function edit($id)
-//    {
-//        $project = Project::find($id);
-//        return view('project.edit', ['project'=>$project]);
-//    }
+    public function edit($id)
+    {
+        $issue = Issue::find($id);
+        $statuses = IssueStatus::all();
+        $projects = Project::all();
+        $types = IssueType::all();
+        $priorities = IssuesPriority::all();
+        $users = User::all();
+        return view('issue.edit', ['issue'=>$issue, 'statuses'=>$statuses,
+            'projects'=>$projects, 'types'=>$types,
+            'priorities'=>$priorities, 'users'=>$users]);
+    }
 //
-//    public function update($id, Request $request)
-//    {
-//        $project = Project::find($id);
-//
-//        $this->validate($request, [
-//            'name' => 'required|max:50',
-//            'key' => 'required|max:5|unique:projects',
-//        ]);
-//
-//        $project->update([
-//            [$project->name = $request->name],
-//            [$project->key = $request->key],
-//        ]);
-//
-//
-//        $project->save();
-//        session()->flash('status', 'Project successfully updated!');
-//
-//        return redirect('project/index');
-//    }
+    public function update($id, Request $request)
+    {
+        $issue =Issue::find($id);
+
+        $this->validate($request, [
+            'summary' => 'required|max:50',
+            'description' => 'required|max:50',
+            'status_id' => 'required|not_in:0',
+            'project_id' => 'required|not_in:0',
+            'type_id' => 'required|not_in:0',
+            'priority_id' => 'required|not_in:0',
+            'reporter_id' => 'required|not_in:0',
+            'assigned_id' => 'required|not_in:0',
+            'original_estimate' => 'required|integer|not_in:0',
+            'remaining_estimate' => 'required|integer|not_in:0',
+        ]);
+
+        $issue->update([
+            [$issue->summary = $request->summary],
+            [$issue->description = $request->descripstatus_id],
+            [$issue->status_id = (int)$request->status_id],
+            [$issue->project_id = (int)$request->project_id],
+            [$issue->type_id = (int)$request->type_id],
+            [$issue->priority_id = (int)$request->priority_id],
+            [$issue->reporter_id = (int)$request->reporter_id],
+            [$issue->assigned_id = (int)$request->assigned_id],
+            [$issue->status_id = (int)$request->status_id],
+            [$issue->original_estimate = (int)$request->original_estimate],
+            [$issue->remaining_estimate = (int)$request->remaining_estimate],
+        ]);
+
+
+        $issue->save();
+        session()->flash('status', 'Issue successfully updated!');
+
+        return redirect('issue/index');
+    }
 }
