@@ -2,12 +2,12 @@
 
 @section('content')
     <div class="container">
+        <h1 class="text-center text-muted">Issue Edit</h1>
         <div class="row">
             <div class="panel-body">
                 <form class="form-horizontal" role="form" method="POST" action="{{action('IssueController@update', ['issue'=>$issue->id])}}">
                     <input type="hidden" name="_method" value="put"/>
                     {{ csrf_field() }}
-
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                         <label for="name" class="col-md-4 control-label">Issue Summary</label>
                         <div class="col-md-6">

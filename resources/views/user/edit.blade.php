@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+        <h1 class="text-center text-muted">User Edit</h1>
         <div class="row">
             <div class="panel-body">
                 <form class="form-horizontal" role="form" method="POST" action="{{action('UserController@update', ['user'=>$user->id])}}">

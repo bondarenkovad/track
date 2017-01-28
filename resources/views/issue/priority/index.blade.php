@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+        <h1 class="text-center text-muted">Priority List</h1>
         <div class="row">
             <table class="table table-hover">
                 <thead>
