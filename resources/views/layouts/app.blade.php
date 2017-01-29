@@ -57,25 +57,19 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dLabel">
                             <li><a href="/user/index">Users List</a></li>
-                            <li><a href="/user/add">Add User</a></li>
                             <li><a href="/user/group/index">Group List</a></li>
-                            <li><a href="/user/group/add">Group Add</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Issues
+                            Issue
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dLabel">
-                            <li><a href="/issue/type/index">Issue Types List</a></li>
-                            <li><a href="/issue/type/add">Issue Type Add</a></li>
-                            <li><a href="/issue/priority/index">Issues Priority List</a></li>
-                            <li><a href="/issue/priority/add">Issue Priority Add</a></li>
-                            <li><a href="/issue/status/index">Issues Statuses List</a></li>
-                            <li><a href="/issue/status/add">Issue Status Add</a></li>
+                            <li><a href="/issue/type/index">Types List</a></li>
+                            <li><a href="/issue/priority/index">Priorities List</a></li>
+                            <li><a href="/issue/status/index">Statuses List</a></li>
                             <li><a href="/issue/index">Issues List</a></li>
-                            <li><a href="/issue/add">Issue Add</a></li>
                         </ul>
                     </li>
 
@@ -86,7 +80,6 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dLabel">
                             <li><a href="/project/index">Project List</a></li>
-                            <li><a href="/project/add">Project Add</a></li>
                         </ul>
                     </li>
                 </ul>
