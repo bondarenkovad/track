@@ -73,10 +73,9 @@ class GroupController extends Controller
                 }
                 else
                 {
-
-//                    if($user->hasGroup($group->name))
+//                    if($group->hasAction($action->name))
 //                    {
-//                        $user->deleteGroupToUser($group->id);
+//                        $group->deleteActionInGroup($action->id);
 //                    }
                 }
             }

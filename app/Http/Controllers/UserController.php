@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Group;
+use App\Project;
 use Validator;
 use App\Http\Requests;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -37,7 +39,8 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('user.create');
+        $projects = Project::all();
+        return view('user.create', ['projects'=>$projects]);
     }
 
     protected function validator(array $data)
@@ -52,14 +55,49 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        $allProjects = Project::all();
+        $projects = $request->project;
 
-//        dd((int)$request['active']);
-         User::create([
+        $id = DB::table('users')->insertGetId([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => bcrypt($request['password']),
-             'active'=>(int)$request['active'],
+            'active'=>(int)$request['active'],
         ]);
+
+        $user = User::find($id);
+
+        if($projects === null)
+        {
+//            foreach($user->groups()->get() as $group)
+//            {
+//                if($user->hasGroup($group->name))
+//                {
+//
+//                    $user->deleteGroupToUser($group->id);
+//                }
+//            }
+        }
+        else
+        {
+            foreach($allProjects as $project)
+            {
+                if(array_key_exists($project->id, $projects))
+                {
+                    if(!$user->hasProject($project->name))
+                    {
+                        $user->addInProject($project->id);
+                    }
+                }
+                else
+                {
+//                    if($user->hasGroup($group->name))
+//                    {
+//                        $user->deleteGroupToUser($group->id);
+//                    }
+                }
+            }
+        }
 
         return redirect('user/index');
     }

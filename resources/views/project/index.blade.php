@@ -11,6 +11,7 @@
                 <thead>
                 <th>Name</th>
                 <th>Short key</th>
+                <th>Users</th>
                 <th></th>
                 <th></th>
                 </thead>
@@ -19,6 +20,11 @@
                     <tr>
                         <td>{{$project->name}}</td>
                         <td>{{$project->key}}</td>
+                        <td>
+                            <ul> @foreach($project->users()->get() as $user)</ul>
+                            <li>{{$user->name}}</li>
+                            @endforeach
+                        </td>
                         <td><a  href="/project/edit/{{$project->id}}" class="btn btn-success" >Edit</a></td>
                         <td><a  href="/project/delete/{{$project->id}}" class="btn btn-danger" >Delete</a></td>
                     </tr>

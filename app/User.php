@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Group;
 use App\Issue;
+use App\Project;
 use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
@@ -30,6 +31,11 @@ class User extends Authenticatable
     public function groups()
     {
         return $this->belongsToMany('App\Group');
+    }
+
+    public function projects()
+    {
+        return $this->belongsToMany('App\Project');
     }
 
     public function issue_reporter()
@@ -122,5 +128,41 @@ class User extends Authenticatable
             ->pluck('id');
 
         DB::table('group_user')->delete($id);
+    }
+
+    public function hasAnyProject()
+    {
+        if( ($this->projects()->exists()) )
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public function hasProject($project)
+    {
+        if($this->projects()->where('name', $project)->first())
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function addInProject($projectId)
+    {
+        DB::table('project_user')->insert(
+            array('project_id' => $projectId, 'user_id' => $this->id)
+        );
+    }
+
+    public function deleteOfProject($projectId)
+    {
+        $id = DB::table('project_user')
+            ->where('project_user.user_id', '=', $this->id)
+            ->where('project_user.project_id', '=', $projectId)
+            ->pluck('id');
+
+        DB::table('project_user')->delete($id);
     }
 }
