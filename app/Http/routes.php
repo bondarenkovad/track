@@ -73,6 +73,14 @@ Route::get('/issue/edit/{id}', 'IssueController@edit');
 Route::put('/issue/edit/{id}', 'IssueController@update');
 Route::get('/issue/delete/{id}', 'IssueController@destroy');
 
+//Sprint routing
+Route::get('/sprint/index', 'SprintController@index');
+Route::get('/sprint/add', 'SprintController@create');
+Route::post('/sprint/create', 'SprintController@store');
+Route::get('/sprint/edit/{id}', 'SprintController@edit');
+Route::put('/sprint/edit/{id}', 'SprintController@update');
+Route::get('/sprint/delete/{id}', 'SprintController@destroy');
+
 Route::post('/store', 'HomeController@store');
 
 //Route::any('{all}', function(){

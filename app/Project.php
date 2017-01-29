@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Issue;
+use App\Sprint;
 
 class Project extends Model
 {
@@ -11,8 +12,13 @@ class Project extends Model
         'name', 'key'
     ];
 
-    public function issue()
+    public function issues()
     {
         return $this->hasMany('App\Issue');
     }
+    public function sprints()
+    {
+        return $this->hasMany('App\Sprint');
+    }
+
 }

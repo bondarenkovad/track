@@ -60,6 +60,7 @@
                             <li><a href="/user/group/index">Group List</a></li>
                         </ul>
                     </li>
+
                     <li class="dropdown">
                         <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Issue
@@ -80,6 +81,16 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dLabel">
                             <li><a href="/project/index">Project List</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sprint
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dLabel">
+                            <li><a href="/sprint/index">Sprints List</a></li>
                         </ul>
                     </li>
                 </ul>
