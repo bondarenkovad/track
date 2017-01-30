@@ -103,6 +103,13 @@ class User extends Authenticatable
             ->get();
     }
 
+    public function getAllProjects()
+    {
+        return $projects = DB::table('projects')
+            ->select('projects.name', 'projects.id')
+            ->get();
+    }
+
     public function hasGroup($group)
     {
         if($this->groups()->where('name', $group)->first())

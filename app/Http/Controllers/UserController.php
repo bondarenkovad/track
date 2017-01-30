@@ -118,6 +118,8 @@ class UserController extends Controller
         $allGroup = Group::all();
         $user=User::find($id);
         $groups = $request->group;
+        $projects = $request->project;
+        $allProjects = Project::all();
 
         if($groups === null)
         {
@@ -152,6 +154,39 @@ class UserController extends Controller
                 }
         }
 
+        if($projects === null)
+        {
+            foreach($user->projects()->get() as $project)
+            {
+                if($user->hasProject($project->name))
+                {
+
+                    $user->deleteOfProject($project->id);
+                }
+            }
+        }
+        else
+        {
+            foreach($allProjects as $project)
+            {
+                if(array_key_exists($project->id, $projects))
+                {
+                    if(!$user->hasProject($project->name))
+                    {
+                        $user->addInProject($project->id);
+                    }
+                }
+                else
+                {
+
+                    if($user->hasProject($project->name))
+                    {
+                        $user->deleteOfProject($project->id);
+                    }
+                }
+            }
+        }
+
         $this->validate($request, [
             'name' => 'required|max:255',
             'active' => 'required|integer|between:0,1',
@@ -178,7 +213,7 @@ class UserController extends Controller
         }
 
         $user->save();
-        session()->flash('status', 'User successfully saved!');
+        session()->flash('status', 'User successfully updated!');
 
         return redirect('user/index');
     }

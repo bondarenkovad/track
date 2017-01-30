@@ -84,6 +84,20 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="active" class="col-md-4 control-label">Projects</label>
+
+                        <div class="col-md-6">
+                            <ul class="list-group">
+                                @foreach($user->getAllProjects() as $project)
+                                    <li class="list-group-item" name="{{$project->name}}">
+                                        {{$project->name}}| <input type="checkbox"  {{ old('type',$user->hasProject($project->name) )  ? 'checked' : '' }} name="project[{{$project->id}}]">
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+
                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                         <label for="password" class="col-md-4 control-label">Password</label>
 
