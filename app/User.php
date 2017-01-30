@@ -127,6 +127,13 @@ class User extends Authenticatable
         );
     }
 
+    public function addDefaultUserGroup()
+    {
+        DB::table('group_user')->insert(
+            array('group_id' => 2, 'user_id' => $this->id)
+        );
+    }
+
     public function deleteGroupToUser($groupId)
     {
         $id = DB::table('group_user')
