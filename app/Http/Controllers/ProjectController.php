@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Project;
+use App\User;
 use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
@@ -23,20 +24,44 @@ class ProjectController extends Controller
 
     public function create()
     {
-        return view('project.create');
+        $users = User::all();
+        return view('project.create', ['users'=>$users]);
     }
 
     public function store(Request $request)
     {
+        $allUsers = User::all();
+        $users = $request->user;
+
         $this->validate($request, [
             'name' => 'required|max:50',
             'key' => 'required|max:5|unique:projects',
         ]);
 
-        Project::create([
+        $id = DB::table('projects')->insertGetId([
             'name' => $request['name'],
             'key' => $request['key'],
         ]);
+
+        $project = Project::find($id);
+
+        if($users === null)
+        {
+
+        }
+        else
+        {
+            foreach($allUsers as $user)
+            {
+                if(array_key_exists($user->id, $users))
+                {
+                    if(!$project->hasUserInProject($user->name))
+                    {
+                        $project->addUserToProject($user->id);
+                    }
+                }
+            }
+        }
 
         return redirect('project/index');
     }
@@ -56,11 +81,46 @@ class ProjectController extends Controller
 
     public function update($id, Request $request)
     {
+        $allUsers = User::all();
         $project = Project::find($id);
+        $users = $request->user;
+
+        if($users === null)
+        {
+            foreach($project->users()->get() as $user)
+            {
+                if($project->hasUserInProject($user->name))
+                {
+
+                    $project->deleteUserOfProject($user->id);
+                }
+            }
+        }
+        else
+        {
+            foreach($allUsers as $user)
+            {
+                if(array_key_exists($user->id, $users))
+                {
+                    if(!$project->hasUserInProject($user->name))
+                    {
+                        $project->addUserToProject($user->id);
+                    }
+                }
+                else
+                {
+
+                    if($project->hasUserInProject($user->name))
+                    {
+                        $project->deleteUserOfProject($user->id);
+                    }
+                }
+            }
+        }
 
         $this->validate($request, [
             'name' => 'required|max:50',
-            'key' => 'required|max:5|unique:projects',
+            'key' => 'required|max:5',
         ]);
 
         $project->update([

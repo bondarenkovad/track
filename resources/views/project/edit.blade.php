@@ -38,6 +38,20 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="active" class="col-md-4 control-label">Users</label>
+
+                        <div class="col-md-6">
+                            <ul class="list-group">
+                                @foreach($project->getAllUsers() as $user)
+                                    <li class="list-group-item" name="{{$user->name}}">
+                                        {{$user->name}}| <input type="checkbox"  {{ old('type',$project->hasUserInProject($user->name) )  ? 'checked' : '' }} name="user[{{$user->id}}]">
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
                             <button type="submit" class="btn btn-primary">
                                 Update

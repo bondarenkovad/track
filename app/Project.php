@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Issue;
 use App\Sprint;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class Project extends Model
 {
@@ -17,6 +18,7 @@ class Project extends Model
     {
         return $this->hasMany('App\Issue');
     }
+
     public function sprints()
     {
         return $this->hasMany('App\Sprint');
@@ -27,4 +29,37 @@ class Project extends Model
         return $this->belongsToMany('App\User');
     }
 
+    public function getAllUsers()
+    {
+        return $users = DB::table('users')
+            ->select('users.name', 'users.id')
+            ->get();
+    }
+
+    public function hasUserInProject($user)
+    {
+        if($this->users()->where('name', $user)->first())
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function addUserToProject($userId)
+    {
+        DB::table('project_user')->insert(
+            array('user_id' => $userId, 'project_id' => $this->id)
+        );
+    }
+
+    public function deleteUserOfProject($userId)
+    {
+        $id = DB::table('project_user')
+            ->where('project_user.user_id', '=', $userId)
+            ->where('project_user.project_id', '=', $this->id)
+            ->pluck('id');
+
+        DB::table('project_user')->delete($id);
+    }
 }
