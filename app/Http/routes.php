@@ -21,6 +21,7 @@ Route::get('/', 'HomeController@index');
 Route::get('/user/index', 'UserController@index');
 Route::get('/user/add', 'UserController@create');
 Route::post('/user/create', 'UserController@store');
+Route::post('/user/index', 'UserController@search');
 Route::get('/user/show/{id}', 'UserController@show');
 Route::get('/user/edit/{id}', 'UserController@edit');
 Route::put('/user/edit/{id}', 'UserController@update');
@@ -59,6 +60,7 @@ Route::get('/issue/status/delete/{id}', 'IssueStatusController@destroy');
 
 //Project routing
 Route::get('/project/index', 'ProjectController@index');
+Route::post('/project/index', 'ProjectController@search');
 Route::get('/project/add', 'ProjectController@create');
 Route::post('/project/create', 'ProjectController@store');
 Route::get('/project/edit/{id}', 'ProjectController@edit');

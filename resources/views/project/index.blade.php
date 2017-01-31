@@ -4,6 +4,17 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1"><h1 class="text-center text-muted">Projects List</h1></div>
+            <div class="col-md-3">
+                <form action="/project/index" method="post">
+                    {{ csrf_field() }}
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for..." name="search">
+                     <span class="input-group-btn">
+                     <button class="btn btn-success" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                    </span>
+                    </div>
+                </form>
+            </div>
             <div class="col-md-10 col-md-offset-10"><a  href="/project/add" class="btn btn-success">Project Create</a></div>
         </div>
         <div class="row">

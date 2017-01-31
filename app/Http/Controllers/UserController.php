@@ -110,6 +110,24 @@ class UserController extends Controller
         return view('user.edit', ['user'=>$user]);
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $u = User::where('name', 'like', "%$search%")->get();
+
+        if(count($u) == 0 || $search === "")
+        {
+            $users = User::all();
+            session()->flash('danger', 'No search in database!');
+            return view('/user/index', ['users' => $users]);
+        }
+        else
+        {
+            return view('/user/index', ['users' => $u]);
+        }
+
+    }
+
     /**
      * @param $id
      * @param Request $request

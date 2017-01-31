@@ -79,6 +79,24 @@ class ProjectController extends Controller
         return view('project.edit', ['project'=>$project]);
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $p = Project::where('name', 'like', "%$search%")->get();
+
+        if(count($p) == 0 || $search === "")
+        {
+            $projects = Project::all();
+            session()->flash('danger', 'No search in database!');
+            return view('/project/index', ['projects' => $projects]);
+        }
+        else
+        {
+            return view('/project/index', ['projects' => $p]);
+        }
+
+    }
+
     public function update($id, Request $request)
     {
         $allUsers = User::all();
