@@ -39,9 +39,6 @@ class ProjectController extends Controller
         ]);
 
         $key = $request->key;
-
-//        $key = preg_replace ("/[^a-zA-ZА-Яа-я]/","",$key);
-//        $key = preg_replace('/\s/','',$key);
         $key = strtoupper($key);
 
         $id = DB::table('projects')->insertGetId([
