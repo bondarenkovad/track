@@ -35,12 +35,18 @@ class ProjectController extends Controller
 
         $this->validate($request, [
             'name' => 'required|max:50',
-            'key' => 'required|max:5|unique:projects',
+            'key' => 'required|max:5|alpha|unique:projects',
         ]);
+
+        $key = $request->key;
+
+//        $key = preg_replace ("/[^a-zA-ZА-Яа-я]/","",$key);
+//        $key = preg_replace('/\s/','',$key);
+        $key = strtoupper($key);
 
         $id = DB::table('projects')->insertGetId([
             'name' => $request['name'],
-            'key' => $request['key'],
+            'key' => $key,
         ]);
 
         $project = Project::find($id);
@@ -138,12 +144,16 @@ class ProjectController extends Controller
 
         $this->validate($request, [
             'name' => 'required|max:50',
-            'key' => 'required|max:5',
+            'key' => 'required|max:5|alpha',
         ]);
+
+        $key = $request->key;
+
+        $key = strtoupper($key);
 
         $project->update([
             [$project->name = $request->name],
-            [$project->key = $request->key],
+            [$project->key = $key],
         ]);
 
 

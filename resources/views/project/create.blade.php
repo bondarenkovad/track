@@ -23,9 +23,9 @@
                         <label for="name" class="col-md-4 control-label">Short key</label>
 
                         <div class="col-md-6">
-                            <input id="name" type="text" class="form-control" name="key">
-                            @if ($errors->has('name'))
-                                {{session()->flash('danger',$errors->first('name'))}}
+                            <input id="key" type="text" class="form-control" name="key">
+                            @if ($errors->has('key'))
+                                {{session()->flash('danger',$errors->first('key'))}}
                             @endif
                         </div>
                     </div>
