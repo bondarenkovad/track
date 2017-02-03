@@ -58,6 +58,13 @@ class UserController extends Controller
         $allProjects = Project::all();
         $projects = $request->project;
 
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'active' => 'required|integer|between:0,1',
+            'email' => 'required|email|max:255',
+            'password' => 'required|min:6|confirmed',
+        ]);
+
         $id = DB::table('users')->insertGetId([
             'name' => $request['name'],
             'email' => $request['email'],
@@ -66,7 +73,7 @@ class UserController extends Controller
         ]);
 
         $user = User::find($id);
-
+//
         $user->addDefaultUserGroup();
 
         if($projects === null)
@@ -84,7 +91,7 @@ class UserController extends Controller
         {
             foreach($allProjects as $project)
             {
-                if(array_key_exists($project->id, $projects))
+                if(in_array($project->id, $projects))
                 {
                     if(!$user->hasProject($project->name))
                     {
@@ -189,7 +196,7 @@ class UserController extends Controller
         {
             foreach($allProjects as $project)
             {
-                if(array_key_exists($project->id, $projects))
+                if(in_array($project->id, $projects))
                 {
                     if(!$user->hasProject($project->name))
                     {
@@ -198,7 +205,6 @@ class UserController extends Controller
                 }
                 else
                 {
-
                     if($user->hasProject($project->name))
                     {
                         $user->deleteOfProject($project->id);

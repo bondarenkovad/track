@@ -44,19 +44,33 @@
                         </div>
                     </div>
 
+                    {{--<div class="form-group">--}}
+                        {{--<label for="active" class="col-md-4 control-label">Projects:</label>--}}
+
+                        {{--<div class="col-md-6">--}}
+                            {{--<ul class="list-group">--}}
+                                {{--@foreach($projects as $project)--}}
+                                    {{--<li class="list-group-item" name="{{$project->name}}">--}}
+                                        {{--{{$project->name}}| <input type="checkbox" name="project[{{$project->id}}]">--}}
+                                    {{--</li>--}}
+                                {{--@endforeach--}}
+                            {{--</ul>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+
                     <div class="form-group">
                         <label for="active" class="col-md-4 control-label">Projects:</label>
 
                         <div class="col-md-6">
-                            <ul class="list-group">
+                            <select class="form-control" id="project" name="project[]" multiple="multiple">
                                 @foreach($projects as $project)
-                                    <li class="list-group-item" name="{{$project->name}}">
-                                        {{$project->name}}| <input type="checkbox" name="project[{{$project->id}}]">
-                                    </li>
+                                    <option value="{{$project->id}}">{{$project->name}}</option>
                                 @endforeach
-                            </ul>
+                            </select>
                         </div>
                     </div>
+
+
 
                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                         <label for="password" class="col-md-4 control-label">Password</label>
