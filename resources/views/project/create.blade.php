@@ -34,13 +34,11 @@
                         <label for="active" class="col-md-4 control-label">Users:</label>
 
                         <div class="col-md-6">
-                            <ul class="list-group">
-                                @foreach($users as $user)
-                                    <li class="list-group-item" name="{{$user->name}}">
-                                        {{$user->name}}| <input type="checkbox" name="user[{{$user->id}}]">
-                                    </li>
-                                @endforeach
-                            </ul>
+                                <select class="form-control" id="project" name="user[]" multiple="multiple">
+                                    @foreach($users as $user)
+                                        <option value="{{$user->id}}">{{$user->name}}</option>
+                                    @endforeach
+                                </select>
                         </div>
                     </div>
 

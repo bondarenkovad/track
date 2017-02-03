@@ -56,7 +56,7 @@ class ProjectController extends Controller
         {
             foreach($allUsers as $user)
             {
-                if(array_key_exists($user->id, $users))
+                if(in_array($user->id, $users))
                 {
                     if(!$project->hasUserInProject($user->name))
                     {
@@ -121,7 +121,7 @@ class ProjectController extends Controller
         {
             foreach($allUsers as $user)
             {
-                if(array_key_exists($user->id, $users))
+                if(in_array($user->id, $users))
                 {
                     if(!$project->hasUserInProject($user->name))
                     {

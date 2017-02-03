@@ -41,13 +41,11 @@
                         <label for="active" class="col-md-4 control-label">Users</label>
 
                         <div class="col-md-6">
-                            <ul class="list-group">
+                            <select class="form-control" id="project" name="user[]" multiple="multiple">
                                 @foreach($project->getAllUsers() as $user)
-                                    <li class="list-group-item" name="{{$user->name}}">
-                                        {{$user->name}}| <input type="checkbox"  {{ old('type',$project->hasUserInProject($user->name) )  ? 'checked' : '' }} name="user[{{$user->id}}]">
-                                    </li>
+                                    <option value="{{$user->id}}" {{ old('type',$project->hasUserInProject($user->name))  ? 'selected' : '' }}>{{$user->name}}</option>
                                 @endforeach
-                            </ul>
+                            </select>
                         </div>
                     </div>
 
