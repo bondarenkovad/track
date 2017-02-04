@@ -74,6 +74,11 @@ class Project extends Model
 
     public function getIsStatusAttribute()
     {
+        foreach($this->getAllStatuses() as $status)
+        {
+
+        }
+
         $this->status = [23,4,56];
         return $this->status;
     }
