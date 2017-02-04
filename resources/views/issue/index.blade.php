@@ -32,8 +32,8 @@
                         <td>{{$issue->priority['name']}}</td>
                         <td>{{$issue->reporter['name']}}</td>
                         <td>{{$issue->assigned['name']}}</td>
-                        <td>{{$issue->original_estimate}}</td>
-                        <td>{{$issue->remaining_estimate}}</td>
+                        <td>{{date("d \d\. H \h\. i \m\. s \s\.",$issue->original_estimate)}}</td>
+                        <td>{{date("d \d\. H \h\. i \m\. s \s\.",$issue->remaining_estimate)}}</td>
                         <td><a  href="/issue/edit/{{$issue->id}}" class="btn btn-success" >Edit</a></td>
                     </tr>
                 @endforeach
