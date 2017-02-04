@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Issue;
 use App\Sprint;
 use App\User;
+use App\IssueStatus;
 use Illuminate\Support\Facades\DB;
 
 class Project extends Model
@@ -37,6 +38,14 @@ class Project extends Model
             ->get();
     }
 
+    public function getAllStatuses()
+    {
+        return $users = DB::table('issue_statuses')
+            ->select('issue_statuses.name', 'issue_statuses.id')
+            ->get();
+    }
+
+
     public function hasUserInProject($user)
     {
         if($this->users()->where('name', $user)->first())
@@ -66,7 +75,8 @@ class Project extends Model
 
     public function getIsStatusAttribute()
     {
-        return $this->status = [2,45,6] ;
+        $this->status = [23,4,56];
+        return $this->status;
     }
 
 }
