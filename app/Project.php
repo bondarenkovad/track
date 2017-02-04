@@ -45,7 +45,6 @@ class Project extends Model
             ->get();
     }
 
-
     public function hasUserInProject($user)
     {
         if($this->users()->where('name', $user)->first())
