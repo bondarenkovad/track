@@ -104,6 +104,7 @@ class ProjectController extends Controller
     {
         $allUsers = User::all();
         $project = Project::find($id);
+        dd($project->toArray());
         $users = $request->user;
 
         if($users === null)

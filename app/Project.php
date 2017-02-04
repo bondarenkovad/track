@@ -14,6 +14,7 @@ class Project extends Model
         'name', 'key'
     ];
 
+    protected $appends = ['is_status'];
     public function issues()
     {
         return $this->hasMany('App\Issue');
@@ -62,4 +63,10 @@ class Project extends Model
 
         DB::table('project_user')->delete($id);
     }
+
+    public function getIsStatusAttribute()
+    {
+        return $this->status = [2,45,6] ;
+    }
+
 }
