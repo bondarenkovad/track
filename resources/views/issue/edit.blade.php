@@ -155,6 +155,17 @@
 
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
+                            @foreach($issue->getThisComments() as $comments)
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">{{$comments->name}}</div>
+                                <div class="panel-body">{{$comments->text}}</div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-6 col-md-offset-4">
                             <button type="submit" class="btn btn-primary">
                                 Update
                             </button>

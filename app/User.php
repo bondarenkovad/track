@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Group;
 use App\Issue;
 use App\Project;
+use App\Comment;
 use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
@@ -41,6 +42,11 @@ class User extends Authenticatable
     public function issue_reporter()
     {
         return $this->hasMany('App\Issue');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comments');
     }
 
     public function issue_assigned()

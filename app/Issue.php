@@ -8,6 +8,8 @@ use App\Project;
 use App\IssueType;
 use App\IssuesPriority;
 use App\User;
+use App\Comment;
+use Illuminate\Support\Facades\DB;
 
 class Issue extends Model
 {
@@ -44,5 +46,31 @@ class Issue extends Model
     public function assigned()
     {
         return $this->hasOne('App\User', 'id', 'assigned_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
+
+    public function getThisComments()
+    {
+        return $comments = DB::table('comments')
+            ->join('users', 'users.id', '=', 'comments.user_id')
+            ->join('issues', 'issues.id', '=', 'comments.issue_id')
+            ->where('comments.issue_id', '=', $this->id)
+            ->select('comments.text', 'users.name')
+            ->distinct()
+            ->get();
+    }
+
+    public function CountComments()
+    {
+        if($this->comments()->exists())
+        {
+            return count($this->comments());
+        }
+
+        return 0;
     }
 }
