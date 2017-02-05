@@ -11,6 +11,7 @@
                 <thead>
                 <th>Name</th>
                 <th>Project Name</th>
+                <th>Statuses</th>
                 <th></th>
                 <th></th>
                 </thead>
@@ -19,6 +20,11 @@
                     <tr>
                         <td>{{$board->name}}</td>
                         <td>{{$board->project['name']}}</td>
+                        <td>
+                            <ul> @foreach($board->statuses()->get() as $status)</ul>
+                            <li>{{$status->name}}</li>
+                            @endforeach
+                        </td>
                         <td><a  href="/board/edit/{{$board->id}}" class="btn btn-success" >Edit</a></td>
                         <td><a  href="/board/delete/{{$board->id}}" class="btn btn-danger" >Delete</a></td>
                     </tr>

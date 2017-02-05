@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Issue;
+use App\Board;
 
 class IssueStatus extends Model
 {
@@ -14,5 +15,10 @@ class IssueStatus extends Model
     public function issue()
     {
         return $this->belongsTo('App\Issue');
+    }
+
+    public function boards()
+    {
+        return $this->belongsToMany('App\Board');
     }
 }
