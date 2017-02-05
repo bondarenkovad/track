@@ -58,7 +58,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dLabel">
                             <li><a href="/user/index">Users List</a></li>
-                            <li><a href="/user/group/index">Group List</a></li>
+                            <li><a href="/user/group/index">Groups List</a></li>
                         </ul>
                     </li>
 
@@ -81,7 +81,17 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dLabel">
-                            <li><a href="/project/index">Project List</a></li>
+                            <li><a href="/project/index">Projects List</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Boards
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dLabel">
+                            <li><a href="/board/index">Boards List</a></li>
                         </ul>
                     </li>
 

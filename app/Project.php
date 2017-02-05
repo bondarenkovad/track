@@ -7,6 +7,7 @@ use App\Issue;
 use App\Sprint;
 use App\User;
 use App\IssueStatus;
+use App\Board;
 use Illuminate\Support\Facades\DB;
 
 class Project extends Model
@@ -15,7 +16,6 @@ class Project extends Model
         'name', 'key'
     ];
 
-    protected $appends = ['is_status'];
     public function issues()
     {
         return $this->hasMany('App\Issue');
@@ -24,6 +24,11 @@ class Project extends Model
     public function sprints()
     {
         return $this->hasMany('App\Sprint');
+    }
+
+    public function board()
+    {
+        return $this->belongsTo('App\Board');
     }
 
     public function users()
@@ -71,16 +76,4 @@ class Project extends Model
 
         DB::table('project_user')->delete($id);
     }
-
-    public function getIsStatusAttribute()
-    {
-        foreach($this->getAllStatuses() as $status)
-        {
-
-        }
-
-        $this->status = [23,4,56];
-        return $this->status;
-    }
-
 }

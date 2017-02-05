@@ -8,8 +8,8 @@
                 <form class="form-horizontal" role="form" method="POST" action="{{action('IssueController@update', ['issue'=>$issue->id])}}">
                     <input type="hidden" name="_method" value="put"/>
                     {{ csrf_field() }}
-                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                        <label for="name" class="col-md-4 control-label">Issue Summary</label>
+                    <div class="form-group{{ $errors->has('summary') ? ' has-error' : '' }}">
+                        <label for="summary" class="col-md-4 control-label">Issue Summary</label>
                         <div class="col-md-6">
                             <input id="summary" type="text" class="form-control" name="summary" value="{{$issue->summary}}">
                             @if ($errors->has('summary'))

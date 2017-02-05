@@ -83,6 +83,14 @@ Route::get('/sprint/edit/{id}', 'SprintController@edit');
 Route::put('/sprint/edit/{id}', 'SprintController@update');
 Route::get('/sprint/delete/{id}', 'SprintController@destroy');
 
+//Board routing
+Route::get('/board/index', 'BoardController@index');
+Route::get('/board/add', 'BoardController@create');
+Route::post('/board/create', 'BoardController@store');
+Route::get('/board/edit/{id}', 'BoardController@edit');
+Route::put('/board/edit/{id}', 'BoardController@update');
+Route::get('/board/delete/{id}', 'BoardController@destroy');
+
 Route::post('/store', 'HomeController@store');
 
 //Route::any('{all}', function(){
