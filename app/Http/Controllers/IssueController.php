@@ -11,7 +11,9 @@ use App\Project;
 use App\IssueType;
 use App\IssuesPriority;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
 
 class IssueController extends Controller
 {
@@ -88,7 +90,14 @@ class IssueController extends Controller
             'projects'=>$projects, 'types'=>$types,
             'priorities'=>$priorities, 'users'=>$users]);
     }
-//
+
+    public function addComment($id)
+    {
+        $issue = Issue::find($id);
+
+        return view('issue.comment', ['issue'=>$issue, ]);
+    }
+
     public function update($id, Request $request)
     {
         $issue =Issue::find($id);
@@ -123,6 +132,20 @@ class IssueController extends Controller
 
         $issue->save();
         session()->flash('status', 'Issue successfully updated!');
+
+        return redirect('issue/index');
+    }
+
+    public function saveComment($id, Request $request)
+    {
+        $this->validate($request, [
+            'text' => 'required',
+        ]);
+
+        DB::table('comments')->insert(
+            array('text' => $request->text, 'user_id' =>  Auth::user()->id, 'issue_id' => $id)
+        );
+        session()->flash('status', 'Comment added!');
 
         return redirect('issue/index');
     }

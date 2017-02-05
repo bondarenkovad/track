@@ -73,6 +73,8 @@ Route::get('/issue/add', 'IssueController@create');
 Route::post('/issue/create', 'IssueController@store');
 Route::get('/issue/edit/{id}', 'IssueController@edit');
 Route::put('/issue/edit/{id}', 'IssueController@update');
+Route::get('/issue/comment/{id}', 'IssueController@addComment');
+Route::put('/issue/comment/{id}', 'IssueController@saveComment');
 Route::get('/issue/delete/{id}', 'IssueController@destroy');
 
 //Sprint routing
@@ -90,6 +92,14 @@ Route::post('/board/create', 'BoardController@store');
 Route::get('/board/edit/{id}', 'BoardController@edit');
 Route::put('/board/edit/{id}', 'BoardController@update');
 Route::get('/board/delete/{id}', 'BoardController@destroy');
+
+//Comment routing
+Route::get('/comment/index', 'CommentController@index');
+Route::get('/comment/add', 'CommentController@create');
+Route::post('/comment/create', 'CommentController@store');
+Route::get('/comment/edit/{id}', 'CommentController@edit');
+Route::put('/comment/edit/{id}', 'CommentController@update');
+Route::get('/comment/delete/{id}', 'CommentController@destroy');
 
 Route::post('/store', 'HomeController@store');
 
