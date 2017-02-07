@@ -157,7 +157,13 @@
                         <div class="col-md-6 col-md-offset-4">
                             @foreach($issue->getThisComments() as $comments)
                             <div class="panel panel-primary">
-                                <div class="panel-heading">{{$comments->name}}</div>
+                                <div class="panel-heading">
+                                    {{$comments->name}}
+                                    @if( $comments->name === Auth::user()->name)
+                                    <a  href="/issue/comment/edit/{{$comments->id}}" class="btn btn-primary" >Edit</a>
+                                    <a  href="/issue/comment/delete/{{$comments->id}}" class="btn btn-danger" >Delete</a>
+                                    @endif
+                                </div>
                                 <div class="panel-body">{{$comments->text}}</div>
                             </div>
                             @endforeach

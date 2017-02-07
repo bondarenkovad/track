@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -95,7 +96,14 @@ class IssueController extends Controller
     {
         $issue = Issue::find($id);
 
-        return view('issue.comment', ['issue'=>$issue, ]);
+        return view('issue.comment.index', ['issue'=>$issue, ]);
+    }
+
+    public function editComment($id)
+    {
+        $comment = Comment::find($id);
+
+        return view('issue.comment.edit', ['comment'=>$comment]);
     }
 
     public function update($id, Request $request)
@@ -136,6 +144,25 @@ class IssueController extends Controller
         return redirect('issue/index');
     }
 
+    public function updateComment($id, Request $request)
+    {
+        $comment =Comment::find($id);
+
+        $this->validate($request, [
+            'text' => 'required',
+        ]);
+
+        $comment->update([
+            [$comment->text = $request->text]
+        ]);
+
+
+        $comment->save();
+        session()->flash('status', 'Comment successfully updated!');
+
+        return redirect('issue/index');
+    }
+
     public function saveComment($id, Request $request)
     {
         $this->validate($request, [
@@ -147,6 +174,14 @@ class IssueController extends Controller
         );
         session()->flash('status', 'Comment added!');
 
+        return redirect('issue/index');
+    }
+
+    public function deleteComment($id)
+    {
+        DB::table('comments')->delete($id);
+
+        session()->flash('danger', 'Comment delete!');
         return redirect('issue/index');
     }
 }
