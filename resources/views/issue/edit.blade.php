@@ -21,7 +21,7 @@
                     <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                         <label for="name" class="col-md-4 control-label">Description</label>
                         <div class="col-md-6">
-                            <input id="description" type="text" class="form-control" name="description" value="{{$issue->description}}">
+                            <textarea id="description" type="text" class="form-control" name="description">{{$issue->description}}</textarea>
                             @if ($errors->has('description'))
                                 {{session()->flash('danger',$errors->first('description'))}}
                             @endif
@@ -155,17 +155,34 @@
 
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
-                            @foreach($issue->getThisComments() as $comments)
+                            @foreach($issue->getThisComments() as $comment)
                             <div class="panel panel-primary">
                                 <div class="panel-heading">
-                                    {{$comments->name}}
-                                    @if( $comments->name === Auth::user()->name)
-                                    <a  href="/issue/comment/edit/{{$comments->id}}" class="btn btn-primary" >Edit</a>
-                                    <a  href="/issue/comment/delete/{{$comments->id}}" class="btn btn-danger" >Delete</a>
+                                    {{$comment->name}}
+                                    @if( $comment->name === Auth::user()->name)
+                                    <a  href="/issue/comment/edit/{{$comment->id}}" class="btn btn-primary" >Edit</a>
+                                    <a  href="/issue/comment/delete/{{$comment->id}}" class="btn btn-danger" >Delete</a>
                                     @endif
                                 </div>
-                                <div class="panel-body">{{$comments->text}}</div>
+                                <div class="panel-body">{{$comment->text}}</div>
                             </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-6 col-md-offset-4">
+                            @foreach($issue->getThisLogs() as $log)
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        {{$log->user}}| {{$log->status}}
+                                        @if( $log->user === Auth::user()->name)
+                                            <a  href="/issue/workLog/edit/{{$log->id}}" class="btn btn-primary" >Edit</a>
+                                            <a  href="/issue/workLog/delete/{{$log->id}}" class="btn btn-danger" >Delete</a>
+                                        @endif
+                                    </div>
+                                    <div class="panel-body">{{$log->comment}} | time spent:{{date("d \d\. H \h\. i \m\. s \s\.",$log->time_spent)}}</div>
+                                </div>
                             @endforeach
                         </div>
                     </div>

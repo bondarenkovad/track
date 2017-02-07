@@ -8,6 +8,7 @@ use App\Issue;
 use App\Project;
 use App\Comment;
 use Illuminate\Support\Facades\DB;
+use App\WorkLog;
 
 class User extends Authenticatable
 {
@@ -32,6 +33,11 @@ class User extends Authenticatable
     public function groups()
     {
         return $this->belongsToMany('App\Group');
+    }
+
+    public function workLogs()
+    {
+        return $this->belongsToMany('App\WorkLog');
     }
 
     public function projects()

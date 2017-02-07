@@ -9,6 +9,7 @@ use App\IssueType;
 use App\IssuesPriority;
 use App\User;
 use App\Comment;
+use App\WorkLog;
 use Illuminate\Support\Facades\DB;
 
 class Issue extends Model
@@ -53,6 +54,11 @@ class Issue extends Model
         return $this->hasMany('App\Comment');
     }
 
+    public function workLogs()
+    {
+        return $this->belongsToMany('App\WorkLog');
+    }
+
     public function getThisComments()
     {
         return $comments = DB::table('comments')
@@ -60,6 +66,18 @@ class Issue extends Model
             ->join('issues', 'issues.id', '=', 'comments.issue_id')
             ->where('comments.issue_id', '=', $this->id)
             ->select('comments.text', 'users.name', 'comments.id')
+            ->distinct()
+            ->get();
+    }
+
+    public function getThisLogs()
+    {
+        return $logs = DB::table('work_logs')
+            ->join('users', 'users.id', '=', 'work_logs.user_id')
+            ->join('issues', 'issues.id', '=', 'work_logs.issue_id')
+            ->join('issue_statuses', 'issue_statuses.id', '=', 'work_logs.issue_status_id')
+            ->where('work_logs.issue_id', '=', $this->id)
+            ->select('work_logs.comment', 'users.name as user', 'issue_statuses.name as status','work_logs.time_spent', 'work_logs.id')
             ->distinct()
             ->get();
     }

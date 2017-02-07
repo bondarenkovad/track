@@ -73,12 +73,19 @@ Route::get('/issue/add', 'IssueController@create');
 Route::post('/issue/create', 'IssueController@store');
 Route::get('/issue/edit/{id}', 'IssueController@edit');
 Route::put('/issue/edit/{id}', 'IssueController@update');
+Route::get('/issue/delete/{id}', 'IssueController@destroy');
+// Comment
 Route::get('/issue/comment/index/{id}', 'IssueController@addComment');
 Route::put('/issue/comment/index/{id}', 'IssueController@saveComment');
 Route::get('/issue/comment/edit/{id}', 'IssueController@editComment');
 Route::put('/issue/comment/edit/{id}', 'IssueController@updateComment');
 Route::get('/issue/comment/delete/{id}', 'IssueController@deleteComment');
-Route::get('/issue/delete/{id}', 'IssueController@destroy');
+// WorkLog
+Route::get('/issue/workLog/index/{id}', 'IssueController@addWorkLog');
+Route::put('/issue/workLog/index/{id}', 'IssueController@saveWorkLog');
+Route::get('/issue/workLog/edit/{id}', 'IssueController@editWorkLog');
+Route::put('/issue/workLog/edit/{id}', 'IssueController@updateWorkLog');
+Route::get('/issue/workLog/delete/{id}', 'IssueController@deleteWorkLog');
 
 //Sprint routing
 Route::get('/sprint/index', 'SprintController@index');
