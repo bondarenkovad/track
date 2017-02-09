@@ -10,6 +10,7 @@ use App\IssuesPriority;
 use App\User;
 use App\Comment;
 use App\WorkLog;
+use App\Attachment;
 use Illuminate\Support\Facades\DB;
 
 class Issue extends Model
@@ -54,6 +55,11 @@ class Issue extends Model
         return $this->hasMany('App\Comment');
     }
 
+    public function attachments()
+    {
+        return $this->hasMany('App\Attachment');
+    }
+
     public function workLogs()
     {
         return $this->belongsToMany('App\WorkLog');
@@ -87,6 +93,16 @@ class Issue extends Model
         if($this->comments()->exists())
         {
             return count($this->comments());
+        }
+
+        return 0;
+    }
+
+    public function CountAttachments()
+    {
+        if($this->attachments()->exists())
+        {
+            return count($this->attachments());
         }
 
         return 0;

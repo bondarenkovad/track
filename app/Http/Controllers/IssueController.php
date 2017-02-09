@@ -131,7 +131,6 @@ class IssueController extends Controller
         return redirect('issue/index');
     }
 
-
     public function addComment($id)
     {
         $issue = Issue::find($id);
@@ -247,5 +246,11 @@ class IssueController extends Controller
 
         session()->flash('danger', 'Work Log has been delete!');
         return redirect('issue/index');
+    }
+
+    public function addFile($id)
+    {
+        $issue = Issue::find($id);
+        return view('issue.file.index', ['issue'=>$issue]);
     }
 }
