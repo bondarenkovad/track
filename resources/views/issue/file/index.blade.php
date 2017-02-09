@@ -5,15 +5,15 @@
         <h1 class="text-center text-muted">Add Files:</h1>
         <div class="row">
             <div class="panel-body">
-                <form class="form-horizontal" role="form" method="POST" action="{{action('IssueController@saveFile', ['issue'=>$issue->id])}}">
+                <form class="form-horizontal" role="form" method="POST" action="{{action('IssueController@saveFile', ['issue'=>$issue->id])}}" enctype="multipart/form-data">
                     <input type="hidden" name="_method" value="put"/>
                     {{ csrf_field() }}
-                    <div class="form-group{{ $errors->has('text') ? ' has-error' : '' }}">
-                        <label for="text" class="col-md-4 control-label">File:</label>
+                    <div class="form-group{{ $errors->has('file') ? ' has-error' : '' }}">
+                        <label for="file" class="col-md-4 control-label">File:</label>
                         <div class="col-md-6">
-                            <input type="file" multiple>
-                            @if ($errors->has('text'))
-                                {{session()->flash('danger',$errors->first('tex'))}}
+                            <input type="file" name="file[]" multiple>
+                            @if ($errors->has('file'))
+                                {{session()->flash('danger',$errors->first('file'))}}
                             @endif
                         </div>
                     </div>

@@ -15,6 +15,7 @@ use App\IssuesPriority;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 
 class IssueController extends Controller
@@ -252,5 +253,31 @@ class IssueController extends Controller
     {
         $issue = Issue::find($id);
         return view('issue.file.index', ['issue'=>$issue]);
+    }
+
+    public function saveFile($id, Request $request)
+    {
+        $files = Input::file('file');
+
+
+        $this->validate($request, [
+            'file' => 'required|max:255',
+        ]);
+
+//        dd($files);
+        foreach($files as $file)
+        {
+            $destinationPath = 'uploads';
+            $fileName = $file->getClientOriginalName();
+            $file->move($destinationPath, $fileName);
+
+            DB::table('attachments')->insert(
+                array('path' => 'C:\wamp\www\track\public\uploads\''.$file->getClientOriginalName(), 'issue_id' => $id)
+            );
+        }
+
+        session()->flash('status', 'File added!');
+
+        return redirect('issue/index');
     }
 }
