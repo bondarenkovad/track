@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Project;
 use App\Board;
+use App\IssueStatus;
 use Illuminate\Support\Facades\DB;
 
 class BoardController extends Controller
@@ -25,20 +26,47 @@ class BoardController extends Controller
     public function create()
     {
         $projects = Project::all();
-        return view('board.create', ['projects'=>$projects]);
+        $statuses = IssueStatus::all();
+        return view('board.create', ['projects'=>$projects, 'statuses'=>$statuses]);
     }
 
     public function store(Request $request)
     {
+        $allStatuses = IssueStatus::all();
+        $statuses = $request->statuses;
+
+//        dd($statuses);
+
         $this->validate($request, [
             'name' => 'required|max:50',
             'project_id' => 'required|not_in:0',
         ]);
 
-        Board::create([
+        $id = DB::table('boards')->insertGetId([
             'name' => $request['name'],
             'project_id' =>(int)$request['project_id'],
         ]);
+
+        $board = Board::find($id);
+
+//        if($statuses === null)
+//        {
+//
+//        }
+//        else
+//        {
+//            foreach($allStatuses as $status)
+//            {
+//                if(in_array($status->id, $statuses))
+//                {
+//                    if(!$board->hasStatus($status->name))
+//                    {
+//                        dd(key($statuses));
+//                        $board->addStatusToBoard($status->id, key($statuses)+1);
+//                    }
+//                }
+//            }
+//        }
 
         return redirect('/board/index');
     }

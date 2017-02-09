@@ -33,6 +33,18 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="active" class="col-md-4 control-label">Statuses:</label>
+
+                        <div class="col-md-6">
+                            <select class="form-control" id="project" name="statuses[]" multiple="multiple">
+                                @foreach($statuses as $status)
+                                    <option value="{{$status->id}}">{{$status->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
                             <button type="submit" class="btn btn-primary">
                                 Create
