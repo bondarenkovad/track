@@ -273,7 +273,7 @@ class IssueController extends Controller
             $file->move($destinationPath, $fileName);
 
             DB::table('attachments')->insert(
-                array('path' => 'C:\wamp\www\track\public\uploads'.$file->getClientOriginalName(), 'issue_id' => $id)
+                array('path' => 'C:\wamp\www\track\public\uploads\\'.$file->getClientOriginalName(), 'issue_id' => $id)
             );
         }
 
