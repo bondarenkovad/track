@@ -189,6 +189,22 @@
 
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
+                            @foreach($issue->getThisAttachments() as $file)
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                            Uploaded files to {{$issue->summary}}
+                                    </div>
+                                    <div class="panel-body">
+                                        {{$file->path}}
+                                        <a  href="{{route('upload_delete', ['filename'=>$file->path])}}" class="btn btn-danger" >Delete</a>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-6 col-md-offset-4">
                             <button type="submit" class="btn btn-primary">
                                 Update
                             </button>

@@ -16,7 +16,8 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
-
+use Illuminate\Support\Facades\Storage;
+use File;
 
 class IssueController extends Controller
 {
@@ -96,7 +97,7 @@ class IssueController extends Controller
 
     public function update($id, Request $request)
     {
-        $issue =Issue::find($id);
+        $issue = Issue::find($id);
 
         $this->validate($request, [
             'summary' => 'required|max:50',
@@ -278,6 +279,18 @@ class IssueController extends Controller
 
         session()->flash('status', 'File added!');
 
+        return redirect('issue/index');
+    }
+
+    public function deleteFile(Request $request)
+    {
+       File::delete($request->filename);
+
+        DB::table('attachments')
+            ->where('attachments.path', '=',$request->filename )
+            ->delete();
+
+        session()->flash('danger', 'File has been delete!');
         return redirect('issue/index');
     }
 }

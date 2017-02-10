@@ -89,9 +89,7 @@ Route::get('/issue/workLog/delete/{id}', 'IssueController@deleteWorkLog');
 // File
 Route::get('/issue/file/index/{id}', 'IssueController@addFile');
 Route::put('/issue/file/index/{id}', 'IssueController@saveFile');
-Route::get('/issue/file/edit/{id}', 'IssueController@editFile');
-Route::put('/issue/file/edit/{id}', 'IssueController@updateFile');
-Route::get('/issue/file/delete/{id}', 'IssueController@deleteFile');
+Route::get('/issue/file/delete/{filename}', ['as'=>'upload_delete', 'uses'=>'IssueController@deleteFile']);
 
 //Sprint routing
 Route::get('/sprint/index', 'SprintController@index');

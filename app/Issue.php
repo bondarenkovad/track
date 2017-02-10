@@ -76,6 +76,16 @@ class Issue extends Model
             ->get();
     }
 
+    public function getThisAttachments()
+    {
+        return $attachments = DB::table('attachments')
+            ->join('issues', 'issues.id', '=', 'attachments.issue_id')
+            ->where('attachments.issue_id', '=', $this->id)
+            ->select('attachments.path', 'issues.summary', 'attachments.id')
+            ->distinct()
+            ->get();
+    }
+
     public function getThisLogs()
     {
         return $logs = DB::table('work_logs')
