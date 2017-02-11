@@ -5,7 +5,7 @@
         <h1 class="text-center text-muted">Board Create</h1>
         <div class="row">
             <div class="panel-body">
-                <form class="form-horizontal" role="form" method="POST" action="/board/create">
+                <form class="form-horizontal" role="form" method="POST" action="/board/create" enctype = "multipart/form-data">
                     {{ csrf_field() }}
 
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -38,18 +38,20 @@
                         <div class="col-md-6">
                             <div class="row">
                                 <div id="left" class="form-control">
-                                    <ul id="sortable1" class="connectedSortable">
+                                    <ul id="sortable1" class="connectedSortable"  name="message">
 
                                     </ul>
                                 </div>
                                 <div id="right" class="form-control">
                                     <ul id="sortable2" class="connectedSortable">
                                         @foreach($statuses as $status)
-                                            <li class="ui-state-default" value="{{$status->id}}">{{$status->name}}</li>
+                                            <li class="ui-state-default" data-value="{{$status->id}}">{{$status->name}}</li>
                                          @endforeach
                                     </ul>
                                 </div>
                             </div>
+                            <input id="statusesId" type="hidden" name="statusesId">
+
                             {{--<select class="form-control" id="project" name="statuses[]" multiple="multiple">--}}
                                 {{--@foreach($statuses as $status)--}}
                                     {{--<option value="{{$status->id}}">{{$status->name}}</option>--}}
@@ -63,7 +65,6 @@
                             <button type="submit" class="btn btn-primary" id="submitBtn">
                                 Create
                             </button>
-
                             <a href="/board/index" class="btn btn-success">
                                 Back to Boards List
                             </a>

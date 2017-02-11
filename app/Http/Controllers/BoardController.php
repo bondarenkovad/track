@@ -32,9 +32,9 @@ class BoardController extends Controller
 
     public function store(Request $request)
     {
-        $allStatuses = IssueStatus::all();
-        $statuses = $request->statuses;
 
+        $statuses = explode(',',$request->input('statusesId'));
+        $allStatuses = IssueStatus::all();
         dd($statuses);
 
         $this->validate($request, [

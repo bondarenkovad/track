@@ -107,6 +107,7 @@ Route::get('/board/add', 'BoardController@create');
 //});
 Route::post('/board/create', 'BoardController@store');
 Route::get('/board/edit/{id}', 'BoardController@edit');
+
 Route::put('/board/edit/{id}', 'BoardController@update');
 Route::get('/board/delete/{id}', 'BoardController@destroy');
 

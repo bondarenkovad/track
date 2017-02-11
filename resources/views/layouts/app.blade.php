@@ -176,20 +176,17 @@
                 }).disableSelection();
             } );
 
-            $mass = [];
+
 
             $('#submitBtn').on('click', function()
             {
+                $mass = [];
+
                 $('#sortable1 li').each(function() {
-                    $mass.push($(this).text());
+                    $mass.push($(this).attr('data-value'));
                 });
 
-//                $.get('http://localhost:8000/board/getdata', {'mass[]':$mass}, function(data)	{
-////                    alert('Сервер ответил: '+data);
-//                });
-
-                   alert($mass);
-//                $.get($mass);
+                $("#statusesId").val($mass);
             });
 
 
