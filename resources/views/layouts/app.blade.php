@@ -176,6 +176,30 @@
                 }).disableSelection();
             } );
 
+            $mass = [];
+
+            $('#submitBtn').on('click', function()
+            {
+                $('#sortable1 li').each(function() {
+                    $mass.push($(this).text());
+                });
+
+//                $.get('http://localhost:8000/board/getdata', {'mass[]':$mass}, function(data)	{
+////                    alert('Сервер ответил: '+data);
+//                });
+
+                   alert($mass);
+//                $.get($mass);
+            });
+
+
+
+
+//            $("#sortable1").on('click','li',(function() {
+//                var selected = $(this).text();   //or .html()
+//                alert(selected);
+//            }));
+
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}

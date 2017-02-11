@@ -102,6 +102,9 @@ Route::get('/sprint/delete/{id}', 'SprintController@destroy');
 //Board routing
 Route::get('/board/index', 'BoardController@index');
 Route::get('/board/add', 'BoardController@create');
+//Route::get('/board/getData/{mass}', function($mass){
+//    return $mass;
+//});
 Route::post('/board/create', 'BoardController@store');
 Route::get('/board/edit/{id}', 'BoardController@edit');
 Route::put('/board/edit/{id}', 'BoardController@update');

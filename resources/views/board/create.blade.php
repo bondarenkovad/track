@@ -39,7 +39,7 @@
                             <div class="row">
                                 <div id="left" class="form-control">
                                     <ul id="sortable1" class="connectedSortable">
-                                        <li class="ui-state-default"></li>
+
                                     </ul>
                                 </div>
                                 <div id="right" class="form-control">
@@ -60,7 +60,7 @@
 
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-primary" id="submitBtn">
                                 Create
                             </button>
 

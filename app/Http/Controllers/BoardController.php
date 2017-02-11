@@ -33,7 +33,7 @@ class BoardController extends Controller
     public function store(Request $request)
     {
         $allStatuses = IssueStatus::all();
-        $statuses = $request->sortable1;
+        $statuses = $request->statuses;
 
         dd($statuses);
 
