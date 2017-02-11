@@ -33,9 +33,9 @@ class BoardController extends Controller
     public function store(Request $request)
     {
         $allStatuses = IssueStatus::all();
-        $statuses = $request->statuses;
+        $statuses = $request->sortable1;
 
-//        dd($statuses);
+        dd($statuses);
 
         $this->validate($request, [
             'name' => 'required|max:50',

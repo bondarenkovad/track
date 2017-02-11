@@ -36,11 +36,25 @@
                         <label for="active" class="col-md-4 control-label">Statuses:</label>
 
                         <div class="col-md-6">
-                            <select class="form-control" id="project" name="statuses[]" multiple="multiple">
-                                @foreach($statuses as $status)
-                                    <option value="{{$status->id}}">{{$status->name}}</option>
-                                @endforeach
-                            </select>
+                            <div class="row">
+                                <div id="left" class="form-control">
+                                    <ul id="sortable1" class="connectedSortable">
+                                        <li class="ui-state-default"></li>
+                                    </ul>
+                                </div>
+                                <div id="right" class="form-control">
+                                    <ul id="sortable2" class="connectedSortable">
+                                        @foreach($statuses as $status)
+                                            <li class="ui-state-default" value="{{$status->id}}">{{$status->name}}</li>
+                                         @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            {{--<select class="form-control" id="project" name="statuses[]" multiple="multiple">--}}
+                                {{--@foreach($statuses as $status)--}}
+                                    {{--<option value="{{$status->id}}">{{$status->name}}</option>--}}
+                                {{--@endforeach--}}
+                            {{--</select>--}}
                         </div>
                     </div>
 
