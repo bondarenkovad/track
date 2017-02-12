@@ -176,6 +176,12 @@
                 }).disableSelection();
             } );
 
+            $( function() {
+                $( "#sortable3,#sortable4" ).sortable({
+                    connectWith: ".connectedSortable"
+                }).disableSelection();
+            } );
+
             $('#submitBtn').on('click', function()
             {
                 $mass = [];

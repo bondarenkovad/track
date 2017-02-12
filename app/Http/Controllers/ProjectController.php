@@ -82,6 +82,20 @@ class ProjectController extends Controller
         return view('project.edit', ['project'=>$project]);
     }
 
+    public function board($key)
+    {
+
+        $project = Project::where('key', '=', $key)
+            ->firstOrFail();
+//        $project = DB::table('projects')
+//            ->where('projects.key', '=', $key)
+//            ->first();
+
+//        $issues = DB::table('issues')
+
+        return view('project.board', ['project'=>$project]);
+    }
+
     public function search(Request $request)
     {
         $search = $request->search;

@@ -63,6 +63,7 @@ Route::get('/project/index', 'ProjectController@index');
 Route::post('/project/index', 'ProjectController@search');
 Route::get('/project/add', 'ProjectController@create');
 Route::post('/project/create', 'ProjectController@store');
+Route::get('/project/{key}', 'ProjectController@board');
 Route::get('/project/edit/{id}', 'ProjectController@edit');
 Route::put('/project/edit/{id}', 'ProjectController@update');
 Route::get('/project/delete/{id}', 'ProjectController@destroy');
