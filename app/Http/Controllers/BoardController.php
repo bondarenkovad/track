@@ -35,7 +35,6 @@ class BoardController extends Controller
 
         $statuses = explode(',',$request->input('statusesId'));
         $allStatuses = IssueStatus::all();
-        dd($statuses);
 
         $this->validate($request, [
             'name' => 'required|max:50',
@@ -48,26 +47,26 @@ class BoardController extends Controller
         ]);
 
         $board = Board::find($id);
+        $key = 0;
 
-//        if($statuses === null)
-//        {
-//
-//        }
-//        else
-//        {
-//            foreach($allStatuses as $status)
-//            {
-//                if(in_array($status->id, $statuses))
-//                {
-//                    if(!$board->hasStatus($status->name))
-//                    {
-//                        dd(key($statuses));
-//                        $board->addStatusToBoard($status->id, key($statuses)+1);
-//                    }
-//                }
-//            }
-//        }
+        if($statuses === null)
+        {
 
+        }
+        else
+        {
+            foreach($allStatuses as $status)
+            {
+                if(in_array($status->id, $statuses))
+                {
+                    if(!$board->hasStatus($status->name))
+                    {
+                        $key++;
+                        $board->addStatusToBoard($status->id, $key);
+                    }
+                }
+            }
+        }
         return redirect('/board/index');
     }
 
