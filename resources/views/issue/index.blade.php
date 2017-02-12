@@ -18,6 +18,7 @@
                 <th>Reporter</th>
                 <th>Assigned</th>
                 <th>Comments</th>
+                <th>Work Log</th>
                 <th>Files</th>
                 <th>Original estimate</th>
                 <th>Remaining estimate</th>
@@ -38,6 +39,7 @@
                         <td>{{$issue->reporter['name']}}</td>
                         <td>{{$issue->assigned['name']}}</td>
                         <td>{{$issue->CountComments()}}</td>
+                        <td>{{$issue->CountLogs()}}</td>
                         <td>{{$issue->CountAttachments()}}</td>
                         <td>{{date("d \d\. H \h\. i \m\. s \s\.",$issue->original_estimate)}}</td>
                         <td>{{date("d \d\. H \h\. i \m\. s \s\.",$issue->remaining_estimate)}}</td>

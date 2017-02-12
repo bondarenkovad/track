@@ -62,7 +62,7 @@ class Issue extends Model
 
     public function workLogs()
     {
-        return $this->belongsToMany('App\WorkLog');
+        return $this->hasMany('App\WorkLog');
     }
 
     public function getThisComments()
@@ -72,7 +72,7 @@ class Issue extends Model
             ->join('issues', 'issues.id', '=', 'comments.issue_id')
             ->where('comments.issue_id', '=', $this->id)
             ->select('comments.text', 'users.name', 'comments.id')
-            ->distinct()
+//            ->distinct()
             ->get();
     }
 
@@ -100,9 +100,29 @@ class Issue extends Model
 
     public function CountComments()
     {
+        $count = 0;
         if($this->comments()->exists())
         {
-            return count($this->comments());
+            foreach($this->comments()->get() as $comment)
+            {
+                $count++;
+            }
+            return $count;
+        }
+
+        return 0;
+    }
+
+    public function CountLogs()
+    {
+        $count = 0;
+        if($this->workLogs()->exists())
+        {
+            foreach($this->workLogs()->get() as $log)
+            {
+                $count++;
+            }
+            return $count;
         }
 
         return 0;
@@ -110,9 +130,15 @@ class Issue extends Model
 
     public function CountAttachments()
     {
+        $count = 0;
+
         if($this->attachments()->exists())
         {
-            return count($this->attachments());
+            foreach($this->attachments()->get() as $file)
+            {
+                $count++;
+            }
+            return $count;
         }
 
         return 0;
