@@ -51,12 +51,6 @@
                                 </div>
                             </div>
                             <input id="statusesId" type="hidden" name="statusesId">
-
-                            {{--<select class="form-control" id="project" name="statuses[]" multiple="multiple">--}}
-                                {{--@foreach($statuses as $status)--}}
-                                    {{--<option value="{{$status->id}}">{{$status->name}}</option>--}}
-                                {{--@endforeach--}}
-                            {{--</select>--}}
                         </div>
                     </div>
 

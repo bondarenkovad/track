@@ -79,7 +79,43 @@ class BoardController extends Controller
 
     public function update($id, Request $request)
     {
+        $statuses = explode(',',$request->input('statusesId'));
+        $allStatuses = IssueStatus::all();
         $board = Board::find($id);
+        $key = 0;
+
+        if($statuses[0] === "")
+        {
+            foreach($board->statuses()->get() as $status)
+            {
+                if($board->hasStatus($status->name))
+                {
+
+                    $board->deleteStatusToBoard($status->id);
+                }
+            }
+        }
+        else
+        {
+            foreach($allStatuses as $status)
+            {
+                if(in_array($status->id, $statuses))
+                {
+                    if(!$board->hasStatus($status->name))
+                    {
+                        $key++;
+                        $board->addStatusToBoard($status->id, $key);
+                    }
+                }
+                else
+                {
+                    if($board->hasStatus($status->name))
+                    {
+                        $board->deleteStatusToBoard($status->id);
+                    }
+                }
+            }
+        }
 
         $this->validate($request, [
             'name' => 'required|max:50',
@@ -93,6 +129,7 @@ class BoardController extends Controller
 
 
         $board->save();
+
         session()->flash('status', 'Board successfully updated!');
 
         return redirect('/board/index');

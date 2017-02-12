@@ -37,8 +37,32 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="active" class="col-md-4 control-label">Statuses:</label>
+
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div id="left" class="form-control">
+                                    <ul id="sortable1" class="connectedSortable"  name="message">
+                                        @foreach($board->statuses()->get() as $status)
+                                        <li class="ui-state-default" data-value="{{$status->id}}">{{$status->name}}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                <div id="right" class="form-control">
+                                    <ul id="sortable2" class="connectedSortable">
+                                        @foreach($board->filterStatus() as $filter)
+                                            <li class="ui-state-default" data-value="{{$filter->id}}">{{$filter->name}}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            <input id="statusesId" type="hidden" name="statusesId">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-primary" id="submitBtn">
                                 Update
                             </button>
 

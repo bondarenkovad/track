@@ -21,7 +21,7 @@
                         <td>{{$board->name}}</td>
                         <td>{{$board->project['name']}}</td>
                         <td>
-                            <ul> @foreach($board->statuses()->get() as $status)</ul>
+                            <ul> @foreach($board->orderByOrders() as $status)</ul>
                             <li>{{$status->name}}</li>
                             @endforeach
                         </td>

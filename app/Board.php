@@ -39,4 +39,48 @@ class Board extends Model
             array('issue_status_id' => $statusId, 'board_id' => $this->id, 'order'=>$key)
         );
     }
+
+    public function deleteStatusToBoard($statusId)
+    {
+         DB::table('board_issue_status')
+            ->where('board_issue_status.board_id', '=', $this->id)
+            ->where('board_issue_status.issue_status_id', '=', $statusId)
+            ->delete();
+
+//        DB::table('group_user')->delete($id);
+    }
+
+    public function filterStatus()
+    {
+        $filterStatus = [];
+        $statusId = [];
+
+        foreach($this->statuses()->get() as $status)
+        {
+            array_push($statusId,$status->id);
+        }
+
+        $allStatuses = IssueStatus::all();
+        foreach($allStatuses as $all)
+        {
+            if(!in_array($all->id, $statusId))
+            {
+                array_push($filterStatus,$all);
+            }
+        }
+
+        return $filterStatus;
+    }
+
+    public function orderByOrders()
+    {
+        return $orderBy = DB::table('board_issue_status')
+            ->join('boards', 'boards.id', '=', 'board_issue_status.board_id')
+            ->join('issue_statuses', 'issue_statuses.id', '=', 'board_issue_status.issue_status_id')
+            ->where('boards.id', '=', $this->id)
+            ->select('issue_statuses.name', 'board_issue_status.order')
+            ->orderBy('board_issue_status.order')
+            ->distinct()
+            ->get();
+    }
 }
