@@ -44,6 +44,7 @@
                                                     <img src="/img/status_icon/blocker.png" class="img">
                                                 @endif
                                             </span>
+                                            <span class="original">{{date("d \d\. H \h\. i \m\. s \s\.",$issue->original_estimate)}}</span>
                                         </li>
                                     @endforeach
                                 </ul>

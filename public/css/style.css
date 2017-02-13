@@ -56,7 +56,7 @@
     margin: 0 5px 5px 5px;
     padding: 5px;
     font-size: 1.2em;
-    width: 1000px;
+    width: 1120px;
 }
 
 .img{
@@ -65,10 +65,14 @@
 }
 
 .assign{
+    padding-right: 10px;
+    text-align: right;
+    float: left;
     width: 200px;
 }
 
 .summary{
+    padding-left: 10px;
     float: left;
     display: block;
     width: 500px;
@@ -80,11 +84,21 @@
 
 .key{
     margin: 0;
-    width: 100px;
-    float: right;
+    width: 60px;
+    float: left;
     display: block;
 }
 
 .imageSpan{
     float: left;
+}
+
+.original{
+    /*float: left;*/
+    display: block;
+}
+
+.prioritySpan{
+    float: left;
+    display: block;
 }
