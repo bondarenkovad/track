@@ -56,5 +56,35 @@
     margin: 0 5px 5px 5px;
     padding: 5px;
     font-size: 1.2em;
+    width: 1000px;
+}
+
+.img{
+    width: 20px;
+    height: 20px;
+}
+
+.assign{
+    width: 200px;
+}
+
+.summary{
+    float: left;
+    display: block;
     width: 500px;
+}
+.imageSpan{
+    float: left;
+    display: block;
+}
+
+.key{
+    margin: 0;
+    width: 100px;
+    float: right;
+    display: block;
+}
+
+.imageSpan{
+    float: left;
 }
