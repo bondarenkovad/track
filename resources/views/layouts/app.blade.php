@@ -178,8 +178,23 @@
 
             $( function() {
                 $( "#sortable3,#sortable4" ).sortable({
-                    connectWith: ".connectedSortable"
-                }).disableSelection();
+                    connectWith: ".connectedSortable",
+                    update:function(event, ui)
+                    {
+                       $m = [];
+                       $('#sortable3 li').each(function() {
+                           $m.push($(this).attr('data-value'));
+                       });
+                        $("#orderId").val($m);
+
+                        var path = window.location.href;
+                        var p = path.substring(21);
+//                        alert(p);
+//                        $.get(p);
+//                        $(location).attr('href',p);
+//                        $.post(p);
+                    }
+                }).disableSelection()
             } );
 
             $('#submitBtn').on('click', function()

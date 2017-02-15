@@ -5,10 +5,14 @@
         <h1 class="text-center text-muted"><span class="title">{{$project->name}}</span> Board</h1>
         <div class="row">
             <div class="panel-body">
+                <form class="form-horizontal" role="form" method="POST" action="{{action('ProjectController@refresh', ['key'=> $project->key])}}">
+                    <input type="hidden" name="_method" value="put"/>
+                    {{ csrf_field() }}
                 <div class="form-group">
                     <label for="active" class="col-md-4 control-label">Backlog</label>
                     <div class="col-md-12">
                         <div class="row">
+
                             {{--<div id="left" class="form-control">--}}
                                 {{--<ul id="sortable1" class="connectedSortable"  name="message">--}}
                                     {{--@foreach($board->statuses()->get() as $status)--}}
@@ -49,18 +53,19 @@
                                     @endforeach
                                 </ul>
                         </div>
-                        <input id="statusesId" type="hidden" name="statusesId">
+                        <input id="orderId" type="hidden" name="orderId">
                     </div>
                     <div class="col-md-6 col-md-offset-4">
-                        {{--<button type="submit" class="btn btn-primary" id="submitBtn">--}}
-                            {{--Update--}}
-                        {{--</button>--}}
+                        <button type="submit" class="btn btn-primary">
+                            Update
+                        </button>
 
                         <a href="/project/index" class="btn btn-success">
                             Back to Project List
                         </a>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
     </div>

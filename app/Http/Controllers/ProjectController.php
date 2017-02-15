@@ -82,17 +82,44 @@ class ProjectController extends Controller
         return view('project.edit', ['project'=>$project]);
     }
 
-    public function board($key)
+    public function board($key, Request $request)
     {
-
         $project = Project::where('key', '=', $key)
             ->firstOrFail();
-//        $project = DB::table('projects')
-//            ->where('projects.key', '=', $key)
-//            ->first();
+        $order = json_encode(explode(',',$request->input('orderId')));
+//        dd($order);
+        $project->update([
+            [$project->order = $order],
+        ]);
+        $project->save();
 
-//        $issues = DB::table('issues')
+        return view('project.board', ['project'=>$project]);
+    }
 
+    public function refresh($key, Request $request)
+    {
+       $project = Project::where('key', '=', $key)
+            ->firstOrFail();
+        $order = explode(',',$request->input('orderId'));
+        $JsonOrder = [];
+
+       // dd($order);
+        foreach($project->issues()->get() as $pro)
+        {
+            for($i=0; $i < count($order); $i++ )
+            {
+//                dd($pro->id);
+                if ($order[$i] + 0 === $pro->id) {
+                    array_push($JsonOrder, $pro);
+                }
+            }
+        }
+
+            dd($JsonOrder);
+        $project->update([
+            [$project->order = $order],
+        ]);
+        $project->save();
         return view('project.board', ['project'=>$project]);
     }
 
