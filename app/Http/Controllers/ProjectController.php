@@ -98,45 +98,22 @@ class ProjectController extends Controller
 
     public function refresh($key, Request $request)
     {
-//       $project = Project::where('key', '=', $key)
-//            ->first();
-
         $project = Project::with('issues')
             ->where('key', '=', $key)
             ->first();
         $order = explode(',',$request->input('orderId'));
         $JsonOrder = [];
 
-//        $rgOrder  = array(5, 2, 0, 4, 1, 3);
-//        $rgData   = array('a', 'b', 'c', 'd', 'e', 'f');
-//        $rgResult = array();
-//        array_walk($rgOrder, function($iValue) use (&$rgData, &$rgResult)
-//        {
-//            $rgResult[]=$rgData[$iValue];
-//        });
-//        var_dump($rgResult);
-//        $old_tracks=array("0"=>"track 1", "1"=>"track 2", "2"=>"track 3");
         $old_track = array();
-//        $tracks=array(0, 2, 1);
-            $new_tracks=array();
-//        foreach($tracks as $idx)
-//        {
-//            $new_tracks[] = $old_tracks[$idx];
-//        }
-
-//        var_dump($new_tracks);
+        $new_tracks=array();
 
         foreach($project->issues()->get() as $pro)
         {
             array_push($old_track, $pro);
         }
 
-
-
-//        dd($old_track[0]->id);
         foreach($order as $id)
         {
-//            dd($id);
             foreach($old_track as $issue)
             {
                 if($issue->id === $id+ 0)
@@ -144,25 +121,10 @@ class ProjectController extends Controller
                     $new_tracks[] = $issue;
                 }
             }
-
-
         }
 
         dd($new_tracks);
 
-       // dd($order);
-//        foreach($project->issues()->get() as $pro)
-//        {
-//            for($i=0; $i < count($order); $i++ )
-//            {
-////                dd($pro->id);
-//                if ($order[$i] + 0 === $pro->id) {
-//                    array_push($JsonOrder, $pro);
-//                }
-//            }
-//        }
-
-//            dd($JsonOrder);
         $project->update([
             [$project->order = $order],
         ]);
