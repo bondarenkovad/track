@@ -76,4 +76,24 @@ class Project extends Model
 
         DB::table('project_user')->delete($id);
     }
+
+    public function SortIssueByOrder()
+    {
+        $orders = json_decode($this->order);
+
+        $collection = collect();
+
+        foreach($orders as $id)
+        {
+            foreach($this->issues()->get() as $issue)
+            {
+                if($issue->id === $id+ 0)
+                {
+                    $collection->push($issue);
+                }
+            }
+        }
+
+        return $collection;
+    }
 }

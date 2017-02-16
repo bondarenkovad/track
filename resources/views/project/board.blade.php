@@ -9,7 +9,7 @@
                     <input type="hidden" name="_method" value="put"/>
                     {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="active" class="col-md-4 control-label">Backlog</label>
+                    <label for="active" class="col-md-4">Backlog</label>
                     <div class="col-md-12">
                         <div class="row">
 
@@ -21,7 +21,7 @@
                                 {{--</ul>--}}
                             {{--</div>--}}
                                 <ul id="sortable3" class="connectedSortable">
-                                    @foreach($project->issues()->get() as $issue)
+                                    @foreach($project->SortIssueByOrder() as $issue)
                                         <li class="ui-state-default" data-value="{{$issue->id}}">
                                              <span class="imageSpan">
                                                 @if($issue->type['name'] === 'task')
@@ -57,7 +57,7 @@
                     </div>
                     <div class="col-md-6 col-md-offset-4">
                         <button type="submit" class="btn btn-primary">
-                            Update
+                            Save
                         </button>
 
                         <a href="/project/index" class="btn btn-success">

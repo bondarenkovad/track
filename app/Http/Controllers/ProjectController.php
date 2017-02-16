@@ -101,33 +101,37 @@ class ProjectController extends Controller
         $project = Project::with('issues')
             ->where('key', '=', $key)
             ->first();
-        $order = explode(',',$request->input('orderId'));
-        $JsonOrder = [];
+        $order = json_encode(explode(',',$request->input('orderId')));
+//        $JsonOrder = [];
 
-        $old_track = array();
-        $new_tracks=array();
+//        $old_track = array();
+//        $collection = collect();
 
-        foreach($project->issues()->get() as $pro)
-        {
-            array_push($old_track, $pro);
-        }
+//        foreach($project->issues()->get() as $pro)
+//        {
+//            array_push($old_track, $pro);
+//        }
 
-        foreach($order as $id)
-        {
-            foreach($old_track as $issue)
-            {
-                if($issue->id === $id+ 0)
-                {
-                    $new_tracks[] = $issue;
-                }
-            }
-        }
+//        foreach($order as $id)
+//        {
+//            foreach($project->issues()->get() as $issue)
+//            {
+//                if($issue->id === $id+ 0)
+//                {
+//                    $collection->push($issue);
+//                }
+//            }
+//        }
 
-        dd($new_tracks);
-
+//        $JsonOrder = $collection->toJson();
+//        $project->update([
+//            [$project->order = $JsonOrder],
+//        ]);
+//        dd($order);
         $project->update([
             [$project->order = $order],
         ]);
+
         $project->save();
         return view('project.board', ['project'=>$project]);
     }
