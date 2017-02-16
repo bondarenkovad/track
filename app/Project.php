@@ -81,19 +81,23 @@ class Project extends Model
     {
         $orders = json_decode($this->order);
 
-        $collection = collect();
-
-        foreach($orders as $id)
+        if($orders != [""])
         {
-            foreach($this->issues()->get() as $issue)
+            $collection = collect();
+            foreach($orders as $id)
             {
-                if($issue->id === $id+ 0)
+                foreach($this->issues()->get() as $issue)
                 {
-                    $collection->push($issue);
+                    if($issue->id === $id+ 0)
+                    {
+                        $collection->push($issue);
+                    }
                 }
             }
+
+            return $collection;
         }
 
-        return $collection;
+        return $this->issues()->get();
     }
 }
