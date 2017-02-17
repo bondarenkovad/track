@@ -86,13 +86,6 @@ class ProjectController extends Controller
     {
         $project = Project::where('key', '=', $key)
             ->firstOrFail();
-        $order = json_encode(explode(',',$request->input('orderId')));
-//        dd($order);
-        $project->update([
-            [$project->order = $order],
-        ]);
-        $project->save();
-
         return view('project.board', ['project'=>$project]);
     }
 
@@ -101,6 +94,7 @@ class ProjectController extends Controller
         $project = Project::with('issues')
             ->where('key', '=', $key)
             ->first();
+
         $order = json_encode(explode(',',$request->input('orderId')));
 //        $JsonOrder = [];
 
@@ -158,7 +152,6 @@ class ProjectController extends Controller
     {
         $allUsers = User::all();
         $project = Project::find($id);
-        dd($project->toArray());
         $users = $request->user;
 
         if($users === null)

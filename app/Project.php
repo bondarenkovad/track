@@ -81,7 +81,7 @@ class Project extends Model
     {
         $orders = json_decode($this->order);
 
-        if($orders != [""])
+        if($orders != null)
         {
             $collection = collect();
             foreach($orders as $id)
