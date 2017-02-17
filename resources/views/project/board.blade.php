@@ -48,11 +48,6 @@
                             </div>
                             <input id="sprintId" type="hidden" name="sprintId">
                         </div>
-                        <div class="col-md-6 col-md-offset-4">
-                            <button type="submit" class="btn btn-primary">
-                                Save
-                            </button>
-                        </div>
                     </div>
                     @endforeach
                 <div class="form-group">
