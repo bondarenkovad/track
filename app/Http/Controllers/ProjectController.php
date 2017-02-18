@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Sprint;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -95,48 +96,36 @@ class ProjectController extends Controller
             ->where('key', '=', $key)
             ->first();
 
-        $activeSprintId = $request->input('activeSprint');
-        $order = json_encode(explode(',',$request->input('orderId')));
-        $activeSprintOrder = json_encode(explode(',',$request->input('activeSprintId')));
+        $sprint = Sprint::all();
 
-        $activeSprint = $project->sprints()->where('id', '=', $activeSprintId)->first();
 
-        $activeSprint->update(
-            [$activeSprint->order = $activeSprintOrder]
-        );
-        $activeSprint->save();
-//        dd($ActiveSprint);
-//        $JsonOrder = [];
+        $sprints = Sprint::all();
+//        $activeSprintId = $request->input('activeSprintId');
+           $data = $request->input('Data');
 
-//        $old_track = array();
-//        $collection = collect();
+        foreach($data as $key=>$value)
+        {
+            if($key === 'backlog')
+            {
+                $project->update([
+                    [$project->order = json_encode($value)],
+                ]);
+//
+                $project->save();
+            }
+            elseif(is_numeric($key))
+            {
+                $sprint = Sprint::find($key);
+               $sprint->update([
+                   [$sprint->order = json_encode($value)],
+               ]);
 
-//        foreach($project->issues()->get() as $pro)
-//        {
-//            array_push($old_track, $pro);
-//        }
+                $sprint->save();
 
-//        foreach($order as $id)
-//        {
-//            foreach($project->issues()->get() as $issue)
-//            {
-//                if($issue->id === $id+ 0)
-//                {
-//                    $collection->push($issue);
-//                }
-//            }
-//        }
+            }
+        }
 
-//        $JsonOrder = $collection->toJson();
-//        $project->update([
-//            [$project->order = $JsonOrder],
-//        ]);
-//        dd($order);
-        $project->update([
-            [$project->order = $order],
-        ]);
 
-        $project->save();
         return view('project.board', ['project'=>$project]);
     }
 

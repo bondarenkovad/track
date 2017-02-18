@@ -101,24 +101,27 @@ class Project extends Model
         return $this->issues()->get();
     }
 
-    public function getFirstActiveSprint()
+    public function getSprints()
     {
         $sprint = $this->sprints()
-            ->where('status', '=', '2')
-            ->first();
+            ->orderBy('status', 'ASC')
+            ->orderBy('created_at', 'ASC')
+            ->get();
 
         return $sprint;
     }
 
-    public function hasActiveSprint()
+    public function hasSprints()
     {
-        foreach($this->sprints()->get() as $sprint)
+        $sprints = $this->sprints()
+            ->where('status','<>',0)
+            ->count();
+
+        if($sprints)
         {
-            if($sprint->status === 2)
-            {
-               return true;
-            }
+            return true;
         }
+
         return false;
     }
 

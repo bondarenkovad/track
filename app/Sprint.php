@@ -19,29 +19,21 @@ class Sprint extends Model
         return $this->hasOne('App\Project', 'id', 'project_id');
     }
 
-    public function SortIssueByOrder()
+    public function getIssueForSprint()
     {
         if($this->order != null)
         {
-            $allIssues = Issue::where('project_id', '=', $this->project['id'])->get();
-
             $order = json_decode($this->order);
-            $collection = collect();
 
-            foreach($order as $id)
-            {
-                foreach($allIssues as $issue)
-                {
-                    if($issue->id === $id+0)
-                    {
-                        $collection->push($issue);
-                    }
-                }
-            }
+            $allIssues = Issue::where('project_id', '=', $this->project['id'])
+                ->whereIn('id', $order )
+                ->get();
 
-            return $collection;
+            return $allIssues;
         }
 
-        return $collection = [];
+
+
+        return [];
     }
 }

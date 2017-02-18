@@ -176,74 +176,61 @@
                 }).disableSelection();
             } );
 
+
+            $action = function(){
+
+                $projectKey = $("#projectKey").val();
+                $data = {};
+
+
+                $('.sprintContainer').each(function() {
+                    $key = $(this).attr('data-value');
+                    $id = $(this).attr('id');
+                    $data[$key] = [];
+                    $('#' + $id + ' li').each(function() {
+                        $data[$key].push($(this).attr('data-value'));
+                       $('#issueData-' + $key).val($data[$key]);
+                    });
+
+                });
+
+                var path = '/project/'+$projectKey+'/board';
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                    }
+                });
+
+                $.ajax({
+                    beforeSend: function (xhr) {
+                        var token = $('meta[name="csrf_token"]').attr('content');
+                        if (token) {
+                            return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                        }
+                    },
+                    url: path,
+                    type: 'PUT',
+                    data: { Data: $data}
+                });
+            };
+
             $( function() {
-                $( "#sortable3,#sortable4" ).sortable({
+                $( ".sprintContainer" ).sortable({
                     connectWith: ".connectedSortable",
                     update:function(event, ui)
                     {
-                       $m = [];
-                        $activeSprint = [];
-                        $futureSprint = [];
-
-                       $('#sortable3 li').each(function() {
-                           $m.push($(this).attr('data-value'));
-                       });
-                        $("#orderId").val($m);
-
-                        var path = window.location.href;
-                        var p = path.substring(21);
-
-//                        $.ajaxSetup({
-//                            headers: {
-//                                'X-CSRF-TOKEN': $('input[name="_token"]').val()
-//                            }
-//                        });
-//
-//                        $.ajax({
-//                            url: p,
-//                            type: 'PUT',
-//                            contentType:"application/json"
-////                            beforeSend: function (xhr) {
-////                                var token = $('meta[name="csrf_token"]').attr('content');
-////                                if (token) {
-////                                    return xhr.setRequestHeader('X-CSRF-TOKEN', token);
-////                                }
-////                            }
-//                        });
-//                        alert(p);
-//                        $.get(p);
-//                        $(location).attr('href',p);
-//                        $.post(p);
+                       $action();
                     },
                     receive:function()
                     {
-                        $m = [];
-                        $activeSprint = [];
-                        $futureSprint = [];
-
-                        $('#sortable3 li').each(function() {
-                            $m.push($(this).attr('data-value'));
-                        });
-
-                        $("#orderId").val($m);
-
-                        $('#sortable4 li').each(function() {
-                            $activeSprint.push($(this).attr('data-value'));
-                        });
-                        $("#activeSprintId").val($activeSprint);
+                        $action();
 
                     },
                     remove:function()
                     {
-                        $m = [];
-                        $activeSprint = [];
-                        $futureSprint = [];
+                        $action();
 
-                        $('#sortable3 li').each(function() {
-                            $m.push($(this).attr('data-value'));
-                        });
-
-                        $("#orderId").val($m);
                     }
                 }).disableSelection()
             } );
