@@ -100,4 +100,13 @@ class Project extends Model
 
         return $this->issues()->get();
     }
+
+    public function getFirstActiveSprint()
+    {
+        $sprint = $this->sprints()
+            ->where('status', '=', '1')
+            ->first();
+
+        return $sprint;
+    }
 }

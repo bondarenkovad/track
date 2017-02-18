@@ -182,6 +182,9 @@
                     update:function(event, ui)
                     {
                        $m = [];
+                        $activeSprint = [];
+                        $futureSprint = [];
+
                        $('#sortable3 li').each(function() {
                            $m.push($(this).attr('data-value'));
                        });
@@ -190,27 +193,57 @@
                         var path = window.location.href;
                         var p = path.substring(21);
 
-                        $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-TOKEN': $('input[name="_token"]').val()
-                            }
-                        });
-
-                        $.ajax({
-                            url: p,
-                            type: 'PUT',
-                            contentType:"application/json"
-//                            beforeSend: function (xhr) {
-//                                var token = $('meta[name="csrf_token"]').attr('content');
-//                                if (token) {
-//                                    return xhr.setRequestHeader('X-CSRF-TOKEN', token);
-//                                }
+//                        $.ajaxSetup({
+//                            headers: {
+//                                'X-CSRF-TOKEN': $('input[name="_token"]').val()
 //                            }
-                        });
+//                        });
+//
+//                        $.ajax({
+//                            url: p,
+//                            type: 'PUT',
+//                            contentType:"application/json"
+////                            beforeSend: function (xhr) {
+////                                var token = $('meta[name="csrf_token"]').attr('content');
+////                                if (token) {
+////                                    return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+////                                }
+////                            }
+//                        });
 //                        alert(p);
 //                        $.get(p);
 //                        $(location).attr('href',p);
 //                        $.post(p);
+                    },
+                    receive:function()
+                    {
+                        $m = [];
+                        $activeSprint = [];
+                        $futureSprint = [];
+
+                        $('#sortable3 li').each(function() {
+                            $m.push($(this).attr('data-value'));
+                        });
+
+                        $("#orderId").val($m);
+
+                        $('#sortable4 li').each(function() {
+                            $activeSprint.push($(this).attr('data-value'));
+                        });
+                        $("#activeSprintId").val($activeSprint);
+
+                    },
+                    remove:function()
+                    {
+                        $m = [];
+                        $activeSprint = [];
+                        $futureSprint = [];
+
+                        $('#sortable3 li').each(function() {
+                            $m.push($(this).attr('data-value'));
+                        });
+
+                        $("#orderId").val($m);
                     }
                 }).disableSelection()
             } );

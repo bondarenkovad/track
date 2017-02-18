@@ -8,13 +8,13 @@
                 <form class="form-horizontal" role="form" method="POST" action="{{action('ProjectController@refresh', ['key'=> $project->key])}}">
                     <input type="hidden" name="_method" value="put"/>
                     {{ csrf_field() }}
-                    @foreach($project->sprints()->get() as $sprint)
                 <div class="form-group">
-                        <label for="active" class="col-md-4">Sprint - {{$sprint->id}}</label>
+                        <label for="active" class="col-md-4"> Active Sprint - {{$project->getFirstActiveSprint()->id}}</label>
                         <div class="col-md-12">
                             <div class="row">
                                 <ul id="sortable4" class="connectedSortable">
-                                    @foreach($project->SortIssueByOrder() as $issue)
+                                    @if($project->getFirstActiveSprint()->order != null)
+                                    @foreach($project->getFirstActiveSprint()->get() as $issue)
                                         <li class="ui-state-default" data-value="{{$issue->id}}">
                                              <span class="imageSpan">
                                                 @if($issue->type['name'] === 'task')
@@ -44,12 +44,12 @@
                                             <span class="original">{{date("d \d\. H \h\. i \m\. s \s\.",$issue->original_estimate)}}</span>
                                         </li>
                                     @endforeach
+                                    @endif
                                 </ul>
                             </div>
-                            <input id="sprint{{$sprint->id}}" type="hidden" name="sprint{{$sprint->id}}">
+                            <input id="activeSprintId" type="hidden" name="activeSprintId">
                         </div>
                     </div>
-                    @endforeach
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-12">
