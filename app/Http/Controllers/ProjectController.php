@@ -95,9 +95,17 @@ class ProjectController extends Controller
             ->where('key', '=', $key)
             ->first();
 
+        $activeSprintId = $request->input('activeSprint');
         $order = json_encode(explode(',',$request->input('orderId')));
+        $activeSprintOrder = json_encode(explode(',',$request->input('activeSprintId')));
 
-//        dd($order);
+        $activeSprint = $project->sprints()->where('id', '=', $activeSprintId)->first();
+
+        $activeSprint->update(
+            [$activeSprint->order = $activeSprintOrder]
+        );
+        $activeSprint->save();
+//        dd($ActiveSprint);
 //        $JsonOrder = [];
 
 //        $old_track = array();

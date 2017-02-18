@@ -104,6 +104,39 @@ class Project extends Model
     public function getFirstActiveSprint()
     {
         $sprint = $this->sprints()
+            ->where('status', '=', '2')
+            ->first();
+
+        return $sprint;
+    }
+
+    public function hasActiveSprint()
+    {
+        foreach($this->sprints()->get() as $sprint)
+        {
+            if($sprint->status === 2)
+            {
+               return true;
+            }
+        }
+        return false;
+    }
+
+    public function hasToDoSprint()
+    {
+        foreach($this->sprints()->get() as $sprint)
+        {
+            if($sprint->status === 1)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function getFirstToDoSprint()
+    {
+        $sprint = $this->sprints()
             ->where('status', '=', '1')
             ->first();
 

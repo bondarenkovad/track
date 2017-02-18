@@ -43,8 +43,7 @@
 }
 
 #sortable3{
-    background-color: #002451;
-    border: 1px dotted #eee;
+    border: 1px solid #000000;
     min-height: 40px;
     min-width: 1120px;
     list-style-type: none;
