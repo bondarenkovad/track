@@ -37,7 +37,7 @@
                             <li>{{$user->name}}</li>
                             @endforeach
                         </td>
-                        <td><a  href="/project/{{$project->key}}" class="btn btn-primary" >Show Board</a></td>
+                        <td><a  href="/project/{{$project->key}}/board" class="btn btn-primary" >Show Board</a></td>
                         <td><a  href="/project/edit/{{$project->id}}" class="btn btn-success" >Edit</a></td>
                         <td><a  href="/project/delete/{{$project->id}}" class="btn btn-danger" >Delete</a></td>
                     </tr>
