@@ -46,8 +46,6 @@ class Board extends Model
             ->where('board_issue_status.board_id', '=', $this->id)
             ->where('board_issue_status.issue_status_id', '=', $statusId)
             ->delete();
-
-//        DB::table('group_user')->delete($id);
     }
 
     public function filterStatus()

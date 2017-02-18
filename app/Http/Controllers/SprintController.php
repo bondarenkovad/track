@@ -22,18 +22,20 @@ class SprintController extends Controller
         return view('sprint.index', ['sprints' => $sprints]);
     }
 
-    public function create()
+    public function create($key)
     {
-        $projects = Project::all();
-        return view('sprint.create', ['projects'=>$projects]);
+        $project = Project::where('key', '=', $key)
+            ->firstOrFail();
+        return view('sprint.create', ['project'=>$project]);
     }
 
-    public function store(Request $request)
+    public function store($id,Request $request)
     {
+        $project = Project::find($id);
+
         $this->validate($request, [
             'name' => 'required|max:50',
             'description' => 'required',
-            'project_id' => 'required|not_in:0',
             'date_start' => 'required|date',
             'date_finish' => 'required|date',
         ]);
@@ -41,12 +43,12 @@ class SprintController extends Controller
         Sprint::create([
             'name' => $request['name'],
             'description' => $request['description'],
-            'project_id' =>(int)$request['project_id'],
+            'project_id' => $id,
             'date_start' => $request['date_start'],
             'date_finish' =>$request['date_start'],
         ]);
 
-        return redirect('/sprint/index');
+        return redirect('/project/index');
     }
 //
 //    public function destroy($id)
