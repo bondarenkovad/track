@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class Sprint extends Model
 {
     protected $fillable = [
-        'name', 'description', 'date_start','date_finish',
+        'name', 'description', 'status','date_start','date_finish',
         'project_id'
     ];
 

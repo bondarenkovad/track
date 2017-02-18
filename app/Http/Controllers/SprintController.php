@@ -31,11 +31,10 @@ class SprintController extends Controller
 
     public function store($id,Request $request)
     {
-        $project = Project::find($id);
-
         $this->validate($request, [
             'name' => 'required|max:50',
             'description' => 'required',
+            'status' => 'required',
             'date_start' => 'required|date',
             'date_finish' => 'required|date',
         ]);
@@ -43,6 +42,7 @@ class SprintController extends Controller
         Sprint::create([
             'name' => $request['name'],
             'description' => $request['description'],
+            'status' => (int)$request['status'],
             'project_id' => $id,
             'date_start' => $request['date_start'],
             'date_finish' =>$request['date_start'],

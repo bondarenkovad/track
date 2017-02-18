@@ -4,7 +4,6 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1"><h1 class="text-center text-muted">Sprints List</h1></div>
-            <div class="col-md-10 col-md-offset-10"><a  href="/sprint/add" class="btn btn-success">Sprint Create</a></div>
         </div>
         <div class="row">
             <table class="table table-hover">

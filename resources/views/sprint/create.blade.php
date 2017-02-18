@@ -28,19 +28,17 @@
                         </div>
                     </div>
 
-                    {{--<div class="form-group{{ $errors->has('project_id') ? ' has-error' : '' }}">--}}
-                        {{--<label for="projct_id" class="col-md-4 control-label">Project</label>--}}
-                        {{--<div class="col-md-6">--}}
-                            {{--<select class="form-control" id="project_id" name="project_id">--}}
-                                {{--@foreach($projects as $project)--}}
-                                    {{--<option value="{{$project->id}}">{{$project->name}}</option>--}}
-                                {{--@endforeach--}}
-                            {{--</select>--}}
-                            {{--@if ($errors->has('project_id'))--}}
-                                {{--{{session()->flash('danger',$errors->first('project_id'))}}--}}
-                            {{--@endif--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
+                    <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
+                        <label for="status" class="col-md-4 control-label">Status</label>
+                        <div class="col-md-6">
+                            <label class="radio-inline"><input type="radio" name="status" value="1">toDo</label>
+                            <label class="radio-inline"><input type="radio" name="status" value="2">active</label>
+                            <label class="radio-inline"><input type="radio" name="status" value="0">finish</label>
+                            @if ($errors->has('status'))
+                                {{session()->flash('danger',$errors->first('status'))}}
+                            @endif
+                        </div>
+                    </div>
 
                     <div class="form-group{{ $errors->has('project_id') ? ' has-error' : '' }}">
                         <label for="project_id" class="col-md-4 control-label">Project:</label>
@@ -51,8 +49,6 @@
                             @endif
                         </div>
                     </div>
-
-
 
                     <div class="form-group{{ $errors->has('date_start') ? ' has-error' : '' }}">
                         <label for="date_start" class="col-md-4 control-label">Date start:</label>
