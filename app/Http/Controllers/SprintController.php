@@ -73,6 +73,7 @@ class SprintController extends Controller
         $this->validate($request, [
             'name' => 'required|max:50',
             'description' => 'required',
+            'status' => 'required',
             'project_id' => 'required|not_in:0',
             'date_start' => 'required|date',
             'date_finish' => 'required|date',
@@ -81,6 +82,7 @@ class SprintController extends Controller
         $sprint->update([
             [$sprint->name = $request->name],
             [$sprint->description = $request->description],
+            [$sprint->status = (int)$request->status],
             [$sprint->project_id = (int)$request->project_id],
             [$sprint->date_start = $request->date_start],
             [$sprint->date_finish = $request->date_finish],

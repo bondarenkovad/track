@@ -27,6 +27,18 @@
                         </div>
                     </div>
 
+                    <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
+                        <label for="status" class="col-md-4 control-label">Status</label>
+                        <div class="col-md-6">
+                            <label class="radio-inline"><input type="radio" name="status" value="1" {{ $sprint->status == 1  ? 'checked' : '' }} >toDo</label>
+                            <label class="radio-inline"><input type="radio" name="status" value="2" {{ $sprint->status ==2  ? 'checked' : '' }}>active</label>
+                            <label class="radio-inline"><input type="radio" name="status" value="0" {{ $sprint->status ==0  ? 'checked' : '' }}>finish</label>
+                            @if ($errors->has('status'))
+                                {{session()->flash('danger',$errors->first('status'))}}
+                            @endif
+                        </div>
+                    </div>
+
                     <div class="form-group{{ $errors->has('project_id') ? ' has-error' : '' }}">
                         <label for="projct_id" class="col-md-4 control-label">Projects:</label>
                         <div class="col-md-6">
