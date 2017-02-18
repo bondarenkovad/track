@@ -96,6 +96,8 @@ class ProjectController extends Controller
             ->first();
 
         $order = json_encode(explode(',',$request->input('orderId')));
+
+//        dd($order);
 //        $JsonOrder = [];
 
 //        $old_track = array();

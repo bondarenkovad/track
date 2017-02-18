@@ -189,6 +189,24 @@
 
                         var path = window.location.href;
                         var p = path.substring(21);
+
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                            }
+                        });
+
+                        $.ajax({
+                            url: p,
+                            type: 'PUT',
+                            contentType:"application/json"
+//                            beforeSend: function (xhr) {
+//                                var token = $('meta[name="csrf_token"]').attr('content');
+//                                if (token) {
+//                                    return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+//                                }
+//                            }
+                        });
 //                        alert(p);
 //                        $.get(p);
 //                        $(location).attr('href',p);

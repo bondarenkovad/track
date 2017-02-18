@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<meta name="csrf_token" content="{{ csrf_token() }}" />
 @section('content')
     <div class="container">
         <h1 class="text-center text-muted"><span class="title">{{$project->name}}</span> Board</h1>
