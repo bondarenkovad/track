@@ -28,7 +28,7 @@ class Project extends Model
 
     public function board()
     {
-        return $this->belongsTo('App\Board');
+        return $this->hasMany('App\Board');
     }
 
     public function users()
@@ -103,12 +103,12 @@ class Project extends Model
 
     public function getSprints()
     {
-        $sprint = $this->sprints()
-            ->orderBy('status', 'ASC')
-            ->orderBy('created_at', 'ASC')
+        $sprints = $this->sprints()
+            ->orderBy('status', 'DESC')
+            ->orderBy('date_start', 'DESC')
             ->get();
 
-        return $sprint;
+        return $sprints;
     }
 
     public function hasSprints()
@@ -123,26 +123,5 @@ class Project extends Model
         }
 
         return false;
-    }
-
-    public function hasToDoSprint()
-    {
-        foreach($this->sprints()->get() as $sprint)
-        {
-            if($sprint->status === 1)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public function getFirstToDoSprint()
-    {
-        $sprint = $this->sprints()
-            ->where('status', '=', '1')
-            ->first();
-
-        return $sprint;
     }
 }

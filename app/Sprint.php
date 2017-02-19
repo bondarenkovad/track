@@ -36,4 +36,13 @@ class Sprint extends Model
 
         return [];
     }
+
+    public function isActiveSprint()
+    {
+        if($this->status === 2)
+        {
+            return true;
+        }
+        return false;
+    }
 }

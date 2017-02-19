@@ -176,11 +176,11 @@
                 }).disableSelection();
             } );
 
-
             $action = function(){
 
                 $projectKey = $("#projectKey").val();
                 $data = {};
+                var path = '/project/'+$projectKey+'/board';
 
 
                 $('.sprintContainer').each(function() {
@@ -194,7 +194,7 @@
 
                 });
 
-                var path = '/project/'+$projectKey+'/board';
+
 
                 $.ajaxSetup({
                     headers: {
@@ -216,11 +216,12 @@
             };
 
             $( function() {
-                $( ".sprintContainer" ).sortable({
-                    connectWith: ".connectedSortable",
+                $( ".issueContainer" ).sortable({
+                    connectWith: ".connectedIssueSortable",
+
                     update:function(event, ui)
                     {
-                       $action();
+                        $action();
                     },
                     receive:function()
                     {
@@ -234,6 +235,29 @@
                     }
                 }).disableSelection()
             } );
+
+            $( function() {
+                $( ".sprintContainer" ).sortable({
+                    connectWith: ".connectedSortable",
+                    connectToSortable: '.sprintContainer',
+
+                    update:function(event, ui)
+                    {
+                        $action();
+                    },
+                    receive:function()
+                    {
+                        $action();
+
+                    },
+                    remove:function()
+                    {
+                        $action();
+
+                    }
+                }).disableSelection()
+            } );
+
 
             $('#submitBtn').on('click', function()
             {

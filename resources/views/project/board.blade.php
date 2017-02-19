@@ -12,7 +12,14 @@
                     @if($project->hasSprints())
                         <div class="form-group">
                             @foreach($project->getSprints() as $sprint)
-                                <h3>{{$sprint->name}}</h3>
+                                @if($sprint->isActiveSprint())
+                                    <div>
+                                        <a href="/project/{{$project->key}}/board/sprint/{{$sprint->id}}" class="btn btn-success">
+                                            To Active Sprint
+                                        </a>
+                                    </div>
+                                @endif
+                                <h3>Sprint - {{$sprint->id}}</h3>
                                 @if($sprint->order != null)
                                     <input id="issueData-{{$sprint->id}}" type="hidden" name="issueData[{{$sprint->id}}]" value="{{implode(',',json_decode($sprint->order))}}">
                                 @else
@@ -25,11 +32,11 @@
                                                 <li class="ui-state-default" data-value="{{$issue->id}}">
                                                 <span class="imageSpan">
                                                 @if($issue->type['name'] === 'task')
-                                                <img src="/img/status_icon/task.png" class="img">
+                                                    <img src="/img/status_icon/task.png" class="img">
                                                 @elseif($issue->type['name'] === 'story')
-                                                <img src="/img/status_icon/story.png" class="img">
+                                                    <img src="/img/status_icon/story.png" class="img">
                                                 @elseif($issue->type['name'] === 'bug')
-                                                <img src="/img/status_icon/bug.png" class="img">
+                                                    <img src="/img/status_icon/bug.png" class="img">
                                                 @endif
                                                 </span>
                                                 <span class="summary">{{$issue->summary}}</span>
@@ -37,15 +44,15 @@
                                                 <span class="key">{{$project->key}} - {{$issue->id}}</span>
                                                 <span class="prioritySpan">
                                                 @if($issue->priority['name'] === 'trivial')
-                                                <img src="/img/status_icon/trivial.png" class="img">
+                                                    <img src="/img/status_icon/trivial.png" class="img">
                                                 @elseif($issue->priority['name'] === 'minor')
-                                                <img src="/img/status_icon/minor.png" class="img">
+                                                    <img src="/img/status_icon/minor.png" class="img">
                                                 @elseif($issue->priority['name'] === 'major')
-                                                <img src="/img/status_icon/major.png" class="img">
+                                                    <img src="/img/status_icon/major.png" class="img">
                                                 @elseif($issue->priority['name'] === 'critical')
-                                                <img src="/img/status_icon/critical.png" class="img">
+                                                    <img src="/img/status_icon/critical.png" class="img">
                                                 @elseif($issue->priority['name'] === 'blocker')
-                                                <img src="/img/status_icon/blocker.png" class="img">
+                                                    <img src="/img/status_icon/blocker.png" class="img">
                                                 @endif
                                                 </span>
                                                 <span class="original">{{date("d \d\. H \h\. i \m\. s \s\.",$issue->original_estimate)}}</span>
@@ -54,9 +61,9 @@
                                         </ul>
                                     </div>
                                 </div>
+                                <hr>
                             @endforeach
                         </div>
-                        <hr>
                     @endif
                 <div class="form-group">
                     <div class="row">

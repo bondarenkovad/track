@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Project;
 use App\User;
+use App\Board;
+use App\Issue;
 use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
@@ -21,6 +23,20 @@ class ProjectController extends Controller
     {
         $projects = Project::all();
         return view('project.index', ['projects' => $projects]);
+    }
+
+    public function showSprint($key, $id)
+    {
+        $project = Project::where('key', '=', $key)
+            ->first();
+
+        $board = $project->board()->first();
+
+        $sprint = $project->sprints()
+            ->where('id', '=', $id)
+            ->first();
+
+        return view('project.board.sprint.activeSprint', ['project' => $project, 'sprint'=> $sprint, 'board'=>$board]);
     }
 
     public function create()
@@ -96,11 +112,6 @@ class ProjectController extends Controller
             ->where('key', '=', $key)
             ->first();
 
-        $sprint = Sprint::all();
-
-
-        $sprints = Sprint::all();
-//        $activeSprintId = $request->input('activeSprintId');
            $data = $request->input('Data');
 
         foreach($data as $key=>$value)
@@ -110,18 +121,27 @@ class ProjectController extends Controller
                 $project->update([
                     [$project->order = json_encode($value)],
                 ]);
-//
+
                 $project->save();
             }
             elseif(is_numeric($key))
             {
                 $sprint = Sprint::find($key);
-               $sprint->update([
-                   [$sprint->order = json_encode($value)],
-               ]);
+
+                if($key === null)
+                {
+                    $sprint->update([
+                        [$sprint->order = json_encode(null)],
+                    ]);
+                }
+                else
+                {
+                    $sprint->update([
+                        [$sprint->order = json_encode($value)],
+                    ]);
+                }
 
                 $sprint->save();
-
             }
         }
 
