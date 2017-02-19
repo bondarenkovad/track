@@ -39,6 +39,57 @@ class ProjectController extends Controller
         return view('project.board.sprint.activeSprint', ['project' => $project, 'sprint'=> $sprint, 'board'=>$board]);
     }
 
+    public function updateSprint($key, $id,Request $request)
+    {
+        $project = Project::with('issues')
+            ->where('key', '=', $key)
+            ->first();
+
+        $sprint = Sprint::find($id);
+
+
+
+        $data = $request->input('Data');
+
+        dd($data);
+//
+//
+//
+//        foreach($data as $key=>$value)
+//        {
+//            if($key === 'backlog')
+//            {
+//                $project->update([
+//                    [$project->order = json_encode($value)],
+//                ]);
+//
+//                $project->save();
+//            }
+//            elseif(is_numeric($key))
+//            {
+//                $sprint = Sprint::find($key);
+//
+//                if($key === null)
+//                {
+//                    $sprint->update([
+//                        [$sprint->order = json_encode(null)],
+//                    ]);
+//                }
+//                else
+//                {
+//                    $sprint->update([
+//                        [$sprint->order = json_encode($value)],
+//                    ]);
+//                }
+//
+//                $sprint->save();
+//            }
+//        }
+//
+//
+//        return view('project.board', ['project'=>$project]);
+    }
+
     public function create()
     {
         $users = User::all();

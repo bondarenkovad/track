@@ -81,4 +81,12 @@ class Board extends Model
             ->distinct()
             ->get();
     }
+
+    public function widthSizing()
+    {
+        $count = count($this->statuses()->get());
+        $size = 1120/$count;
+
+        return $size;
+    }
 }

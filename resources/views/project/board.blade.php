@@ -112,16 +112,6 @@
                                     @endforeach
                                 </ul>
                         </div>
-
-                    </div>
-                    <div class="col-md-6 col-md-offset-4">
-                        <button type="submit" class="btn btn-primary">
-                            Save
-                        </button>
-
-                        <a href="/project/index" class="btn btn-success">
-                            Back to Project List
-                        </a>
                     </div>
                 </div>
                 </form>

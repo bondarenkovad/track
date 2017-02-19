@@ -159,12 +159,6 @@
           $("#project").select2({
               multiply:true
           });
-
-
-//          $('#draggable').draggable();
-//          $("#project").select2({
-//
-//          });
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
         <script type="text/javascript" src="/jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
@@ -215,22 +209,59 @@
                 });
             };
 
+            $sprint = function(){
+
+                $projectKey = $("#projectKey").val();
+                $sprintId = $("#sprintId").val();
+                $data = {};
+                var path = '/project/'+ $projectKey+'/board/sprint/' + $sprintId;
+
+                $('.issueContainer').each(function() {
+                    $key = $(this).attr('data-value');
+                    $id = $(this).attr('id');
+                    $data[$key] = [];
+                    $('#' + $id + ' li').each(function() {
+                        $data[$key].push($(this).attr('data-value'));
+                        $('#issueData-' + $key).val($data[$key]);
+                    });
+
+                });
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                    }
+                });
+
+                $.ajax({
+                    beforeSend: function (xhr) {
+                        var token = $('meta[name="csrf_token"]').attr('content');
+                        if (token) {
+                            return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                        }
+                    },
+                    url: path,
+                    type: 'PUT',
+                    data: { Data: $data}
+                });
+            };
+
             $( function() {
                 $( ".issueContainer" ).sortable({
                     connectWith: ".connectedIssueSortable",
 
                     update:function(event, ui)
                     {
-                        $action();
+                        $sprint();
                     },
                     receive:function()
                     {
-                        $action();
+                        $sprint();
 
                     },
                     remove:function()
                     {
-                        $action();
+                        $sprint();
 
                     }
                 }).disableSelection()
