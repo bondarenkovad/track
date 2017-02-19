@@ -5,7 +5,7 @@
         <h1 class="text-center text-muted">Issue Create</h1>
         <div class="row">
             <div class="panel-body">
-                <form class="form-horizontal" role="form" method="POST" action="/issue/create">
+                <form class="form-horizontal" role="form" method="POST" action="{{action('SprintController@store', ['project'=>$project->id])}}">
                     {{ csrf_field() }}
 
                     <div class="form-group{{ $errors->has('summary') ? ' has-error' : '' }}">
@@ -45,11 +45,7 @@
                     <div class="form-group{{ $errors->has('project_id') ? ' has-error' : '' }}">
                         <label for="name" class="col-md-4 control-label">Project:</label>
                         <div class="col-md-6">
-                            <select class="form-control" id="project_id" name="project_id">
-                                @foreach($projects as $project)
-                                    <option value="{{$project->id}}">{{$project->name}}</option>
-                                @endforeach
-                            </select>
+                            <input id="project_id" type="text" class="form-control" name="project_id" readonly value="{{$project->name}}">
                             @if ($errors->has('project_id'))
                                 {{session()->flash('danger',$errors->first('project_id'))}}
                             @endif

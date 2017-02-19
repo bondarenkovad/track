@@ -32,25 +32,26 @@ class IssueController extends Controller
         return view('issue.index', ['issues' => $issues]);
     }
 
-    public function create()
+    public function create($key)
     {
         $statuses = IssueStatus::all();
-        $projects = Project::all();
+        $project = Project::where('key', '=', $key)
+            ->firstOrFail();
         $types = IssueType::all();
         $priorities = IssuesPriority::all();
         $users = User::all();
         return view('issue.create', ['statuses'=>$statuses,
-            'projects'=>$projects, 'types'=>$types,
+            'project'=>$project, 'types'=>$types,
             'priorities'=>$priorities, 'users'=>$users]);
     }
 
-    public function store(Request $request)
+    public function store($id, Request $request)
     {
         $this->validate($request, [
             'summary' => 'required|max:50',
             'description' => 'required|max:50',
             'status_id' => 'required|not_in:0',
-            'project_id' => 'required|not_in:0',
+            'project_id' => 'required',
             'type_id' => 'required|not_in:0',
             'priority_id' => 'required|not_in:0',
             'reporter_id' => 'required|not_in:0',
@@ -63,7 +64,7 @@ class IssueController extends Controller
         'summary' => $request['summary'],
         'description' => $request['description'],
             'status_id' => $request['status_id'],
-            'project_id' =>(int)$request['project_id'],
+            'project_id' =>$id,
             'type_id' => (int)$request['type_id'],
             'priority_id' => (int)$request['priority_id'],
             'reporter_id' => (int)$request['reporter_id'],

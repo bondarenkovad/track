@@ -61,6 +61,7 @@
                                         </ul>
                                     </div>
                                 </div>
+                                    <a href="/issue/add/{{$project->key}}" class="btn btn-default col-md-offset-10">Create Issue</a>
                                 <hr>
                             @endforeach
                         </div>
