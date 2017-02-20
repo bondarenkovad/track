@@ -9,6 +9,8 @@ use App\User;
 use App\IssueStatus;
 use App\Board;
 use Illuminate\Support\Facades\DB;
+use RecursiveArrayIterator;
+use RecursiveIteratorIterator;
 
 class Project extends Model
 {
@@ -81,6 +83,13 @@ class Project extends Model
     {
         $orders = json_decode($this->order);
 
+        $idIssueInSprint = [];
+
+        foreach($this->sprints()->get() as $sprint)
+        {
+                $idIssueInSprint = array_merge( $idIssueInSprint, json_decode($sprint->order));
+        }
+
         if($orders != null)
         {
             $collection = collect();
@@ -88,7 +97,12 @@ class Project extends Model
             {
                 foreach($this->issues()->get() as $issue)
                 {
-                    if($issue->id === $id+ 0)
+                    if($issue->id === $id+ 0 && !in_array($issue->id, $idIssueInSprint))
+                    {
+                        $collection->push($issue);
+                    }
+
+                    if(!in_array($issue->id, $idIssueInSprint) && !in_array($issue->id, $orders))
                     {
                         $collection->push($issue);
                     }
