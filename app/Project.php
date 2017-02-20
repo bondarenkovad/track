@@ -87,7 +87,10 @@ class Project extends Model
 
         foreach($this->sprints()->get() as $sprint)
         {
+            if($sprint->order != null)
+            {
                 $idIssueInSprint = array_merge( $idIssueInSprint, json_decode($sprint->order));
+            }
         }
 
         if($orders != null)
