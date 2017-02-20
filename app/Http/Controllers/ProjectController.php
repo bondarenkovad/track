@@ -159,6 +159,7 @@ class ProjectController extends Controller
 
     public function refresh($key, Request $request)
     {
+        dd("Yes!");
         $project = Project::with('issues')
             ->where('key', '=', $key)
             ->first();

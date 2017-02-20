@@ -51,7 +51,6 @@ class IssueController extends Controller
             'summary' => 'required|max:50',
             'description' => 'required|max:50',
             'status_id' => 'required|not_in:0',
-            'project_id' => 'required',
             'type_id' => 'required|not_in:0',
             'priority_id' => 'required|not_in:0',
             'reporter_id' => 'required|not_in:0',
