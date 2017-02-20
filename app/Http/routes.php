@@ -63,7 +63,7 @@ Route::get('/project/index', 'ProjectController@index');
 Route::post('/project/index', 'ProjectController@search');
 Route::get('/project/add', 'ProjectController@create');
 Route::post('/project/create', 'ProjectController@store');
-Route::get('/project/{key}/board', 'ProjectController@board');
+Route::get('/project/{key}/backlog', 'ProjectController@backlog');
 Route::get('/project/{key}/board/sprint/{id}', 'ProjectController@showSprint');
 Route::put('/project/{key}/board/sprint/{id}', 'ProjectController@updateSprint');
 Route::put('/project/{key}/board', 'ProjectController@refresh');

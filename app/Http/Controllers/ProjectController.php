@@ -150,11 +150,11 @@ class ProjectController extends Controller
         return view('project.edit', ['project'=>$project]);
     }
 
-    public function board($key, Request $request)
+    public function backlog($key, Request $request)
     {
         $project = Project::where('key', '=', $key)
             ->firstOrFail();
-        return view('project.board', ['project'=>$project]);
+        return view('project.backlog', ['project'=>$project]);
     }
 
     public function refresh($key, Request $request)
