@@ -218,13 +218,13 @@
 
                 $('.issueContainer').each(function() {
                     $key = $(this).attr('data-value');
-                    $id = $(this).attr('id');
                     $data[$key] = [];
+                    $count = 0;
                     $('.issueContainer li').each(function() {
                         $data[$key].push($(this).attr('data-value'));
                         $('#status-' + $key).val($data[$key]);
+                        $count++;
                     });
-
                 });
 
                 $.ajaxSetup({
