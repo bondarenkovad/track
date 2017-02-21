@@ -51,7 +51,6 @@ class ProjectController extends Controller
 
         $data = $request->input('Data');
 
-        dd($data);
 //
 //
 //
@@ -159,7 +158,6 @@ class ProjectController extends Controller
 
     public function refresh($key, Request $request)
     {
-        dd("Yes!");
         $project = Project::with('issues')
             ->where('key', '=', $key)
             ->first();
@@ -198,7 +196,7 @@ class ProjectController extends Controller
         }
 
 
-        return view('project.board', ['project'=>$project]);
+        return view('project.backlog', ['project'=>$project]);
     }
 
     public function search(Request $request)

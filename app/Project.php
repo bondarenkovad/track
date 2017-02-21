@@ -82,8 +82,8 @@ class Project extends Model
     public function SortIssueByOrder()
     {
         $orders = json_decode($this->order);
-
         $idIssueInSprint = [];
+        $collection = collect();
 
         foreach($this->sprints()->get() as $sprint)
         {
@@ -92,10 +92,9 @@ class Project extends Model
                 $idIssueInSprint = array_merge( $idIssueInSprint, json_decode($sprint->order));
             }
         }
-
         if($orders != null)
         {
-            $collection = collect();
+
             foreach($orders as $id)
             {
                 foreach($this->issues()->get() as $issue)
@@ -107,6 +106,7 @@ class Project extends Model
 
                     if(!in_array($issue->id, $idIssueInSprint) && !in_array($issue->id, $orders))
                     {
+
                         $collection->push($issue);
                     }
                 }
@@ -114,8 +114,25 @@ class Project extends Model
 
             return $collection;
         }
+        else
+        {
+            foreach($this->issues()->get() as $issue)
+            {
+                if (!in_array($issue->id, $idIssueInSprint))
+                {
+                    $collection->push($issue);
+                }
+            }
 
-        return $this->issues()->get();
+            if($collection != null)
+            {
+                return $collection;
+            }
+            else
+            {
+                return [];
+            }
+        }
     }
 
     public function getSprints()

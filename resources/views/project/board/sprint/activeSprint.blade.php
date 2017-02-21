@@ -13,12 +13,12 @@
             <div class="statusContainer" style="width: {{$board-> widthSizing()}}">
                 <h3 class="text-center">{{$status->name}}</h3>
                 <hr>
-                    <ul class="issueContainer connectedIssueSortable" data-value="{{$status->id}}">
+                    <ul class="issueContainer connectedIssueSortable" data-value="{{$status->name}}">
                         @foreach($sprint->getIssueForSprint() as $issue)
                         @if($sprint->order != null)
-                            <input id="issueData-{{$sprint->id}}" type="hidden" name="issueData[{{$sprint->id}}]" value="{{implode(',',json_decode($sprint->order))}}">
+                            <input id="status-{{$status->name}}" type="hidden" name="status[{{$status->id}}]" value="{{implode(',',json_decode($sprint->order))}}">
                         @else
-                            <input id="issueData-{{$sprint->id}}" type="hidden" name="issueData[{{$sprint->id}}]">
+                            <input id="status-{{$status->name}}" type="hidden" name="status[{{$status->id}}]">
                         @endif
                             @if($status->id === $issue->status_id)
                                 <li class="ui-state-default" data-value="{{$issue->id}}">
@@ -64,7 +64,6 @@
             </div>
             @endforeach
         </div>
-            <button type="submit" class="btn btn-success">Save</button>
         </form>
     </div>
 @endsection

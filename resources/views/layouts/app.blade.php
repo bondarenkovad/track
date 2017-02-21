@@ -174,7 +174,7 @@
 
                 $projectKey = $("#projectKey").val();
                 $data = {};
-                var path = '/project/'+$projectKey+'/board';
+                var path = '/project/'+$projectKey+'/backlog';
 
 
                 $('.sprintContainer').each(function() {
@@ -214,15 +214,15 @@
                 $projectKey = $("#projectKey").val();
                 $sprintId = $("#sprintId").val();
                 $data = {};
-                var path = '/project/'+ $projectKey+'/board/sprint/' + $sprintId;
+                var path = '/project/'+ $projectKey+'/backlog/sprint/' + $sprintId;
 
                 $('.issueContainer').each(function() {
                     $key = $(this).attr('data-value');
                     $id = $(this).attr('id');
                     $data[$key] = [];
-                    $('#' + $id + ' li').each(function() {
+                    $('.issueContainer li').each(function() {
                         $data[$key].push($(this).attr('data-value'));
-                        $('#issueData-' + $key).val($data[$key]);
+                        $('#status-' + $key).val($data[$key]);
                     });
 
                 });
