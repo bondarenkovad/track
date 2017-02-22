@@ -213,19 +213,21 @@
 
                 $projectKey = $("#projectKey").val();
                 $sprintId = $("#sprintId").val();
-                $data = [];
-                var path = '/project/'+ $projectKey+'/backlog/sprint/' + $sprintId;
+                $data = {};
+                var path = '/project/'+ $projectKey+'/board/sprint/' + $sprintId;
 
                 $('.issueContainer').each(function() {
-                    $key = $(this).attr('data-value');
-                    $count = 0;
-                    $('.issueContainer li').each(function() {
-//                        $data.push($(this).attr('data-value'));
-                        $count++;
-                        $('#status-' + $key).val($count);
+                    $id =  $(this).attr('id');
+                    $statusId = $(this).attr('data-value');
+                    $data[$statusId] = [];
+
+                    $('#' + $id + ' li').each(function() {
+                        $data[$statusId].push($(this).attr('data-value'));
+//                        $('#issue-' + $id).val($count);
                     });
                 });
 
+//                alert(JSON.stringify($data));
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('input[name="_token"]').val()
@@ -255,13 +257,11 @@
                     },
                     receive:function()
                     {
-                        $sprint();
-
+                       $sprint();
                     },
                     remove:function()
                     {
                         $sprint();
-
                     }
                 }).disableSelection()
             } );

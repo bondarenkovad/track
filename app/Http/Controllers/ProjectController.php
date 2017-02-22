@@ -51,6 +51,9 @@ class ProjectController extends Controller
 
         $data = $request->input('Data');
 
+        print_r($data);
+        exit;
+
 //
 //
 //

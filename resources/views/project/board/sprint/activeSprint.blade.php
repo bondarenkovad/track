@@ -10,18 +10,11 @@
             <input id="projectKey" type="hidden" name="projectKey" value="{{$project->key}}">
             <input id="sprintId" type="hidden" name="sprintId" value="{{$sprint->id}}">
             @foreach($board->statuses()->get() as $status)
-
             <div class="statusContainer" style="width: {{$board-> widthSizing()}}">
                 <h3 class="text-center">{{$status->name}}</h3>
                 <hr>
-
+                <ul id="issueContainer_{{$status->id}}" class="issueContainer connectedIssueSortable" data-value="{{$status->id}}">
                 @foreach($sprint->getIssueByStatus($status->id) as $issue)
-                    <ul class="issueContainer connectedIssueSortable" data-value="{{$status->name}}">
-                        @if($sprint->order != null)
-                            <input id="status-{{$status->name}}" type="hidden" name="status[{{$status->id}}]">
-                        @else
-                            <input id="status-{{$status->name}}" type="hidden" name="status[{{$status->id}}]">
-                        @endif
                                 <li class="ui-state-default" data-value="{{$issue->id}}">
                                     <div class="container">
                                         <div class="row">
@@ -59,12 +52,10 @@
                                         </div>
                                     </div>
                                 </li>
-                 </ul>
                 @endforeach
-
+                </ul>
             </div>
             @endforeach
-
         </div>
         </form>
     </div>
