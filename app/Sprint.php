@@ -31,8 +31,22 @@ class Sprint extends Model
 
             return $allIssues;
         }
+        return [];
+    }
 
+    public function getIssueByStatus($id)
+    {
+        if($this->order != null)
+        {
+            $order = json_decode($this->order);
 
+            $issues = Issue::where('project_id', '=', $this->project['id'])
+                ->whereIn('id', $order )
+                ->where('status_id', '=', $id)
+                ->get();
+
+            return $issues;
+        }
 
         return [];
     }

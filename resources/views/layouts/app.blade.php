@@ -213,17 +213,16 @@
 
                 $projectKey = $("#projectKey").val();
                 $sprintId = $("#sprintId").val();
-                $data = {};
+                $data = [];
                 var path = '/project/'+ $projectKey+'/backlog/sprint/' + $sprintId;
 
                 $('.issueContainer').each(function() {
                     $key = $(this).attr('data-value');
-                    $data[$key] = [];
                     $count = 0;
                     $('.issueContainer li').each(function() {
-                        $data[$key].push($(this).attr('data-value'));
-                        $('#status-' + $key).val($data[$key]);
+//                        $data.push($(this).attr('data-value'));
                         $count++;
+                        $('#status-' + $key).val($count);
                     });
                 });
 
