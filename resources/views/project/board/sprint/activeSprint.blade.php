@@ -58,5 +58,6 @@
             @endforeach
         </div>
         </form>
+        <a href="/project/{{$project->key}}/backlog" class="btn btn-success col-md-offset-1">Back to Backlog</a>
     </div>
 @endsection

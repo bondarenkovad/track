@@ -39,57 +39,34 @@ class ProjectController extends Controller
         return view('project.board.sprint.activeSprint', ['project' => $project, 'sprint'=> $sprint, 'board'=>$board]);
     }
 
-    public function updateSprint($key, $id,Request $request)
+    public function updateSprint($id,Request $request)
     {
-        $project = Project::with('issues')
-            ->where('key', '=', $key)
-            ->first();
-
+//        $project = Project::with('issues')
+//            ->where('key', '=', $key)
+//            ->first();
         $sprint = Sprint::find($id);
-
-
-
         $data = $request->input('Data');
 
-        print_r($data);
-        exit;
+        foreach($data as $key=>$value)
+        {
+                foreach($value as $id)
+                {
+                    if($key != null)
+                    {
+                        $issue = Issue::find($id);
 
-//
-//
-//
-//        foreach($data as $key=>$value)
-//        {
-//            if($key === 'backlog')
-//            {
-//                $project->update([
-//                    [$project->order = json_encode($value)],
-//                ]);
-//
-//                $project->save();
-//            }
-//            elseif(is_numeric($key))
-//            {
-//                $sprint = Sprint::find($key);
-//
-//                if($key === null)
-//                {
-//                    $sprint->update([
-//                        [$sprint->order = json_encode(null)],
-//                    ]);
-//                }
-//                else
-//                {
-//                    $sprint->update([
-//                        [$sprint->order = json_encode($value)],
-//                    ]);
-//                }
-//
-//                $sprint->save();
-//            }
-//        }
-//
-//
-//        return view('project.board', ['project'=>$project]);
+                        $issue->update([
+                            [$issue->status_id = json_encode($key)]
+                        ]);
+
+                        $issue->save();
+                    }
+                }
+
+
+        }
+
+        return redirect('project/index');
     }
 
     public function create()
@@ -136,7 +113,7 @@ class ProjectController extends Controller
             }
         }
 
-        return redirect('project/index');
+//        return redirect('project/index');
     }
 
     public function destroy($id)
@@ -232,7 +209,6 @@ class ProjectController extends Controller
             {
                 if($project->hasUserInProject($user->name))
                 {
-
                     $project->deleteUserOfProject($user->id);
                 }
             }
@@ -250,7 +226,6 @@ class ProjectController extends Controller
                 }
                 else
                 {
-
                     if($project->hasUserInProject($user->name))
                     {
                         $project->deleteUserOfProject($user->id);
