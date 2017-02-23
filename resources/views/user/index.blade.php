@@ -21,6 +21,7 @@
             <table class="table table-hover">
                 <thead>
                 <th>Name</th>
+                <th>Photo</th>
                 <th>E-mail</th>
                 <th>Active</th>
                 <th>Groups</th>
@@ -32,6 +33,13 @@
                 @foreach($users as $user)
                     <tr>
                             <td>{{$user->name}}</td>
+                            <td>
+                                @if($user->image_path != null)
+                                <img class="img" src="/{{$user->image_path}}">
+                                    @else
+                                    <img class="img" src="/img/userPhoto/defaultPhoto.png">
+                                    @endif
+                            </td>
                             <td>{{$user->email}} <input type="hidden" name="email" value="{{$user->email}}"></td>
                             <td>
                                 @if($user->active)

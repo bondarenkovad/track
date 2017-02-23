@@ -5,7 +5,7 @@
         <h1 class="text-center text-muted">User Create</h1>
         <div class="row">
             <div class="panel-body">
-                <form class="form-horizontal" role="form" method="POST" action="/user/create">
+                <form class="form-horizontal" role="form" method="POST" action="/user/create" enctype="multipart/form-data">
                     {{ csrf_field() }}
 
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -44,19 +44,13 @@
                         </div>
                     </div>
 
-                    {{--<div class="form-group">--}}
-                        {{--<label for="active" class="col-md-4 control-label">Projects:</label>--}}
+                    <div class="form-group">
+                        <label for="active" class="col-md-4 control-label">Photo:</label>
 
-                        {{--<div class="col-md-6">--}}
-                            {{--<ul class="list-group">--}}
-                                {{--@foreach($projects as $project)--}}
-                                    {{--<li class="list-group-item" name="{{$project->name}}">--}}
-                                        {{--{{$project->name}}| <input type="checkbox" name="project[{{$project->id}}]">--}}
-                                    {{--</li>--}}
-                                {{--@endforeach--}}
-                            {{--</ul>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
+                        <div class="col-md-6">
+                            <input type="file"  name="image_path">
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label for="active" class="col-md-4 control-label">Projects:</label>

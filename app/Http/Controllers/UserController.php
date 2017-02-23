@@ -65,29 +65,34 @@ class UserController extends Controller
             'password' => 'required|min:6|confirmed',
         ]);
 
+        if($request->hasFile('image_path'))
+        {
+            $file = $request->file('image_path');
+            $destinationPath = 'img.userPhoto';
+            $extention = $file->getClientOriginalExtension();
+            $fileName = rand(11111, 99999).'.'.$extention;
+            $file->move($destinationPath, $fileName);
+
+            $userPhoto = $destinationPath.'/'.$fileName;
+        }
+        else
+        {
+            $userPhoto = 'img/userPhoto/defaultPhoto.png';
+        }
+
         $id = DB::table('users')->insertGetId([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => bcrypt($request['password']),
             'active'=>(int)$request['active'],
+            'image_path'=>$userPhoto,
         ]);
 
         $user = User::find($id);
-//
+
         $user->addDefaultUserGroup();
 
-        if($projects === null)
-        {
-//            foreach($user->groups()->get() as $group)
-//            {
-//                if($user->hasGroup($group->name))
-//                {
-//
-//                    $user->deleteGroupToUser($group->id);
-//                }
-//            }
-        }
-        else
+        if($projects != null)
         {
             foreach($allProjects as $project)
             {
@@ -97,13 +102,6 @@ class UserController extends Controller
                     {
                         $user->addInProject($project->id);
                     }
-                }
-                else
-                {
-//                    if($user->hasGroup($group->name))
-//                    {
-//                        $user->deleteGroupToUser($group->id);
-//                    }
                 }
             }
         }
@@ -220,12 +218,30 @@ class UserController extends Controller
             'password' => 'sometimes|min:6|confirmed',
         ]);
 
+        if($request->hasFile('image_path'))
+        {
+            $file = $request->file('image_path');
+            $destinationPath = 'img.userPhoto';
+            $extention = $file->getClientOriginalExtension();
+            $fileName = rand(11111, 99999).'.'.$extention;
+            $file->move($destinationPath, $fileName);
+
+            $userPhoto = $destinationPath.'/'.$fileName;
+        }
+        else
+        {
+            $userPhoto = 'img/userPhoto/defaultPhoto.png';
+        }
+
+
         if($request->password === "")
         {
             $user->update([
                 [$user->name = $request->name],
                 [$user->active = $request->active],
                 [$user->email = $request->email],
+                [$user->active = (int)$request->active],
+                [$user->image_path = $userPhoto],
             ]);
         }
         else
@@ -235,6 +251,7 @@ class UserController extends Controller
                 'email' => $request['email'],
                 'password' => bcrypt($request['password']),
                 'active'=>(int)$request['active'],
+                'image_path'=>$userPhoto,
             ]);
         }
 

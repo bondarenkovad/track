@@ -5,34 +5,9 @@
         <h1 class="text-center text-muted">User Edit</h1>
         <div class="row">
             <div class="panel-body">
-                <form class="form-horizontal" role="form" method="POST" action="{{action('UserController@update', ['user'=>$user->id])}}">
-                    {{--<form method="POST" action="{{action('CategoriesController@update',['categories'=>$category->id])}}"/>--}}
-                    {{--Название категории<br>--}}
-                    {{--<input type="text" name="title" value="{{$category->title}}"/><br>--}}
+                <form class="form-horizontal" role="form" method="POST" action="{{action('UserController@update', ['user'=>$user->id])}}" enctype="multipart/form-data">
                     <input type="hidden" name="_method" value="put"/>
-                    {{--<input type="hidden" name="_token" value="{{csrf_token()}}"/>--}}
-                    {{--<input type="submit" value="Сохранить">--}}
-                {{--</form>--}}
-                {{--@if(Session::has('message'))--}}
-                    {{--{{Session::get('message')}}--}}
-                {{--@endif--}}
                     {{ csrf_field() }}
-
-                    {{--<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">--}}
-
-                        {{--<div class="col-md-6">--}}
-                            {{--<input type="hidden" value="{{ $user->id }}" name="id">--}}
-
-                            {{--@if ($errors->has('name'))--}}
-                            {{--<span class="help-block">--}}
-                            {{--<strong>{{ $errors->first('name') }}</strong>--}}
-                            {{--</span>--}}
-                            {{--@endif--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-
-
-
                     <div class="form-group">
                         <label for="name" class="col-md-4 control-label">Name</label>
 
@@ -44,6 +19,14 @@
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                             @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="active" class="col-md-4 control-label">Photo:</label>
+
+                        <div class="col-md-6">
+                            <input type="file"  name="image_path">
                         </div>
                     </div>
 
