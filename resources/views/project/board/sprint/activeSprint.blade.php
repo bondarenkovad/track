@@ -25,29 +25,35 @@
                                             <div>
                                                  <span>
                                                 @if($issue->type['name'] === 'task')
-                                                         <img src="/img/status_icon/task.png" class="imgMini">
+                                                         <img src="/img/status_icon/task.png" class="imgMini" data-toggle="tooltip" title="{{$issue->type['name']}}">
                                                      @elseif($issue->type['name'] === 'story')
-                                                         <img src="/img/status_icon/story.png" class="imgMini">
+                                                         <img src="/img/status_icon/story.png" class="imgMini" data-toggle="tooltip" title="{{$issue->type['name']}}">
                                                      @elseif($issue->type['name'] === 'bug')
-                                                         <img src="/img/status_icon/bug.png" class="imgMini">
+                                                         <img src="/img/status_icon/bug.png" class="imgMini" data-toggle="tooltip" title="{{$issue->type['name']}}">
                                                      @endif
                                             </span>
                                             <span>
                                                   @if($issue->priority['name'] === 'trivial')
-                                                    <img src="/img/status_icon/trivial.png" class="imgMini">
+                                                    <img src="/img/status_icon/trivial.png" class="imgMini" data-toggle="tooltip" title="{{$issue->priority['name']}}">
                                                 @elseif($issue->priority['name'] === 'minor')
-                                                    <img src="/img/status_icon/minor.png" class="imgMini">
+                                                    <img src="/img/status_icon/minor.png" class="imgMini" data-toggle="tooltip" title="{{$issue->priority['name']}}">
                                                 @elseif($issue->priority['name'] === 'major')
-                                                    <img src="/img/status_icon/major.png" class="imgMini">
+                                                    <img src="/img/status_icon/major.png" class="imgMini" data-toggle="tooltip" title="{{$issue->priority['name']}}">
                                                 @elseif($issue->priority['name'] === 'critical')
-                                                    <img src="/img/status_icon/critical.png" class="imgMini">
+                                                    <img src="/img/status_icon/critical.png" class="imgMini" data-toggle="tooltip" title="{{$issue->priority['name']}}">
                                                 @elseif($issue->priority['name'] === 'blocker')
-                                                    <img src="/img/status_icon/blocker.png" class="imgMini">
+                                                    <img src="/img/status_icon/blocker.png" class="imgMini" data-toggle="tooltip" title="{{$issue->priority['name']}}">
                                                 @endif
                                             </span>
                                                 <span class="">{{date("d \d\. H \h\. i \m\. s \s\.",$issue->original_estimate)}}</span>
                                                 <span class="col-md-offset-1">{{$project->key}} - {{$issue->id}}</span>
-                                                <span class="col-md-offset-1">{{$issue->assigned['name']}}</span>
+                                                <span class="col-md-offset-1">
+                                                      @if($issue->assigned['image_path'] != null)
+                                                        <img src="{{$issue->assigned['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
+                                                    @else
+                                                        <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
+                                                    @endif
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -56,8 +62,8 @@
                 </ul>
             </div>
             @endforeach
+            <a href="/project/{{$project->key}}/backlog" class="btn btn-success col-md-2">Back to Backlog</a>
         </div>
         </form>
-        <a href="/project/{{$project->key}}/backlog" class="btn btn-success col-md-offset-1">Back to Backlog</a>
     </div>
 @endsection

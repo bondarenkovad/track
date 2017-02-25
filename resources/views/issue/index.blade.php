@@ -4,7 +4,6 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1"><h1 class="text-center text-muted">Issues List</h1></div>
-            <div class="col-md-10 col-md-offset-10"><a  href="/issue/add" class="btn btn-success">Issue Create</a></div>
         </div>
         <div class="row">
             <table class="table table-hover">
@@ -36,8 +35,20 @@
                         <td>{{$issue->project['name']}}</td>
                         <td>{{$issue->type['name']}}</td>
                         <td>{{$issue->priority['name']}}</td>
-                        <td>{{$issue->reporter['name']}}</td>
-                        <td>{{$issue->assigned['name']}}</td>
+                        <td>
+                            @if($issue->reporter['image_path'] != null)
+                                <img src="{{$issue->reporter['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
+                                @else
+                                <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
+                            @endif
+                        </td>
+                        <td>
+                            @if($issue->assigned['image_path'] != null)
+                                <img src="{{$issue->assigned['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
+                            @else
+                                <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
+                            @endif
+                        </td>
                         <td>{{$issue->CountComments()}}</td>
                         <td>{{$issue->CountLogs()}}</td>
                         <td>{{$issue->CountAttachments()}}</td>

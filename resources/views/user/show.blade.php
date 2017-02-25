@@ -6,13 +6,17 @@
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">{{$user->name}} ({{$user->email}}) |
+                    <h3 class="panel-title">{{$user->name}} ({{$user->email}})
+                        @if($user->image_path != null)
+                        <img class="img img-circle" src="{{$user->image_path}}">
+                        @else
+                        <img class="img img-circle" src="/img/userPhoto/defaultPhoto.png">
+                        @endif
+                        |
                         @if($user->active)
                             <img src="/img/status_icon/on.png">
-                            {{--<i class="glyphicon glyphicon-ok-sign"></i>--}}
                         @else
                             <img src="/img/status_icon/off.png">
-                        {{--<i class="glyphicon glyphicon-remove-sign"></i>--}}
                         @endif
                     </h3>
                 </div>

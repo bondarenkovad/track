@@ -34,10 +34,16 @@
                         <td>{{$project->key}}</td>
                         <td>
                             <ul> @foreach($project->users()->get() as $user)</ul>
-                            <li>{{$user->name}}</li>
+                            <li>
+                                @if($user->image_path != null)
+                                    <img src="{{$user->image_path}}" class="img img-circle" data-toggle="tooltip" title="{{$user->name}}">
+                                @else
+                                    <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$user->name}}">
+                                @endif
+                            </li>
                             @endforeach
                         </td>
-                        <td><a  href="/project/{{$project->key}}/backlog" class="btn btn-primary" >Show Board</a></td>
+                        <td><a  href="/project/{{$project->key}}/backlog" class="btn btn-primary" >Show Backlog</a></td>
                         <td><a  href="/project/edit/{{$project->id}}" class="btn btn-success" >Edit</a></td>
                         <td><a  href="/project/delete/{{$project->id}}" class="btn btn-danger" >Delete</a></td>
                     </tr>

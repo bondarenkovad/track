@@ -35,9 +35,9 @@
                             <td>{{$user->name}}</td>
                             <td>
                                 @if($user->image_path != null)
-                                <img class="img" src="/{{$user->image_path}}">
+                                <img class="img img-circle" src="{{$user->image_path}}" data-toggle="tooltip" title="{{$user->name}}">
                                     @else
-                                    <img class="img" src="/img/userPhoto/defaultPhoto.png">
+                                    <img class="img" src="/img/userPhoto/defaultPhoto.png" data-toggle="tooltip" title="{{$user->name}}">
                                     @endif
                             </td>
                             <td>{{$user->email}} <input type="hidden" name="email" value="{{$user->email}}"></td>
