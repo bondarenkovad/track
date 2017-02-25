@@ -47,7 +47,11 @@
                                                         <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
                                                     @endif
                                                 </span>
-                                                <span class="key">{{$project->key}} - {{$issue->id}}</span>
+                                                <span class="keyRef">
+                                                     <a href="/project/{{$project->key}}/issue/{{$issue->id}}/edit">
+                                                         {{$project->key}} - {{$issue->id}}
+                                                     </a>
+                                                </span>
                                                 <span class="prioritySpan">
                                                 @if($issue->priority['name'] === 'trivial')
                                                     <img src="/img/status_icon/trivial.png" class="img" data-toggle="tooltip" title="{{$issue->priority['name']}}">
@@ -61,7 +65,9 @@
                                                     <img src="/img/status_icon/blocker.png" class="img" data-toggle="tooltip" title="{{$issue->priority['name']}}">
                                                 @endif
                                                 </span>
-                                                <span class="original">{{date("d \d\. H \h\. i \m\. s \s\.",$issue->original_estimate)}}</span>
+                                                <span class="original">
+                                                    <span class="badge">{{date("H",$issue->original_estimate)}}</span>
+                                                </span>
                                                 </li>
                                         @endforeach
                                         </ul>
@@ -105,7 +111,11 @@
                                                     <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
                                                 @endif
                                             </span>
-                                            <span class="key">{{$project->key}} - {{$issue->id}}</span>
+                                            <span class="keyRef">
+                                                <a href="/project/{{$project->key}}/issue/{{$issue->id}}/edit">
+                                                    {{$project->key}} - {{$issue->id}}
+                                                </a>
+                                            </span>
                                             <span class="prioritySpan">
                                                  @if($issue->priority['name'] === 'trivial')
                                                     <img src="/img/status_icon/trivial.png" class="img" data-toggle="tooltip" title="{{$issue->priority['name']}}">
@@ -119,7 +129,9 @@
                                                     <img src="/img/status_icon/blocker.png" class="img" data-toggle="tooltip" title="{{$issue->priority['name']}}">
                                                 @endif
                                             </span>
-                                            <span class="original">{{date("d \d\. H \h\. i \m\. s \s\.",$issue->original_estimate)}}</span>
+                                            <span class="original">
+                                                <span class="badge">{{date("H",$issue->original_estimate)}}</span>
+                                            </span>
                                         </li>
                                     @endforeach
                                 </ul>

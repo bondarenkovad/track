@@ -941,7 +941,6 @@ a.ui-button,
 a:link.ui-button,
 a:visited.ui-button,
 .ui-button {
-	color: #454545;
 	text-decoration: none;
 }
 .ui-state-hover,

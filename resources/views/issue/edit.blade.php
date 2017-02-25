@@ -5,7 +5,7 @@
         <h1 class="text-center text-muted">Issue Edit</h1>
         <div class="row">
             <div class="panel-body">
-                <form class="form-horizontal" role="form" method="POST" action="{{action('IssueController@update', ['issue'=>$issue->id])}}">
+                <form class="form-horizontal" role="form" method="POST" action="{{action('IssueController@update', ['issue'=>$issue->id, 'project'=>$project->key])}}">
                     <input type="hidden" name="_method" value="put"/>
                     {{ csrf_field() }}
                     <div class="form-group{{ $errors->has('summary') ? ' has-error' : '' }}">
@@ -42,21 +42,10 @@
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('project_id') ? ' has-error' : '' }}">
+                    <div class="form-group">
                         <label for="name" class="col-md-4 control-label">Project:</label>
                         <div class="col-md-6">
-                            <select class="form-control" name="project_id">
-                            @foreach($projects as $project)
-                                @if($issue->project['name'] === $project->name)
-                                        <option selected value="{{$project->id}}">{{$project->name}}</option>
-                                 @else
-                                    <option value="{{$project->id}}">{{$project->name}}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                            @if ($errors->has('project_id'))
-                                {{session()->flash('danger',$errors->first('project_id'))}}
-                            @endif
+                            <input id="project_id" type="text" class="form-control" name="project_id" readonly value="{{$project->name}}">
                         </div>
                     </div>
 
@@ -217,8 +206,8 @@
                                 Update
                             </button>
 
-                            <a href="/issue/index" class="btn btn-success">
-                                Back to Issues List
+                            <a href="/project/{{$project->key}}/backlog" class="btn btn-success">
+                                Back to Project Backlog
                             </a>
                         </div>
                     </div>

@@ -45,7 +45,9 @@
                                                     <img src="/img/status_icon/blocker.png" class="imgMini" data-toggle="tooltip" title="{{$issue->priority['name']}}">
                                                 @endif
                                             </span>
-                                                <span class="">{{date("d \d\. H \h\. i \m\. s \s\.",$issue->original_estimate)}}</span>
+                                                <span class="">
+                                                    <span class="badge">{{date("H",$issue->original_estimate)}}</span>
+                                                </span>
                                                 <span class="col-md-offset-1">{{$project->key}} - {{$issue->id}}</span>
                                                 <span class="col-md-offset-1">
                                                       @if($issue->assigned['image_path'] != null)

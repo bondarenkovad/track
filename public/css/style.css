@@ -110,7 +110,8 @@
     display: block;
 }
 
-.key{
+.keyRef{
+    color: #007fff;
     margin: 0;
     width: 60px;
     float: left;
