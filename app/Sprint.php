@@ -21,6 +21,8 @@ class Sprint extends Model
 
     public function getIssueForSprint()
     {
+        $collection = collect();
+
         if($this->order != null)
         {
             $order = json_decode($this->order);
@@ -29,7 +31,18 @@ class Sprint extends Model
                 ->whereIn('id', $order )
                 ->get();
 
-            return $allIssues;
+            foreach($order as $id)
+            {
+                foreach($allIssues as $issue)
+                {
+                    if($issue->id === $id+ 0)
+                    {
+                        $collection->push($issue);
+                    }
+                }
+            }
+
+            return $collection;
         }
         return [];
     }
