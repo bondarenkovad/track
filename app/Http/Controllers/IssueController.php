@@ -55,9 +55,14 @@ class IssueController extends Controller
             'priority_id' => 'required|not_in:0',
             'reporter_id' => 'required|not_in:0',
             'assigned_id' => 'required|not_in:0',
-            'original_estimate' => 'required|integer|not_in:0',
-            'remaining_estimate' => 'required|integer|not_in:0',
+            'original_estimate' => 'required|integer',
+            'remaining_estimate' => 'required|integer',
         ]);
+
+        $orEst = mktime($request->original_estimate,0,0,0,0,0 );
+        $remEst = mktime($request->remaining_estimate,0,0,0,0,0 );
+
+        dd($orEst);
 
         Issue::create([
         'summary' => $request['summary'],
@@ -68,8 +73,8 @@ class IssueController extends Controller
             'priority_id' => (int)$request['priority_id'],
             'reporter_id' => (int)$request['reporter_id'],
             'assigned_id' => (int)$request['assigned_id'],
-            'original_estimate' => (int)$request['original_estimate'],
-            'remaining_estimate' =>(int)$request['remaining_estimate'],
+            'original_estimate' => $orEst,
+            'remaining_estimate' => $remEst,
     ]);
 
        return redirect('issue/index');

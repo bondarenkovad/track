@@ -52,8 +52,8 @@
                         <td>{{$issue->CountComments()}}</td>
                         <td>{{$issue->CountLogs()}}</td>
                         <td>{{$issue->CountAttachments()}}</td>
-                        <td>{{date("d \d\. H \h\. i \m\. s \s\.",$issue->original_estimate)}}</td>
-                        <td>{{date("d \d\. H \h\. i \m\. s \s\.",$issue->remaining_estimate)}}</td>
+                        <td>{{date("H\h\.",$issue->original_estimate)}}</td>
+                        <td>{{date("H \h\.",$issue->remaining_estimate)}}</td>
                         <td><a  href="/issue/edit/{{$issue->id}}" class="btn btn-success" >Edit</a></td>
                         <td><a  href="/issue/comment/index/{{$issue->id}}" class="btn btn-primary" >Add Comment</a></td>
                         <td><a  href="/issue/workLog/index/{{$issue->id}}" class="btn btn-primary" >Add WorkLog</a></td>

@@ -46,9 +46,6 @@
                         <label for="name" class="col-md-4 control-label">Project:</label>
                         <div class="col-md-6">
                             <input id="project_id" type="text" class="form-control" name="project_id" readonly value="{{$project->name}}">
-                            {{--@if ($errors->has('project_id'))--}}
-                                {{--{{session()->flash('danger',$errors->first('project_id'))}}--}}
-                            {{--@endif--}}
                         </div>
                     </div>
 
@@ -110,21 +107,29 @@
 
                     <div class="form-group{{ $errors->has('original_estimate') ? ' has-error' : '' }}">
                         <label for="name" class="col-md-4 control-label">Original Estimate:</label>
-                        <div class="col-md-6">
-                            <input id="original_estimate" type="datetime" class="form-control" name="original_estimate">
-                            @if ($errors->has('original_estimate'))
-                                {{session()->flash('danger',$errors->first('original_estimate'))}}
-                            @endif
+                        <div class="row">
+                            <div class="col-md-2">
+                                <input id="original_estimate" type="number" class="form-control" name="original_estimate">
+                                @if ($errors->has('original_estimate'))
+                                    {{session()->flash('danger',$errors->first('original_estimate'))}}
+                                @endif
+                            </div>
+                            <img src="/img/status_icon/help.png" class="img img-circle" data-toggle="tooltip"
+                                 title="The original estimate in hours of how much work is involved resolving this issue">
                         </div>
                     </div>
 
                     <div class="form-group{{ $errors->has('remaining_estimate') ? ' has-error' : '' }}">
                         <label for="name" class="col-md-4 control-label">Remaining Estimate:</label>
-                        <div class="col-md-6">
-                            <input id="remaining_estimate" type="datetime" class="form-control" name="remaining_estimate">
-                            @if ($errors->has('remaining_estimate'))
-                                {{session()->flash('danger',$errors->first('remaining_estimate'))}}
-                            @endif
+                        <div class="row">
+                            <div class="col-md-2">
+                                <input id="remaining_estimate" type="number" class="form-control" name="remaining_estimate">
+                                @if ($errors->has('remaining_estimate'))
+                                    {{session()->flash('danger',$errors->first('remaining_estimate'))}}
+                                @endif
+                            </div>
+                            <img src="/img/status_icon/help.png" class="img img-circle" data-toggle="tooltip"
+                                 title="An estimate of how much work remains until this issue will be resolved in hours">
                         </div>
                     </div>
 
