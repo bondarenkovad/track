@@ -62,8 +62,6 @@ class IssueController extends Controller
         $orEst = mktime($request->original_estimate,0,0,0,0,0 );
         $remEst = mktime($request->remaining_estimate,0,0,0,0,0 );
 
-        dd($orEst);
-
         Issue::create([
         'summary' => $request['summary'],
         'description' => $request['description'],
