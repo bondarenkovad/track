@@ -127,7 +127,12 @@
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                @if(Auth::user()->image_path != null)
+                                    <img src="{{Auth::user()->image_path}}" class="img img-circle" data-toggle="tooltip" title="{{Auth::user()->name}}">
+                                @else
+                                    <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{Auth::user()->name}}">
+                                @endif
+                                    <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
