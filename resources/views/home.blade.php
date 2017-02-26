@@ -24,7 +24,16 @@
                                         </span>
                                         <span class="summary">{{$issue->summary}}</span>
                                         <span class="description">{{$issue->description}}</span>
+                                         <span class="assign">
+                                             R:
+                                             @if($issue->reporter['image_path'] != null)
+                                                 <img src="{{$issue->reporter['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
+                                             @else
+                                                 <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
+                                             @endif
+                                        </span>
                                         <span class="assign">
+                                            A:
                                              @if($issue->assigned['image_path'] != null)
                                                 <img src="{{$issue->assigned['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
                                             @else
