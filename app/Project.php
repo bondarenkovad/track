@@ -162,8 +162,10 @@ class Project extends Model
     public function getIssueForUserById($id)
     {
         return $issues = $this->issues()
-            ->where('reporter_id', '=', $id)
-            ->where('assigned_id', '=', $id)
+            ->where([
+                ['reporter_id', '=', $this->id],
+                ['assigned_id', '=', $this->id]
+            ])
             ->get();
     }
 }

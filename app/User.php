@@ -188,8 +188,10 @@ class User extends Authenticatable
     {
         $projectIds = $this->projects()->get()->pluck('id');
 
-        $issues = Issue::where('reporter_id', '=', $this->id)
-            ->where('assigned_id', '=', $this->id)
+        $issues = Issue::where([
+                ['reporter_id', '=', $this->id],
+                ['assigned_id', '=', $this->id]
+        ])
             ->whereNotIn('project_id', $projectIds)
             ->get();
 
