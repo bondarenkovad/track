@@ -158,4 +158,12 @@ class Project extends Model
 
         return false;
     }
+
+    public function getIssueForUserById($id)
+    {
+        return $issues = $this->issues()
+            ->where('reporter_id', '=', $id)
+            ->where('assigned_id', '=', $id)
+            ->get();
+    }
 }

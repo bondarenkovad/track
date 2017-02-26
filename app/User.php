@@ -186,8 +186,18 @@ class User extends Authenticatable
 
     public function getUserIssues()
     {
-        return $issues = Issue::where('reporter_id', '=', $this->id)
+        $projectIds = $this->projects()->get()->pluck('id');
+
+        $issues = Issue::where('reporter_id', '=', $this->id)
             ->where('assigned_id', '=', $this->id)
+            ->whereNotIn('project_id', $projectIds)
             ->get();
+
+        return $issues;
+    }
+
+    public function getUserProjects()
+    {
+        return $projects = $this->projects()->get();
     }
 }
