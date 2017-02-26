@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -25,30 +26,10 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-//        $request->user()->hasRole();
-        $user = $request->user();
+        $user = User::where('users.name', '=', Auth::user()->name)
+            ->first();
 
-        if($request->user() != null)
-        {
-            if($request->user()->ifAdmin())
-            {
-                $users = User::all();
-               return view('home', ['users'=>$users, 'user'=>$user]);
-            }
-//            else if(!$request->user()->hasRole())
-//            {
-//                return "У вас не назначены роли, обратитесь к администратору!";
-//            }
-            else{
-                return view('welcome', ['user'=>$user]);
-            }
-        }
-        else
-        {
-            return view('auth.login');
-        }
-
-//        return view('home');
+        return view('home', ['user'=>$user]);
     }
 
     public function store(Request $request)

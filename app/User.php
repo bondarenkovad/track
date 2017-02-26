@@ -80,8 +80,6 @@ class User extends Authenticatable
 
     public function hasAnyGroup()
     {
-//        dd($this->groups()->exists());
-
         if( ($this->groups()->exists()) )
         {
             return true;
@@ -91,10 +89,6 @@ class User extends Authenticatable
 
     public function getActions()
     {
-//        return $this->groups()->methods()->get();
-//       dd($this->groups()->with('group_method')->get());
-//        return DB::table('actions')->get();
-
         return $actions = DB::table('users')
             ->join('group_user', 'users.id', '=', 'group_user.user_id')
             ->join('groups', 'groups.id', '=', 'group_user.group_id')
@@ -104,8 +98,6 @@ class User extends Authenticatable
             ->select('users.name', 'actions.name')
             ->distinct()
             ->get();
-
-//        dd($actions);
     }
 
     public function getAllGroups()
@@ -190,5 +182,12 @@ class User extends Authenticatable
             ->pluck('id');
 
         DB::table('project_user')->delete($id);
+    }
+
+    public function getUserIssues()
+    {
+        return $issues = Issue::where('reporter_id', '=', $this->id)
+            ->where('assigned_id', '=', $this->id)
+            ->get();
     }
 }
