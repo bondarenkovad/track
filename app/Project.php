@@ -162,7 +162,8 @@ class Project extends Model
     public function getIssueForUserById($id)
     {
         return $issues = Issue::
-            where('project_id', '=', $this->id)
-            ->get();
+                 where('project_id', '=', $this->id)
+                ->where('assigned_id', '=', $id)
+                ->get();
     }
 }
