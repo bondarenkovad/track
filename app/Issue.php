@@ -71,7 +71,7 @@ class Issue extends Model
             ->join('users', 'users.id', '=', 'comments.user_id')
             ->join('issues', 'issues.id', '=', 'comments.issue_id')
             ->where('comments.issue_id', '=', $this->id)
-            ->select('comments.text', 'users.name', 'comments.id')
+            ->select('comments.text', 'users.name', 'users.image_path','comments.id')
 //            ->distinct()
             ->get();
     }
@@ -93,7 +93,7 @@ class Issue extends Model
             ->join('issues', 'issues.id', '=', 'work_logs.issue_id')
             ->join('issue_statuses', 'issue_statuses.id', '=', 'work_logs.issue_status_id')
             ->where('work_logs.issue_id', '=', $this->id)
-            ->select('work_logs.comment', 'users.name as user', 'issue_statuses.name as status','work_logs.time_spent', 'work_logs.id')
+            ->select('work_logs.comment','users.image_path', 'users.name as user', 'issue_statuses.name as status','work_logs.time_spent', 'work_logs.id')
             ->distinct()
             ->get();
     }

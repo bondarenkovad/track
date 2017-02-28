@@ -15,7 +15,9 @@
             </div>
         <div class="row">
             <div class="leftDivDetails">
-                <span>Details___________________________________________________________________________________</span>
+                <div class="strike">
+                    <span>Details</span>
+                </div>
                 <div class="row">
                     <dl class="dl-horizontal">
                         <dt>Type:</dt>
@@ -56,9 +58,13 @@
                         </dd>
                     </dl>
                 </div>
-                <span>Description________________________________________________________________________________</span>
+                <div class="strike">
+                    <span>Description</span>
+                </div>
                 <textarea class="form-control" readonly rows="5" style="width: 300px; resize: none">{{$issue->description}}</textarea>
-                <span>Attachment________________________________________________________________________________</span>
+                <div class="strike">
+                    <span>Attachment</span>
+                </div>
                 <ul class="list-group">
                     @if($issue->getThisAttachments() != [])
                         @foreach($issue->getThisAttachments() as $file)
@@ -68,9 +74,64 @@
                         <li class="list-group-item">no files found</li>
                     @endif
                 </ul>
+                <div class="strike">
+                    <span>Activity</span>
+                </div>
+                <div class="row">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#home">Comments</a></li>
+                        <li><a data-toggle="tab" href="#menu1">Work Logs</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="home" class="tab-pane fade in active">
+                            @if($issue->getThisComments() != [])
+                                @foreach($issue->getThisComments() as $comment)
+                                    <div class="media">
+                                        <div class="media-left">
+                                            @if($comment->image_path != null)
+                                                <img src="{{$comment->image_path}}" class="img img-circle" data-toggle="tooltip" title="{{$comment->image_path}}">
+                                            @else
+                                                <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$comment->image_path}}">
+                                            @endif
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">{{$comment->name}}</h4>
+                                            <p>{{$comment->text}}</p>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
+                        <div id="menu1" class="tab-pane fade">
+                            @if($issue->getThisLogs() != [])
+                                @foreach($issue->getThisLogs() as $log)
+                                    <div class="media">
+                                        <div class="media-left">
+                                            @if($log->image_path != null)
+                                                <img src="{{$log->image_path}}" class="img img-circle" data-toggle="tooltip" title="{{$log->image_path}}">
+                                            @else
+                                                <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$log->image_path}}">
+                                            @endif
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">{{$log->user}}</h4>
+                                            <p><b>Time spent: {{$log->time_spent}}</b></p>
+                                            <p>{{$log->comment}}</p>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="rightDivPeople">
-                <span>People_________________________________________________________</span>
+                <div class="strike">
+                    <span>People</span>
+                </div>
                 <div class="row">
                     <dl class="dl-horizontal">
                         <dt>Assignee:</dt>
@@ -97,7 +158,9 @@
                         </dd>
                     </dl>
                 </div>
-                <span>Dates_________________________________________________________</span>
+                <div class="strike">
+                    <span>Dates</span>
+                </div>
                 <div class="row">
                     <dl class="dl-horizontal">
                         <dt>Created:</dt>
@@ -114,7 +177,6 @@
                         </dd>
                     </dl>
                 </div>
-
             </div>
         </div>
     </div>
