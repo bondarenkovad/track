@@ -75,6 +75,7 @@ Route::get('/project/delete/{id}', 'ProjectController@destroy');
 Route::get('/issue/index', 'IssueController@index');
 Route::get('/issue/add/{key}', 'IssueController@create');
 Route::post('/issue/create/{key}', 'IssueController@store');
+Route::get('/project/{key?}/issue/{id}/view', 'IssueController@view');
 Route::get('/project/{key}/issue/{id}/edit', 'IssueController@edit');
 Route::put('/project/{key}/issue/{id}/edit', 'IssueController@update');
 Route::get('/issue/delete/{id}', 'IssueController@destroy');

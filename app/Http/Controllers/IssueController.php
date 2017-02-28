@@ -85,6 +85,23 @@ class IssueController extends Controller
 //        return redirect('project/index');
 //    }
 //
+
+    public function view($key,$id)
+    {
+        $issue = Issue::find($id);
+        $statuses = IssueStatus::all();
+        if ($key != null) {
+            $project = Project::where('key', '=', $key)
+                ->first();
+        }
+        $projects = Project::all();
+        $types = IssueType::all();
+        $priorities = IssuesPriority::all();
+        $users = User::all();
+        return view('issue.view', ['issue'=>$issue, 'statuses'=>$statuses,
+            'project'=>$project, 'types'=>$types,
+            'priorities'=>$priorities, 'users'=>$users, 'projects'=>$projects]);
+    }
     public function edit($key,$id)
     {
         $issue = Issue::find($id);
