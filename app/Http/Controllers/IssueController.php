@@ -181,7 +181,7 @@ class IssueController extends Controller
         );
         session()->flash('status', 'Comment added!');
 
-        return redirect('issue/index');
+        return back();
     }
 
     public function editComment($id)

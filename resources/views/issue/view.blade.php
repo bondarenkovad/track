@@ -8,13 +8,13 @@
         <h2 class="text-left text-muted">{{$issue->summary}}</h2>
             <div>
                 @if($issue->reporter_id === Auth::user()->id)
-                <a class="btn btn-default" data-toggle="modal" data-target="#exampleModal">Edit</a>
+                <a class="btn btn-default" data-toggle="modal" data-target="#issueEdit">Edit</a>
                 @endif
-                <a class="btn btn-default">Comment</a>
+                <a class="btn btn-default" data-toggle="modal" data-target="#issueComment">Comment</a>
                 <a class="btn btn-default">WorkLog</a>
             </div>
         <div class="row">
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="issueEdit" tabindex="-1" role="dialog" aria-labelledby="issueEditLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -192,6 +192,36 @@
                                     {{--<textarea class="form-control" id="message-text"></textarea>--}}
                                 {{--</div>--}}
                             {{--</form>--}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="issueComment" tabindex="-1" role="dialog" aria-labelledby="issueCommentLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Comment Issue</h5>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal" role="form" method="POST" action="{{action('IssueController@saveComment', ['issue'=>$issue->id])}}">
+                                <input type="hidden" name="_method" value="put"/>
+                                {{ csrf_field() }}
+                                <div class="form-group{{ $errors->has('text') ? ' has-error' : '' }}">
+                                    <label for="text" class="col-md-4 control-label">Text:</label>
+                                    <div class="col-md-6">
+                                        <textarea id="text" type="text" class="form-control" name="text"></textarea>
+                                        @if ($errors->has('text'))
+                                            {{session()->flash('danger',$errors->first('tex'))}}
+                                        @endif
+                                    </div>
+                                </div>
+
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Add Comment</button>
+                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
