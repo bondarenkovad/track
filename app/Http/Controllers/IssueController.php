@@ -102,12 +102,13 @@ class IssueController extends Controller
             'project'=>$project, 'types'=>$types,
             'priorities'=>$priorities, 'users'=>$users, 'projects'=>$projects]);
     }
+
     public function edit($key,$id)
     {
         $issue = Issue::find($id);
         $statuses = IssueStatus::all();
         $project = Project::where('key', '=', $key)
-            ->firstOrFail();
+            ->first();
         $types = IssueType::all();
         $priorities = IssuesPriority::all();
         $users = User::all();
@@ -128,14 +129,18 @@ class IssueController extends Controller
             'status_id' => 'required|not_in:0',
             'type_id' => 'required|not_in:0',
             'priority_id' => 'required|not_in:0',
-            'reporter_id' => 'required|not_in:0',
             'assigned_id' => 'required|not_in:0',
-            'original_estimate' => 'required|integer',
-            'remaining_estimate' => 'required|integer',
+//            'original_estimate' => 'integer',
+//            'remaining_estimate' => 'integer',
         ]);
 
-        $orEst = mktime($request->original_estimate,0,0,0,0,0 );
-        $remEst = mktime($request->remaining_estimate,0,0,0,0,0 );
+        if(is_numeric($request->original_estimate) && is_numeric($request->remaining_estimate))
+        {
+            $orEst = mktime($request->original_estimate,0,0,0,0,0 );
+            $remEst = mktime($request->remaining_estimate,0,0,0,0,0 );
+        }
+
+
 
         $issue->update([
             [$issue->summary = $request->summary],
@@ -144,7 +149,7 @@ class IssueController extends Controller
             [$issue->project_id = $project->id],
             [$issue->type_id = (int)$request->type_id],
             [$issue->priority_id = (int)$request->priority_id],
-            [$issue->reporter_id = (int)$request->reporter_id],
+            [$issue->reporter_id =  Auth::user()->id],
             [$issue->assigned_id = (int)$request->assigned_id],
             [$issue->status_id = (int)$request->status_id],
             [$issue->original_estimate = $orEst],
@@ -155,7 +160,7 @@ class IssueController extends Controller
         $issue->save();
         session()->flash('status', 'Issue successfully updated!');
 
-        return redirect('/project/'.$project->key.'/backlog');
+        return back();
     }
 
     public function addComment($id)
