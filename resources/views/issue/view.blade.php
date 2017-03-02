@@ -11,7 +11,7 @@
                 <a class="btn btn-default" data-toggle="modal" data-target="#issueEdit">Edit</a>
                 @endif
                 <a class="btn btn-default" data-toggle="modal" data-target="#issueComment">Comment</a>
-                <a class="btn btn-default">WorkLog</a>
+                <a class="btn btn-default" data-toggle="modal" data-target="#issueLog">WorkLog</a>
             </div>
         <div class="row">
             <div class="modal fade" id="issueEdit" tabindex="-1" role="dialog" aria-labelledby="issueEditLabel" aria-hidden="true">
@@ -226,6 +226,63 @@
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="issueLog" tabindex="-1" role="dialog" aria-labelledby="issueLogLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">WorkLog Issue</h5>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal" role="form" method="POST" action="{{action('IssueController@saveWorkLog', ['issue'=>$issue->id])}}">
+                                <input type="hidden" name="_method" value="put"/>
+                                {{ csrf_field() }}
+
+
+                                <div class="form-group{{ $errors->has('time_spent') ? ' has-error' : '' }}">
+                                    <label for="time_spent" class="col-md-4 control-label">Time Spent:</label>
+                                    <div class="col-md-6">
+                                        <input id="time_spent" type="number" class="form-control" name="time_spent" min="0"/>
+                                        @if ($errors->has('time_spent'))
+                                            {{session()->flash('danger',$errors->first('time_spent'))}}
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group{{ $errors->has('status_id') ? ' has-error' : '' }}">
+                                    <label for="name" class="col-md-4 control-label">Status:</label>
+                                    <div class="col-md-6">
+                                        <select class="form-control" id="status_id" name="status_id">
+                                            @foreach($statuses as $status)
+                                                <option value="{{$status->id}}">{{$status->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        @if ($errors->has('status_id'))
+                                            {{session()->flash('danger',$errors->first('status_id'))}}
+                                        @endif
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
+                                    <label for="comment" class="col-md-4 control-label">Comment:</label>
+                                    <div class="col-md-6">
+                                        <textarea id="comment" type="text" class="form-control" name="comment"></textarea>
+                                        @if ($errors->has('comment'))
+                                            {{session()->flash('danger',$errors->first('comment'))}}
+                                        @endif
+                                    </div>
+                                </div>
+
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Add WorkLog</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="leftDivDetails">
                 <div class="strike">
                     <span>Details</span>
@@ -299,16 +356,50 @@
                         <div id="home" class="tab-pane fade in active">
                             @if($issue->getThisComments() != [])
                                 @foreach($issue->getThisComments() as $comment)
+                                    <div class="modal fade" id="issueCommentEdit" tabindex="-1" role="dialog" aria-labelledby="issueCommentEditLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Edit Comment Issue</h5>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form class="form-horizontal" role="form" method="POST" action="{{action('IssueController@updateComment', ['comment'=>$comment->id])}}">
+                                                        <input type="hidden" name="_method" value="put"/>
+                                                        {{ csrf_field() }}
+                                                        <div class="form-group{{ $errors->has('text') ? ' has-error' : '' }}">
+                                                            <label for="text" class="col-md-4 control-label">Text:</label>
+                                                            <div class="col-md-6">
+                                                                <textarea id="text" type="text" class="form-control" name="text">{{$comment->text}}</textarea>
+                                                                @if ($errors->has('text'))
+                                                                    {{session()->flash('danger',$errors->first('tex'))}}
+                                                                @endif
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary">Update Comment</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="media">
                                         <div class="media-left">
-                                            @if($comment->image_path != null)
-                                                <img src="{{$comment->image_path}}" class="img img-circle" data-toggle="tooltip" title="{{$comment->image_path}}">
-                                            @else
-                                                <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$comment->image_path}}">
-                                            @endif
-                                        </div>
+                                                @if($comment->image_path != null)
+                                                    <img src="{{$comment->image_path}}" class="img img-circle imgBlock" data-toggle="tooltip" title="{{$comment->name}}">
+                                                @else
+                                                    <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$comment->name}}">
+                                                @endif
+                                            </div>
                                         <div class="media-body">
-                                            <h4 class="media-heading">{{$comment->name}}</h4>
+                                            <h4 class="media-heading">{{$comment->name}}
+                                                @if(Auth::user()->name === $comment->name)
+                                                <a data-toggle="modal" data-target="#issueCommentEdit" class="btn iconBlock"><i class="glyphicon glyphicon-pencil"></i></a>
+                                                @endif
+                                            </h4>
                                             <p>{{$comment->text}}</p>
                                         </div>
                                         <hr>
@@ -319,16 +410,81 @@
                         <div id="menu1" class="tab-pane fade">
                             @if($issue->getThisLogs() != [])
                                 @foreach($issue->getThisLogs() as $log)
+                                    <div class="modal fade" id="issueLogEdit" tabindex="-1" role="dialog" aria-labelledby="issueLogEditLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Edit Work Log</h5>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form class="form-horizontal" role="form" method="POST" action="{{action('IssueController@updateWorkLog', ['log'=>$log->id])}}">
+                                                        <input type="hidden" name="_method" value="put"/>
+                                                        {{ csrf_field() }}
+
+                                                        <div class="form-group{{ $errors->has('time_spent') ? ' has-error' : '' }}">
+                                                            <label for="time_spent" class="col-md-4 control-label">Time Spent:</label>
+                                                            <div class="col-md-6">
+                                                                <input id="time_spent" type="number" class="form-control" name="time_spent" value="{{$log->time_spent}}" min="0"/>
+                                                                @if ($errors->has('time_spent'))
+                                                                    {{session()->flash('danger',$errors->first('time_spent'))}}
+                                                                @endif
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group{{ $errors->has('status_id') ? ' has-error' : '' }}">
+                                                            <label for="name" class="col-md-4 control-label">Status:</label>
+                                                            <div class="col-md-6">
+                                                                <select class="form-control" name="status_id">
+                                                                    @foreach($statuses as $status)
+                                                                        @if($log->status === $status->name)
+                                                                            <option selected value="{{$status->id}}">{{$status->name}}</option>
+                                                                        @else
+                                                                            <option value="{{$status->id}}">{{$status->name}}</option>
+                                                                        @endif
+                                                                    @endforeach
+                                                                </select>
+                                                                @if ($errors->has('status_id'))
+                                                                    {{session()->flash('danger',$errors->first('status_id'))}}
+                                                                @endif
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
+                                                            <label for="comment" class="col-md-4 control-label">Comment:</label>
+                                                            <div class="col-md-6">
+                                                                <textarea id="comment" type="text" class="form-control" name="comment">{{$log->comment}}</textarea>
+                                                                @if ($errors->has('comment'))
+                                                                    {{session()->flash('danger',$errors->first('comment'))}}
+                                                                @endif
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary">Update Work Log</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="media">
                                         <div class="media-left">
                                             @if($log->image_path != null)
-                                                <img src="{{$log->image_path}}" class="img img-circle" data-toggle="tooltip" title="{{$log->image_path}}">
+                                                <img src="{{$log->image_path}}" class="img img-circle" data-toggle="tooltip" title="{{$log->user}}">
                                             @else
-                                                <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$log->image_path}}">
+                                                <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$log->user}}">
                                             @endif
                                         </div>
                                         <div class="media-body">
-                                            <h4 class="media-heading">{{$log->user}}</h4>
+                                            <h4 class="media-heading">
+                                                {{$log->user}}
+                                                @if(Auth::user()->name === $log->user)
+                                                    <a data-toggle="modal" data-target="#issueLogEdit" class="btn iconBlock"><i class="glyphicon glyphicon-pencil"></i></a>
+                                                @endif
+                                            </h4>
                                             <p><b>Time spent: {{$log->time_spent}}</b></p>
                                             <p>{{$log->comment}}</p>
                                         </div>

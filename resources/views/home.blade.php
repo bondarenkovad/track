@@ -61,7 +61,7 @@
                                                     <span class="badge">{{date("H",$issue->original_estimate)}}</span>
                                                     </span>
                                                     <span>
-                                                    <a class="btn btn-success" href="/project/{{$project->key}}/issue/{{$issue->id}}/view">View Issue</a>
+                                                    <a class="btn btn-primary" href="/project/{{$project->key}}/issue/{{$issue->id}}/view">View Issue</a>
                                                     </span>
                                                     </li>
                                                 @endforeach
@@ -120,7 +120,7 @@
                                             <span class="badge">{{date("H",$issue->original_estimate)}}</span>
                                         </span>
                                         <span>
-                                            <a class="btn btn-success" href="">View Issue</a>
+                                            <a class="btn btn-primary" href="/project/{{$project->key}}/issue/{{$issue->id}}/view">View Issue</a>
                                         </span>
                                     </li>
                                 @endforeach

@@ -105,6 +105,16 @@
     height: 20px;
 }
 
+.imgBlock{
+     display: block;
+     float: left;
+ }
+
+.iconBlock{
+    float: right;
+    display: block;
+}
+
 .imgMini{
     width: 15px;
     height: 15px;

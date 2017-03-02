@@ -191,9 +191,28 @@ class IssueController extends Controller
         return view('issue.comment.edit', ['comment'=>$comment]);
     }
 
+//    public function updateComment($id, Request $request)
+//    {
+//        $comment =Comment::find($id);
+//
+//        $this->validate($request, [
+//            'text' => 'required',
+//        ]);
+//
+//        $comment->update([
+//            [$comment->text = $request->text]
+//        ]);
+//
+//
+//        $comment->save();
+//        session()->flash('status', 'Comment successfully updated!');
+//
+//        return redirect('issue/index');
+//    }
+
     public function updateComment($id, Request $request)
     {
-        $comment =Comment::find($id);
+        $comment = Comment::find($id);
 
         $this->validate($request, [
             'text' => 'required',
@@ -207,7 +226,7 @@ class IssueController extends Controller
         $comment->save();
         session()->flash('status', 'Comment successfully updated!');
 
-        return redirect('issue/index');
+        return back();
     }
 
     public function deleteComment($id)
@@ -233,6 +252,29 @@ class IssueController extends Controller
         return view('issue.workLog.index', ['issue'=>$issue, 'statuses'=>$statuses]);
     }
 
+//    public function updateWorkLog($id, Request $request)
+//    {
+//        $log = WorkLog::find($id);
+//
+//        $this->validate($request, [
+//            'time_spent' => 'required|not_in:0',
+//            'status_id' => 'required|not_in:0',
+//            'comment' => 'required',
+//        ]);
+//
+//        $log->update([
+//            [$log->comment = $request->comment],
+//            [$log->time_spent = (int)$request->time_spent],
+//            [$log->issue_status_id = (int)$request->status_id]
+//        ]);
+//
+//
+//        $log->save();
+//        session()->flash('status', 'Work Log successfully updated!');
+//
+//        return redirect('issue/index');
+//    }
+
     public function updateWorkLog($id, Request $request)
     {
         $log = WorkLog::find($id);
@@ -253,7 +295,7 @@ class IssueController extends Controller
         $log->save();
         session()->flash('status', 'Work Log successfully updated!');
 
-        return redirect('issue/index');
+        return back();
     }
 
     public function saveWorkLog($id, Request $request)
@@ -261,7 +303,7 @@ class IssueController extends Controller
         $this->validate($request, [
             'comment' => 'required',
             'status_id' => 'required|not_in:0',
-            'time_spent' => 'required|not_in:0',
+            'time_spent' => 'required|integer',
         ]);
 
         DB::table('work_logs')->insert(
@@ -269,7 +311,7 @@ class IssueController extends Controller
         );
         session()->flash('status', 'Work Log added!');
 
-        return redirect('issue/index');
+        return back();
     }
 
     public function deleteWorkLog($id)
