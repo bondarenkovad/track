@@ -94,7 +94,14 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dLabel">
-                            <li><a href="/project/index">Projects List</a></li>
+                            @if(Auth::user()->hasAnyProject())
+                            @foreach(Auth::user()->getUserProjects() as $project)
+                            {{--<li><a href="/project/index">Projects List</a></li>--}}
+                                <li><a href="/project/{{$project->id}}/view">{{$project->name}}</a></li>
+                            @endforeach
+                            @else
+                                <li>No Project found</li>
+                            @endif
                         </ul>
                     </li>
 

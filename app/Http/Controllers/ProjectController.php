@@ -25,6 +25,12 @@ class ProjectController extends Controller
         return view('project.index', ['projects' => $projects]);
     }
 
+    public function view($id)
+    {
+        $project = Project::find($id);
+        return view('project.view', ['project' => $project]);
+    }
+
     public function showSprint($key, $id)
     {
         $project = Project::where('key', '=', $key)
