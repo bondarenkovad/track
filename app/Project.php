@@ -28,7 +28,7 @@ class Project extends Model
         return $this->hasMany('App\Sprint');
     }
 
-    public function board()
+    public function boards()
     {
         return $this->hasMany('App\Board');
     }
@@ -126,6 +126,69 @@ class Project extends Model
 
             if($collection != null)
             {
+                return $collection;
+            }
+            else
+            {
+                return [];
+            }
+        }
+    }
+
+    public function SortIssueByOrderAndUserId($userId)
+    {
+        $orders = json_decode($this->order);
+        $idIssueInSprint = [];
+        $collection = collect();
+        $userColl = collect();
+
+        foreach($this->sprints()->get() as $sprint)
+        {
+            if($sprint->order != null)
+            {
+                $idIssueInSprint = array_merge( $idIssueInSprint, json_decode($sprint->order));
+            }
+        }
+
+        if($orders != null)
+        {
+            foreach($orders as $id)
+            {
+                foreach($this->issues()->get() as $issue)
+                {
+                    if($issue->id === $id+ 0 && !in_array($issue->id, $idIssueInSprint))
+                    {
+                        $collection->push($issue);
+                    }
+
+                    if(!in_array($issue->id, $idIssueInSprint) && !in_array($issue->id, $orders))
+                    {
+
+                        $collection->push($issue);
+                    }
+                }
+            }
+
+//            $userColl = $collection->where('assigned_id', '=', $userId);
+//            dd($userColl->all());
+//            return $userColl;
+            return $collection;
+        }
+        else
+        {
+            foreach($this->issues()->get() as $issue)
+            {
+                if (!in_array($issue->id, $idIssueInSprint))
+                {
+                    $collection->push($issue);
+                }
+            }
+
+            if($collection != null)
+            {
+//                $userColl = $collection->where('assigned_id', '=', $userId);
+//
+//                return $userColl->all();
                 return $collection;
             }
             else

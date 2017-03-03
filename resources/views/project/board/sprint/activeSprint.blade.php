@@ -2,7 +2,7 @@
 <meta name="csrf_token" content="{{ csrf_token() }}" />
 @section('content')
     <div class="container">
-        <form class="form-horizontal" role="form" method="POST" action="{{action('ProjectController@updateSprint', ['key'=> $project->key, 'id'=>$sprint->id])}}">
+        <form class="form-horizontal" role="form" method="POST" action="{{action('ProjectController@updateSprint', ['key'=> $project->key, 'id'=>$sprint->id, 'i'=>$board->id])}}">
             <input type="hidden" name="_method" value="put"/>
             {{ csrf_field() }}
         <h3 class="text-left text-muted">Sprint <span class="title">{{$sprint->id}}</span></h3>
@@ -64,7 +64,7 @@
                 </ul>
             </div>
             @endforeach
-            <a href="/project/{{$project->key}}/backlog" class="btn btn-success col-md-2">Back to Backlog</a>
+            {{--<a href="/project/{{$project->key}}/backlog" class="btn btn-success col-md-2">Back to Backlog</a>--}}
         </div>
         </form>
     </div>

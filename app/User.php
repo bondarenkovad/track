@@ -7,6 +7,7 @@ use App\Group;
 use App\Issue;
 use App\Project;
 use App\Comment;
+use App\Board;
 use Illuminate\Support\Facades\DB;
 use App\WorkLog;
 
@@ -201,5 +202,13 @@ class User extends Authenticatable
     public function getUserProjects()
     {
         return $projects = $this->projects()->get();
+    }
+
+    public function getUserBoards()
+    {
+        $projectIds = $this->projects()->get()->pluck('id');
+
+       return $boards = Board::whereIn('project_id', $projectIds)
+           ->get();
     }
 }

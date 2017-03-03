@@ -31,12 +31,12 @@ class ProjectController extends Controller
         return view('project.view', ['project' => $project]);
     }
 
-    public function showSprint($key, $id)
+    public function showSprint($key,$i, $id)
     {
         $project = Project::where('key', '=', $key)
             ->first();
 
-        $board = $project->board()->first();
+        $board = Board::find($i);
 
         $sprint = $project->sprints()
             ->where('id', '=', $id)
@@ -135,18 +135,21 @@ class ProjectController extends Controller
         return view('project.edit', ['project'=>$project]);
     }
 
-    public function backlog($key, Request $request)
+    public function backlog($key,$id, Request $request)
     {
         $project = Project::where('key', '=', $key)
             ->firstOrFail();
-        return view('project.backlog', ['project'=>$project]);
+        $board = Board::find($id);
+        return view('project.backlog', ['project'=>$project,'board'=>$board]);
     }
 
-    public function refresh($key, Request $request)
+    public function refresh($key,$id, Request $request)
     {
         $project = Project::with('issues')
             ->where('key', '=', $key)
             ->first();
+
+        $board = Board::find($id);
 
            $data = $request->input('Data');
 
@@ -182,7 +185,7 @@ class ProjectController extends Controller
         }
 
 
-        return view('project.backlog', ['project'=>$project]);
+        return view('project.backlog', ['project'=>$project,'board'=>$board]);
     }
 
     public function search(Request $request)

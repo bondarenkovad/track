@@ -94,13 +94,15 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dLabel">
-                            @if(Auth::user()->hasAnyProject())
-                            @foreach(Auth::user()->getUserProjects() as $project)
-                            {{--<li><a href="/project/index">Projects List</a></li>--}}
-                                <li><a href="/project/{{$project->id}}/view">{{$project->name}}</a></li>
-                            @endforeach
-                            @else
-                                <li>No Project found</li>
+                            @if(Auth::check())
+                                @if(Auth::user()->hasAnyProject())
+                                    @foreach(Auth::user()->getUserProjects() as $project)
+                                        {{--<li><a href="/project/index">Projects List</a></li>--}}
+                                        <li><a href="/project/{{$project->id}}/view">{{$project->name}}</a></li>
+                                    @endforeach
+                                @else
+                                    <li>No Project found</li>
+                                @endif
                             @endif
                         </ul>
                     </li>
@@ -111,7 +113,18 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dLabel">
-                            <li><a href="/board/index">Boards List</a></li>
+                            {{--<li><a href="/board/index">Boards List</a></li>--}}
+                            {{--{{Auth::user()->getUserBoards()}}--}}
+                            @if(Auth::check())
+                                {{--@if()--}}
+                                    @foreach(Auth::user()->getUserBoards() as $board)
+                                        {{--<li><a href="/project/index">Projects List</a></li>--}}
+                                        <li><a href="/project/{{$board->project['key']}}/board/{{$board->id}}/backlog">{{$board->name}}</a></li>
+                                    @endforeach
+                                {{--@else--}}
+                                    {{--<li>No Project found</li>--}}
+                                {{--@endif--}}
+                            @endif
                         </ul>
                     </li>
 
@@ -185,8 +198,10 @@
             $action = function(){
 
                 $projectKey = $("#projectKey").val();
+                $sprintId = $("#sprintId").val();
+                $boardId = $("#boardId").val();
                 $data = {};
-                var path = '/project/'+$projectKey+'/backlog';
+                var path = '/project/'+ $projectKey+'/board/' + $boardId + '/backlog';
 
 
                 $('.sprintContainer').each(function() {
