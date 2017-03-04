@@ -70,10 +70,10 @@
                             </div>
                         </div>
                                 <li id="{{$issue->id}}" class="ui-state-default" data-value="{{$issue->id}}">
-                                    <div class="container">
+                                    <div class="container-fluid">
                                         <div class="row">
-                                            <span>{{$issue->summary}}</span>
-                                            <span class="col-md-offset-2">{{$issue->description}}</span>
+                                            <span class="sprintSummary">{{$issue->summary}}</span>
+                                            <span class="sprintDescription">{{$issue->description}}</span>
                                         </div>
                                         <div class="row">
                                             <div>
@@ -102,8 +102,8 @@
                                                 <span class="">
                                                     <span class="badge">{{date("H",$issue->original_estimate)}}</span>
                                                 </span>
-                                                <span class="col-md-offset-1">{{$project->key}} - {{$issue->id}}</span>
-                                                <span class="col-md-offset-1">
+                                                <span style="margin-left: 20px;">{{$project->key}} - {{$issue->id}}</span>
+                                                <span style="margin-left: 20px; float: right">
                                                       @if($issue->assigned['image_path'] != null)
                                                         <img src="{{$issue->assigned['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
                                                     @else

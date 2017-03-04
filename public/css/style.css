@@ -143,6 +143,25 @@
     width: 600px;
 }
 
+.sprintSummary{
+    white-space: nowrap;
+    padding-left: 10px;
+    overflow: hidden;
+    float: left;
+    /*display: block;*/
+    min-width: 80px;
+}
+
+.sprintDescription{
+    white-space: nowrap;
+    padding-left: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    float: right;
+    width: 200px;
+}
+
+
 .imageSpan{
     float: left;
     display: block;
