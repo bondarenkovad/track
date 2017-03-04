@@ -130,8 +130,8 @@ Route::get('/board/delete/{id}', 'BoardController@destroy');
 
 Route::post('/store', 'HomeController@store');
 
-//Route::any('{all}', function(){
-//    return view('auth.login');
-//})
-//    ->where('all', '.*');
+Route::any('{all}', function(){
+    return view('auth.login');
+})
+    ->where('all', '.*');
 

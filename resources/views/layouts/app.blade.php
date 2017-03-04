@@ -64,29 +64,43 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/') }}">Home</a></li>
 
-                    <li class="dropdown">
-                        <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            User
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="dLabel">
-                            <li><a href="/user/index">Users List</a></li>
-                            <li><a href="/user/group/index">Groups List</a></li>
-                        </ul>
-                    </li>
+                    @if(Auth::check())
+                        @if( Auth::user()->ifAdmin() || Auth::user()->ifPM() )
+                            <li class="dropdown">
+                                <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    User
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dLabel">
+                                    <li><a href="/user/index">Users List</a></li>
+                                    <li><a href="/user/group/index">Groups List</a></li>
+                                </ul>
+                            </li>
 
-                    <li class="dropdown">
-                        <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Issue
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="dLabel">
-                            <li><a href="/issue/type/index">Types List</a></li>
-                            <li><a href="/issue/priority/index">Priorities List</a></li>
-                            <li><a href="/issue/status/index">Statuses List</a></li>
-                            <li><a href="/issue/index">Issues List</a></li>
-                        </ul>
-                    </li>
+                            <li class="dropdown">
+                                <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Issue
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dLabel">
+                                    <li><a href="/issue/type/index">Types List</a></li>
+                                    <li><a href="/issue/priority/index">Priorities List</a></li>
+                                    <li><a href="/issue/status/index">Statuses List</a></li>
+                                    <li><a href="/issue/index">Issues List</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="dropdown">
+                                <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Sprint
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dLabel">
+                                    <li><a href="/sprint/index">Sprints List</a></li>
+                                </ul>
+                            </li>
+                        @endif
+
 
                     <li class="dropdown">
                         <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -94,7 +108,6 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dLabel">
-                            @if(Auth::check())
                                 @if(Auth::user()->hasAnyProject())
                                     @foreach(Auth::user()->getUserProjects() as $project)
                                         {{--<li><a href="/project/index">Projects List</a></li>--}}
@@ -103,7 +116,6 @@
                                 @else
                                     <li>No Project found</li>
                                 @endif
-                            @endif
                         </ul>
                     </li>
 
@@ -127,16 +139,7 @@
                             @endif
                         </ul>
                     </li>
-
-                    <li class="dropdown">
-                        <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Sprint
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="dLabel">
-                            <li><a href="/sprint/index">Sprints List</a></li>
-                        </ul>
-                    </li>
+                    @endif
                 </ul>
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
@@ -203,7 +206,6 @@
                 $data = {};
                 var path = '/project/'+ $projectKey+'/board/' + $boardId + '/backlog';
 
-
                 $('.sprintContainer').each(function() {
                     $key = $(this).attr('data-value');
                     $id = $(this).attr('id');
@@ -214,8 +216,6 @@
                     });
 
                 });
-
-
 
                 $.ajaxSetup({
                     headers: {
@@ -255,8 +255,6 @@
                     $projectKey = $("#projectKey").val();
                     $sprintId = $("#sprintId").val();
                     $boardId = $("#boardId").val();
-
-
 
                     var path = '/project/'+ $projectKey + '/board/' + $boardId + '/sprint/' + $sprintId;
 
@@ -338,17 +336,9 @@
                 $( ".issueContainer" ).sortable({
                     connectWith: ".connectedIssueSortable",
 
-                    update:function(event, ui)
-                    {
-//                        $sprint();
-                    },
                     receive:function()
                     {
                        $sprint();
-                    },
-                    remove:function()
-                    {
-//                        $sprint();
                     }
                 }).disableSelection()
             } );
@@ -370,11 +360,9 @@
                     remove:function()
                     {
                         $action();
-
                     }
                 }).disableSelection()
             } );
-
 
             $('#submitBtn').on('click', function()
             {
@@ -388,6 +376,5 @@
             });
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
 </html>

@@ -79,6 +79,24 @@ class User extends Authenticatable
         return false;
    }
 
+    public function ifPM()
+    {
+        $role = "PM";
+
+
+        $allRoles = $this->groups()->get();
+
+        foreach($allRoles as $group)
+        {
+            if($group->name === $role)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function hasAnyGroup()
     {
         if( ($this->groups()->exists()) )
