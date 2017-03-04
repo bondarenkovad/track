@@ -14,7 +14,7 @@
                 <a class="btn btn-default" data-toggle="modal" data-target="#issueLog">WorkLog</a>
             </div>
         <div class="row">
-            <div class="modal fade" id="issueEdit" tabindex="-1" role="dialog" aria-labelledby="issueEditLabel" aria-hidden="true">
+            <div class="modal fade" id="issueEdit" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="issueEditLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -196,7 +196,7 @@
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="issueComment" tabindex="-1" role="dialog" aria-labelledby="issueCommentLabel" aria-hidden="true">
+            <div class="modal fade" id="issueComment" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="issueCommentLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -226,7 +226,7 @@
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="issueLog" tabindex="-1" role="dialog" aria-labelledby="issueLogLabel" aria-hidden="true">
+            <div class="modal fade" id="issueLog" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="issueLogLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -236,7 +236,6 @@
                             <form class="form-horizontal" role="form" method="POST" action="{{action('IssueController@saveWorkLog', ['issue'=>$issue->id])}}">
                                 <input type="hidden" name="_method" value="put"/>
                                 {{ csrf_field() }}
-
 
                                 <div class="form-group{{ $errors->has('time_spent') ? ' has-error' : '' }}">
                                     <label for="time_spent" class="col-md-4 control-label">Time Spent:</label>
@@ -262,7 +261,6 @@
                                     </div>
                                 </div>
 
-
                                 <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
                                     <label for="comment" class="col-md-4 control-label">Comment:</label>
                                     <div class="col-md-6">
@@ -272,7 +270,6 @@
                                         @endif
                                     </div>
                                 </div>
-
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

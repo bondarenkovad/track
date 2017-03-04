@@ -238,40 +238,100 @@
 
             $sprint = function(){
 
-                $projectKey = $("#projectKey").val();
-                $sprintId = $("#sprintId").val();
+                $('#issueLog').modal();
+
+                $dataMass = {};
                 $data = {};
-                var path = '/project/'+ $projectKey+'/board/sprint/' + $sprintId;
 
-                $('.issueContainer').each(function() {
-                    $id =  $(this).attr('id');
-                    $statusId = $(this).attr('data-value');
-                    $data[$statusId] = [];
+                $('#subBtn').on('click', function()
+                {
+                    $dataMass= {
+                        'issueId' : $('.issueContainer li').attr('id'),
+                        'time_spent' : $("#time_spent").val(),
+                        'status_id' : $("#status_id").val(),
+                        'comment' : $("#comment").val()
+                    };
 
-                    $('#' + $id + ' li').each(function() {
-                        $data[$statusId].push($(this).attr('data-value'));
-//                        $('#issue-' + $id).val($count);
+                    $projectKey = $("#projectKey").val();
+                    $sprintId = $("#sprintId").val();
+                    $boardId = $("#boardId").val();
+
+
+
+                    var path = '/project/'+ $projectKey + '/board/' + $boardId + '/sprint/' + $sprintId;
+
+                    $('.issueContainer').each(function() {
+                        $id =  $(this).attr('id');
+                        $statusId = $(this).attr('data-value');
+                        $data[$statusId] = [];
+                        $('#' + $id + ' li').each(function() {
+                            $data[$statusId].push($(this).attr('data-value'));
+                        });
+                    });
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                        }
+                    });
+
+                    $.ajax({
+                        beforeSend: function (xhr) {
+                            var token = $('meta[name="csrf_token"]').attr('content');
+                            if (token) {
+                                return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                            }
+                        },
+                        url: path,
+                        type: 'PUT',
+                        data: {
+                            Data: $data,
+                            log: $dataMass
+                        }
                     });
                 });
 
-//                alert(JSON.stringify($data));
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('input[name="_token"]').val()
-                    }
+                $('#closeBtn').on('click', function()
+                {
+                    $projectKey = $("#projectKey").val();
+                    $sprintId = $("#sprintId").val();
+                    $boardId = $("#boardId").val();
+
+
+
+                    var path = '/project/'+ $projectKey + '/board/' + $boardId + '/sprint/' + $sprintId;
+
+                    $('.issueContainer').each(function() {
+                        $id =  $(this).attr('id');
+                        $statusId = $(this).attr('data-value');
+                        $data[$statusId] = [];
+                        $('#' + $id + ' li').each(function() {
+                            $data[$statusId].push($(this).attr('data-value'));
+                        });
+                    });
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                        }
+                    });
+
+                    $.ajax({
+                        beforeSend: function (xhr) {
+                            var token = $('meta[name="csrf_token"]').attr('content');
+                            if (token) {
+                                return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                            }
+                        },
+                        url: path,
+                        type: 'PUT',
+                        data: {
+                            Data: $data
+                        }
+                    });
                 });
 
-                $.ajax({
-                    beforeSend: function (xhr) {
-                        var token = $('meta[name="csrf_token"]').attr('content');
-                        if (token) {
-                            return xhr.setRequestHeader('X-CSRF-TOKEN', token);
-                        }
-                    },
-                    url: path,
-                    type: 'PUT',
-                    data: { Data: $data}
-                });
+
             };
 
             $( function() {
@@ -280,7 +340,7 @@
 
                     update:function(event, ui)
                     {
-                        $sprint();
+//                        $sprint();
                     },
                     receive:function()
                     {
@@ -288,7 +348,7 @@
                     },
                     remove:function()
                     {
-                        $sprint();
+//                        $sprint();
                     }
                 }).disableSelection()
             } );

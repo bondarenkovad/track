@@ -70,6 +70,7 @@ Route::get('/project/{key}/board/{id}/backlog', 'ProjectController@backlog');
 Route::put('/project/{key}/board/{id}/backlog', 'ProjectController@refresh');
 Route::get('/project/{key}/board/{i}/sprint/{id}', 'ProjectController@showSprint');
 Route::put('/project/{key}/board/{i}/sprint/{id}', 'ProjectController@updateSprint');
+Route::put('/project/issue/{id}', 'ProjectController@saveWorkLog');
 Route::get('/project/edit/{id}', 'ProjectController@edit');
 Route::put('/project/edit/{id}', 'ProjectController@update');
 Route::get('/project/delete/{id}', 'ProjectController@destroy');

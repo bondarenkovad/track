@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\IssueStatus;
 use App\Sprint;
 use Illuminate\Http\Request;
 
@@ -11,6 +12,7 @@ use App\User;
 use App\Board;
 use App\Issue;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -35,44 +37,44 @@ class ProjectController extends Controller
     {
         $project = Project::where('key', '=', $key)
             ->first();
-
         $board = Board::find($i);
-
+        $statuses = IssueStatus::all();
         $sprint = $project->sprints()
             ->where('id', '=', $id)
             ->first();
 
-        return view('project.board.sprint.activeSprint', ['project' => $project, 'sprint'=> $sprint, 'board'=>$board]);
+        return view('project.board.sprint.activeSprint', ['project' => $project, 'sprint'=> $sprint, 'board'=>$board, 'statuses'=>$statuses]);
     }
 
     public function updateSprint($id,Request $request)
     {
-//        $project = Project::with('issues')
-//            ->where('key', '=', $key)
-//            ->first();
-        $sprint = Sprint::find($id);
         $data = $request->input('Data');
+        $log = $request->input('log');
+
+
+        if($log != null)
+        {
+            DB::table('work_logs')->insert(
+                array('comment' => $log['comment'], 'user_id' =>  Auth::user()->id, 'issue_id' => $log['issueId'],'issue_status_id' => (int)$log['status_id'], 'time_spent'=>(int)$log['time_spent'])
+            );
+
+            session()->flash('status', 'Work Log added!');
+        }
 
         foreach($data as $key=>$value)
         {
-                foreach($value as $id)
+            foreach($value as $id)
+            {
+                if($key != null)
                 {
-                    if($key != null)
-                    {
-                        $issue = Issue::find($id);
-
-                        $issue->update([
-                            [$issue->status_id = json_encode($key)]
-                        ]);
-
-                        $issue->save();
-                    }
+                    $issue = Issue::find($id);
+                    $issue->update([
+                        [$issue->status_id = json_encode($key)]
+                    ]);
+                    $issue->save();
                 }
-
-
+            }
         }
-
-        return redirect('project/index');
     }
 
     public function create()
