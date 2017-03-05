@@ -71,7 +71,7 @@ class Issue extends Model
             ->join('users', 'users.id', '=', 'comments.user_id')
             ->join('issues', 'issues.id', '=', 'comments.issue_id')
             ->where('comments.issue_id', '=', $this->id)
-            ->select('comments.text', 'users.name', 'users.image_path','comments.id')
+            ->select('comments.text', 'users.name', 'users.image_path','comments.id','comments.created_at')
 //            ->distinct()
             ->get();
     }

@@ -237,3 +237,10 @@
     left: 100%;
     margin-left: 15px;
 }
+
+.dataFormat{
+    font-size: 0.7em;
+    margin-left: 5px;
+    color: #007fff;
+
+}

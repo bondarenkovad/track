@@ -172,12 +172,14 @@ class IssueController extends Controller
 
     public function saveComment($id, Request $request)
     {
+        $date = date("Y-m-d H:i:s",time());
+
         $this->validate($request, [
             'text' => 'required',
         ]);
 
         DB::table('comments')->insert(
-            array('text' => $request->text, 'user_id' =>  Auth::user()->id, 'issue_id' => $id)
+            array('text' => $request->text, 'user_id' =>  Auth::user()->id, 'issue_id' => $id, 'created_at'=>$date)
         );
         session()->flash('status', 'Comment added!');
 
