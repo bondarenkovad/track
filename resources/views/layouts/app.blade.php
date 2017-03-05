@@ -62,83 +62,58 @@
                 <!-- Left Side Of Navbar -->
 
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/') }}">Home</a></li>
-
                     @if(Auth::check())
-                        @if( Auth::user()->ifAdmin() || Auth::user()->ifPM() )
+                        <li><a href="{{ url('/') }}">Home</a></li>
+
+                        <li class="dropdown">
+                            <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Project
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dLabel">
+                                    @if(Auth::user()->hasAnyProject())
+                                        @foreach(Auth::user()->getUserProjects() as $project)
+                                            <li><a href="/project/{{$project->id}}/view">{{$project->name}}</a></li>
+                                        @endforeach
+                                    @else
+                                        <li>No Project found</li>
+                                    @endif
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Boards
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dLabel">
+                                @if(Auth::check())
+                                        @foreach(Auth::user()->getUserBoards() as $board)
+                                            <li><a href="/project/{{$board->project['key']}}/board/{{$board->id}}/backlog">{{$board->name}}</a></li>
+                                        @endforeach
+                                @endif
+                            </ul>
+                        </li>
+
+                        @if( Auth::user()->ifAdmin())
                             <li class="dropdown">
                                 <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    User
+                                    Administrator panel
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="dLabel">
                                     <li><a href="/user/index">Users List</a></li>
                                     <li><a href="/user/group/index">Groups List</a></li>
-                                </ul>
-                            </li>
-
-                            <li class="dropdown">
-                                <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Issue
-                                    <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dLabel">
                                     <li><a href="/issue/type/index">Types List</a></li>
                                     <li><a href="/issue/priority/index">Priorities List</a></li>
                                     <li><a href="/issue/status/index">Statuses List</a></li>
                                     <li><a href="/issue/index">Issues List</a></li>
-                                </ul>
-                            </li>
-
-                            <li class="dropdown">
-                                <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Sprint
-                                    <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dLabel">
                                     <li><a href="/sprint/index">Sprints List</a></li>
+                                    <li><a href="/project/index">Projects List</a></li>
+                                    <li><a href="/board/index">Boards List</a></li>
                                 </ul>
                             </li>
                         @endif
-
-
-                    <li class="dropdown">
-                        <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Project
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="dLabel">
-                                @if(Auth::user()->hasAnyProject())
-                                    @foreach(Auth::user()->getUserProjects() as $project)
-                                        {{--<li><a href="/project/index">Projects List</a></li>--}}
-                                        <li><a href="/project/{{$project->id}}/view">{{$project->name}}</a></li>
-                                    @endforeach
-                                @else
-                                    <li>No Project found</li>
-                                @endif
-                        </ul>
-                    </li>
-
-                    <li class="dropdown">
-                        <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Boards
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="dLabel">
-                            {{--<li><a href="/board/index">Boards List</a></li>--}}
-                            {{--{{Auth::user()->getUserBoards()}}--}}
-                            @if(Auth::check())
-                                {{--@if()--}}
-                                    @foreach(Auth::user()->getUserBoards() as $board)
-                                        {{--<li><a href="/project/index">Projects List</a></li>--}}
-                                        <li><a href="/project/{{$board->project['key']}}/board/{{$board->id}}/backlog">{{$board->name}}</a></li>
-                                    @endforeach
-                                {{--@else--}}
-                                    {{--<li>No Project found</li>--}}
-                                {{--@endif--}}
-                            @endif
-                        </ul>
-                    </li>
                     @endif
                 </ul>
                 <!-- Right Side Of Navbar -->
