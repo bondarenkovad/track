@@ -6,131 +6,71 @@
     <div class="row">
         <div class="panel-body">
             <form class="form-horizontal" role="form" method="POST">
-                {{ csrf_field() }}
-                    <div class="form-group">
-                        <div class="row">
-                            @if($user->hasAnyProject())
-                                @foreach($user->getUserProjects() as $project)
-                                    @if(count($project->getIssueForUserById($user->id)) > 0)
-                                        <div class="col-md-12">
-                                            <h3>Project - {{$project->key}}</h3>
-                                            <ul class="issue">
-                                                @foreach($project->getIssueForUserById($user->id) as $issue)
-                                                    <li class="ui-state-default" data-value="{{$issue->id}}">
-                                                        <span class="imageSpan">
-                                                            @if($issue->type['name'] === 'task')
-                                                                <img src="/img/status_icon/task.png" class="img" data-toggle="tooltip" title="{{$issue->type['name']}}">
-                                                            @elseif($issue->type['name'] === 'story')
-                                                                <img src="/img/status_icon/story.png" class="img" data-toggle="tooltip" title="{{$issue->type['name']}}">
-                                                            @elseif($issue->type['name'] === 'bug')
-                                                                <img src="/img/status_icon/bug.png" class="img" data-toggle="tooltip" title="{{$issue->type['name']}}">
+                <div class="form-group">
+                    <div class="row">
+                        @if($user->hasAnyProject())
+                            @foreach($user->getUserProjects() as $project)
+                                @if(count($project->getIssueForUserById($user->id)) > 0)
+                                    <div class="col-md-12">
+                                        <h3>Project - {{$project->key}}</h3>
+                                        <ul class="issue">
+                                            @foreach($project->getIssueForUserById($user->id) as $issue)
+                                                <li class="ui-state-default" data-value="{{$issue->id}}">
+                                                    <span class="imageSpan">
+                                                        @if($issue->type['name'] === 'task')
+                                                            <img src="/img/status_icon/task.png" class="img" data-toggle="tooltip" title="{{$issue->type['name']}}">
+                                                        @elseif($issue->type['name'] === 'story')
+                                                            <img src="/img/status_icon/story.png" class="img" data-toggle="tooltip" title="{{$issue->type['name']}}">
+                                                        @elseif($issue->type['name'] === 'bug')
+                                                            <img src="/img/status_icon/bug.png" class="img" data-toggle="tooltip" title="{{$issue->type['name']}}">
+                                                        @endif
+                                                    </span>
+                                                    <span class="summary">{{$issue->summary}}</span>
+                                                    <span class="description">{{$issue->description}}</span>
+                                                    <span class="assign">
+                                                        R:
+                                                            @if($issue->reporter['image_path'] != null)
+                                                                <img src="{{$issue->reporter['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
+                                                            @else
+                                                                <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
+                                                            @endif
+                                                    </span>
+                                                    <span class="assign">
+                                                        A:
+                                                            @if($issue->assigned['image_path'] != null)
+                                                                <img src="{{$issue->assigned['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
+                                                            @else
+                                                                <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
                                                             @endif
                                                         </span>
-                                                        <span class="summary">{{$issue->summary}}</span>
-                                                        <span class="description">{{$issue->description}}</span>
-                                                        <span class="assign">
-                                                            R:
-                                                                @if($issue->reporter['image_path'] != null)
-                                                                    <img src="{{$issue->reporter['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
-                                                                @else
-                                                                    <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
-                                                                @endif
-                                                        </span>
-                                                        <span class="assign">
-                                                            A:
-                                                                @if($issue->assigned['image_path'] != null)
-                                                                    <img src="{{$issue->assigned['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
-                                                                @else
-                                                                    <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
-                                                                @endif
-                                                            </span>
-                                                        <span class="prioritySpan">
-                                                            @if($issue->priority['name'] === 'trivial')
-                                                                <img src="/img/status_icon/trivial.png" class="img" data-toggle="tooltip" title="{{$issue->priority['name']}}">
-                                                            @elseif($issue->priority['name'] === 'minor')
-                                                                <img src="/img/status_icon/minor.png" class="img" data-toggle="tooltip" title="{{$issue->priority['name']}}">
-                                                            @elseif($issue->priority['name'] === 'major')
-                                                                <img src="/img/status_icon/major.png" class="img" data-toggle="tooltip" title="{{$issue->priority['name']}}">
-                                                            @elseif($issue->priority['name'] === 'critical')
-                                                                <img src="/img/status_icon/critical.png" class="img" data-toggle="tooltip" title="{{$issue->priority['name']}}">
-                                                            @elseif($issue->priority['name'] === 'blocker')
-                                                                <img src="/img/status_icon/blocker.png" class="img" data-toggle="tooltip" title="{{$issue->priority['name']}}">
-                                                            @endif
-                                                        </span>
-                                                        <span>
-                                                        <span class="badge">{{date("H",$issue->original_estimate)}}</span>
-                                                        </span>
-                                                        <span>
-                                                        <a class="btn btn-primary" href="/project/{{$project->key}}/issue/{{$issue->id}}/view">View Issue</a>
-                                                        </span>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    @endif
-                                @endforeach
-                            @endif
-                        <div class="col-md-12">
-                            <h3>Issues not belong to any Project:</h3>
-                            <ul class="issue">
-                                @if(count($user->getUserIssues()) > 0)
-                                @foreach($user->getUserIssues() as $issue)
-                                    <li class="ui-state-default" data-value="{{$issue->id}}">
-                                        <span class="imageSpan">
-                                        @if($issue->type['name'] === 'task')
-                                                <img src="/img/status_icon/task.png" class="img" data-toggle="tooltip" title="{{$issue->type['name']}}">
-                                            @elseif($issue->type['name'] === 'story')
-                                                <img src="/img/status_icon/story.png" class="img" data-toggle="tooltip" title="{{$issue->type['name']}}">
-                                            @elseif($issue->type['name'] === 'bug')
-                                                <img src="/img/status_icon/bug.png" class="img" data-toggle="tooltip" title="{{$issue->type['name']}}">
-                                            @endif
-                                        </span>
-                                        <span class="summary">{{$issue->summary}}</span>
-                                        <span class="description">{{$issue->description}}</span>
-                                         <span class="assign">
-                                             R:
-                                             @if($issue->reporter['image_path'] != null)
-                                                 <img src="{{$issue->reporter['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
-                                             @else
-                                                 <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
-                                             @endif
-                                        </span>
-                                        <span class="assign">
-                                            A:
-                                             @if($issue->assigned['image_path'] != null)
-                                                <img src="{{$issue->assigned['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
-                                            @else
-                                                <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
-                                            @endif
-                                        </span>
-                                        <span class="prioritySpan">
-                                        @if($issue->priority['name'] === 'trivial')
-                                                <img src="/img/status_icon/trivial.png" class="img" data-toggle="tooltip" title="{{$issue->priority['name']}}">
-                                            @elseif($issue->priority['name'] === 'minor')
-                                                <img src="/img/status_icon/minor.png" class="img" data-toggle="tooltip" title="{{$issue->priority['name']}}">
-                                            @elseif($issue->priority['name'] === 'major')
-                                                <img src="/img/status_icon/major.png" class="img" data-toggle="tooltip" title="{{$issue->priority['name']}}">
-                                            @elseif($issue->priority['name'] === 'critical')
-                                                <img src="/img/status_icon/critical.png" class="img" data-toggle="tooltip" title="{{$issue->priority['name']}}">
-                                            @elseif($issue->priority['name'] === 'blocker')
-                                                <img src="/img/status_icon/blocker.png" class="img" data-toggle="tooltip" title="{{$issue->priority['name']}}">
-                                            @endif
-                                        </span>
-                                        <span>
-                                            <span class="badge">{{date("H",$issue->original_estimate)}}</span>
-                                        </span>
-                                        <span>
-                                            <a class="btn btn-primary" href="/project/{{$project->key}}/issue/{{$issue->id}}/view">View Issue</a>
-                                        </span>
-                                    </li>
-                                @endforeach
-                                    @else
-                                    <li class="ui-state-default">Issues not found!</li>
+                                                    <span class="prioritySpan">
+                                                        @if($issue->priority['name'] === 'trivial')
+                                                            <img src="/img/status_icon/trivial.png" class="img" data-toggle="tooltip" title="{{$issue->priority['name']}}">
+                                                        @elseif($issue->priority['name'] === 'minor')
+                                                            <img src="/img/status_icon/minor.png" class="img" data-toggle="tooltip" title="{{$issue->priority['name']}}">
+                                                        @elseif($issue->priority['name'] === 'major')
+                                                            <img src="/img/status_icon/major.png" class="img" data-toggle="tooltip" title="{{$issue->priority['name']}}">
+                                                        @elseif($issue->priority['name'] === 'critical')
+                                                            <img src="/img/status_icon/critical.png" class="img" data-toggle="tooltip" title="{{$issue->priority['name']}}">
+                                                        @elseif($issue->priority['name'] === 'blocker')
+                                                            <img src="/img/status_icon/blocker.png" class="img" data-toggle="tooltip" title="{{$issue->priority['name']}}">
+                                                        @endif
+                                                    </span>
+                                                    <span>
+                                                    <span class="badge">{{date("H",$issue->original_estimate)}}</span>
+                                                    </span>
+                                                    <span>
+                                                    <a class="btn btn-primary" href="/project/{{$project->key}}/issue/{{$issue->id}}/view">View Issue</a>
+                                                    </span>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
                                 @endif
-                            </ul>
-                        </div>
-                        </div>
+                            @endforeach
+                        @endif
                     </div>
+                </div>
             </form>
         </div>
     </div>
