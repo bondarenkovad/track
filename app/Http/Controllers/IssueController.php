@@ -47,13 +47,14 @@ class IssueController extends Controller
 
     public function store($id, Request $request)
     {
+        $project = Project::find($id);
+
         $this->validate($request, [
             'summary' => 'required|max:50',
             'description' => 'required|max:50',
             'status_id' => 'required|not_in:0',
             'type_id' => 'required|not_in:0',
             'priority_id' => 'required|not_in:0',
-            'reporter_id' => 'required|not_in:0',
             'assigned_id' => 'required|not_in:0',
             'original_estimate' => 'required|integer',
             'remaining_estimate' => 'required|integer',
@@ -69,13 +70,13 @@ class IssueController extends Controller
             'project_id' =>$id,
             'type_id' => (int)$request['type_id'],
             'priority_id' => (int)$request['priority_id'],
-            'reporter_id' => (int)$request['reporter_id'],
+            'reporter_id' => Auth::user()->id,
             'assigned_id' => (int)$request['assigned_id'],
             'original_estimate' => $orEst,
             'remaining_estimate' => $remEst,
     ]);
 
-       return redirect('issue/index');
+        return view('project.view', ['project' => $project]);
     }
 //
 //    public function destroy($id)
@@ -155,7 +156,6 @@ class IssueController extends Controller
             [$issue->original_estimate = $orEst],
             [$issue->remaining_estimate = $remEst],
         ]);
-
 
         $issue->save();
         session()->flash('status', 'Issue successfully updated!');

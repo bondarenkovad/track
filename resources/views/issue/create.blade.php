@@ -77,17 +77,10 @@
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('reporter_id') ? ' has-error' : '' }}">
+                    <div class="form-group">
                         <label for="name" class="col-md-4 control-label">Reporter:</label>
                         <div class="col-md-6">
-                            <select class="form-control" id="reporter_id" name="reporter_id">
-                                @foreach($users as $user)
-                                    <option value="{{$user->id}}">{{$user->name}}</option>
-                                @endforeach
-                            </select>
-                            @if ($errors->has('reporter_id'))
-                                {{session()->flash('danger',$errors->first('reporter_id'))}}
-                            @endif
+                            <input id="reporter_id" type="text" class="form-control" name="reporter_id" readonly value="{{Auth::user()->name}}">
                         </div>
                     </div>
 
@@ -138,10 +131,6 @@
                             <button type="submit" class="btn btn-primary">
                                 Create
                             </button>
-
-                            <a href="/issue/index" class="btn btn-success">
-                                Back to Issues List
-                            </a>
                         </div>
                     </div>
                 </form>
