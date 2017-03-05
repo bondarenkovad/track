@@ -111,6 +111,7 @@
  }
 
 .iconBlock{
+    cursor: pointer;
     float: right;
     display: block;
 }

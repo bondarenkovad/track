@@ -394,7 +394,7 @@
                                         <div class="media-body">
                                             <h4 class="media-heading">{{$comment->name}} <span class="dataFormat">{{$comment->created_at}}</span>
                                                 @if(Auth::user()->name === $comment->name)
-                                                <a data-toggle="modal" data-target="#issueCommentEdit" class="btn iconBlock"><i class="glyphicon glyphicon-pencil"></i></a>
+                                                <a data-toggle="modal" data-target="#issueCommentEdit" class="iconBlock"><i class="glyphicon glyphicon-pencil"></i></a>
                                                 @endif
                                             </h4>
                                             <p>{{$comment->text}}</p>
