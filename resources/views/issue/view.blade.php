@@ -334,7 +334,7 @@
                 <ul class="list-group">
                     @if($issue->getThisAttachments() != [])
                         @foreach($issue->getThisAttachments() as $file)
-                            <li class="list-group-item">{{$file->path}}</li>
+                            <li class="list-group-item"><a download href="{{$file->path}}">{{$file->path}}</a></li>
                         @endforeach
                     @else
                         <li class="list-group-item">no files found</li>

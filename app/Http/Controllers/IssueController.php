@@ -51,7 +51,7 @@ class IssueController extends Controller
 
         $this->validate($request, [
             'summary' => 'required|max:50',
-            'description' => 'required|max:50',
+            'description' => 'required',
             'status_id' => 'required|not_in:0',
             'type_id' => 'required|not_in:0',
             'priority_id' => 'required|not_in:0',
@@ -345,7 +345,7 @@ class IssueController extends Controller
             $file->move($destinationPath, $fileName);
 
             DB::table('attachments')->insert(
-                array('path' => 'C:\wamp\www\track\public\uploads\\'.$file->getClientOriginalName(), 'issue_id' => $id)
+                array('path' => '\uploads\\'.$file->getClientOriginalName(), 'issue_id' => $id)
             );
         }
 
