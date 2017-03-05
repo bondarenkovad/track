@@ -28,6 +28,11 @@ class Project extends Model
         return $this->hasMany('App\Sprint');
     }
 
+    public function countIssues()
+    {
+        return count($this->issues());
+    }
+
     public function boards()
     {
         return $this->hasMany('App\Board');
