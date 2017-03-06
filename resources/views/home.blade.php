@@ -12,7 +12,7 @@
                             @foreach($user->getUserProjects() as $project)
                                 @if(count($project->getIssueForUserById($user->id)) > 0)
                                     <div class="col-md-12">
-                                        <h3>Project - {{$project->key}}</h3>
+                                        <h4  class="title">Project - {{$project->key}}</h4>
                                         <ul class="issue">
                                             @foreach($project->getIssueForUserById($user->id) as $issue)
                                                 <li class="ui-state-default" data-value="{{$issue->id}}">
@@ -59,8 +59,8 @@
                                                     <span>
                                                     <span class="badge">{{date("H",$issue->original_estimate)}}</span>
                                                     </span>
-                                                    <span>
-                                                    <a class="btn btn-primary" href="/project/{{$project->key}}/issue/{{$issue->id}}/view">View Issue</a>
+                                                    <span class="text-right">
+                                                    <a href="/project/{{$project->key}}/issue/{{$issue->id}}/view">View Issue</a>
                                                     </span>
                                                 </li>
                                             @endforeach
