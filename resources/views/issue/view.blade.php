@@ -209,13 +209,12 @@
                                 <div class="form-group{{ $errors->has('text') ? ' has-error' : '' }}">
                                     <label for="text" class="col-md-4 control-label">Text:</label>
                                     <div class="col-md-6">
-                                        <textarea id="text" type="text" class="form-control" name="text"></textarea>
+                                        <textarea class="form-control mytextarea" name="text"></textarea>
                                         @if ($errors->has('text'))
                                             {{session()->flash('danger',$errors->first('tex'))}}
                                         @endif
                                     </div>
                                 </div>
-
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -226,6 +225,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="modal fade" id="issueLog" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="issueLogLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -264,7 +264,7 @@
                                 <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
                                     <label for="comment" class="col-md-4 control-label">Comment:</label>
                                     <div class="col-md-6">
-                                        <textarea id="comment" type="text" class="form-control" name="comment"></textarea>
+                                        <textarea class="form-control mytextarea" name="comment"></textarea>
                                         @if ($errors->has('comment'))
                                             {{session()->flash('danger',$errors->first('comment'))}}
                                         @endif
