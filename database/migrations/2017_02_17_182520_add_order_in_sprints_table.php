@@ -13,7 +13,7 @@ class AddOrderInSprintsTable extends Migration
     public function up()
     {
         Schema::table('sprints', function (Blueprint $table) {
-            $table->string('order', 255);
+            $table->text('order');
         });
     }
 
