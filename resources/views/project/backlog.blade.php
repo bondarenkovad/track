@@ -13,13 +13,13 @@
                     @if($project->hasSprints())
                         <div class="form-group">
                             @foreach($project->getSprints() as $sprint)
-                                @if($sprint->isActiveSprint())
+                                {{--@if($sprint->isActiveSprint())--}}
                                     <div>
                                         <a href="/project/{{$project->key}}/board/{{$board->id}}/sprint/{{$sprint->id}}" class="btn btn-success">
                                             To Active Sprint
                                         </a>
                                     </div>
-                                @endif
+                                {{--@endif--}}
                                 <h3>Sprint - {{$sprint->id}}</h3>
                                 @if($sprint->order != null)
                                     <input id="issueData-{{$sprint->id}}" type="hidden" name="issueData[{{$sprint->id}}]" value="{{implode(',',json_decode($sprint->order))}}">
