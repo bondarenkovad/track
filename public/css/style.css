@@ -130,7 +130,7 @@
 
 .assign{
     color: #737373;
-    margin-left: 50px;
+    margin-left: 30px;
     padding-right: 10px;
     float: left;
 }
@@ -170,7 +170,6 @@
     float: right;
     width: 200px;
 }
-
 
 .imageSpan{
     float: left;
@@ -257,4 +256,44 @@
 
 .linkIssue{
     float: right;
+}
+
+.statusColor {
+    color: #93a1a1;
+}
+
+.statusBGColorO{
+    background-color: #fffa90;
+}
+
+.statusBGColorI{
+    background-color: #46b8da;
+}
+
+.statusBGColorR{
+    background-color: #d9534f;
+}
+
+.statusBGColorT{
+    background-color: #d58512;
+}
+
+.statusBGColorD{
+    background-color: green;
+}
+
+.danger{
+    color: #d9534f;
+}
+
+.attention{
+    color: yellow;
+}
+
+.high{
+    color: #003eff;
+}
+
+.low{
+    color: green;
 }
