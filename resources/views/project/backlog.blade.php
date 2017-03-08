@@ -94,7 +94,9 @@
                 @endif
                         <div>
                             <label>Backlog</label>
+                            @if(Auth::user()->ifAdmin() || Auth::user()->ifPM())
                             <a href="/sprint/add/{{$project->key}}">Create Sprint</a>
+                            @endif
                                 @if($project->order != null)
                                     <input id="issueData-backlog" type="hidden" name="issueData[backlog]" value="{{implode(',',json_decode($project->order))}}">
                                 @else
@@ -167,7 +169,9 @@
                                         </li>
                                     @endforeach
                                 </ul>
-                            <a href="/issue/add/{{$project->key}}">Create Issue</a>
+                            <div style="float: right; margin-right: 15px">
+                                <a href="/issue/add/{{$project->key}}">Create Issue</a>
+                            </div>
                         </div>
         </form>
     </div>
