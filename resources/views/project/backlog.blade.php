@@ -13,7 +13,7 @@
                         <div>
                             {{--@if($sprint->isActiveSprint())--}}
                                 <a href="/project/{{$project->key}}/board/{{$board->id}}/sprint/{{$sprint->id}}">
-                                <span class="glyphicon glyphicon-dashboard"></span>
+                                <span class="glyphicon glyphicon-hand-left"></span>
                                 </a>
                             {{--@endif--}}
                             <label>Sprint - <span class="userName">{{$sprint->id}}</span></label>
