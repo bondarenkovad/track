@@ -1,19 +1,17 @@
 @extends('layouts.app')
-
 @section('content')
     <div class="container">
-        @if($project != null)
-            <h5>{{$project->name}}/{{$project->key}} - {{$issue->id}}</h5>
-        @endif
-        <h2 class="text-left text-muted">{{$issue->summary}}</h2>
+            @if($project != null)
+                <h5><span class="userName">{{$project->name}}</span>/<span class="userName">{{$project->key}}</span> - <span class="userName">{{$issue->id}}</span></h5>
+            <h3 class="text-left text-muted">{{$issue->summary}}</h3>
+            <hr>
             <div>
                 @if($issue->reporter_id === Auth::user()->id)
-                <a class="btn btn-default" data-toggle="modal" data-target="#issueEdit">Edit</a>
+                    <a class="btn btn-default" data-toggle="modal" data-target="#issueEdit">Edit</a>
                 @endif
                 <a class="btn btn-default" data-toggle="modal" data-target="#issueComment">Comment</a>
                 <a class="btn btn-default" data-toggle="modal" data-target="#issueLog">WorkLog</a>
             </div>
-        <div class="row">
             <div class="modal fade" id="issueEdit" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="issueEditLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -225,7 +223,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="modal fade" id="issueLog" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="issueLogLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -282,20 +279,20 @@
             </div>
             <div class="leftDivDetails">
                 <div class="strike">
-                    <span>Details</span>
+                    <span class="bolder">Details</span>
                 </div>
                 <div class="row">
                     <dl class="dl-horizontal">
                         <dt>Type:</dt>
                         <dd>
                             <span class="marginLeft">
-                            @if($issue->type['name'] === 'task')
-                                <img src="/img/status_icon/task.png" class="img" data-toggle="tooltip" title="{{$issue->type['name']}}">
-                            @elseif($issue->type['name'] === 'story')
-                                <img src="/img/status_icon/story.png" class="img" data-toggle="tooltip" title="{{$issue->type['name']}}">
-                            @elseif($issue->type['name'] === 'bug')
-                                <img src="/img/status_icon/bug.png" class="img" data-toggle="tooltip" title="{{$issue->type['name']}}">
-                            @endif
+                                @if($issue->type['name'] === 'task')
+                                        <span class="img glyphicon glyphicon-education low" data-toggle="tooltip" title="{{$issue->type['name']}}"></span>
+                                @elseif($issue->type['name'] === 'story')
+                                        <span class="img glyphicon glyphicon-file high" data-toggle="tooltip" title="{{$issue->type['name']}}"></span>
+                                @elseif($issue->type['name'] === 'bug')
+                                        <span class="img glyphicon glyphicon-fire danger" data-toggle="tooltip" title="{{$issue->type['name']}}"></span>
+                                @endif
                             {{$issue->type['name']}}
                             </span>
                         </dd>
@@ -303,15 +300,15 @@
                         <dd>
                             <span class="marginLeft">
                             @if($issue->priority['name'] === 'trivial')
-                                    <img src="/img/status_icon/trivial.png" class="img" data-toggle="tooltip" title="{{$issue->priority['name']}}">
+                                    <span class="img glyphicon glyphicon-triangle-bottom low" data-toggle="tooltip" title="{{$issue->priority['name']}}"></span>
                                 @elseif($issue->priority['name'] === 'minor')
-                                    <img src="/img/status_icon/minor.png" class="img" data-toggle="tooltip" title="{{$issue->priority['name']}}">
+                                    <span class="img glyphicon glyphicon-menu-down" data-toggle="tooltip" title="{{$issue->priority['name']}}"></span>
                                 @elseif($issue->priority['name'] === 'major')
-                                    <img src="/img/status_icon/major.png" class="img" data-toggle="tooltip" title="{{$issue->priority['name']}}">
+                                    <span class="img glyphicon glyphicon-menu-up high" data-toggle="tooltip" title="{{$issue->priority['name']}}"></span>
                                 @elseif($issue->priority['name'] === 'critical')
-                                    <img src="/img/status_icon/critical.png" class="img" data-toggle="tooltip" title="{{$issue->priority['name']}}">
+                                    <span class="img glyphicon glyphicon-alert danger" data-toggle="tooltip" title="{{$issue->priority['name']}}"></span>
                                 @elseif($issue->priority['name'] === 'blocker')
-                                    <img src="/img/status_icon/blocker.png" class="img" data-toggle="tooltip" title="{{$issue->priority['name']}}">
+                                    <span class="img glyphicon glyphicon-ban-circle danger" data-toggle="tooltip" title="{{$issue->priority['name']}}"></span>
                                 @endif
                                 {{$issue->priority['name']}}
                             </span>
@@ -325,11 +322,11 @@
                     </dl>
                 </div>
                 <div class="strike">
-                    <span>Description</span>
+                    <span class="bolder">Description</span>
                 </div>
-                <textarea class="form-control" readonly rows="5" style="width: 300px; resize: none">{{$issue->description}}</textarea>
+                <textarea class="form-control" readonly rows="5" style="resize: none">{{$issue->description}}</textarea>
                 <div class="strike">
-                    <span>Attachment</span>
+                    <span class="bolder">Attachment</span>
                 </div>
                 <ul class="list-group">
                     @if($issue->getThisAttachments() != [])
@@ -341,9 +338,8 @@
                     @endif
                 </ul>
                 <div class="strike">
-                    <span>Activity</span>
+                    <span class="bolder">Activity</span>
                 </div>
-                <div class="row">
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#home">Comments</a></li>
                         <li><a data-toggle="tab" href="#menu1">Work Logs</a></li>
@@ -491,11 +487,10 @@
                             @endif
                         </div>
                     </div>
-                </div>
             </div>
             <div class="rightDivPeople">
                 <div class="strike">
-                    <span>People</span>
+                    <span class="bolder">People</span>
                 </div>
                 <div class="row">
                     <dl class="dl-horizontal">
@@ -521,10 +516,12 @@
                                  {{$issue->reporter['name']}}
                             </span>
                         </dd>
+                        <dt>&nbsp;</dt>
+                        <dd>&nbsp;</dd>
                     </dl>
                 </div>
                 <div class="strike">
-                    <span>Dates</span>
+                    <span class="bolder">Dates</span>
                 </div>
                 <div class="row">
                     <dl class="dl-horizontal">
@@ -543,6 +540,6 @@
                     </dl>
                 </div>
             </div>
-        </div>
+        @endif
     </div>
-@endsection
+@stop

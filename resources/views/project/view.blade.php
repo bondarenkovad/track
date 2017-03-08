@@ -17,7 +17,7 @@
                                 <span class="img glyphicon glyphicon-file high" data-toggle="tooltip" title="{{$issue->type['name']}}"></span>
                             @elseif($issue->type['name'] === 'bug')
                                 <span class="img glyphicon glyphicon-fire danger" data-toggle="tooltip" title="{{$issue->type['name']}}"></span>
-                            @endif
+                        @endif
                         </span>
                         <span class="summary">{{$issue->summary}}</span>
                         <span class="description">{{$issue->description}}</span>
