@@ -89,9 +89,7 @@
                             </li>
                             @endforeach
                             </ul>
-
                         </div>
-
                     @endforeach
                 @endif
                         <div>
