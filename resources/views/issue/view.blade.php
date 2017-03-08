@@ -205,8 +205,8 @@
                                 <input type="hidden" name="_method" value="put"/>
                                 {{ csrf_field() }}
                                 <div class="form-group{{ $errors->has('text') ? ' has-error' : '' }}">
-                                    <label for="text" class="col-md-4 control-label">Text:</label>
-                                    <div class="col-md-6">
+                                    <label for="text" class="text-left control-label" style="margin-left: 15px">Text:</label>
+                                    <div class="col-md-12">
                                         <textarea class="form-control mytextarea" name="text"></textarea>
                                         @if ($errors->has('text'))
                                             {{session()->flash('danger',$errors->first('tex'))}}
@@ -260,7 +260,7 @@
 
                                 <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
                                     <label for="comment" class="col-md-4 control-label">Comment:</label>
-                                    <div class="col-md-6">
+                                    <div class="col-md-7 col-md-offset-4">
                                         <textarea class="form-control mytextarea" name="comment"></textarea>
                                         @if ($errors->has('comment'))
                                             {{session()->flash('danger',$errors->first('comment'))}}
