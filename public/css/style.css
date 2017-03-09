@@ -3,12 +3,17 @@
 }
 
 #left{
-    margin-left: 10px;
+    margin-left: 15px;
     float: left;
-    width: 200px;
-    height: 400px;
+    padding: 0;
+    width: 172px;
+    min-height: 220px;
     display: block;
-    background-color: #398439;
+    border: 2px solid #737373;
+}
+
+.borderRad{
+    border-radius: 5px;
 }
 
 .title{
@@ -20,18 +25,17 @@
 }
 
 #right{
-    margin-left: 165px;
+    padding: 0;
+    margin-left: 210px;
     float: left;
-    width: 200px;
-    height: 400px;
+    width: 172px;
+    min-height: 220px;
     display: block;
     border: 2px solid #737373;
 }
 
 #sortable1, #sortable2 {
      /*border: 1px solid #eee;*/
-     width: 200px;
-     height: 400px;
      min-height: 20px;
      list-style-type: none;
      margin: 0;
@@ -40,7 +44,7 @@
      /*margin-right: 10px;*/
  }
 #sortable1 li, #sortable2 li {
-    margin: 0 5px 5px 5px;
+    margin: 5px;
     padding: 5px;
     font-size: 1.2em;
     width: 160px;

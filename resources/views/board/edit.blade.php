@@ -44,14 +44,14 @@
                                 <div id="left" class="form-control">
                                     <ul id="sortable1" class="connectedSortable"  name="message">
                                         @foreach($board->statuses()->get() as $status)
-                                        <li class="ui-state-default" data-value="{{$status->id}}">{{$status->name}}</li>
+                                        <li class="ui-state-default borderRad" data-value="{{$status->id}}">{{$status->name}}</li>
                                         @endforeach
                                     </ul>
                                 </div>
                                 <div id="right" class="form-control">
                                     <ul id="sortable2" class="connectedSortable">
                                         @foreach($board->filterStatus() as $filter)
-                                            <li class="ui-state-default" data-value="{{$filter->id}}">{{$filter->name}}</li>
+                                            <li class="ui-state-default borderRad" data-value="{{$filter->id}}">{{$filter->name}}</li>
                                         @endforeach
                                     </ul>
                                 </div>
