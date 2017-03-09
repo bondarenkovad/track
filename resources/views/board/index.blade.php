@@ -2,11 +2,8 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1"><h1 class="text-center text-muted">Boards List</h1></div>
-            <div class="col-md-10 col-md-offset-10"><a  href="/board/add" class="btn btn-success">Board Create</a></div>
-        </div>
-        <div class="row">
+             <span class="text-left text-muted" style="font-size: 1.3em"><span class="userName">Boards</span> List</span>
+            <span style="float: right"><a  href="/board/add" class="">Board Create</a></span>
             <table class="table table-hover">
                 <thead>
                 <th>Name</th>
@@ -21,16 +18,17 @@
                         <td>{{$board->name}}</td>
                         <td>{{$board->project['name']}}</td>
                         <td>
-                            <ul> @foreach($board->orderByOrders() as $status)</ul>
-                            <li>{{$status->name}}</li>
-                            @endforeach
+                            <ul>
+                                @foreach($board->orderByOrders() as $status)
+                                    <li>{{$status->name}}</li>
+                                @endforeach
+                            </ul>
                         </td>
-                        <td><a  href="/board/edit/{{$board->id}}" class="btn btn-success" >Edit</a></td>
-                        <td><a  href="/board/delete/{{$board->id}}" class="btn btn-danger" >Delete</a></td>
+                        <td><a  href="/board/edit/{{$board->id}}" style="float: right">Edit</a></td>
+                        <td><a  href="/board/delete/{{$board->id}}" style="float: right"><span class="danger">Delete</span></a></td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
-        </div>
     </div>
 @endsection
