@@ -102,15 +102,15 @@
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="dLabel">
-                                    <li><a href="/user/index">Users List</a></li>
-                                    <li><a href="/user/group/index">Groups List</a></li>
-                                    <li><a href="/issue/type/index">Types List</a></li>
-                                    <li><a href="/issue/priority/index">Priorities List</a></li>
-                                    <li><a href="/issue/status/index">Statuses List</a></li>
-                                    <li><a href="/issue/index">Issues List</a></li>
-                                    <li><a href="/sprint/index">Sprints List</a></li>
-                                    <li><a href="/project/index">Projects List</a></li>
                                     <li><a href="/board/index">Boards List</a></li>
+                                    <li><a href="/user/group/index">Groups List</a></li>
+                                    <li><a href="/issue/index">Issues List</a></li>
+                                    <li><a href="/issue/priority/index">Priorities List</a></li>
+                                    <li><a href="/project/index">Projects List</a></li>
+                                    <li><a href="/sprint/index">Sprints List</a></li>
+                                    <li><a href="/issue/status/index">Statuses List</a></li>
+                                    <li><a href="/issue/type/index">Types List</a></li>
+                                    <li><a href="/user/index">Users List</a></li>
                                 </ul>
                             </li>
                         @endif
