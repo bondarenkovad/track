@@ -45,7 +45,7 @@
                                 <div id="right" class="form-control">
                                     <ul id="sortable2" class="connectedSortable">
                                         @foreach($statuses as $status)
-                                            <li class="ui-state-default" data-value="{{$status->id}}">{{$status->name}}</li>
+                                            <li class="ui-state-default borderRad" data-value="{{$status->id}}">{{$status->name}}</li>
                                          @endforeach
                                     </ul>
                                 </div>
