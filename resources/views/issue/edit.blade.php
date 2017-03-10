@@ -151,52 +151,56 @@
 
 
                     <div class="form-group">
+                        <label for="name" class="col-md-4 control-label">Comments:</label>
                         <div class="col-md-6 col-md-offset-4">
                             @foreach($issue->getThisComments() as $comment)
-                            <div class="panel panel-primary">
+                            <div class="panel panel-default">
                                 <div class="panel-heading">
                                     {{$comment->name}}
                                     @if( $comment->name === Auth::user()->name)
-                                    <a  href="/issue/comment/edit/{{$comment->id}}" class="btn btn-primary" >Edit</a>
-                                    <a  href="/issue/comment/delete/{{$comment->id}}" class="btn btn-danger" >Delete</a>
+                                    <a  href="/issue/comment/delete/{{$comment->id}}"><i class="glyphicon glyphicon-remove danger" data-toggle="tooltip" title="Delete"></i></a>
                                     @endif
                                 </div>
                                 <div class="panel-body">{{$comment->text}}</div>
                             </div>
                             @endforeach
+                                <hr>
                         </div>
                     </div>
 
                     <div class="form-group">
+                        <label for="name" class="col-md-4 control-label">Work Logs:</label>
                         <div class="col-md-6 col-md-offset-4">
                             @foreach($issue->getThisLogs() as $log)
-                                <div class="panel panel-primary">
+                                <div class="panel panel-default">
                                     <div class="panel-heading">
                                         {{$log->user}}| {{$log->status}}
                                         @if( $log->user === Auth::user()->name)
-                                            <a  href="/issue/workLog/edit/{{$log->id}}" class="btn btn-primary" >Edit</a>
-                                            <a  href="/issue/workLog/delete/{{$log->id}}" class="btn btn-danger" >Delete</a>
+                                            <a  href="/issue/workLog/delete/{{$log->id}}"><i class="glyphicon glyphicon-remove danger" data-toggle="tooltip" title="Delete"></i></a>
                                         @endif
                                     </div>
                                     <div class="panel-body">{{$log->comment}} | time spent:{{date("d \d\. H \h\. i \m\. s \s\.",$log->time_spent)}}</div>
                                 </div>
                             @endforeach
+                                <hr>
                         </div>
                     </div>
 
                     <div class="form-group">
+                        <label for="name" class="col-md-4 control-label">Files:</label>
                         <div class="col-md-6 col-md-offset-4">
                             @foreach($issue->getThisAttachments() as $file)
-                                <div class="panel panel-primary">
+                                <div class="panel panel-default">
                                     <div class="panel-heading">
                                             Uploaded files to {{$issue->summary}}
                                     </div>
                                     <div class="panel-body">
                                         {{$file->path}}
-                                        <a  href="{{route('upload_delete', ['filename'=>$file->path])}}" class="btn btn-danger" >Delete</a>
+                                        <a  href="{{route('upload_delete', ['filename'=>$file->path])}}"><i class="glyphicon glyphicon-remove danger" data-toggle="tooltip" title="Delete"></i></a>
                                     </div>
                                 </div>
                             @endforeach
+                                <hr>
                         </div>
                     </div>
 
@@ -205,10 +209,6 @@
                             <button type="submit" class="btn btn-primary">
                                 Update
                             </button>
-
-                            <a href="/project/{{$project->key}}/backlog" class="btn btn-success">
-                                Back to Project Backlog
-                            </a>
                         </div>
                     </div>
                 </form>

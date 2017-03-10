@@ -141,8 +141,6 @@ class IssueController extends Controller
             $remEst = mktime($request->remaining_estimate,0,0,0,0,0 );
         }
 
-
-
         $issue->update([
             [$issue->summary = $request->summary],
             [$issue->description = $request->description],

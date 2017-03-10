@@ -47,7 +47,7 @@
                         <td>{{$issue->CountAttachments()}}</td>
                         <td>{{date("H\h\.",$issue->original_estimate)}}</td>
                         <td>{{date("H \h\.",$issue->remaining_estimate)}}</td>
-                        <td><a  href="/issue/edit/{{$issue->id}}" class="floatRight"><i class="glyphicon glyphicon-pencil" data-toggle="tooltip" title="Edit"></i></a></td>
+                        <td><a  href="/project/{{$issue->getProjectInfo($issue->project['name'])->key}}/issue/{{$issue->id}}/edit" class="floatRight"><i class="glyphicon glyphicon-pencil" data-toggle="tooltip" title="Edit"></i></a></td>
                     </tr>
                 @endforeach
                 </tbody>

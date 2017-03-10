@@ -143,4 +143,9 @@ class Issue extends Model
 
         return 0;
     }
+
+    public function getProjectInfo($name)
+    {
+        return $project = Project::where('name', '=', $name)->first();
+    }
 }
