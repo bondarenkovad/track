@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
              <span class="text-left text-muted" style="font-size: 1.3em"><span class="userName">Boards</span> List</span>
-            <span style="float: right"><a  href="/board/add" class="">Board Create</a></span>
+            <span class="floatRight"><a  href="/board/add">Board Create</a></span>
             <table class="table table-hover">
                 <thead>
                 <th>Name</th>
@@ -24,8 +24,8 @@
                                 @endforeach
                             </ul>
                         </td>
-                        <td><a  href="/board/edit/{{$board->id}}" style="float: right">Edit</a></td>
-                        <td><a  href="/board/delete/{{$board->id}}" style="float: right"><span class="danger">Delete</span></a></td>
+                        <td><a  href="/board/edit/{{$board->id}}" class="floatRight"><i class="glyphicon glyphicon-pencil" data-toggle="tooltip" title="Edit"></i></a></td>
+                        <td><a  href="/board/delete/{{$board->id}}" class="floatRight"><span class="danger">Delete</span></a></td>
                     </tr>
                 @endforeach
                 </tbody>
