@@ -1,11 +1,7 @@
 @extends('layouts.app')
-
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1"><h1 class="text-center text-muted">Issues List</h1></div>
-        </div>
-        <div class="row">
+            <span class="text-left text-muted" style="font-size: 1.3em"><span class="userName">Issues</span> List</span>
             <table class="table table-hover">
                 <thead>
                 <th>Summary</th>
@@ -21,9 +17,6 @@
                 <th>Files</th>
                 <th>Original estimate</th>
                 <th>Remaining estimate</th>
-                <th></th>
-                <th></th>
-                <th></th>
                 <th></th>
                 </thead>
                 <tbody>
@@ -54,14 +47,10 @@
                         <td>{{$issue->CountAttachments()}}</td>
                         <td>{{date("H\h\.",$issue->original_estimate)}}</td>
                         <td>{{date("H \h\.",$issue->remaining_estimate)}}</td>
-                        <td><a  href="/issue/edit/{{$issue->id}}" class="btn btn-success" >Edit</a></td>
-                        <td><a  href="/issue/comment/index/{{$issue->id}}" class="btn btn-primary" >Add Comment</a></td>
-                        <td><a  href="/issue/workLog/index/{{$issue->id}}" class="btn btn-primary" >Add WorkLog</a></td>
-                        <td><a  href="/issue/file/index/{{$issue->id}}" class="btn btn-primary" >Add Files</a></td>
+                        <td><a  href="/issue/edit/{{$issue->id}}" class="floatRight"><i class="glyphicon glyphicon-pencil" data-toggle="tooltip" title="Edit"></i></a></td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
-        </div>
     </div>
-@endsection
+@stop
