@@ -96,7 +96,7 @@
                                             @endif
                                         </span>
                                         <span class="linkIssue">
-                                        <a href="/project/{{$project->key}}/issue/{{$issue->id}}/view">View Issue</a>
+                                        <a href="/project/{{$project->key}}/issue/{{$issue->id}}/view" class="colorShade">View Issue</a>
                                         </span>
                                     </li>
                                 @endforeach
@@ -178,7 +178,7 @@
                                             @endif
                                         </span>
                                         <span class="linkIssue">
-                                        <a href="/project/{{$project->key}}/issue/{{$issue->id}}/view">View Issue</a>
+                                        <a href="/project/{{$project->key}}/issue/{{$issue->id}}/view" class="colorShade">View Issue</a>
                                         </span>
                                 </li>
                             @endforeach
