@@ -27,7 +27,7 @@
                                             @if($sprint->status === 2)
                                                 <li><a href="#"><span class="colorShade">Finish Sprint</span></a></li>
                                             @else
-                                                <li><a href="#"><span class="colorShade">Start Sprint</span></a></li>
+                                                <li><a href="/sprint/{{$sprint->id}}/makeActive"><span class="colorShade">Start Sprint</span></a></li>
                                             @endif
                                     </ul>
                                 </div>

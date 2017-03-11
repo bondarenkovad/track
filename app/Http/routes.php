@@ -105,6 +105,7 @@ Route::get('/sprint/index', 'SprintController@index');
 Route::get('/sprint/add/project/{key}/board/{id}', 'SprintController@create');
 Route::post('/sprint/create/project/{key}/board/{id}', 'SprintController@store');
 Route::get('/sprint/edit/{id}', 'SprintController@edit');
+Route::get('/sprint/{id}/makeActive', 'SprintController@makeStatusIsActive');
 Route::put('/sprint/edit/{id}', 'SprintController@update');
 Route::get('/sprint/delete/{id}', 'SprintController@destroy');
 

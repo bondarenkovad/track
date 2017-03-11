@@ -23,6 +23,19 @@ class SprintController extends Controller
         return view('sprint.index', ['sprints' => $sprints]);
     }
 
+    public function makeStatusIsActive($id)
+    {
+        $sprint = Sprint::find($id);
+
+        $sprint->update([
+            [$sprint->status = 2],
+        ]);
+
+        $sprint->save();
+
+        return back();
+    }
+
     public function create($key, $id)
     {
         $project = Project::where('key', '=', $key)
