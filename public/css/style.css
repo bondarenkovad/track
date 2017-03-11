@@ -94,8 +94,7 @@
     list-style-type: none;
     margin-bottom: 10px;
     padding: 5px 0 0 0;
-    float: left;
-    /*margin-right: 10px;*/
+    width: 100%;
 }
 
 .issue li {
@@ -103,13 +102,19 @@
     padding: 5px;
     border-radius: 5px;
     font-size: 1em;
-    width: 1120px;
+    width:calc(100% - 10px);
+
 }
 
 .statusContainer{
+    margin: 0 1%;
     min-height: 300px;
     float: left;
     display: block;
+}
+
+.statusBlock{
+    margin: 0 -1%;
 }
 
 .img{
@@ -161,19 +166,18 @@
 .sprintSummary{
     white-space: nowrap;
     padding-left: 10px;
+    display: block;
     overflow: hidden;
-    float: left;
-    /*display: block;*/
-    min-width: 80px;
+    text-overflow: ellipsis;
 }
 
 .sprintDescription{
+    color:#93a1a1;
+    display: block;
     white-space: nowrap;
     padding-left: 10px;
     overflow: hidden;
     text-overflow: ellipsis;
-    float: right;
-    width: 200px;
 }
 
 .imageSpan{
@@ -316,6 +320,7 @@
 }
 
 .floatRight{
+    margin-right: 15px;
     float: right;
 }
 

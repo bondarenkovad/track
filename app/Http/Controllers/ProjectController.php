@@ -58,6 +58,16 @@ class ProjectController extends Controller
                 array('comment' => $log['comment'], 'user_id' =>  Auth::user()->id, 'issue_id' => $log['issueId'],'issue_status_id' => (int)$log['status_id'], 'time_spent'=>(int)$log['time_spent'])
             );
 
+            $issue = Issue::find($log['issueId']);
+
+            $newRem = $issue->remaining_estimate - (int)$log['time_spent'];
+
+            $issue->update([
+                [$issue->remaining_estimate = $newRem],
+            ]);
+
+            $issue->save();
+
             session()->flash('status', 'Work Log added!');
         }
 

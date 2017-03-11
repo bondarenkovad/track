@@ -85,8 +85,8 @@ class Board extends Model
     public function widthSizing()
     {
         $count = count($this->statuses()->get());
-        $size = 1120/$count;
+        $size = (100/$count) - 2;
 
-        return $size;
+        return round($size, 2);
     }
 }

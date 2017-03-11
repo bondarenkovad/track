@@ -4,7 +4,7 @@
     <div class="container">
         <div>
             <span class="text-left text-muted"><span class="userName">{{$project->name}}</span>/<span class="userName">{{$project->key}}</span> Issues:</span>
-            <a href="/issue/add/{{$project->key}}" style="float: right; margin-right: 15px">Create Issue</a>
+            <a href="/issue/add/{{$project->key}}" style="float: right">Create Issue</a>
         </div>
         <ul class="issue">
             @if(count( $project->countIssues() > 0))
@@ -53,7 +53,7 @@
                             @endif
                         </span>
                         <span>
-                        <span class="badge">{{date("H",$issue->original_estimate)}}</span>
+                        <span class="badge">{{$issue->remaining_estimate}}h</span>
                         </span>
                         <span class="statusColor">
                             @if($issue->status['name'] === 'open')

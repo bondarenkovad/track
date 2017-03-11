@@ -2,7 +2,7 @@
 <meta name="csrf_token" content="{{ csrf_token() }}" />
 @section('content')
     <div class="container">
-        <h4 class="text-left text-muted" style="margin-left: 15px"><span class="userName">{{$project->name}}</span> Board</h4>
+        <h4 class="text-left text-muted"><span class="userName">{{$project->name}}</span> Board</h4>
         <form role="form" method="POST" action="{{action('ProjectController@refresh', ['key'=> $project->key, 'id'=>$board->id])}}">
             <input type="hidden" name="_method" value="put"/>
             <input id="projectKey" type="hidden" name="projectKey" value="{{$project->key}}">
@@ -11,7 +11,7 @@
                 @if($project->hasSprints())
                     @foreach($project->getSprints() as $sprint)
                         @if($sprint->status != 0)
-                        <div class="container-fluid">
+                        <div>
                             @if($sprint->isActiveSprint())
                                 <a href="/project/{{$project->key}}/board/{{$board->id}}/sprint/{{$sprint->id}}">
                                     <span class="glyphicon glyphicon-hand-left"></span>
@@ -85,7 +85,7 @@
                                             @endif
                                         </span>
                                         <span>
-                                        <span class="badge">{{date("H",$issue->original_estimate)}}</span>
+                                        <span class="badge">{{$issue->remaining_estimate}}h</span>
                                         </span>
                                         <span class="statusColor">
                                         @if($issue->status['name'] === 'open')
@@ -111,8 +111,8 @@
                         @endif
                     @endforeach
                 @endif
-                        <div class="container-fluid">
-                        <label>Backlog <span class="colorShade">issues: {{count($project->SortIssueByOrder())}}</span></label>
+                        <div>
+                        <label>Backlog <span class="colorShade">issues: {{count($project->SortIssueByOrder())}}</span></label><span class="badge">{{$project->getBacklogTime()}}h</span>
                         @if(Auth::user()->ifAdmin() || Auth::user()->ifPM())
                                 <a href="/sprint/add/project/{{$project->key}}/board/{{$board->id}}" class="colorShade floatRight" style="text-decoration: none">Create Sprint</a>
                         @endif
@@ -167,7 +167,7 @@
                                             @endif
                                         </span>
                                         <span>
-                                        <span class="badge">{{date("H",$issue->original_estimate)}}</span>
+                                        <span class="badge">{{$issue->original_estimate}}h</span>
                                         </span>
                                         <span class="statusColor">
                                         @if($issue->status['name'] === 'open')

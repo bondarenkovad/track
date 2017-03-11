@@ -56,7 +56,7 @@
                                         @endif
                                     </span>
                                     <span>
-                                    <span class="badge">{{date("H",$issue->original_estimate)}}</span>
+                                    <span class="badge">{{$issue->remaining_estimate}}h</span>
                                     </span>
                                     <span class="statusColor">
                                         @if($issue->status['name'] === 'open')

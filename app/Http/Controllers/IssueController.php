@@ -60,8 +60,8 @@ class IssueController extends Controller
             'remaining_estimate' => 'required|integer',
         ]);
 
-        $orEst = mktime($request->original_estimate,0,0,0,0,0 );
-        $remEst = mktime($request->remaining_estimate,0,0,0,0,0 );
+//        $orEst = mktime($request->original_estimate,0,0,0,0,0 );
+//        $remEst = mktime($request->remaining_estimate,0,0,0,0,0 );
 
         Issue::create([
         'summary' => $request['summary'],
@@ -72,8 +72,8 @@ class IssueController extends Controller
             'priority_id' => (int)$request['priority_id'],
             'reporter_id' => Auth::user()->id,
             'assigned_id' => (int)$request['assigned_id'],
-            'original_estimate' => $orEst,
-            'remaining_estimate' => $remEst,
+            'original_estimate' => (int)$request['original_estimate'],
+            'remaining_estimate' => (int)$request['remaining_estimate'],
     ]);
 
         return view('project.view', ['project' => $project]);
@@ -131,15 +131,15 @@ class IssueController extends Controller
             'type_id' => 'required|not_in:0',
             'priority_id' => 'required|not_in:0',
             'assigned_id' => 'required|not_in:0',
-//            'original_estimate' => 'integer',
-//            'remaining_estimate' => 'integer',
+            'original_estimate' => 'integer',
+            'remaining_estimate' => 'integer',
         ]);
 
-        if(is_numeric($request->original_estimate) && is_numeric($request->remaining_estimate))
-        {
-            $orEst = mktime($request->original_estimate,0,0,0,0,0 );
-            $remEst = mktime($request->remaining_estimate,0,0,0,0,0 );
-        }
+//        if(is_numeric($request->original_estimate) && is_numeric($request->remaining_estimate))
+//        {
+//            $orEst = mktime($request->original_estimate,0,0,0,0,0 );
+//            $remEst = mktime($request->remaining_estimate,0,0,0,0,0 );
+//        }
 
         $issue->update([
             [$issue->summary = $request->summary],
@@ -151,8 +151,8 @@ class IssueController extends Controller
             [$issue->reporter_id =  Auth::user()->id],
             [$issue->assigned_id = (int)$request->assigned_id],
             [$issue->status_id = (int)$request->status_id],
-            [$issue->original_estimate = $orEst],
-            [$issue->remaining_estimate = $remEst],
+            [$issue->original_estimate = (int)$request->original_estimate],
+            [$issue->remaining_estimate = (int)$request->remaining_estimate],
         ]);
 
         $issue->save();
@@ -293,6 +293,16 @@ class IssueController extends Controller
 
 
         $log->save();
+
+        $issue = Issue::find($id);
+
+        $newRem = $issue->remaining_estimate - (int)$request->time_spent;
+
+        $issue->update([
+            [$issue->remaining_estimate = $newRem],
+        ]);
+
+        $issue->save();
         session()->flash('status', 'Work Log successfully updated!');
 
         return back();
@@ -305,6 +315,8 @@ class IssueController extends Controller
             'status_id' => 'required|not_in:0',
             'time_spent' => 'required|integer',
         ]);
+
+
 
         DB::table('work_logs')->insert(
             array('comment' => $request->comment, 'user_id' =>  Auth::user()->id, 'issue_id' => $id,'issue_status_id' => (int)$request['status_id'], 'time_spent'=>(int)$request['time_spent'] )

@@ -211,7 +211,7 @@
                 });
             };
 
-            $sprint = function(){
+            $sprint = function($issue_id){
 
                 $('#issueLog').modal();
 
@@ -221,11 +221,15 @@
                 $('#subBtn').on('click', function()
                 {
                     $dataMass= {
-                        'issueId' : $('.issueContainer li').attr('id'),
+                        'issueId' : $issue_id,
                         'time_spent' : $("#time_spent").val(),
                         'status_id' : $("#status_id").val(),
                         'comment' : $("#comment").val()
                     };
+
+                        $("#time_spent").val('');
+                        $("#status_id").val('');
+                        $("#comment").val('');
 
                     $projectKey = $("#projectKey").val();
                     $sprintId = $("#sprintId").val();
@@ -311,9 +315,9 @@
                 $( ".issueContainer" ).sortable({
                     connectWith: ".connectedIssueSortable",
 
-                    receive:function()
+                    receive:function(event,ui)
                     {
-                       $sprint();
+                       $sprint(ui.item.attr('id'));
                     }
                 }).disableSelection()
             } );

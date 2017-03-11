@@ -233,4 +233,16 @@ class Project extends Model
                 ->where('assigned_id', '=', $id)
                 ->get();
     }
+
+    public function getBacklogTime()
+    {
+        $issues = json_decode($this->order);
+
+        $time = Issue::whereIn('id', $issues)
+            ->sum('remaining_estimate');
+
+        return $time;
+    }
+
+
 }
