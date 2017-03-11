@@ -25,7 +25,7 @@
                             </ul>
                         </td>
                         <td><a  href="/board/edit/{{$board->id}}" class="floatRight"><i class="glyphicon glyphicon-pencil" data-toggle="tooltip" title="Edit"></i></a></td>
-                        <td><a  href="/board/delete/{{$board->id}}" class="floatRight"><span class="danger">Delete</span></a></td>
+                        <td><a  href="/board/delete/{{$board->id}}" class="floatRight"><i class="glyphicon glyphicon-remove danger" data-toggle="tooltip" title="Delete"></i></a></td>
                     </tr>
                 @endforeach
                 </tbody>

@@ -20,7 +20,7 @@
                         <li>{{$action->name}}</li>
                         @endforeach
                     </td>
-                    <td><a  href="/user/group/show/{{$group->id}}" class="floatRight">Show</a></td>
+                    <td><a  href="/user/group/show/{{$group->id}}" class="floatRight"><i class="glyphicon glyphicon-eye-open" data-toggle="tooltip" title="Show"></i></a></td>
                     <td><a  href="/user/group/edit/{{$group->id}}" class="floatRight"><i class="glyphicon glyphicon-pencil" data-toggle="tooltip" title="Edit"></i></a></td>
                 </tr>
             @endforeach

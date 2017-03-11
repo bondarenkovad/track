@@ -57,8 +57,8 @@
                         @endforeach
                     </ul>
                 </td>
-                <td><a  href="/user/show/{{$user->id}}">Show</a> </td>
-                <td><a  href="/user/edit/{{$user->id}}">Edit</a></td>
+                <td><a  href="/user/show/{{$user->id}}" class="floatRight"><i class="glyphicon glyphicon-eye-open" data-toggle="tooltip" title="Show"></i></a></td>
+                <td><a  href="/user/edit/{{$user->id}}" class="floatRight"><i class="glyphicon glyphicon-pencil" data-toggle="tooltip" title="Edit"></i></a></td>
                 </tr>
                 @endforeach
             </tbody>
