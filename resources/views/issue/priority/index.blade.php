@@ -2,11 +2,8 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1"><h1 class="text-center text-muted">Priorities List</h1></div>
-            <div class="col-md-10 col-md-offset-10"><a  href="/issue/priority/add" class="btn btn-success">Priorities Create</a></div>
-        </div>
-        <div class="row">
+             <span class="text-left text-muted" style="font-size: 1.3em"><span class="userName">Priorities</span> List</span>
+            <span class="floatRight"><a  href="/issue/priority/add" class="">Priority Create</a></span>
             <table class="table table-hover">
                 <thead>
                 <th>Name</th>
@@ -17,12 +14,11 @@
                 @foreach($issuesPriority as $issue)
                     <tr>
                         <td>{{$issue->name}}</td>
-                        <td><a  href="/issue/priority/edit/{{$issue->id}}" class="btn btn-success" >Edit</a></td>
-                        <td><a  href="/issue/priority/delete/{{$issue->id}}" class="btn btn-danger" >Delete</a></td>
+                        <td><a  href="/issue/priority/edit/{{$issue->id}}" class="floatRight"><i class="glyphicon glyphicon-pencil" data-toggle="tooltip" title="Edit"></i></a></td>
+                        <td><a  href="/issue/priority/delete/{{$issue->id}}" class="floatRight"><i class="glyphicon glyphicon-remove danger" data-toggle="tooltip" title="Delete"></i></a></td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
-        </div>
     </div>
 @endsection
