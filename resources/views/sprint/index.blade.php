@@ -2,10 +2,7 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1"><h1 class="text-center text-muted">Sprints List</h1></div>
-        </div>
-        <div class="row">
+        <h4 class="text-left text-muted"><span class="userName">Sprints</span> List</h4>
             <table class="table table-hover">
                 <thead>
                 <th>Name</th>
@@ -23,11 +20,10 @@
                         <td>{{$sprint->date_start}}</td>
                         <td>{{$sprint->date_finish}}</td>
                         <td>{{$sprint->project['name']}}</td>
-                        <td><a  href="/sprint/edit/{{$sprint->id}}" class="btn btn-success" >Edit</a></td>
+                        <td><a  href="/sprint/edit/{{$sprint->id}}" class="floatRight"><i class="glyphicon glyphicon-pencil" data-toggle="tooltip" title="Edit"></i></a></td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
-        </div>
     </div>
 @endsection
