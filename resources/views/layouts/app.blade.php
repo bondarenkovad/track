@@ -354,7 +354,8 @@
         <script type="text/javascript" src="/tinymce/js/tinymce/tinymce.min.js"></script>
         <script type="text/javascript">
             tinyMCE.init({
-                selector: '.mytextarea'
+                selector: '.mytextarea',
+                resize: false
 //                theme : "simple"
             });
         </script>
