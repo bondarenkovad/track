@@ -2,27 +2,23 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1"><h1 class="text-center text-muted">Types List</h1></div>
-            <div class="col-md-10 col-md-offset-10"><a  href="/issue/type/add" class="btn btn-success">Type Create</a></div>
-        </div>
-        <div class="row">
-            <table class="table table-hover">
-                <thead>
-                <th>Name</th>
-                <th></th>
-                <th></th>
-                </thead>
-                <tbody>
-                @foreach($issueTypes as $issue)
-                    <tr>
-                        <td>{{$issue->name}}</td>
-                        <td><a  href="/issue/type/edit/{{$issue->id}}" class="btn btn-success" >Edit</a></td>
-                        <td><a  href="/issue/type/delete/{{$issue->id}}" class="btn btn-danger" >Delete</a></td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </div>
+        <span class="text-left text-muted" style="font-size: 1.3em"><span class="userName">Types</span> List</span>
+        <a  href="/issue/type/add" class="floatRight">Type Create</a>
+        <table class="table table-hover">
+            <thead>
+            <th>Name</th>
+            <th></th>
+            <th></th>
+            </thead>
+            <tbody>
+            @foreach($issueTypes as $issue)
+                <tr>
+                    <td>{{$issue->name}}</td>
+                    <td><a  href="/issue/type/edit/{{$issue->id}}" class="floatRight"><i class="glyphicon glyphicon-pencil" data-toggle="tooltip" title="Edit"></i></a></td>
+                    <td><a  href="/issue/type/delete/{{$issue->id}}" class="floatRight"><i class="glyphicon glyphicon-remove danger" data-toggle="tooltip" title="Delete"></i></a></td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
     </div>
 @endsection
