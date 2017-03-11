@@ -28,7 +28,7 @@
                             <button type="submit" class="btn btn-primary">
                                 Update
                             </button>
-                            <a href="/issue/type/index" class="btn btn-success">
+                            <a href="/issue/status/index" class="btn btn-success">
                                 Back To Issue Statuses List
                             </a>
                         </div>
