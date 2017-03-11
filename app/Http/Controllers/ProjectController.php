@@ -21,7 +21,7 @@ class ProjectController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(Request $request)
+    public function index()
     {
         $projects = Project::all();
         return view('project.index', ['projects' => $projects]);
