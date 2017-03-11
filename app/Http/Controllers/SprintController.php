@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Board;
 use Illuminate\Http\Request;
 use App\Project;
 use App\Sprint;
@@ -22,15 +23,20 @@ class SprintController extends Controller
         return view('sprint.index', ['sprints' => $sprints]);
     }
 
-    public function create($key)
+    public function create($key, $id)
     {
         $project = Project::where('key', '=', $key)
-            ->firstOrFail();
-        return view('sprint.create', ['project'=>$project]);
+            ->first();
+        $board = Board::find($id);
+
+        return view('sprint.create', ['project'=>$project, 'board'=>$board]);
     }
 
-    public function store($id,Request $request)
+    public function store($key,$id,Request $request)
     {
+        $project = Project::where('key', '=', $key)
+            ->first();
+
         $this->validate($request, [
             'name' => 'required|max:50',
             'description' => 'required',
@@ -43,21 +49,21 @@ class SprintController extends Controller
             'name' => $request['name'],
             'description' => $request['description'],
             'status' => (int)$request['status'],
-            'project_id' => $id,
+            'project_id' => $project->id,
             'date_start' => $request['date_start'],
             'date_finish' =>$request['date_start'],
         ]);
 
-        return redirect('/project/index');
+        return redirect('/project/'.$project->key.'/board/'.$id.'/backlog');
     }
-//
-//    public function destroy($id)
-//    {
-//        DB::table('projects')->delete($id);
-//
-//        return redirect('project/index');
-//    }
-//
+
+    public function destroy($id)
+    {
+        Sprint::find($id)->delete();
+
+        return back();
+    }
+
     public function edit($id)
     {
         $sprint = Sprint::find($id);

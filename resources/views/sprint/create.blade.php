@@ -4,7 +4,7 @@
     <div class="container">
         <h1 class="text-center text-muted">Sprint Create</h1>
         <div class="panel-body">
-            <form class="form-horizontal" role="form" method="POST" action="{{action('SprintController@store', ['project'=>$project->id])}}">
+            <form class="form-horizontal" role="form" method="POST" action="{{action('SprintController@store', ['project'=>$project->key, 'board'=>$board->id])}}">
                 {{ csrf_field() }}
 
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">

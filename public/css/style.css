@@ -69,7 +69,7 @@
     background-color: #93a1a1;
     border-radius: 5px;
     min-height: 40px;
-    min-width: 1100px;
+    min-width: 1130px;
     list-style-type: none;
     margin-bottom: 10px;
     padding: 5px 0 0 0;
@@ -286,6 +286,10 @@
     background-color: green;
 }
 
+.colorShade{
+    color:#93a1a1;
+}
+
 .danger{
     color: #d9534f;
 }
@@ -315,3 +319,10 @@
     float: right;
 }
 
+.floatLeft{
+    float: left;
+}
+
+a:hover{
+    text-decoration: none;
+}

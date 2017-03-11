@@ -102,8 +102,8 @@ Route::get('/issue/file/delete/{filename}', ['as'=>'upload_delete', 'uses'=>'Iss
 
 //Sprint routing
 Route::get('/sprint/index', 'SprintController@index');
-Route::get('/sprint/add/{key}', 'SprintController@create');
-Route::post('/sprint/create/{key}', 'SprintController@store');
+Route::get('/sprint/add/project/{key}/board/{id}', 'SprintController@create');
+Route::post('/sprint/create/project/{key}/board/{id}', 'SprintController@store');
 Route::get('/sprint/edit/{id}', 'SprintController@edit');
 Route::put('/sprint/edit/{id}', 'SprintController@update');
 Route::get('/sprint/delete/{id}', 'SprintController@destroy');
