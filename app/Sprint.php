@@ -72,4 +72,30 @@ class Sprint extends Model
         }
         return false;
     }
+
+    public function getNotDoneIssues()
+    {
+        $issueMass = json_decode($this->order);
+        $issueIdMass = [];
+
+        if($this->order != null && $this->order != [])
+        {
+            $allIssues = Issue::where('project_id', '=', $this->project['id'])
+                ->whereIn('id', $issueMass)
+                ->get();
+
+            foreach($issueMass as $id)
+            {
+                foreach($allIssues as $issue)
+                {
+                    if($issue->id === $id+ 0 && $issue->status_id != 5)
+                    {
+                        array_push($issueIdMass, $issue->id);
+                    }
+                }
+            }
+        }
+
+        return $issueIdMass;
+    }
 }

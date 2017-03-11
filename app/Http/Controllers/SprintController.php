@@ -6,6 +6,7 @@ use App\Board;
 use Illuminate\Http\Request;
 use App\Project;
 use App\Sprint;
+use App\Issue;
 use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests;
@@ -35,6 +36,30 @@ class SprintController extends Controller
 
         return back();
     }
+
+    public function makeStatusIsFinish($id)
+    {
+        $sprint = Sprint::find($id);
+        $issueIdMass = $sprint->getNotDoneIssues();
+        $project = Project::find($sprint->project['id']);
+
+        $project->update([
+            [$project->order = json_encode($issueIdMass)]
+        ]);
+
+        $project->save();
+
+        $sprint->update([
+            [$sprint->order = null],
+            [$sprint->status = 0]
+        ]);
+
+        $sprint->save();
+
+        session()->flash('status', 'Unfinished issue replace to backlog!');
+        return back();
+    }
+
 
     public function create($key, $id)
     {

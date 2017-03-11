@@ -10,6 +10,7 @@
                 {{ csrf_field() }}
                 @if($project->hasSprints())
                     @foreach($project->getSprints() as $sprint)
+                        @if($sprint->status != 0)
                         <div class="container-fluid">
                             @if($sprint->isActiveSprint())
                                 <a href="/project/{{$project->key}}/board/{{$board->id}}/sprint/{{$sprint->id}}">
@@ -25,14 +26,14 @@
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                         <li><a href="/sprint/delete/{{$sprint->id}}"><span class="colorShade">Delete Sprint</span></a></li>
                                             @if($sprint->status === 2)
-                                                <li><a href="#"><span class="colorShade">Finish Sprint</span></a></li>
+                                                <li><a href="/sprint/{{$sprint->id}}/makeFinish"><span class="colorShade">Finish Sprint</span></a></li>
                                             @else
                                                 <li><a href="/sprint/{{$sprint->id}}/makeActive"><span class="colorShade">Start Sprint</span></a></li>
                                             @endif
                                     </ul>
                                 </div>
                             </span>
-                            <label>Sprint - <span class="userName">{{$sprint->id}}</span></label>
+                            <label>Sprint - <span class="userName">{{$sprint->id}}</span> issues:{{count($sprint->getIssueForSprint())}}</label>
                             @if($sprint->order != null)
                                 <input id="issueData-{{$sprint->id}}" type="hidden" name="issueData[{{$sprint->id}}]" value="{{implode(',',json_decode($sprint->order))}}">
                             @else
@@ -106,10 +107,12 @@
                                 @endforeach
                             </ul>
                         </div>
+                        @else
+                        @endif
                     @endforeach
                 @endif
                         <div class="container-fluid">
-                        <label>Backlog</label>
+                        <label>Backlog issues: {{count($project->SortIssueByOrder())}}</label>
                         @if(Auth::user()->ifAdmin() || Auth::user()->ifPM())
                             <span class="floatRight">
                                 <a href="/sprint/add/project/{{$project->key}}/board/{{$board->id}}" class="colorShade" style="text-decoration: none">Create Sprint</a>
