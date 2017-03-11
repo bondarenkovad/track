@@ -33,7 +33,7 @@
                                     </ul>
                                 </div>
                             </span>
-                            <label>Sprint - <span class="userName">{{$sprint->id}}</span> issues:{{count($sprint->getIssueForSprint())}}</label>
+                            <label>Sprint - <span class="userName">{{$sprint->id}}</span> <span class="colorShade">issues:{{count($sprint->getIssueForSprint())}}</span></label>
                             @if($sprint->order != null)
                                 <input id="issueData-{{$sprint->id}}" type="hidden" name="issueData[{{$sprint->id}}]" value="{{implode(',',json_decode($sprint->order))}}">
                             @else
@@ -112,11 +112,9 @@
                     @endforeach
                 @endif
                         <div class="container-fluid">
-                        <label>Backlog issues: {{count($project->SortIssueByOrder())}}</label>
+                        <label>Backlog <span class="colorShade">issues: {{count($project->SortIssueByOrder())}}</span></label>
                         @if(Auth::user()->ifAdmin() || Auth::user()->ifPM())
-                            <span class="floatRight">
-                                <a href="/sprint/add/project/{{$project->key}}/board/{{$board->id}}" class="colorShade" style="text-decoration: none">Create Sprint</a>
-                            </span>
+                                <a href="/sprint/add/project/{{$project->key}}/board/{{$board->id}}" class="colorShade floatRight" style="text-decoration: none">Create Sprint</a>
                         @endif
                         @if($project->order != null)
                             <input id="issueData-backlog" type="hidden" name="issueData[backlog]" value="{{implode(',',json_decode($project->order))}}">
