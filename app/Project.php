@@ -97,9 +97,9 @@ class Project extends Model
                 $idIssueInSprint = array_merge( $idIssueInSprint, json_decode($sprint->order));
             }
         }
+
         if($orders != null)
         {
-
             foreach($orders as $id)
             {
                 foreach($this->issues()->get() as $issue)
@@ -111,7 +111,6 @@ class Project extends Model
 
                     if(!in_array($issue->id, $idIssueInSprint) && !in_array($issue->id, $orders))
                     {
-
                         $collection->push($issue);
                     }
                 }
