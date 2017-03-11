@@ -24,7 +24,11 @@
                                     </span>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                         <li><a href="/sprint/delete/{{$sprint->id}}"><span class="colorShade">Delete Sprint</span></a></li>
-                                        <li><a href="#">Finish Sprint</a></li>
+                                            @if($sprint->status === 2)
+                                                <li><a href="#"><span class="colorShade">Finish Sprint</span></a></li>
+                                            @else
+                                                <li><a href="#"><span class="colorShade">Start Sprint</span></a></li>
+                                            @endif
                                     </ul>
                                 </div>
                             </span>
