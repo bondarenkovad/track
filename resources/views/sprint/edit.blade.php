@@ -20,7 +20,7 @@
                     <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                         <label for="description" class="col-md-4 control-label">Description</label>
                         <div class="col-md-6">
-                            <textarea id="description" type="text" class="form-control" name="description">{{$sprint->description}}</textarea>
+                            <textarea id="description" type="text" class="form-control mytextarea" name="description">{{$sprint->description}}</textarea>
                             @if ($errors->has('description'))
                                 {{session()->flash('danger',$errors->first('description'))}}
                             @endif
