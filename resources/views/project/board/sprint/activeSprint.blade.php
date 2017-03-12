@@ -110,8 +110,8 @@
                                                        @endif
                                                     </span>
                                                </span>
-                                                <span style="margin-left: 20px;">{{$project->key}} - <span class="userName">{{$issue->id}}</span></span>
-                                                <span style="margin-left: 20px; float: right; margin-right: 5px">
+                                                <span style="margin-left: 10px;">{{$project->key}} - <span class="userName">{{$issue->id}}</span></span>
+                                                <span style="margin-left: 15px; float: right; margin-right: 5px">
                                                       @if($issue->assigned['image_path'] != null)
                                                         <img src="{{$issue->assigned['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
                                                     @else
