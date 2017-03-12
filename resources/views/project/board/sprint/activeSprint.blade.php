@@ -62,7 +62,10 @@
                                 <li id="{{$issue->id}}" class="ui-state-default" data-value="{{$issue->id}}">
                                     <div class="container-fluid">
                                         <div class="row">
-                                            <span class="sprintSummary">{{$issue->summary}}</span>
+                                            <span class="sprintSummary">
+                                                {{$issue->summary}}
+                                            <a  href="/project/{{$project->key}}/issue/{{$issue->id}}/view" class="floatR glyphicon glyphicon-eye-open" style="margin-right: 5px"></a>
+                                            </span>
                                             <span class="sprintDescription">{{$issue->description}}</span>
                                         </div>
                                         <div class="row">
