@@ -5,7 +5,7 @@
         <form class="form-horizontal" role="form" method="POST" action="{{action('ProjectController@updateSprint', ['key'=> $project->key, 'i'=>$board->id, 'id'=>$sprint->id])}}">
             <input type="hidden" name="_method" value="put"/>
             {{ csrf_field() }}
-        <h4 class="text-left text-muted">Sprint <span class="userName">{{$sprint->id}}</span></h4>
+        <h4 class="text-left text-muted">Sprint -<span class="userName"> {{$sprint->id}}</span></h4>
             <input id="projectKey" type="hidden" name="projectKey" value="{{$project->key}}">
             <input id="sprintId" type="hidden" name="sprintId" value="{{$sprint->id}}">
             <input id="boardId" type="hidden" name="boardId" value="{{$board->id}}">
@@ -94,23 +94,23 @@
                                                         @endif
                                                 </span>
                                                     <span>
-                                                        <span class="badge">{{$issue->remaining_estimate}}h</span>
+                                                        <span class="badge bWidth">{{$issue->remaining_estimate}}h</span>
                                                     </span>
-                                                    <span class="statusColor">
+                                                   <span>
                                                         @if($issue->status['name'] === 'open')
-                                                            <span class="statusBGColorO">{{$issue->status['name']}}</span>
-                                                        @elseif($issue->status['name'] === 'inProgress')
-                                                            <span class="statusBGColorI">{{$issue->status['name']}}</span>
-                                                        @elseif($issue->status['name'] === 'review')
-                                                            <span class="statusBGColorR">{{$issue->status['name']}}</span>
-                                                        @elseif($issue->status['name'] === 'testing')
-                                                            <span class="statusBGColorT">{{$issue->status['name']}}</span>
-                                                        @elseif($issue->status['name'] === 'done')
-                                                            <span class="statusBGColorD">{{$issue->status['name']}}</span>
-                                                        @endif
+                                                           <span class="baDge" style=" background-color: #f89406">{{$issue->status['name']}}</span>
+                                                       @elseif($issue->status['name'] === 'inProgress')
+                                                           <span class="baDge" style="background-color: #3a87ad">{{$issue->status['name']}}</span>
+                                                       @elseif($issue->status['name'] === 'review')
+                                                           <span class="baDge" style="background-color: #1a1a1a">{{$issue->status['name']}}</span>
+                                                       @elseif($issue->status['name'] === 'testing')
+                                                           <span class="baDge" style="background-color: #953b39">{{$issue->status['name']}}</span>
+                                                       @elseif($issue->status['name'] === 'done')
+                                                           <span class="baDge" style="background-color: #468847">{{$issue->status['name']}}</span>
+                                                       @endif
                                                     </span>
                                                </span>
-                                                <span style="margin-left: 20px;">{{$project->key}} - {{$issue->id}}</span>
+                                                <span style="margin-left: 20px;">{{$project->key}} - <span class="userName">{{$issue->id}}</span></span>
                                                 <span style="margin-left: 20px; float: right; margin-right: 5px">
                                                       @if($issue->assigned['image_path'] != null)
                                                         <img src="{{$issue->assigned['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">

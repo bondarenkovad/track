@@ -167,12 +167,17 @@
     width: 580px;
 }
 
-.sprintSummary{
+.issueContainer{
     white-space: nowrap;
     padding-left: 10px;
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.sprintSummary{
+    padding-left: 10px;
+    font-weight: bold;
 }
 
 .sprintDescription{

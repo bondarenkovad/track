@@ -17,22 +17,41 @@
                                     <span class="glyphicon glyphicon-hand-left"></span>
                                 </a>
                             @endif
-                            <span class="floatR">
-                                <div class="dropdown pull-right">
-                                    <span class="dropdown-toggle colorShade" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                        <i class="glyphicon glyphicon-option-horizontal"></i>
-                                        <span class="caret"></span>
-                                    </span>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <li><a href="/sprint/delete/{{$sprint->id}}"><span class="colorShade">Delete Sprint</span></a></li>
+                            @if(Auth::user()->ifAdmin() || Auth::user()->ifPM())
+                                <span class="floatR">
+                                    <div class="dropdown pull-right">
+                                        <span class="dropdown-toggle colorShade" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            <i class="glyphicon glyphicon-option-horizontal"></i>
+                                            <span class="caret"></span>
+                                        </span>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            <li><a href="/sprint/delete/{{$sprint->id}}"><span class="colorShade">Delete Sprint</span></a></li>
+                                                @if($sprint->status === 2)
+                                                    <li><a href="/sprint/{{$sprint->id}}/makeFinish"><span class="colorShade">Finish Sprint</span></a></li>
+                                                @else
+                                                    <li><a href="/sprint/{{$sprint->id}}/makeActive"><span class="colorShade">Start Sprint</span></a></li>
+                                                @endif
+                                        </ul>
+                                    </div>
+                                </span>
+                            @else
+                                <span class="floatR"  style="visibility: hidden">
+                                    <div class="dropdown pull-right">
+                                        <span class="dropdown-toggle colorShade" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            <i class="glyphicon glyphicon-option-horizontal"></i>
+                                            <span class="caret"></span>
+                                        </span>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            <li><a href="/sprint/delete/{{$sprint->id}}"><span class="colorShade">Delete Sprint</span></a></li>
                                             @if($sprint->status === 2)
                                                 <li><a href="/sprint/{{$sprint->id}}/makeFinish"><span class="colorShade">Finish Sprint</span></a></li>
                                             @else
                                                 <li><a href="/sprint/{{$sprint->id}}/makeActive"><span class="colorShade">Start Sprint</span></a></li>
                                             @endif
-                                    </ul>
-                                </div>
-                            </span>
+                                        </ul>
+                                    </div>
+                                </span>
+                            @endif
                             <label>Sprint - <span class="userName">{{$sprint->id}}</span> <span class="colorShade">issues:{{count($sprint->getIssueForSprint())}}</span></label><span class="badge floatRight bWidth" style="margin-right: 102px">{{$project->getSprintTime($sprint->id)}}h</span>
                             @if($sprint->order != null)
                                 <input id="issueData-{{$sprint->id}}" type="hidden" name="issueData[{{$sprint->id}}]" value="{{implode(',',json_decode($sprint->order))}}">
