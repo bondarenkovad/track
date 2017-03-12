@@ -249,5 +249,11 @@ class Project extends Model
             ->sum('remaining_estimate');
     }
 
+    public function getProjectTime()
+    {
+        return $time = Issue::where('project_id', '=', $this->id)
+            ->sum('remaining_estimate');
+    }
+
 
 }

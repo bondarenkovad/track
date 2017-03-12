@@ -22,6 +22,7 @@
                                         <span class="img glyphicon glyphicon-fire danger" data-toggle="tooltip" title="{{$issue->type['name']}}"></span>
                                     @endif
                                     </span>
+                                    <span class="badge floatLeft" style="display: block; width: 40px">Id:{{$issue->id}}</span>
                                     <span class="summary">{{$issue->summary}}</span>
                                     <span class="description">{{$issue->description}}</span>
                                     <span class="assign">

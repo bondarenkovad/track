@@ -140,7 +140,6 @@
 
 .assign{
     color: #737373;
-    margin-left: 20px;
     padding-right: 10px;
     float: left;
 }
@@ -164,7 +163,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     float: left;
-    width: 600px;
+    width: 580px;
 }
 
 .sprintSummary{
@@ -325,6 +324,10 @@
 
 .floatRight{
     margin-right: 15px;
+    float: right;
+}
+
+.floatR{
     float: right;
 }
 
