@@ -9,7 +9,7 @@
             @foreach($user->getUserProjects() as $project)
                 @if(count($project->getIssueForUserById($user->id)) > 0)
                     <div class="col-md-12">
-                        <h5  class="title">Project - {{$project->key}}</h5>
+                        <span  class="title">Project - {{$project->key}}</span> <span class="badge floatRight" style="margin-right: 157px">{{$project->getUserInProjectTime($user->id)}}h</span>
                         <ul class="issue">
                             @foreach($project->getIssueForUserById($user->id) as $issue)
                                 <li class="ui-state-default" data-value="{{$issue->id}}">

@@ -238,10 +238,15 @@ class Project extends Model
     {
         $issues = json_decode($this->order);
 
-        $time = Issue::whereIn('id', $issues)
+        return $time = Issue::whereIn('id', $issues)
             ->sum('remaining_estimate');
+    }
 
-        return $time;
+    public function getUserInProjectTime($userId)
+    {
+        return $time = Issue::where('project_id', '=', $this->id)
+            ->where('assigned_id', '=', $userId)
+            ->sum('remaining_estimate');
     }
 
 
