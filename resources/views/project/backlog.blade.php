@@ -17,7 +17,7 @@
                                     <span class="glyphicon glyphicon-hand-left"></span>
                                 </a>
                             @endif
-                            <span class="floatRight">
+                            <span class="floatR">
                                 <div class="dropdown pull-right">
                                     <span class="dropdown-toggle colorShade" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                         <i class="glyphicon glyphicon-option-horizontal"></i>
@@ -33,7 +33,7 @@
                                     </ul>
                                 </div>
                             </span>
-                            <label>Sprint - <span class="userName">{{$sprint->id}}</span> <span class="colorShade">issues:{{count($sprint->getIssueForSprint())}}</span></label>
+                            <label>Sprint - <span class="userName">{{$sprint->id}}</span> <span class="colorShade">issues:{{count($sprint->getIssueForSprint())}}</span></label><span class="badge floatRight bWidth" style="margin-right: 102px">{{$project->getSprintTime($sprint->id)}}h</span>
                             @if($sprint->order != null)
                                 <input id="issueData-{{$sprint->id}}" type="hidden" name="issueData[{{$sprint->id}}]" value="{{implode(',',json_decode($sprint->order))}}">
                             @else
@@ -51,10 +51,11 @@
                                                 <span class="img glyphicon glyphicon-fire danger" data-toggle="tooltip" title="{{$issue->type['name']}}"></span>
                                             @endif
                                         </span>
+                                        <span class="badge floatLeft" style="display: block; width: 40px">Id:{{$issue->id}}</span>
                                         <span class="summary">{{$issue->summary}}</span>
                                         <span class="description">{{$issue->description}}</span>
                                         <span class="assign">
-                                        <span>
+                                        <span class="marginL">
                                         R:
                                             @if($issue->reporter['image_path'] != null)
                                                 <img src="{{$issue->reporter['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
@@ -62,7 +63,7 @@
                                                 <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
                                             @endif
                                         </span>
-                                        <span>
+                                        <span class="marginL">
                                         A:
                                             @if($issue->assigned['image_path'] != null)
                                                 <img src="{{$issue->assigned['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
@@ -85,23 +86,23 @@
                                             @endif
                                         </span>
                                         <span>
-                                        <span class="badge">{{$issue->remaining_estimate}}h</span>
+                                        <span class="badge marginL bWidth">{{$issue->remaining_estimate}}h</span>
                                         </span>
-                                        <span class="statusColor">
-                                        @if($issue->status['name'] === 'open')
-                                                <span class="statusBGColorO">{{$issue->status['name']}}</span>
+                                        <span class="marginL">
+                                            @if($issue->status['name'] === 'open')
+                                                <span class="baDge" style=" background-color: #f89406">{{$issue->status['name']}}</span>
                                             @elseif($issue->status['name'] === 'inProgress')
-                                                <span class="statusBGColorI">{{$issue->status['name']}}</span>
+                                                <span class="baDge" style="background-color: #3a87ad">{{$issue->status['name']}}</span>
                                             @elseif($issue->status['name'] === 'review')
-                                                <span class="statusBGColorR">{{$issue->status['name']}}</span>
+                                                <span class="baDge" style="background-color: #1a1a1a">{{$issue->status['name']}}</span>
                                             @elseif($issue->status['name'] === 'testing')
-                                                <span class="statusBGColorT">{{$issue->status['name']}}</span>
+                                                <span class="baDge" style="background-color: #953b39">{{$issue->status['name']}}</span>
                                             @elseif($issue->status['name'] === 'done')
-                                                <span class="statusBGColorD">{{$issue->status['name']}}</span>
+                                                <span class="baDge" style="background-color: #468847">{{$issue->status['name']}}</span>
                                             @endif
                                         </span>
                                         <span class="linkIssue">
-                                        <a href="/project/{{$project->key}}/issue/{{$issue->id}}/view" class="colorShade">View Issue</a>
+                                        <a href="/project/{{$project->key}}/issue/{{$issue->id}}/view">View</a>
                                         </span>
                                     </li>
                                 @endforeach
@@ -112,9 +113,10 @@
                     @endforeach
                 @endif
                         <div>
-                        <label>Backlog <span class="colorShade">issues: {{count($project->SortIssueByOrder())}}</span></label><span class="badge">{{$project->getBacklogTime()}}h</span>
+                        <span class="floatLeft bolder">Backlog <span class="colorShade">issues: {{count($project->SortIssueByOrder())}}</span></span>
+                        <span class="badge floatLeft bWidth" style="margin-left: 855px">{{$project->getBacklogTime()}}h</span>
                         @if(Auth::user()->ifAdmin() || Auth::user()->ifPM())
-                                <a href="/sprint/add/project/{{$project->key}}/board/{{$board->id}}" class="colorShade floatRight" style="text-decoration: none">Create Sprint</a>
+                                <a href="/sprint/add/project/{{$project->key}}/board/{{$board->id}}" class="colorShade floatR" style="text-decoration: none">Create Sprint</a>
                         @endif
                         @if($project->order != null)
                             <input id="issueData-backlog" type="hidden" name="issueData[backlog]" value="{{implode(',',json_decode($project->order))}}">
@@ -124,19 +126,20 @@
                         <ul id="backlog" class="connectedSortable sprintContainer" data-value="backlog">
                             @foreach($project->SortIssueByOrder() as $issue)
                                 <li class="ui-state-default" data-value="{{$issue->id}}">
-                                        <span class="imageSpan">
-                                        @if($issue->type['name'] === 'task')
-                                                <span class="img glyphicon glyphicon-education low" data-toggle="tooltip" title="{{$issue->type['name']}}"></span>
-                                            @elseif($issue->type['name'] === 'story')
-                                                <span class="img glyphicon glyphicon-file high" data-toggle="tooltip" title="{{$issue->type['name']}}"></span>
-                                            @elseif($issue->type['name'] === 'bug')
-                                                <span class="img glyphicon glyphicon-fire danger" data-toggle="tooltip" title="{{$issue->type['name']}}"></span>
-                                            @endif
-                                        </span>
+                                    <span class="imageSpan">
+                                    @if($issue->type['name'] === 'task')
+                                            <span class="img glyphicon glyphicon-education low" data-toggle="tooltip" title="{{$issue->type['name']}}"></span>
+                                        @elseif($issue->type['name'] === 'story')
+                                            <span class="img glyphicon glyphicon-file high" data-toggle="tooltip" title="{{$issue->type['name']}}"></span>
+                                        @elseif($issue->type['name'] === 'bug')
+                                            <span class="img glyphicon glyphicon-fire danger" data-toggle="tooltip" title="{{$issue->type['name']}}"></span>
+                                        @endif
+                                    </span>
+                                    <span class="badge floatLeft" style="display: block; width: 40px">Id:{{$issue->id}}</span>
                                     <span class="summary">{{$issue->summary}}</span>
                                     <span class="description">{{$issue->description}}</span>
                                         <span class="assign">
-                                        <span>
+                                        <span class="marginL">
                                         R:
                                             @if($issue->reporter['image_path'] != null)
                                                 <img src="{{$issue->reporter['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
@@ -144,7 +147,7 @@
                                                 <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
                                             @endif
                                         </span>
-                                        <span>
+                                        <span class="marginL">
                                         A:
                                             @if($issue->assigned['image_path'] != null)
                                                 <img src="{{$issue->assigned['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
@@ -167,23 +170,23 @@
                                             @endif
                                         </span>
                                         <span>
-                                        <span class="badge">{{$issue->original_estimate}}h</span>
+                                        <span class="badge marginL bWidth">{{$issue->original_estimate}}h</span>
                                         </span>
-                                        <span class="statusColor">
-                                        @if($issue->status['name'] === 'open')
-                                                <span class="statusBGColorO">{{$issue->status['name']}}</span>
+                                        <span class="marginL">
+                                            @if($issue->status['name'] === 'open')
+                                                <span class="baDge" style=" background-color: #f89406">{{$issue->status['name']}}</span>
                                             @elseif($issue->status['name'] === 'inProgress')
-                                                <span class="statusBGColorI">{{$issue->status['name']}}</span>
+                                                <span class="baDge" style="background-color: #3a87ad">{{$issue->status['name']}}</span>
                                             @elseif($issue->status['name'] === 'review')
-                                                <span class="statusBGColorR">{{$issue->status['name']}}</span>
+                                                <span class="baDge" style="background-color: #1a1a1a">{{$issue->status['name']}}</span>
                                             @elseif($issue->status['name'] === 'testing')
-                                                <span class="statusBGColorT">{{$issue->status['name']}}</span>
+                                                <span class="baDge" style="background-color: #953b39">{{$issue->status['name']}}</span>
                                             @elseif($issue->status['name'] === 'done')
-                                                <span class="statusBGColorD">{{$issue->status['name']}}</span>
+                                                <span class="baDge" style="background-color: #468847">{{$issue->status['name']}}</span>
                                             @endif
                                         </span>
                                         <span class="linkIssue">
-                                        <a href="/project/{{$project->key}}/issue/{{$issue->id}}/view" class="colorShade">View Issue</a>
+                                        <a href="/project/{{$project->key}}/issue/{{$issue->id}}/view">View</a>
                                         </span>
                                 </li>
                             @endforeach

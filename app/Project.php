@@ -242,6 +242,15 @@ class Project extends Model
             ->sum('remaining_estimate');
     }
 
+    public function getSprintTime($sprintId)
+    {
+        $sprint = Sprint::find($sprintId);
+        $issues = json_decode($sprint->order);
+
+        return $time = Issue::whereIn('id', $issues)
+            ->sum('remaining_estimate');
+    }
+
     public function getUserInProjectTime($userId)
     {
         return $time = Issue::where('project_id', '=', $this->id)

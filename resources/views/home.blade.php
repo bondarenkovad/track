@@ -9,7 +9,7 @@
             @foreach($user->getUserProjects() as $project)
                 @if(count($project->getIssueForUserById($user->id)) > 0)
                     <div class="col-md-12">
-                        <span  class="title">Project - {{$project->key}}</span> <span class="badge floatRight" style="margin-right: 140px">{{$project->getUserInProjectTime($user->id)}}h</span>
+                        <span  class="title">Project - {{$project->key}}</span> <span class="badge floatRight bWidth" style="margin-right: 130px">{{$project->getUserInProjectTime($user->id)}}h</span>
                         <ul class="issue">
                             @foreach($project->getIssueForUserById($user->id) as $issue)
                                 <li class="ui-state-default" data-value="{{$issue->id}}">
@@ -57,7 +57,7 @@
                                         @endif
                                     </span>
                                     <span>
-                                    <span class="badge marginL">{{$issue->remaining_estimate}}h</span>
+                                    <span class="badge marginL bWidth" >{{$issue->remaining_estimate}}h</span>
                                     </span>
                                     <span class="marginL">
                                         @if($issue->status['name'] === 'open')

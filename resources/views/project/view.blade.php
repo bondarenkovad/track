@@ -4,7 +4,7 @@
     <div class="container">
         <span class="text-left text-muted"><span class="userName">{{$project->name}}</span>/<span class="userName">{{$project->key}}</span> Issues:</span>
         <a href="/issue/add/{{$project->key}}" class="floatR">Create Issue</a>
-        <span class="badge floatR" style="margin-right: 60px">{{$project->getProjectTime()}}h</span>
+        <span class="badge floatR bWidth" style="margin-right: 52px">{{$project->getProjectTime()}}h</span>
         <ul class="issue">
             @if(count( $project->countIssues() > 0))
                 @foreach($project->issues()->get() as $issue)
@@ -53,7 +53,7 @@
                             @endif
                         </span>
                         <span>
-                        <span class="badge marginL">{{$issue->remaining_estimate}}h</span>
+                        <span class="badge marginL bWidth">{{$issue->remaining_estimate}}h</span>
                         </span>
                         <span class="marginL">
                             @if($issue->status['name'] === 'open')
