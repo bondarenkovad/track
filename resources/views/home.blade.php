@@ -9,7 +9,7 @@
             @foreach($user->getUserProjects() as $project)
                 @if(count($project->getIssueForUserById($user->id)) > 0)
                     <div class="col-md-12">
-                        <span  class="title">Project - {{$project->key}}</span> <span class="badge floatRight" style="margin-right: 157px">{{$project->getUserInProjectTime($user->id)}}h</span>
+                        <span  class="title">Project - {{$project->key}}</span> <span class="badge floatRight" style="margin-right: 140px">{{$project->getUserInProjectTime($user->id)}}h</span>
                         <ul class="issue">
                             @foreach($project->getIssueForUserById($user->id) as $issue)
                                 <li class="ui-state-default" data-value="{{$issue->id}}">
@@ -25,7 +25,7 @@
                                     <span class="summary">{{$issue->summary}}</span>
                                     <span class="description">{{$issue->description}}</span>
                                     <span class="assign">
-                                         <span>
+                                         <span class="marginL">
                                             R:
                                              @if($issue->reporter['image_path'] != null)
                                                  <img src="{{$issue->reporter['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
@@ -33,7 +33,7 @@
                                                  <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
                                              @endif
                                         </span>
-                                        <span>
+                                        <span class="marginL">
                                             A:
                                             @if($issue->assigned['image_path'] != null)
                                                 <img src="{{$issue->assigned['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
@@ -56,23 +56,23 @@
                                         @endif
                                     </span>
                                     <span>
-                                    <span class="badge">{{$issue->remaining_estimate}}h</span>
+                                    <span class="badge marginL">{{$issue->remaining_estimate}}h</span>
                                     </span>
-                                    <span class="statusColor">
+                                    <span class="marginL">
                                         @if($issue->status['name'] === 'open')
-                                            <span class="statusBGColorO">{{$issue->status['name']}}</span>
+                                            <span class="baDge baDge-warning">{{$issue->status['name']}}</span>
                                         @elseif($issue->status['name'] === 'inProgress')
-                                            <span class="statusBGColorI">{{$issue->status['name']}}</span>
+                                            <span class="baDge baDge-info">{{$issue->status['name']}}</span>
                                         @elseif($issue->status['name'] === 'review')
-                                            <span class="statusBGColorR">{{$issue->status['name']}}</span>
+                                            <span class="baDge baDge-inverse">{{$issue->status['name']}}</span>
                                         @elseif($issue->status['name'] === 'testing')
-                                            <span class="statusBGColorT">{{$issue->status['name']}}</span>
+                                            <span class="baDge baDge-error">{{$issue->status['name']}}</span>
                                         @elseif($issue->status['name'] === 'done')
-                                            <span class="statusBGColorD">{{$issue->status['name']}}</span>
+                                            <span class="baDge baDge-success">{{$issue->status['name']}}</span>
                                         @endif
                                     </span>
                                     <span class="linkIssue">
-                                        <a href="/project/{{$project->key}}/issue/{{$issue->id}}/view">View Issue</a>
+                                        <a href="/project/{{$project->key}}/issue/{{$issue->id}}/view">View</a>
                                     </span>
                                 </li>
                             @endforeach
