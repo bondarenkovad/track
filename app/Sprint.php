@@ -90,12 +90,16 @@ class Sprint extends Model
                 {
                     if($issue->id === $id+ 0 && $issue->status_id != 5)
                     {
-                        array_push($issueIdMass, $issue->id);
+                        array_push($issueIdMass, "".$issue->id);
                     }
                 }
             }
-        }
 
-        return $issueIdMass;
+            return $issueIdMass;
+        }
+        else
+        {
+            return [];
+        }
     }
 }

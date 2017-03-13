@@ -132,8 +132,8 @@
                     @endforeach
                 @endif
                         <div>
-                        <span class="floatLeft bolder">Backlog <span class="colorShade">issues: {{count($project->SortIssueByOrder())}}</span></span>
-                        <span class="badge floatLeft bWidth" style="margin-left: 855px">{{$project->getBacklogTime()}}h</span>
+                        <span class="floatLeft"><b>Backlog</b> <span class="colorShade">issues: {{count($project->SortIssueByOrder())}}</span></span>
+                        <span class="badge floatLeft bWidth" style="margin-left: 860px">{{$project->getBacklogTime()}}h</span>
                         @if(Auth::user()->ifAdmin() || Auth::user()->ifPM())
                                 <a href="/sprint/add/project/{{$project->key}}/board/{{$board->id}}" class="colorShade floatR" style="text-decoration: none">Create Sprint</a>
                         @endif

@@ -42,9 +42,12 @@ class SprintController extends Controller
         $sprint = Sprint::find($id);
         $issueIdMass = $sprint->getNotDoneIssues();
         $project = Project::find($sprint->project['id']);
+        $issueInProject = json_decode($project->order);
+
+        $mergeMass = array_merge($issueInProject, $issueIdMass);
 
         $project->update([
-            [$project->order = json_encode($issueIdMass)]
+            [$project->order = json_encode($mergeMass)]
         ]);
 
         $project->save();
