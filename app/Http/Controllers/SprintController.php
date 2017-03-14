@@ -100,7 +100,28 @@ class SprintController extends Controller
 
     public function destroy($id)
     {
-        Sprint::find($id)->delete();
+        $sprint = Sprint::find($id);
+
+        if($sprint->order === null || $sprint->order === [])
+        {
+            $sprint->delete();
+        }
+        else
+        {
+            $issueIdMass = $sprint->getNotDoneIssues();
+            $project = Project::find($sprint->project['id']);
+            $issueInProject = json_decode($project->order);
+
+            $mergeMass = array_merge($issueInProject, $issueIdMass);
+
+            $project->update([
+                [$project->order = json_encode($mergeMass)]
+            ]);
+
+            $project->save();
+
+            $sprint->delete();
+        }
 
         return back();
     }
