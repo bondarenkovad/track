@@ -537,6 +537,24 @@
                                 {{$issue->updated_at}}
                             </span>
                         </dd>
+                        <dt>Original Estimate:</dt>
+                        <dd>
+                            <span class="marginLeft">
+                                {{$issue->original_estimate}}
+                            </span>
+                        </dd>
+                        <dt>Remaining Estimate:</dt>
+                        <dd>
+                             <span class="marginLeft">
+                                {{$issue->remaining_estimate}}
+                            </span>
+                        </dd>
+                        <dt>Time Spent:</dt>
+                        <dd>
+                             <span class="marginLeft">
+                                {{$issue->TimeSpentSum()}}
+                            </span>
+                        </dd>
                     </dl>
                 </div>
             </div>

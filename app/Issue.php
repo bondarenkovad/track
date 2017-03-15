@@ -148,4 +148,11 @@ class Issue extends Model
     {
         return $project = Project::where('name', '=', $name)->first();
     }
+
+    public function TimeSpentSum()
+    {
+        return $sum = $this->workLogs()
+            ->where('Issue_id', '=', $this->id)
+            ->sum('time_spent');
+    }
 }
