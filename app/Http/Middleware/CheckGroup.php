@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Middleware;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Cookie;
 
 use Closure;
 
@@ -13,19 +15,34 @@ class CheckGroup
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $group)
+    public function handle($request, Closure $next)
     {
-        if($request->user() === null)
-        {
-            return response("Insufficient permission!", 401);
-        }
+//        if($request->user() === null)
+//        {
+//            return response("Insufficient permission!", 401);
+//        }
 
-        if($request->user()->hasGroup($group))
-        {
 
-            return $next($request);
-        }
+        $group = 'Administrator';
 
-        return response("Insufficient permission!", 401);
+//        if($request->user()->hasGroup($group))
+//        {
+//
+//
+//        }
+//        dd($request->route());
+//            return $request->route();
+//        return $this->addCookieToResponse($request, $next($request));
+//        return response("Insufficient permission!", 401);
+        return $next($request);
     }
+
+    protected function addCookieToResponse($request, $response)
+    {
+        $response->headers->setCookie(
+            new Cookie('XSRF-TOKEN', $request->session()->token(), time() + 60 * 120, '/', null, false, false)
+        );
+        return $response;
+    }
+
 }
