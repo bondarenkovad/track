@@ -66,8 +66,7 @@
 }
 
 .sprintContainer{
-    border: 1px solid #3d3d3d;
-    background-color: #3d3d3d;
+    border: 1px dotted #c5c5c5;
     border-radius: 5px;
     min-height: 40px;
     width: 100%;
@@ -87,8 +86,7 @@
 }
 
 .issue{
-    border: 1px solid #3d3d3d;
-    background-color: #3d3d3d;
+    border: 1px dotted #c5c5c5;
     border-radius: 5px;
     min-height: 40px;
     min-width: 1100px;
