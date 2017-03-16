@@ -9,7 +9,6 @@
                 @if($issue->reporter_id === Auth::user()->id)
                     <a class="btn btn-default" data-toggle="modal" data-target="#issueEdit">Edit</a>
                 @endif
-                <a class="btn btn-default" data-toggle="modal" data-target="#issueComment">Comment</a>
             </div>
             <div class="modal fade" id="issueEdit" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="issueEditLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -563,6 +562,7 @@
                                         <hr>
                                     </div>
                                 @endforeach
+                                <a class="btn btn-default floatR" style="margin-bottom: 10px" data-toggle="modal" data-target="#issueComment">Comment</a>
                             @endif
                         </div>
                         <div id="menu1" class="tab-pane fade">
