@@ -230,41 +230,207 @@
                             <h5 class="modal-title" id="exampleModalLabel">WorkLog Issue</h5>
                         </div>
                         <div class="modal-body">
-                            <form class="form-horizontal" role="form" method="POST" action="{{action('IssueController@saveWorkLog', ['issue'=>$issue->id])}}">
-                                <input type="hidden" name="_method" value="put"/>
-                                {{ csrf_field() }}
+                            {{--<form class="form-horizontal" role="form" method="POST" action="{{action('IssueController@saveWorkLog', ['issue'=>$issue->id])}}">--}}
+                                {{--<input type="hidden" name="_method" value="put"/>--}}
+                                {{--{{ csrf_field() }}--}}
 
-                                <div class="form-group{{ $errors->has('time_spent') ? ' has-error' : '' }}">
-                                    <label for="time_spent" class="col-md-4 control-label">Time Spent:</label>
-                                    <div class="col-md-6">
-                                        <input id="time_spent" type="number" class="form-control" name="time_spent" min="0"/>
-                                        @if ($errors->has('time_spent'))
-                                            {{session()->flash('danger',$errors->first('time_spent'))}}
-                                        @endif
+                                {{--<div class="form-group{{ $errors->has('time_spent') ? ' has-error' : '' }}">--}}
+                                    {{--<label for="time_spent" class="col-md-4 control-label">Time Spent:</label>--}}
+                                    {{--<div class="col-md-6">--}}
+                                        {{--<input id="time_spent" type="number" class="form-control" name="time_spent" min="0"/>--}}
+                                        {{--@if ($errors->has('time_spent'))--}}
+                                            {{--{{session()->flash('danger',$errors->first('time_spent'))}}--}}
+                                        {{--@endif--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+
+                                {{--<div class="form-group{{ $errors->has('status_id') ? ' has-error' : '' }}">--}}
+                                    {{--<label for="name" class="col-md-4 control-label">Status:</label>--}}
+                                    {{--<div class="col-md-6">--}}
+                                        {{--<select class="form-control" id="status_id" name="status_id">--}}
+                                            {{--@foreach($statuses as $status)--}}
+                                                {{--<option value="{{$status->id}}">{{$status->name}}</option>--}}
+                                            {{--@endforeach--}}
+                                        {{--</select>--}}
+                                        {{--@if ($errors->has('status_id'))--}}
+                                            {{--{{session()->flash('danger',$errors->first('status_id'))}}--}}
+                                        {{--@endif--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+
+                                {{--<div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">--}}
+                                    {{--<label for="comment" class="col-md-4 control-label">Comment:</label>--}}
+                                    {{--<div class="col-md-7 col-md-offset-4">--}}
+                                        {{--<textarea class="form-control mytextarea" name="comment"></textarea>--}}
+                                        {{--@if ($errors->has('comment'))--}}
+                                            {{--{{session()->flash('danger',$errors->first('comment'))}}--}}
+                                        {{--@endif--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+
+                                {{--<div class="modal-footer">--}}
+                                    {{--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--}}
+                                    {{--<button type="submit" class="btn btn-primary">Add WorkLog</button>--}}
+                                {{--</div>--}}
+                            {{--</form>--}}
+                            <form class="form-horizontal" role="form" method="POST" action="http://track.you-like.org/issue/workLog/index/40">
+                                <input type="hidden" name="_method" value="put">
+                                <input type="hidden" name="_token" value="9izSz3TjfrHRwV3QUbAK1wgO8eohSjNT21sxMCgQ">
+
+                                <div class="form-group">
+
+                                    <div class="col-md-12">
+                                        <label for="time_spent" class="control-label">Time Spent:</label>
+                                        <input id="time_spent" type="number" class="form-control" name="time_spent" min="0">
                                     </div>
                                 </div>
 
-                                <div class="form-group{{ $errors->has('status_id') ? ' has-error' : '' }}">
-                                    <label for="name" class="col-md-4 control-label">Status:</label>
-                                    <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label for="name" class="control-label">Status:</label>
                                         <select class="form-control" id="status_id" name="status_id">
-                                            @foreach($statuses as $status)
-                                                <option value="{{$status->id}}">{{$status->name}}</option>
-                                            @endforeach
+                                            <option value="1">open</option>
+                                            <option value="2">inProgress</option>
+                                            <option value="3">review</option>
+                                            <option value="4">testing</option>
+                                            <option value="5">done</option>
                                         </select>
-                                        @if ($errors->has('status_id'))
-                                            {{session()->flash('danger',$errors->first('status_id'))}}
-                                        @endif
                                     </div>
                                 </div>
 
-                                <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
-                                    <label for="comment" class="col-md-4 control-label">Comment:</label>
-                                    <div class="col-md-7 col-md-offset-4">
-                                        <textarea class="form-control mytextarea" name="comment"></textarea>
-                                        @if ($errors->has('comment'))
-                                            {{session()->flash('danger',$errors->first('comment'))}}
-                                        @endif
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label for="comment" class="control-label">Comment:</label>
+                                        <div id="mceu_39" class="mce-tinymce mce-container mce-panel" hidefocus="1" tabindex="-1" role="application" style="visibility: hidden; border-width: 1px;">
+                                            <div id="mceu_39-body" class="mce-container-body mce-stack-layout">
+                                                <div id="mceu_40" class="mce-container mce-menubar mce-toolbar mce-stack-layout-item mce-first" role="menubar" style="border-width: 0px 0px 1px;">
+                                                    <div id="mceu_40-body" class="mce-container-body mce-flow-layout">
+                                                        <div id="mceu_41" class="mce-widget mce-btn mce-menubtn mce-flow-layout-item mce-first mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_41" role="menuitem" aria-haspopup="true">
+                                                            <button id="mceu_41-open" role="presentation" type="button" tabindex="-1">
+                                                                <span class="mce-txt">File</span>
+                                                                <i class="mce-caret"></i>
+                                                            </button>
+                                                        </div>
+                                                        <div id="mceu_42" class="mce-widget mce-btn mce-menubtn mce-flow-layout-item mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_42" role="menuitem" aria-haspopup="true">
+                                                            <button id="mceu_42-open" role="presentation" type="button" tabindex="-1">
+                                                                <span class="mce-txt">Edit</span>
+                                                                <i class="mce-caret"></i>
+                                                            </button>
+                                                        </div>
+                                                        <div id="mceu_43" class="mce-widget mce-btn mce-menubtn mce-flow-layout-item mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_43" role="menuitem" aria-haspopup="true">
+                                                            <button id="mceu_43-open" role="presentation" type="button" tabindex="-1">
+                                                                <span class="mce-txt">View</span>
+                                                                <i class="mce-caret"></i>
+                                                            </button></div><div id="mceu_44" class="mce-widget mce-btn mce-menubtn mce-flow-layout-item mce-last mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_44" role="menuitem" aria-haspopup="true">
+                                                            <button id="mceu_44-open" role="presentation" type="button" tabindex="-1">
+                                                                <span class="mce-txt">Format</span>
+                                                                <i class="mce-caret"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="mceu_45" class="mce-toolbar-grp mce-container mce-panel mce-stack-layout-item" hidefocus="1" tabindex="-1" role="group">
+                                                    <div id="mceu_45-body" class="mce-container-body mce-stack-layout">
+                                                        <div id="mceu_46" class="mce-container mce-toolbar mce-stack-layout-item mce-first mce-last" role="toolbar">
+                                                            <div id="mceu_46-body" class="mce-container-body mce-flow-layout">
+                                                                <div id="mceu_47" class="mce-container mce-flow-layout-item mce-first mce-btn-group" role="group">
+                                                                    <div id="mceu_47-body">
+                                                                        <div id="mceu_28" class="mce-widget mce-btn mce-first mce-disabled" tabindex="-1" aria-labelledby="mceu_28" role="button" aria-label="Undo" aria-disabled="true">
+                                                                            <button role="presentation" type="button" tabindex="-1">
+                                                                                <i class="mce-ico mce-i-undo"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div id="mceu_29" class="mce-widget mce-btn mce-last mce-disabled" tabindex="-1" aria-labelledby="mceu_29" role="button" aria-label="Redo" aria-disabled="true">
+                                                                            <button role="presentation" type="button" tabindex="-1">
+                                                                                <i class="mce-ico mce-i-redo"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div id="mceu_48" class="mce-container mce-flow-layout-item mce-btn-group" role="group">
+                                                                    <div id="mceu_48-body">
+                                                                        <div id="mceu_30" class="mce-widget mce-btn mce-menubtn mce-first mce-last mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_30" role="button" aria-haspopup="true">
+                                                                            <button id="mceu_30-open" role="presentation" type="button" tabindex="-1">
+                                                                                <span class="mce-txt">Formats</span>
+                                                                                <i class="mce-caret"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div id="mceu_49" class="mce-container mce-flow-layout-item mce-btn-group" role="group">
+                                                                    <div id="mceu_49-body">
+                                                                        <div id="mceu_31" class="mce-widget mce-btn mce-first" tabindex="-1" aria-labelledby="mceu_31" role="button" aria-label="Bold">
+                                                                            <button role="presentation" type="button" tabindex="-1">
+                                                                                <i class="mce-ico mce-i-bold"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div id="mceu_32" class="mce-widget mce-btn mce-last" tabindex="-1" aria-labelledby="mceu_32" role="button" aria-label="Italic">
+                                                                            <button role="presentation" type="button" tabindex="-1">
+                                                                                <i class="mce-ico mce-i-italic"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div id="mceu_50" class="mce-container mce-flow-layout-item mce-btn-group" role="group">
+                                                                    <div id="mceu_50-body">
+                                                                        <div id="mceu_33" class="mce-widget mce-btn mce-first" tabindex="-1" aria-labelledby="mceu_33" role="button" aria-label="Align left">
+                                                                            <button role="presentation" type="button" tabindex="-1">
+                                                                                <i class="mce-ico mce-i-alignleft"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div id="mceu_34" class="mce-widget mce-btn" tabindex="-1" aria-labelledby="mceu_34" role="button" aria-label="Align center">
+                                                                            <button role="presentation" type="button" tabindex="-1">
+                                                                                <i class="mce-ico mce-i-aligncenter"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div id="mceu_35" class="mce-widget mce-btn" tabindex="-1" aria-labelledby="mceu_35" role="button" aria-label="Align right">
+                                                                            <button role="presentation" type="button" tabindex="-1">
+                                                                                <i class="mce-ico mce-i-alignright"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div id="mceu_36" class="mce-widget mce-btn mce-last" tabindex="-1" aria-labelledby="mceu_36" role="button" aria-label="Justify">
+                                                                            <button role="presentation" type="button" tabindex="-1">
+                                                                                <i class="mce-ico mce-i-alignjustify"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div id="mceu_51" class="mce-container mce-flow-layout-item mce-btn-group" role="group">
+                                                                    <div id="mceu_51-body">
+                                                                        <div id="mceu_37" class="mce-widget mce-btn mce-first" tabindex="-1" aria-labelledby="mceu_37" role="button" aria-label="Decrease indent">
+                                                                            <button role="presentation" type="button" tabindex="-1">
+                                                                                <i class="mce-ico mce-i-outdent"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div id="mceu_38" class="mce-widget mce-btn mce-last" tabindex="-1" aria-labelledby="mceu_38" role="button" aria-label="Increase indent">
+                                                                            <button role="presentation" type="button" tabindex="-1">
+                                                                                <i class="mce-ico mce-i-indent"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div id="mceu_52" class="mce-container mce-flow-layout-item mce-last mce-btn-group" role="group">
+                                                                    <div id="mceu_52-body">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="mceu_53" class="mce-edit-area mce-container mce-panel mce-stack-layout-item" hidefocus="1" tabindex="-1" role="group" style="border-width: 1px 0px 0px;">
+                                                    <iframe id="comment_ifr" frameborder="0" allowtransparency="true" title="Rich Text Area. Press ALT-F9 for menu. Press ALT-F10 for toolbar. Press ALT-0 for help" src='javascript:""' style="width: 100%; height: 100px; display: block;"></iframe>
+                                                </div>
+                                                <div id="mceu_54" class="mce-statusbar mce-container mce-panel mce-stack-layout-item mce-last" hidefocus="1" tabindex="-1" role="group" style="border-width: 1px 0px 0px;">
+                                                    <div id="mceu_54-body" class="mce-container-body mce-flow-layout"><div id="mceu_55" class="mce-path mce-flow-layout-item mce-first mce-last">
+                                                            <div role="button" class="mce-path-item mce-last" data-index="0" tabindex="-1" id="mceu_55-0" aria-level="1">
+                                                                p
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <textarea class=" mytextarea" name="comment" id="comment" aria-hidden="true" style="display: none;"></textarea>
                                     </div>
                                 </div>
 
