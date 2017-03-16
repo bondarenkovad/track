@@ -3,13 +3,12 @@
     <div class="container">
             @if($project != null)
                 <h5><span class="userName">{{$project->name}}</span>/<span class="userName">{{$project->key}}</span> - <span class="userName">{{$issue->id}}</span></h5>
-            <h3 class="text-left text-muted">{{$issue->summary}}</h3>
-            <hr>
-            <div>
+            <h3 class="text-left text-muted">{{$issue->summary}}
                 @if($issue->reporter_id === Auth::user()->id)
-                    <a class="btn btn-default" data-toggle="modal" data-target="#issueEdit">Edit</a>
+                    <a class="btn btn-default floatR" data-toggle="modal" data-target="#issueEdit">Edit</a>
                 @endif
-            </div>
+            </h3>
+            <hr>
             <div class="modal fade" id="issueEdit" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="issueEditLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
