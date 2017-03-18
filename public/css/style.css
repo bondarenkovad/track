@@ -249,7 +249,7 @@
     top: 50%;
     width: 9999px;
     height: 1px;
-    background: red;
+    background: #c3c3c3;
 }
 
 .strike > span:before {
