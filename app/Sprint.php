@@ -66,11 +66,13 @@ class Sprint extends Model
 
     public function isActive()
     {
-        if($this->status === 2)
-        {
-            return true;
-        }
-        return false;
+
+        return $this->status;
+//        if($this->status === 2)
+//        {
+//            return true;
+//        }
+//        return ;
     }
 
     public function getNotDoneIssues()

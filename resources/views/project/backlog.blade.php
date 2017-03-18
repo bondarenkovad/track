@@ -12,6 +12,7 @@
                     @foreach($project->getSprints() as $sprint)
                         @if($sprint->status != 0)
                             <div>
+                                {{$sprint->isActive()}}
                             @if($sprint->isActive())
                                 <a href="/project/{{$project->key}}/board/{{$board->id}}/sprint/{{$sprint->id}}" class="glyphicon glyphicon-hand-left" style="text-decoration: none"></a>
                             @endif
