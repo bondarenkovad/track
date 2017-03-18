@@ -36,9 +36,11 @@
 
 #sortable1, #sortable2 {
      /*border: 1px solid #eee;*/
-     min-height: 20px;
+     width: 172px;
+     min-height: 220px;
      list-style-type: none;
      margin: 0;
+
      padding: 5px 0 0 0;
      float: left;
      /*margin-right: 10px;*/
