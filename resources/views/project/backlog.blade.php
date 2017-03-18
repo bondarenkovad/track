@@ -52,7 +52,7 @@
                                     </div>
                                 </span>
                             @endif
-                            <label>Sprint - <span class="userName">{{$sprint->id}}</span> <span class="colorShade">issues:{{count($sprint->getIssueForSprint())}}</span></label><span class="badge floatRight bWidth" style="margin-right: 102px">{{$project->getSprintTime($sprint->id)}}h</span>
+                            <label>Sprint - <span class="userName">{{$sprint->id}}</span> <span class="colorShade">issues:{{count($sprint->getIssueForSprint())}}</span></label><span class="badge floatRight bWidth" style="margin-right: 122px">{{$project->getSprintTime($sprint->id)}}h</span>
                             @if($sprint->order != null)
                                 <input id="issueData-{{$sprint->id}}" type="hidden" name="issueData[{{$sprint->id}}]" value="{{implode(',',json_decode($sprint->order))}}">
                             @else
@@ -70,7 +70,7 @@
                                                 <span class="img glyphicon glyphicon-fire danger" data-toggle="tooltip" title="{{$issue->type['name']}}"></span>
                                             @endif
                                         </span>
-                                        <span class="badge floatLeft" style="display: block; width: 40px">Id:{{$issue->id}}</span>
+                                        <span class="badge floatLeft" style="display: block; width: 100px">{{$project->key}} - {{$issue->id}}</span>
                                         <span class="summary">{{$issue->summary}}</span>
                                         <span class="description">{{$issue->description}}</span>
                                         <span class="assign">
@@ -133,7 +133,7 @@
                 @endif
                         <div>
                         <span class="floatLeft"><b>Backlog</b> <span class="colorShade">issues: {{count($project->SortIssueByOrder())}}</span></span>
-                        <span class="badge floatLeft bWidth" style="margin-left: 860px">{{$project->getBacklogTime()}}h</span>
+                        <span class="badge floatLeft bWidth" style="margin-left: 840px">{{$project->getBacklogTime()}}h</span>
                         @if(Auth::user()->ifAdmin() || Auth::user()->ifPM())
                                 <a href="/sprint/add/project/{{$project->key}}/board/{{$board->id}}" class="colorShade floatR" style="text-decoration: none">Create Sprint</a>
                         @endif
@@ -154,7 +154,7 @@
                                             <span class="img glyphicon glyphicon-fire danger" data-toggle="tooltip" title="{{$issue->type['name']}}"></span>
                                         @endif
                                     </span>
-                                    <span class="badge floatLeft" style="display: block; width: 40px">Id:{{$issue->id}}</span>
+                                    <span class="badge floatLeft" style="display: block; width: 100px">{{$project->key}} - {{$issue->id}}</span>
                                     <span class="summary">{{$issue->summary}}</span>
                                     <span class="description">{{$issue->description}}</span>
                                         <span class="assign">

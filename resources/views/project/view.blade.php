@@ -4,7 +4,7 @@
     <div class="container">
         <span class="text-left text-muted"><span class="userName">{{$project->name}}</span>/<span class="userName">{{$project->key}}</span> Issues:</span>
         <a href="/issue/add/{{$project->key}}" class="floatR">Create Issue</a>
-        <span class="badge floatR bWidth" style="margin-right: 52px">{{$project->getProjectTime()}}h</span>
+        <span class="badge floatR bWidth" style="margin-right: 72px">{{$project->getProjectTime()}}h</span>
         <ul class="issue">
             @if(count( $project->countIssues() > 0))
                 @foreach($project->issues()->get() as $issue)
@@ -18,7 +18,7 @@
                                 <span class="img glyphicon glyphicon-fire danger" data-toggle="tooltip" title="{{$issue->type['name']}}"></span>
                         @endif
                         </span>
-                        <span class="badge floatLeft" style="display: block; width: 40px">Id:{{$issue->id}}</span>
+                        <span class="badge floatLeft" style="display: block; width: 100px">{{$project->key}} - {{$issue->id}}</span>
                         <span class="summary">{{$issue->summary}}</span>
                         <span class="description">{{$issue->description}}</span>
                         <span class="assign">
