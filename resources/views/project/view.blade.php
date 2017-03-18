@@ -7,7 +7,7 @@
         <span class="badge floatR bWidth" style="margin-right: 72px">{{$project->getProjectTime()}}h</span>
         <ul class="issue">
             @if(count( $project->countIssues() > 0))
-                @foreach($project->issues()->get() as $issue)
+                @foreach($issues as $issue)
                     <li class="ui-state-default" data-value="{{$issue->id}}">
                         <span class="imageSpan">
                         @if($issue->type['name'] === 'task')
@@ -77,5 +77,8 @@
                 <li class="ui-state-default">No issue assigned to Project </li>
             @endif
         </ul>
+        <div class="text-center">
+            {{$issues->links()}}
+        </div>
     </div>
 @endsection

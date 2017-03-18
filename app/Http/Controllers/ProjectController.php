@@ -30,7 +30,8 @@ class ProjectController extends Controller
     public function view($id)
     {
         $project = Project::find($id);
-        return view('project.view', ['project' => $project]);
+        $issues = $project->issues()->paginate(5);
+        return view('project.view', ['issues'=>$issues,'project'=>$project]);
     }
 
     public function showSprint($key,$i, $id)
