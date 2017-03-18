@@ -13,9 +13,7 @@
                         @if($sprint->status != 0)
                         <div>
                             @if($sprint->isActiveSprint())
-                                <a href="/project/{{$project->key}}/board/{{$board->id}}/sprint/{{$sprint->id}}">
-                                    <span class="glyphicon glyphicon-hand-left"></span>
-                                </a>
+                                <a href="/project/{{$project->key}}/board/{{$board->id}}/sprint/{{$sprint->id}}" class="glyphicon glyphicon-hand-left" style="text-decoration: none"></a>
                             @endif
                             @if(Auth::user()->ifAdmin() || Auth::user()->ifPM())
                                 <span class="floatR">
