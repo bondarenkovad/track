@@ -61,7 +61,7 @@ Route::get('/issue/status/delete/{id}', 'IssueStatusController@destroy');
 //Project routing
 Route::get('/project/index', [
     'uses'=>'ProjectController@index',
-//    'middleware'=>'group',
+    'middleware'=>'group:Administrator'
 ]);
 Route::get('/project/{id}/view', 'ProjectController@view');
 Route::post('/project/index', 'ProjectController@search');

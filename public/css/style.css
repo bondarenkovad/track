@@ -215,12 +215,12 @@
 
 .leftDivDetails{
     float: left;
-    width: 70%;
+    width: 65%;
     margin-top: 10px;
 }
 
 .rightDivPeople{
-    float: left;
+    float: right;
     width: 30%;
     height: 500px;
     margin-top: 10px;
@@ -231,6 +231,7 @@
 }
 
 .strike {
+    padding: 5px 0;
     display: block;
     text-align: left;
     overflow: hidden;
@@ -402,6 +403,6 @@ a:hover{
     z-index: 3;
     color: #fff;
     cursor: default;
-     background-color: #f6f6f6;
-    border-color: #f6f6f6;
+     background-color: #222 !important;
+    border-color: #222 !important;
 }

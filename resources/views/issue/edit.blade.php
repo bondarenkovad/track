@@ -125,7 +125,7 @@
                         <label for="name" class="col-md-4 control-label">Original Estimate:</label>
                         <div class="row">
                             <div class="col-md-2">
-                                <input id="original_estimate" type="number" class="form-control" name="original_estimate" value="{{date("H",$issue->original_estimate)}}">
+                                <input id="original_estimate" type="number" class="form-control" name="original_estimate" value="{{$issue->original_estimate}}">
                                 @if ($errors->has('original_estimate'))
                                     {{session()->flash('danger',$errors->first('original_estimate'))}}
                                 @endif
@@ -139,7 +139,7 @@
                         <label for="name" class="col-md-4 control-label">Remaining Estimate:</label>
                         <div class="row">
                             <div class="col-md-2">
-                                <input id="remaining_estimate" type="number" class="form-control" name="remaining_estimate" value="{{date("H",$issue->remaining_estimate)}}">
+                                <input id="remaining_estimate" type="number" class="form-control" name="remaining_estimate" value="{{$issue->remaining_estimate}}">
                                 @if ($errors->has('remaining_estimate'))
                                     {{session()->flash('danger',$errors->first('remaining_estimate'))}}
                                 @endif

@@ -15,26 +15,28 @@ class CheckGroup
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $group)
     {
+//        echo $group;
+        return $next($request);
 //        if($request->user() === null)
 //        {
 //            return response("Insufficient permission!", 401);
 //        }
-
-
-        $group = 'Administrator';
-
+//
+//
+////        $group = 'Administrator';
+//
 //        if($request->user()->hasGroup($group))
 //        {
 //
 //
 //        }
-//        dd($request->route());
-//            return $request->route();
-//        return $this->addCookieToResponse($request, $next($request));
+////        dd($request->route());
+////            return $request->route();
+////        return $this->addCookieToResponse($request, $next($request));
 //        return response("Insufficient permission!", 401);
-        return $next($request);
+
     }
 
     protected function addCookieToResponse($request, $response)
