@@ -64,7 +64,7 @@ class Sprint extends Model
         return [];
     }
 
-    public function isActiveSprint()
+    public function isActive()
     {
         if($this->status === 2)
         {
