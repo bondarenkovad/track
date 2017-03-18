@@ -329,7 +329,11 @@
                 <ul class="list-group">
                     @if($issue->getThisAttachments() != [])
                         @foreach($issue->getThisAttachments() as $file)
-                            <li class="list-group-item"><a download href="{{$file->path}}">{{$file->path}}</a></li>
+                            <li class="list-group-item">
+                                <a download href="{{$file->path}}">
+                                    <span class="glyphicon glyphicon-file" style="font-size: 36px; color:#eee"></span>
+                                </a>
+                            </li>
                         @endforeach
                     @else
                         <li class="list-group-item">no files found</li>
