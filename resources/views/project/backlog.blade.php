@@ -12,10 +12,6 @@
                     @foreach($project->getSprints() as $sprint)
                         @if($sprint->status != 0)
                             <div>
-                                {{$sprint->isActive()}}
-                            @if($sprint->isActive())
-                                <a href="/project/{{$project->key}}/board/{{$board->id}}/sprint/{{$sprint->id}}" class="glyphicon glyphicon-hand-left" style="text-decoration: none"></a>
-                            @endif
                             @if(Auth::user()->ifAdmin() || Auth::user()->ifPM())
                                 <span class="floatR">
                                     <div class="dropdown pull-right">
@@ -51,7 +47,15 @@
                                     </div>
                                 </span>
                             @endif
-                            <label>Sprint - <span class="userName">{{$sprint->id}}</span> <span class="colorShade">issues:{{count($sprint->getIssueForSprint())}}</span></label><span class="badge floatRight bWidth" style="margin-right: 122px">{{$project->getSprintTime($sprint->id)}}h</span>
+                            <label>
+                                @if($sprint->isActive())
+                                    <a href="/project/{{$project->key}}/board/{{$board->id}}/sprint/{{$sprint->id}}"  style="text-decoration: none">
+                                        <span class="glyphicon glyphicon-hand-left"></span> Sprint - <span class="userName">{{$sprint->id}}</span>
+                                    </a>
+                                    @else
+                                    Sprint - <span class="userName">{{$sprint->id}}</span>
+                                @endif
+                                     <span class="colorShade">issues:{{count($sprint->getIssueForSprint())}}</span></label><span class="badge floatRight bWidth" style="margin-right: 122px">{{$project->getSprintTime($sprint->id)}}h</span>
                             @if($sprint->order != null)
                                 <input id="issueData-{{$sprint->id}}" type="hidden" name="issueData[{{$sprint->id}}]" value="{{implode(',',json_decode($sprint->order))}}">
                             @else
