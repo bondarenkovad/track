@@ -716,9 +716,15 @@
                         </dd>
                         <dt>Time Spent:</dt>
                         <dd>
+                            @if($issue->TimeSpentSum()!= null)
                              <span class="marginLeft">
                                 {{$issue->TimeSpentSum()}}
                             </span>
+                            @else
+                            <span class="marginLeft">
+                                0
+                            </span>
+                            @endif
                         </dd>
                     </dl>
                 </div>
