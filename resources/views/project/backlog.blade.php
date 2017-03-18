@@ -210,7 +210,7 @@
                                 </li>
                             @endforeach
                         </ul>
-                            <span class="floatLeft ">
+                            <span class="floatR">
                                 <a href="/issue/add/{{$project->key}}" class="colorShade"><span class="glyphicon glyphicon-plus-sign colorShade"></span>Create Issue</a>
                             </span>
                     </div>
