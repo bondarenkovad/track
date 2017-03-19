@@ -131,6 +131,8 @@
                             <button type="submit" class="btn btn-primary">
                                 Create
                             </button>
+
+                            <a href="/" class="btn btn-default">Back to Home</a>
                         </div>
                     </div>
                 </form>

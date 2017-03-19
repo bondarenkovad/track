@@ -2,7 +2,7 @@
 <meta name="csrf_token" content="{{ csrf_token() }}" />
 @section('content')
     <div class="container">
-        <h4 class="text-left text-muted"><span class="userName">{{$project->name}}</span> Board</h4>
+        <h4 class="text-left text-muted"><a href="/project/{{$project->id}}/view" style="text-decoration: none"><span class="userName">{{$project->name}}</span></a> Board</h4>
         <form role="form" method="POST" action="{{action('ProjectController@refresh', ['key'=> $project->key, 'id'=>$board->id])}}">
             <input type="hidden" name="_method" value="put"/>
             <input id="projectKey" type="hidden" name="projectKey" value="{{$project->key}}">
