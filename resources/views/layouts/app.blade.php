@@ -160,7 +160,8 @@
         </script>
         <script>
           $("#project").select2({
-              multiply:true
+              multiply:true,
+              minimumInputLength: 2
           });
 
 //          $('#LogBtn').on('click', function()
