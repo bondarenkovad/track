@@ -327,7 +327,7 @@
                                                         <div class="form-group{{ $errors->has('text') ? ' has-error' : '' }}">
                                                             <label for="text" class="col-md-12">Text:</label>
                                                             <div class="col-md-12">
-                                                                <textarea id="text" type="text" class="form-control" name="text">{{$comment->text}}</textarea>
+                                                                <textarea id="text" class="form-control mytextarea" name="text">{!! $comment->text !!}</textarea>
                                                                 @if ($errors->has('text'))
                                                                     {{session()->flash('danger',$errors->first('tex'))}}
                                                                 @endif
@@ -386,8 +386,7 @@
                                                         <div class="form-group{{ $errors->has('time_spent') ? ' has-error' : '' }}">
                                                             <label for="time_spent" class="col-md-12">Time Spent:</label>
                                                             <div class="col-md-12">
-                                                                {{$log->id}}
-                                                                <input id="time_spent" type="number" class="form-control" name="time_spent" value=""/>
+                                                                <input id="time_spent" type="number" class="form-control" name="time_spent" value="{{$log->time_spent}}" min="0"/>
                                                                 @if ($errors->has('time_spent'))
                                                                     {{session()->flash('danger',$errors->first('time_spent'))}}
                                                                 @endif
@@ -412,12 +411,12 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
-                                                            <label for="comment" class="col-md-12">Comment:</label>
+                                                        <div class="form-group{{ $errors->has('commentLog') ? ' has-error' : '' }}">
+                                                            <label for="commentLog" class="col-md-12">Comment:</label>
                                                             <div class="col-md-12">
-                                                                <textarea id="commentLog" class="form-control" name="commentLog"></textarea>
-                                                                @if ($errors->has('comment'))
-                                                                    {{session()->flash('danger',$errors->first('comment'))}}
+                                                                <textarea id="commentLog" class="form-control mytextarea" name="commentLog">{!! $log->comment !!}</textarea>
+                                                                @if ($errors->has('commentLog'))
+                                                                    {{session()->flash('danger',$errors->first('commentLog'))}}
                                                                 @endif
                                                             </div>
                                                         </div>

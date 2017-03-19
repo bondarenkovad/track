@@ -252,45 +252,21 @@ class IssueController extends Controller
         return view('issue.workLog.index', ['issue'=>$issue, 'statuses'=>$statuses]);
     }
 
-//    public function updateWorkLog($id, Request $request)
-//    {
-//        $log = WorkLog::find($id);
-//
-//        $this->validate($request, [
-//            'time_spent' => 'required|not_in:0',
-//            'status_id' => 'required|not_in:0',
-//            'comment' => 'required',
-//        ]);
-//
-//        $log->update([
-//            [$log->comment = $request->comment],
-//            [$log->time_spent = (int)$request->time_spent],
-//            [$log->issue_status_id = (int)$request->status_id]
-//        ]);
-//
-//
-//        $log->save();
-//        session()->flash('status', 'Work Log successfully updated!');
-//
-//        return redirect('issue/index');
-//    }
-
     public function updateWorkLog($id, Request $request)
     {
         $log = WorkLog::find($id);
 
         $this->validate($request, [
-            'time_spent' => 'required|not_in:0',
+            'time_spent' => 'required|integer',
             'status_id' => 'required|not_in:0',
-            'comment' => 'required',
+            'commentLog' => 'required',
         ]);
 
         $log->update([
-            [$log->comment = $request->comment],
+            [$log->comment = $request->commentLog],
             [$log->time_spent = (int)$request->time_spent],
             [$log->issue_status_id = (int)$request->status_id]
         ]);
-
 
         $log->save();
 
@@ -303,6 +279,7 @@ class IssueController extends Controller
         ]);
 
         $issue->save();
+
         session()->flash('status', 'Work Log successfully updated!');
 
         return back();
