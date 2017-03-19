@@ -321,12 +321,10 @@ class IssueController extends Controller
     {
         $files = Input::file('file');
 
-
         $this->validate($request, [
             'file' => 'required|max:255',
         ]);
 
-//        dd($files);
         foreach($files as $file)
         {
             $destinationPath = 'uploads';
@@ -340,7 +338,7 @@ class IssueController extends Controller
 
         session()->flash('status', 'File added!');
 
-        return redirect('issue/index');
+        return back();
     }
 
     public function deleteFile(Request $request)

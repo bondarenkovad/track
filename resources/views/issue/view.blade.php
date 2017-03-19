@@ -236,6 +236,36 @@
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="issueFile" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="issueFileLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <label class="modal-title" id="exampleModalLabel">Add Files</label>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal" role="form" method="POST" action="{{action('IssueController@saveFile', ['issue'=>$issue->id])}}" enctype="multipart/form-data">
+                                <input type="hidden" name="_method" value="put"/>
+                                {{ csrf_field() }}
+                                <div class="form-group{{ $errors->has('file') ? ' has-error' : '' }}">
+                                    <label for="file" class="col-md-12">Files:</label>
+                                    <div class="col-md-12">
+                                        <input type="file" name="file[]" multiple>
+                                        @if ($errors->has('file'))
+                                            {{session()->flash('danger',$errors->first('file'))}}
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Add Files</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="leftDivDetails">
                 <div class="strike">
                     <span class="bolder">Details</span>
@@ -286,22 +316,25 @@
                 <div style="border: 1px solid #ddd; border-radius: 4px; padding: 5px 15px">
                     {!!$issue->description  !!}
                 </div>
-                <div class="strike">
-                    <span class="bolder">Attachment</span>
+                <div>
+                    <div class="strike">
+                        <span class="bolder">Attachment</span>
+                    </div>
+                    <ul class="list-group list-inline" style="margin-left:0">
+                        @if($issue->getThisAttachments() != [])
+                            @foreach($issue->getThisAttachments() as $file)
+                                <li class="list-group-item">
+                                    <a download href="{{$file->path}}">
+                                        <span class="glyphicon glyphicon-file" style="font-size: 36px; color:#eee"></span>
+                                    </a>
+                                </li>
+                            @endforeach
+                        @else
+                            <li class="list-group-item">no files found</li>
+                        @endif
+                    </ul>
+                    <a data-toggle="modal" data-target="#issueFile" data-toggle="tooltip" title="Add Files"><span class="glyphicon glyphicon-plus"></span><span class="glyphicon glyphicon-file"></span></a>
                 </div>
-                <ul class="list-group">
-                    @if($issue->getThisAttachments() != [])
-                        @foreach($issue->getThisAttachments() as $file)
-                            <li class="list-group-item">
-                                <a download href="{{$file->path}}">
-                                    <span class="glyphicon glyphicon-file" style="font-size: 36px; color:#eee"></span>
-                                </a>
-                            </li>
-                        @endforeach
-                    @else
-                        <li class="list-group-item">no files found</li>
-                    @endif
-                </ul>
                 <div class="strike">
                     <span class="bolder">Activity</span>
                 </div>
@@ -365,7 +398,7 @@
                                     </div>
                                 @endforeach
                             @endif
-                                <br><a class="btn btn-default floatR" style="margin-bottom: 10px" data-toggle="modal" data-target="#issueComment">Comment</a>
+                                <br><a class="btn btn-default floatR" style="margin-bottom: 10px" data-toggle="modal" data-target="#issueComment"> Add Comment</a>
                         </div>
                         <div id="menu1" class="tab-pane fade">
                             @if($issue->getThisLogs() != [])
