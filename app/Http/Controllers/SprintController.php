@@ -126,23 +126,23 @@ class SprintController extends Controller
         return back();
     }
 
-    public function edit($id)
+    public function edit($id, $i)
     {
         $sprint = Sprint::find($id);
         $projects = Project::all();
+        $board = Board::find($i);
 
-        return view('sprint.edit', ['sprint'=>$sprint,'projects'=>$projects]);
+        return view('sprint.edit', ['sprint'=>$sprint,'projects'=>$projects, 'board'=>$board]);
     }
 
-    public function update($id, Request $request)
+    public function update($id, $i, Request $request)
     {
-        $sprint =Sprint::find($id);
+        $sprint = Sprint::find($id);
 
         $this->validate($request, [
             'name' => 'required|max:50',
             'description' => 'required',
             'status' => 'required',
-            'project_id' => 'required|not_in:0',
             'date_start' => 'required|date',
             'date_finish' => 'required|date',
         ]);
@@ -151,15 +151,14 @@ class SprintController extends Controller
             [$sprint->name = $request->name],
             [$sprint->description = $request->description],
             [$sprint->status = (int)$request->status],
-            [$sprint->project_id = (int)$request->project_id],
+            [$sprint->project_id = $sprint->project['id']],
             [$sprint->date_start = $request->date_start],
             [$sprint->date_finish = $request->date_finish],
         ]);
 
-
         $sprint->save();
         session()->flash('status', 'Sprint successfully updated!');
 
-        return redirect('sprint/index');
+        return redirect('/project/'.$sprint->project['key'].'/board/'.$i.'/backlog');
     }
 }

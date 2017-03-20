@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <h1 class="text-center text-muted">Sprint Create</h1>
+        <h1 class="text-center text-muted">Sprint Edit</h1>
         <div class="row">
             <div class="panel-body">
-                <form class="form-horizontal" role="form" method="POST" action="{{action('SprintController@update', ['sprint'=>$sprint->id])}}">
+                <form class="form-horizontal" role="form" method="POST" action="{{action('SprintController@update', ['sprint'=>$sprint->id, 'board'=>$board->id])}}">
                     <input type="hidden" name="_method" value="put"/>
                     {{ csrf_field() }}
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -20,7 +20,7 @@
                     <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                         <label for="description" class="col-md-4 control-label">Description</label>
                         <div class="col-md-6">
-                            <textarea id="description" type="text" class="form-control mytextarea" name="description">{{$sprint->description}}</textarea>
+                            <textarea id="description" class="form-control mytextarea" name="description">{{$sprint->description}}</textarea>
                             @if ($errors->has('description'))
                                 {{session()->flash('danger',$errors->first('description'))}}
                             @endif
@@ -39,25 +39,12 @@
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('project_id') ? ' has-error' : '' }}">
+                    <div class="form-group">
                         <label for="projct_id" class="col-md-4 control-label">Projects:</label>
                         <div class="col-md-6">
-                            <select class="form-control" id="project_id" name="project_id">
-                                @foreach($projects as $project)
-                                    @if($sprint->project['name'] === $project->name)
-                                        <option selected value="{{$project->id}}">{{$project->name}}</option>
-                                    @else
-                                        <option value="{{$project->id}}">{{$project->name}}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                            </select>
-                            @if ($errors->has('project_id'))
-                                {{session()->flash('danger',$errors->first('project_id'))}}
-                            @endif
+                            <input id="name" type="text" class="form-control" readonly name="project_id" value="{{$sprint->project['name']}}">
                         </div>
                     </div>
-
 
                     <div class="form-group{{ $errors->has('date_start') ? ' has-error' : '' }}">
                         <label for="date_start" class="col-md-4 control-label">Date start:</label>
@@ -79,16 +66,11 @@
                         </div>
                     </div>
 
-
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
                             <button type="submit" class="btn btn-primary">
                                 Update
                             </button>
-
-                            <a href="/sprint/index" class="btn btn-success">
-                                Back to Sprints List
-                            </a>
                         </div>
                     </div>
                 </form>

@@ -120,10 +120,11 @@ Route::put('/issue/file/index/{id}', 'IssueController@saveFile');
 Route::get('/issue/file/delete/{filename}', ['as'=>'upload_delete', 'uses'=>'IssueController@deleteFile']);
 
 //Sprint routing
+
 Route::get('/sprint/add/project/{key}/board/{id}', 'SprintController@create');
 Route::post('/sprint/create/project/{key}/board/{id}', 'SprintController@store');
-Route::get('/sprint/edit/{id}', 'SprintController@edit');
-Route::put('/sprint/edit/{id}', 'SprintController@update');
+Route::get('/sprint/edit/{id}/board/{i}', 'SprintController@edit');
+Route::put('/sprint/edit/{id}/board/{i}', 'SprintController@update');
 Route::get('/sprint/{id}/makeActive', 'SprintController@makeStatusIsActive');
 Route::get('/sprint/{id}/makeFinish', 'SprintController@makeStatusIsFinish');
 Route::get('/sprint/delete/{id}', 'SprintController@destroy');
