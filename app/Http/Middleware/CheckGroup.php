@@ -15,18 +15,20 @@ class CheckGroup
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $Admin, $PM)
+    public function handle($request, Closure $next, $Admin)
     {
         if($request->user() === null)
         {
-            return response("Insufficient permission!", 401);
+            session()->flash('danger', 'Only with Administrator permissions!');
+            return back();
         }
 
-        if($request->user()->hasGroup($Admin) || $request->user()->hasGroup($PM))
+        if($request->user()->hasGroup($Admin))
         {
             return $next($request);
         }
 
-        return response("Insufficient permission!", 401);
+        session()->flash('danger', 'Only with Administrator permissions!');
+        return back();
     }
 }

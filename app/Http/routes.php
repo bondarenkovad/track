@@ -19,7 +19,62 @@ Route::auth();
 Route::get('/', 'HomeController@index');
 
 Route::group(['middleware' => 'group:Administrator,PM'], function () {
+    //Board routing
+    Route::get('/board/index', 'BoardController@index');
+    Route::get('/board/add', 'BoardController@create');
+    Route::post('/board/create', 'BoardController@store');
+    Route::get('/board/edit/{id}', 'BoardController@edit');
+    Route::put('/board/edit/{id}', 'BoardController@update');
+    Route::get('/board/delete/{id}', 'BoardController@destroy');
 
+    //Group routing
+    Route::get('/user/group/index', 'GroupController@index');
+    Route::get('/user/group/add', 'GroupController@create');
+    Route::post('/user/group/create', 'GroupController@store');
+    Route::get('/user/group/edit/{id}', 'GroupController@edit');
+    Route::put('/user/group/edit/{id}', 'GroupController@update');
+    Route::get('/user/group/show/{id}', 'GroupController@showUser');
+
+
+    //Issue routing
+    Route::get('/issue/index', 'IssueController@index');
+    Route::get('/issue/delete/{id}', 'IssueController@destroy');
+
+    //IssuesPriority routing
+    Route::get('/issue/priority/index', 'IssuesPriorityController@index');
+    Route::get('/issue/priority/add', 'IssuesPriorityController@create');
+    Route::post('/issue/priority/create', 'IssuesPriorityController@store');
+    Route::get('/issue/priority/edit/{id}', 'IssuesPriorityController@edit');
+    Route::put('/issue/priority/edit/{id}', 'IssuesPriorityController@update');
+    Route::get('/issue/priority/delete/{id}', 'IssuesPriorityController@destroy');
+
+    //IssuesStatus routing
+    Route::get('/issue/status/index', 'IssueStatusController@index');
+    Route::get('/issue/status/add', 'IssueStatusController@create');
+    Route::post('/issue/status/create', 'IssueStatusController@store');
+    Route::get('/issue/status/edit/{id}', 'IssueStatusController@edit');
+    Route::put('/issue/status/edit/{id}', 'IssueStatusController@update');
+    Route::get('/issue/status/delete/{id}', 'IssueStatusController@destroy');
+
+    //IssueTypes routing
+    Route::get('/issue/type/index', 'IssueTypeController@index');
+    Route::get('/issue/type/add', 'IssueTypeController@create');
+    Route::post('/issue/type/create', 'IssueTypeController@store');
+    Route::get('/issue/type/edit/{id}', 'IssueTypeController@edit');
+    Route::put('/issue/type/edit/{id}', 'IssueTypeController@update');
+    Route::get('/issue/type/delete/{id}', 'IssueTypeController@destroy');
+
+    //Project routing
+    Route::get('/project/index','ProjectController@index');
+    Route::post('/project/index', 'ProjectController@search');
+    Route::get('/project/add', 'ProjectController@create');
+    Route::post('/project/create', 'ProjectController@store');
+    Route::get('/project/delete/{id}', 'ProjectController@destroy');
+
+    //Sprint routing
+    Route::get('/sprint/index', 'SprintController@index');
+
+    //User routing
     Route::get('/user/index', 'UserController@index');
     Route::post('/user/index', 'UserController@search');
     Route::get('/user/add', 'UserController@create');
@@ -30,49 +85,8 @@ Route::group(['middleware' => 'group:Administrator,PM'], function () {
 
 });
 
-//Group routing
-Route::get('/user/group/index', 'GroupController@index');
-Route::get('/user/group/add', 'GroupController@create');
-Route::post('/user/group/create', 'GroupController@store');
-Route::get('/user/group/edit/{id}', 'GroupController@edit');
-Route::put('/user/group/edit/{id}', 'GroupController@update');
-Route::get('/user/group/show/{id}', 'GroupController@showUser');
-
-//IssueTypes routing
-Route::get('/issue/type/index', 'IssueTypeController@index');
-Route::get('/issue/type/add', 'IssueTypeController@create');
-Route::post('/issue/type/create', 'IssueTypeController@store');
-Route::get('/issue/type/edit/{id}', 'IssueTypeController@edit');
-Route::put('/issue/type/edit/{id}', 'IssueTypeController@update');
-Route::get('/issue/type/delete/{id}', 'IssueTypeController@destroy');
-
-//IssuesPriority routing
-Route::get('/issue/priority/index', 'IssuesPriorityController@index');
-Route::get('/issue/priority/add', 'IssuesPriorityController@create');
-Route::post('/issue/priority/create', 'IssuesPriorityController@store');
-Route::get('/issue/priority/edit/{id}', 'IssuesPriorityController@edit');
-Route::put('/issue/priority/edit/{id}', 'IssuesPriorityController@update');
-Route::get('/issue/priority/delete/{id}', 'IssuesPriorityController@destroy');
-
-//IssuesStatus routing
-Route::get('/issue/status/index', 'IssueStatusController@index');
-Route::get('/issue/status/add', 'IssueStatusController@create');
-Route::post('/issue/status/create', 'IssueStatusController@store');
-Route::get('/issue/status/edit/{id}', 'IssueStatusController@edit');
-Route::put('/issue/status/edit/{id}', 'IssueStatusController@update');
-Route::get('/issue/status/delete/{id}', 'IssueStatusController@destroy');
-
 //Project routing
-Route::get('/project/index', [
-    'uses'=>'ProjectController@index',
-    'middleware'=>'group:Administrator'
-]);
 Route::get('/project/{id}/view', 'ProjectController@view');
-Route::post('/project/index', 'ProjectController@search');
-Route::get('/project/add', 'ProjectController@create');
-Route::post('/project/create', 'ProjectController@store');
-//Route::get('/project/{key}/backlog', 'ProjectController@backlog');
-//Route::put('/project/{key}/backlog', 'ProjectController@refresh');
 Route::get('/project/{key}/board/{id}/backlog', 'ProjectController@backlog');
 Route::put('/project/{key}/board/{id}/backlog', 'ProjectController@refresh');
 Route::get('/project/{key}/board/{i}/sprint/{id}', 'ProjectController@showSprint');
@@ -80,16 +94,14 @@ Route::put('/project/{key}/board/{i}/sprint/{id}', 'ProjectController@updateSpri
 Route::put('/project/issue/{id}', 'ProjectController@saveWorkLog');
 Route::get('/project/edit/{id}', 'ProjectController@edit');
 Route::put('/project/edit/{id}', 'ProjectController@update');
-Route::get('/project/delete/{id}', 'ProjectController@destroy');
 
 //Issue routing
-Route::get('/issue/index', 'IssueController@index');
 Route::get('/issue/add/{key}', 'IssueController@create');
 Route::post('/issue/create/{key}', 'IssueController@store');
 Route::get('/project/{key?}/issue/{id}/view', 'IssueController@view');
 Route::get('/project/{key}/issue/{id}/edit', 'IssueController@edit');
 Route::put('/project/{key}/issue/{id}/edit', 'IssueController@update');
-Route::get('/issue/delete/{id}', 'IssueController@destroy');
+
 // Comment
 Route::get('/issue/comment/index/{id}', 'IssueController@addComment');
 Route::put('/issue/comment/index/{id}', 'IssueController@saveComment');
@@ -108,22 +120,13 @@ Route::put('/issue/file/index/{id}', 'IssueController@saveFile');
 Route::get('/issue/file/delete/{filename}', ['as'=>'upload_delete', 'uses'=>'IssueController@deleteFile']);
 
 //Sprint routing
-Route::get('/sprint/index', 'SprintController@index');
 Route::get('/sprint/add/project/{key}/board/{id}', 'SprintController@create');
 Route::post('/sprint/create/project/{key}/board/{id}', 'SprintController@store');
 Route::get('/sprint/edit/{id}', 'SprintController@edit');
+Route::put('/sprint/edit/{id}', 'SprintController@update');
 Route::get('/sprint/{id}/makeActive', 'SprintController@makeStatusIsActive');
 Route::get('/sprint/{id}/makeFinish', 'SprintController@makeStatusIsFinish');
-Route::put('/sprint/edit/{id}', 'SprintController@update');
 Route::get('/sprint/delete/{id}', 'SprintController@destroy');
-
-//Board routing
-Route::get('/board/index', 'BoardController@index');
-Route::get('/board/add', 'BoardController@create');
-Route::post('/board/create', 'BoardController@store');
-Route::get('/board/edit/{id}', 'BoardController@edit');
-Route::put('/board/edit/{id}', 'BoardController@update');
-Route::get('/board/delete/{id}', 'BoardController@destroy');
 
 Route::post('/store', 'HomeController@store');
 
