@@ -17,14 +17,18 @@
 Route::auth();
 
 Route::get('/', 'HomeController@index');
-//Route::resource('Users', 'UserController');
-Route::get('/user/index', 'UserController@index');
-Route::get('/user/add', 'UserController@create');
-Route::post('/user/create', 'UserController@store');
-Route::post('/user/index', 'UserController@search');
-Route::get('/user/show/{id}', 'UserController@show');
-Route::get('/user/edit/{id}', 'UserController@edit');
-Route::put('/user/edit/{id}', 'UserController@update');
+
+Route::group(['middleware' => 'group:Administrator,PM'], function () {
+
+    Route::get('/user/index', 'UserController@index');
+    Route::post('/user/index', 'UserController@search');
+    Route::get('/user/add', 'UserController@create');
+    Route::post('/user/create', 'UserController@store');
+    Route::get('/user/show/{id}', 'UserController@show');
+    Route::get('/user/edit/{id}', 'UserController@edit');
+    Route::put('/user/edit/{id}', 'UserController@update');
+
+});
 
 //Group routing
 Route::get('/user/group/index', 'GroupController@index');
@@ -116,22 +120,10 @@ Route::get('/sprint/delete/{id}', 'SprintController@destroy');
 //Board routing
 Route::get('/board/index', 'BoardController@index');
 Route::get('/board/add', 'BoardController@create');
-//Route::get('/board/getData/{mass}', function($mass){
-//    return $mass;
-//});
 Route::post('/board/create', 'BoardController@store');
 Route::get('/board/edit/{id}', 'BoardController@edit');
-
 Route::put('/board/edit/{id}', 'BoardController@update');
 Route::get('/board/delete/{id}', 'BoardController@destroy');
-
-////Comment routing
-//Route::get('/comment/index', 'CommentController@index');
-//Route::get('/comment/add', 'CommentController@create');
-//Route::post('/comment/create', 'CommentController@store');
-//Route::get('/comment/edit/{id}', 'CommentController@edit');
-//Route::put('/comment/edit/{id}', 'CommentController@update');
-//Route::get('/comment/delete/{id}', 'CommentController@destroy');
 
 Route::post('/store', 'HomeController@store');
 
