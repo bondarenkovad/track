@@ -3,8 +3,8 @@
 @section('content')
     <div class="container">
         <span class="text-left text-muted"><span class="userName">{{$project->name}}</span>/<span class="userName">{{$project->key}}</span> Issues:</span>
-        <a href="/issue/add/{{$project->key}}" class="floatR">Create Issue</a>
-        <span class="badge floatR bWidth" style="margin-right: 72px">{{$project->getProjectTime()}}h</span>
+        <a href="/issue/add/{{$project->key}}" class="floatR" style="margin-left: 5px; text-decoration: none"><span class="glyphicon glyphicon-plus-sign"></span>Issue</a>
+        <span class="badge baDge-success floatR bWidth marginL">{{$project->getProjectTime()}}h</span><span class="badge baDge-warning floatR bWidth marginL">{{$project->getProjectOE()}}h</span>
         <ul class="issue">
             @if(count( $project->countIssues() > 0))
                 @foreach($issues as $issue)

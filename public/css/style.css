@@ -363,31 +363,31 @@ a:hover{
     cursor: pointer;
 }
 .baDge-error {
-    background-color: #b94a48;
+    background-color: #b94a48 !important;
 }
 .baDge-error:hover {
     background-color: #953b39;
 }
 .baDge-warning {
-    background-color: #f89406;
+    background-color: #f89406 !important;
 }
 .baDge-warning:hover {
     background-color: #c67605;
 }
 .baDge-success {
-    background-color: #468847;
+    background-color: #468847 !important;
 }
 .baDge-success:hover {
     background-color: #356635;
 }
 .baDge-info {
-    background-color: #3a87ad;
+    background-color: #3a87ad !important;
 }
 .baDge-info:hover {
     background-color: #2d6987;
 }
 .baDge-inverse {
-    background-color: #333333;
+    background-color: #333333 !important;
 }
 .baDge-inverse:hover {
     background-color: #1a1a1a;

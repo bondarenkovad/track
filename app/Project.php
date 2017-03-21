@@ -238,8 +238,34 @@ class Project extends Model
     {
         $issues = json_decode($this->order);
 
-        return $time = Issue::whereIn('id', $issues)
+        $time = Issue::whereIn('id', $issues)
             ->sum('remaining_estimate');
+
+        if($time != null)
+        {
+            return $time;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    public function getBacklogOE()
+    {
+        $issues = json_decode($this->order);
+
+        $time = Issue::whereIn('id', $issues)
+            ->sum('original_estimate');
+
+        if($time != null)
+        {
+            return $time;
+        }
+        else
+        {
+            return 0;
+        }
     }
 
     public function getSprintTime($sprintId)
@@ -247,22 +273,97 @@ class Project extends Model
         $sprint = Sprint::find($sprintId);
         $issues = json_decode($sprint->order);
 
-        return $time = Issue::whereIn('id', $issues)
+        $time = Issue::whereIn('id', $issues)
             ->sum('remaining_estimate');
+
+        if($time != null)
+        {
+            return $time;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    public function getSprintOE($sprintId)
+    {
+        $sprint = Sprint::find($sprintId);
+        $issues = json_decode($sprint->order);
+
+        $time = Issue::whereIn('id', $issues)
+            ->sum('original_estimate');
+
+        if($time != null)
+        {
+            return $time;
+        }
+        else
+        {
+            return 0;
+        }
     }
 
     public function getUserInProjectTime($userId)
     {
-        return $time = Issue::where('project_id', '=', $this->id)
+        $time = Issue::where('project_id', '=', $this->id)
             ->where('assigned_id', '=', $userId)
             ->sum('remaining_estimate');
+
+        if($time != null)
+        {
+            return $time;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    public function getUserInProjectOE($userId)
+    {
+        $time = Issue::where('project_id', '=', $this->id)
+            ->where('assigned_id', '=', $userId)
+            ->sum('original_estimate');
+
+        if($time != null)
+        {
+            return $time;
+        }
+        else
+        {
+            return 0;
+        }
     }
 
     public function getProjectTime()
     {
-        return $time = Issue::where('project_id', '=', $this->id)
+         $time = Issue::where('project_id', '=', $this->id)
             ->sum('remaining_estimate');
+
+        if($time != null)
+        {
+            return $time;
+        }
+        else
+        {
+            return 0;
+        }
     }
 
+    public function getProjectOE()
+    {
+         $time = Issue::where('project_id', '=', $this->id)
+            ->sum('original_estimate');
+
+        if($time != null)
+        {
+            return $time;
+        }
+        else
+        {
+            return 0;
+        }
+    }
 
 }

@@ -95,7 +95,7 @@
                         @if($sprint->status != 0)
                             <div>
                             @if(Auth::user()->ifAdmin() || Auth::user()->ifPM())
-                                <span class="floatR">
+                                <span class="floatR" style="margin-left: 5px">
                                     <div class="dropdown pull-right">
                                         <span class="dropdown-toggle colorShade" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                             <i class="glyphicon glyphicon-option-horizontal"></i>
@@ -112,23 +112,6 @@
                                         </ul>
                                     </div>
                                 </span>
-                            @else
-                                <span class="floatR"  style="visibility: hidden">
-                                    <div class="dropdown pull-right">
-                                        <span class="dropdown-toggle colorShade" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                            <i class="glyphicon glyphicon-option-horizontal"></i>
-                                            <span class="caret"></span>
-                                        </span>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                            <li><a href="/sprint/delete/{{$sprint->id}}"><span class="colorShade">Delete Sprint</span></a></li>
-                                            @if($sprint->status === 2)
-                                                <li><a href="/sprint/{{$sprint->id}}/makeFinish"><span class="colorShade">Finish Sprint</span></a></li>
-                                            @else
-                                                <li><a href="/sprint/{{$sprint->id}}/makeActive"><span class="colorShade">Start Sprint</span></a></li>
-                                            @endif
-                                        </ul>
-                                    </div>
-                                </span>
                             @endif
                             <label>
                                 @if($sprint->isActive())
@@ -138,7 +121,7 @@
                                     @else
                                     Sprint - <span class="userName">{{$sprint->id}}</span>
                                 @endif
-                                     <span class="colorShade">issues:{{count($sprint->getIssueForSprint())}}</span></label><span class="badge floatRight bWidth" style="margin-right: 122px">{{$project->getSprintTime($sprint->id)}}h</span>
+                                     <span class="colorShade">issues:{{count($sprint->getIssueForSprint())}}</span></label><span class="badge baDge-success floatR bWidth marginL">{{$project->getSprintTime($sprint->id)}}h</span><span class="badge baDge-warning floatR bWidth marginL">{{$project->getSprintOE($sprint->id)}}h</span>
                             @if($sprint->order != null)
                                 <input id="issueData-{{$sprint->id}}" type="hidden" name="issueData[{{$sprint->id}}]" value="{{implode(',',json_decode($sprint->order))}}">
                             @else
@@ -217,11 +200,11 @@
                     @endforeach
                 @endif
                 <div>
-                    <span class="floatLeft"><b>Backlog</b> <span class="colorShade"><b>issues: {{count($project->SortIssueByOrder())}}</b></span></span>
-                    <span class="badge floatLeft bWidth" style="margin-left: 840px">{{$project->getBacklogTime()}}h</span>
                     @if(Auth::user()->ifAdmin() || Auth::user()->ifPM())
-                        <a class="floatR" style="text-decoration: none" data-toggle="modal" data-target="#sprintCreate"><span class="glyphicon glyphicon-plus-sign"></span>Sprint</a>
+                        <a class="floatR" style="text-decoration: none; margin-left: 5px" data-toggle="modal" data-target="#sprintCreate"><span class="glyphicon glyphicon-plus-sign"></span>Sprint</a>
                     @endif
+                        <span class="floatLeft"><b>Backlog</b> <span class="colorShade"><b>issues: {{count($project->SortIssueByOrder())}}</b></span></span>
+                        <span class="badge baDge-success floatR bWidth marginL">{{$project->getBacklogTime()}}h</span><span class="badge baDge-warning floatR bWidth marginL">{{$project->getBacklogOE()}}h</span>
                     @if($project->order != null)
                         <input id="issueData-backlog" type="hidden" name="issueData[backlog]" value="{{implode(',',json_decode($project->order))}}">
                     @else

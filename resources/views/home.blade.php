@@ -9,7 +9,7 @@
             @foreach($user->getUserProjects() as $project)
                 @if(count($project->getIssueForUserById($user->id)) > 0)
                     <div class="col-md-12">
-                        <a href="/project/{{$project->id}}/view" style="text-decoration: none">Project - {{$project->key}}</a> <span class="badge floatRight bWidth" style="margin-right: 150px">{{$project->getUserInProjectTime($user->id)}}h</span>
+                        <a href="/project/{{$project->id}}/view" style="text-decoration: none">Project - {{$project->key}}</a> <span class="badge baDge-success floatR bWidth marginL">{{$project->getUserInProjectTime($user->id)}}h</span><span class="badge baDge-warning floatR bWidth marginL">{{$project->getUserInProjectOE($user->id)}}h</span>
                         <ul class="issue">
                             @foreach($project->getIssueForUserById($user->id) as $issue)
                                 <li class="ui-state-default" data-value="{{$issue->id}}">
