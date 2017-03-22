@@ -60,9 +60,6 @@ class IssueController extends Controller
             'remaining_estimate' => 'required|integer',
         ]);
 
-//        $orEst = mktime($request->original_estimate,0,0,0,0,0 );
-//        $remEst = mktime($request->remaining_estimate,0,0,0,0,0 );
-
         Issue::create([
         'summary' => $request['summary'],
         'description' => $request['description'],
@@ -77,6 +74,38 @@ class IssueController extends Controller
     ]);
 
         return view('project.view', ['project' => $project]);
+    }
+
+
+    public function modalStore($id, Request $request)
+    {
+        $project = Project::find($id);
+
+        $this->validate($request, [
+            'summary' => 'required|max:50',
+            'description' => 'required',
+            'status_id' => 'required|not_in:0',
+            'type_id' => 'required|not_in:0',
+            'priority_id' => 'required|not_in:0',
+            'assigned_id' => 'required|not_in:0',
+            'original_estimate' => 'required|integer',
+            'remaining_estimate' => 'required|integer',
+        ]);
+
+        Issue::create([
+            'summary' => $request['summary'],
+            'description' => $request['description'],
+            'status_id' => $request['status_id'],
+            'project_id' =>$id,
+            'type_id' => (int)$request['type_id'],
+            'priority_id' => (int)$request['priority_id'],
+            'reporter_id' => Auth::user()->id,
+            'assigned_id' => (int)$request['assigned_id'],
+            'original_estimate' => (int)$request['original_estimate'],
+            'remaining_estimate' => (int)$request['remaining_estimate'],
+        ]);
+
+        return back();
     }
 //
 //    public function destroy($id)

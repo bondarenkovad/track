@@ -98,6 +98,7 @@ Route::put('/project/edit/{id}', 'ProjectController@update');
 //Issue routing
 Route::get('/issue/add/{key}', 'IssueController@create');
 Route::post('/issue/create/{key}', 'IssueController@store');
+Route::post('/issue/create/{key}', 'IssueController@modalStore');
 Route::get('/project/{key?}/issue/{id}/view', 'IssueController@view');
 Route::get('/project/{key}/issue/{id}/edit', 'IssueController@edit');
 Route::put('/project/{key}/issue/{id}/edit', 'IssueController@update');

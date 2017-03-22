@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\IssueStatus;
-use App\Sprint;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Project;
 use App\User;
 use App\Board;
 use App\Issue;
+use App\IssueStatus;
+use App\IssueType;
+use App\IssuesPriority;
+use App\Sprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -153,7 +154,11 @@ class ProjectController extends Controller
         $project = Project::where('key', '=', $key)
             ->firstOrFail();
         $board = Board::find($id);
-        return view('project.backlog', ['project'=>$project,'board'=>$board]);
+        $statuses = IssueStatus::all();
+        $types = IssueType::all();
+        $priorities = IssuesPriority::all();
+        $users = User::all();
+        return view('project.backlog', ['project'=> $project,'board'=> $board, 'statuses'=> $statuses,'types'=>$types, 'priorities'=>$priorities, 'users'=>$users]);
     }
 
     public function refresh($key,$id, Request $request)
