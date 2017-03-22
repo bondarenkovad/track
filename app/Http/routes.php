@@ -17,6 +17,7 @@
 Route::auth();
 
 Route::get('/', 'HomeController@index');
+Route::get('/presentation', 'HomeController@presentation');
 
 Route::group(['middleware' => 'group:Administrator,PM'], function () {
     //Board routing

@@ -32,6 +32,11 @@ class HomeController extends Controller
         return view('home', ['user'=>$user]);
     }
 
+    public function presentation()
+    {
+        return view('presentation');
+    }
+
     public function store(Request $request)
     {
         $user = User::all()->where('email', $request->email)->first();
