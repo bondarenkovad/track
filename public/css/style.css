@@ -408,3 +408,26 @@ a:hover{
      background-color: #222 !important;
     border-color: #222 !important;
 }
+
+.panel-default>.panel-heading{
+    background-color: #101010 !important;
+    color: white !important;
+}
+
+.btn-log {
+    color: #fff;
+    background-color: #101010;
+    border-color: #101010;
+}
+
+.btn-log:hover{
+    color: #93a1a1 !important;
+}
+
+.navbar-inverse .navbar-nav>li>a  {
+    color: white !important;
+}
+
+.navbar-inverse .navbar-brand {
+    color: white !important;
+}
