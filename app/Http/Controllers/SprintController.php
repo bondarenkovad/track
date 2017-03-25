@@ -135,6 +135,13 @@ class SprintController extends Controller
         return view('sprint.edit', ['sprint'=>$sprint,'projects'=>$projects, 'board'=>$board]);
     }
 
+    public function modalEdit($id)
+    {
+        $sprint = Sprint::find($id);
+
+        return json_encode($sprint);
+    }
+
     public function update($id, $i, Request $request)
     {
         $sprint = Sprint::find($id);

@@ -186,6 +186,43 @@
                 }).disableSelection();
             } );
 
+
+            $('#sprintEdit').on('show.bs.modal', function (event) {
+                // получить кнопку, которая его открыло
+                var button = $(event.relatedTarget);
+                // извлечь информацию из атрибута data-content
+                var content = button.data('content');
+                // вывести эту информацию в элемент, имеющий id="content"
+//                $(this).find('#content').text(content);
+
+                var path = '/sprint/modalEdit/' + content + '';
+                var obj = {};
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                    }
+                });
+
+                $.ajax({
+                    beforeSend: function (xhr) {
+                        var token = $('meta[name="csrf_token"]').attr('content');
+                        if (token) {
+                            return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                        }
+                    },
+                    url: path,
+                    type: 'GET',
+//                    data: data,
+                    complete: function(data){ // data - ответ полученный с сервера
+                       obj = data; // записываем полученные данные data в ранее подготовленную переменную
+                    }
+                });
+                alert(obj);
+
+//                $('#sprintName').val(data['name']);
+            });
+
             $action = function(){
 
                 $projectKey = $("#projectKey").val();

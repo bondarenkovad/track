@@ -126,6 +126,7 @@ Route::get('/issue/file/delete/{filename}', ['as'=>'upload_delete', 'uses'=>'Iss
 Route::get('/sprint/add/project/{key}/board/{id}', 'SprintController@create');
 Route::post('/sprint/create/project/{key}/board/{id}', 'SprintController@store');
 Route::get('/sprint/edit/{id}/board/{i}', 'SprintController@edit');
+Route::get('/sprint/modalEdit/{id}', 'SprintController@modalEdit');
 Route::put('/sprint/edit/{id}/board/{i}', 'SprintController@update');
 Route::get('/sprint/{id}/makeActive', 'SprintController@makeStatusIsActive');
 Route::get('/sprint/{id}/makeFinish', 'SprintController@makeStatusIsFinish');
