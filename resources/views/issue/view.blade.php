@@ -465,7 +465,6 @@
                                     </div>
                                     <div class="media">
                                         <div class="media-left">
-                                            <span>{{$log->id}}</span>
                                             @if($log->image_path != null)
                                                 <img src="{{$log->image_path}}" class="img img-circle" data-toggle="tooltip" title="{{$log->user}}">
                                             @else
