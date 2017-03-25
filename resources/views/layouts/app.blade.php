@@ -187,14 +187,21 @@
             } );
 
 
+            $editSprint = function(obj){
+
+                $('#sprintName').val(obj.name);
+
+                tinymce.activeEditor.execCommand('mceInsertContent', false, obj.description);
+
+
+            };
+
+
             $('#sprintEdit').on('show.bs.modal', function (event) {
                 // получить кнопку, которая его открыло
                 var button = $(event.relatedTarget);
                 // извлечь информацию из атрибута data-content
                 var content = button.data('content');
-                // вывести эту информацию в элемент, имеющий id="content"
-//                $(this).find('#content').text(content);
-
                 var path = '/sprint/modalEdit/' + content + '';
                 var obj = {};
 
@@ -212,15 +219,21 @@
                         }
                     },
                     url: path,
+                    dataType:'json',
                     type: 'GET',
 //                    data: data,
                     complete: function(data){ // data - ответ полученный с сервера
-                       obj = data; // записываем полученные данные data в ранее подготовленную переменную
+                       obj = JSON.parse(data.responseText); // записываем полученные данные data в ранее подготовленную переменную
+
+
+                        $editSprint(obj);
                     }
                 });
-                alert(obj);
 
-//                $('#sprintName').val(data['name']);
+
+                console.log(obj.description);
+
+//
             });
 
             $action = function(){

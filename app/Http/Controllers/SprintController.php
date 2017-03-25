@@ -139,7 +139,7 @@ class SprintController extends Controller
     {
         $sprint = Sprint::find($id);
 
-        return json_encode($sprint);
+        return $sprint;
     }
 
     public function update($id, $i, Request $request)

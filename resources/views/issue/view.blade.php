@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
             @if($project != null)
-                <h5><a href="/project/{{$project->id}}/view" style="text-decoration: none"><span class="userName">{{$project->name}}</span>/<span class="userName">{{$project->key}}</span> - <span class="userName">{{$issue->id}}</span></a></h5>
+            <h5><a href="/project/{{$project->id}}/view" style="text-decoration: none"><span class="userName">{{$project->name}}</span>/<span class="userName">{{$project->key}}</span> - <span class="userName">{{$issue->id}}</span></a></h5>
             <h3 class="text-left text-muted">{{$issue->summary}}
             <a class="btn btn-default floatR" data-toggle="modal" data-target="#issueEdit">Edit</a>
             </h3>
@@ -347,7 +347,7 @@
                         <div id="home" class="tab-pane fade in active">
                             @if($issue->getThisComments() != [])
                                 @foreach($issue->getThisComments() as $comment)
-                                    <div class="modal fade" id="issueCommentEdit" tabindex="-1" role="dialog" data-backdrop="static"  aria-labelledby="issueCommentEditLabel" aria-hidden="true">
+                                    <div class="modal fade" id="issueCommentEdit{{$comment->id}}" tabindex="-1" role="dialog" data-backdrop="static"  aria-labelledby="issueCommentEditLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -387,7 +387,7 @@
                                         <div class="media-body">
                                             <h4 class="media-heading">{{$comment->name}} <span class="dataFormat">{{$comment->created_at}}</span>
                                                 @if(Auth::user()->name === $comment->name)
-                                                <a data-toggle="modal" data-target="#issueCommentEdit" class="iconBlock"><i class="glyphicon glyphicon-pencil"></i></a>
+                                                <a data-toggle="modal" data-target="#issueCommentEdit{{$comment->id}}" class="iconBlock"><i class="glyphicon glyphicon-pencil"></i></a>
                                                 @endif
                                             </h4>
                                             <div>
@@ -405,7 +405,7 @@
                                 @foreach($issue->getThisLogs() as $log)
                                     <input id="timeSpent" type="hidden" name="timeSpent" value="{{$log->time_spent}}">
                                     <input id="logComment" type="hidden" name="logComment" value="{{$log->comment}}">
-                                    <div class="modal fade" id="issueLogEdit" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="issueLogEditLabel" aria-hidden="true">
+                                    <div class="modal fade" id="issueLogEdit{{$log->id}}" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="issueLogEditLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -476,7 +476,7 @@
                                             <h4 class="media-heading">
                                                 {{$log->user}}
                                                 @if(Auth::user()->name === $log->user)
-                                                    <a id="LogBtn" data-toggle="modal" data-target="#issueLogEdit" class="btn iconBlock"><i class="glyphicon glyphicon-pencil"></i></a>
+                                                    <a id="LogBtn" data-toggle="modal" data-target="#issueLogEdit{{$log->id}}" class="btn iconBlock"><i class="glyphicon glyphicon-pencil"></i></a>
                                                 @endif
                                             </h4>
                                             <p><b>Time spent: {{$log->time_spent}}</b></p>

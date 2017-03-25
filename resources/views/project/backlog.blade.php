@@ -237,15 +237,15 @@
                                 </div>
                             </div>
 
-                            {{--<div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">--}}
-                                {{--<label for="description" class="col-md-12">Description</label>--}}
-                                {{--<div class="col-md-12">--}}
-                                    {{--<textarea id="description" class="form-control mytextarea" name="description">{{$sprint->description}}</textarea>--}}
-                                    {{--@if ($errors->has('description'))--}}
-                                        {{--{{session()->flash('danger',$errors->first('description'))}}--}}
-                                    {{--@endif--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
+                            <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+                                <label for="description" class="col-md-12">Description</label>
+                                <div class="col-md-12">
+                                    <textarea id="description" class="form-control mytextarea" name="description"></textarea>
+                                    @if ($errors->has('description'))
+                                        {{session()->flash('danger',$errors->first('description'))}}
+                                    @endif
+                                </div>
+                            </div>
 
                             {{--<div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">--}}
                                 {{--<label for="status" class="col-md-4 control-label">Status</label>--}}
