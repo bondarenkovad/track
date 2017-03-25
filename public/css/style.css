@@ -428,6 +428,15 @@ a:hover{
     color: white !important;
 }
 
+.navbar-inverse .navbar-nav>li>a:hover  {
+    color: #93a1a1 !important;
+}
+
 .navbar-inverse .navbar-brand {
     color: white !important;
 }
+
+.navbar-inverse .navbar-brand:hover {
+    color: #93a1a1 !important;
+}
+

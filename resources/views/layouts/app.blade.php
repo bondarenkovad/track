@@ -83,7 +83,7 @@
 
                         <li class="dropdown">
                             <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Boards
+                                Board
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="dLabel">
