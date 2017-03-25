@@ -129,6 +129,7 @@ Route::get('/sprint/edit/{id}/board/{i}', 'SprintController@edit');
 Route::get('/sprint/modalEdit/{id}', 'SprintController@modalEdit', function(){
     return response()->header('Content-Type', 'application/json');
 });
+Route::put('/sprint/modalEdit/{id}', 'SprintController@modalUpdate');
 Route::put('/sprint/edit/{id}/board/{i}', 'SprintController@update');
 Route::get('/sprint/{id}/makeActive', 'SprintController@makeStatusIsActive');
 Route::get('/sprint/{id}/makeFinish', 'SprintController@makeStatusIsFinish');

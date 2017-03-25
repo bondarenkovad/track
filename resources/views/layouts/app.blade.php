@@ -187,13 +187,19 @@
             } );
 
 
-            $editSprint = function(obj){
+            $editSprint = function(obj, content){
 
                 $('#sprintName').val(obj.name);
-
                 tinymce.activeEditor.execCommand('mceInsertContent', false, obj.description);
 
 
+                if($('#sprintStatus').val() == obj.status)
+                    $('#sprintStatus').prop('checked');
+
+                $('#sprintProject').val(obj.project);
+                $('#sprintDate_start').val(obj.date_start);
+                $('#sprintDate_finish').val(obj.date_start);
+                $('#sprintId').val(content);
             };
 
 
@@ -221,19 +227,18 @@
                     url: path,
                     dataType:'json',
                     type: 'GET',
-//                    data: data,
                     complete: function(data){ // data - ответ полученный с сервера
                        obj = JSON.parse(data.responseText); // записываем полученные данные data в ранее подготовленную переменную
 
-
-                        $editSprint(obj);
+                        $editSprint(obj, content);
                     }
                 });
 
-
-                console.log(obj.description);
-
-//
+                $('#sprintName').val('');
+                tinymce.activeEditor.execCommand('mceInsertContent', false, '');
+                $('#sprintProject').val('');
+                $('#sprintDate_start').val('');
+                $('#sprintDate_finish').val('');
             });
 
             $action = function(){

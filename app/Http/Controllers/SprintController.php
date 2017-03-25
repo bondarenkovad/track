@@ -137,9 +137,41 @@ class SprintController extends Controller
 
     public function modalEdit($id)
     {
+        $sprint = DB::table('sprints')
+            ->join('projects', 'projects.id', '=', 'sprints.project_id')
+            ->where('sprints.id', '=', $id)
+            ->select('projects.name as project', 'sprints.*')
+            ->first();
+
+        return json_encode($sprint);
+    }
+
+    public function modalUpdate($id, Request $request)
+    {
+
         $sprint = Sprint::find($id);
 
-        return $sprint;
+        $this->validate($request, [
+            'sprintName' => 'required|max:50',
+            'description' => 'required',
+            'status' => 'required',
+            'date_start' => 'required|date',
+            'date_finish' => 'required|date',
+        ]);
+
+        $sprint->update([
+            [$sprint->name = $request->sprintName],
+            [$sprint->description = $request->description],
+            [$sprint->status = (int)$request->status],
+            [$sprint->project_id = $sprint->project['id']],
+            [$sprint->date_start = $request->date_start],
+            [$sprint->date_finish = $request->date_finish],
+        ]);
+
+        $sprint->save();
+        session()->flash('status', 'Sprint successfully updated!');
+
+        return back();
     }
 
     public function update($id, $i, Request $request)

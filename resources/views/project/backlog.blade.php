@@ -223,8 +223,9 @@
                         <label class="modal-title" id="exampleModalLabel">Edit Sprint</label>
                     </div>
                     <div class="modal-body">
-                        <form class="form-horizontal" role="form" method="POST" action="">
+                        <form class="form-horizontal" role="form" method="POST" action="{{action('SprintController@modalEdit', ['id'=>14])}}">
                             <input type="hidden" name="_method" value="put"/>
+                            <input id="sprintId" type="hidden" name="sprintId" value="">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('sprintName') ? ' has-error' : '' }}">
@@ -247,44 +248,44 @@
                                 </div>
                             </div>
 
-                            {{--<div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">--}}
-                                {{--<label for="status" class="col-md-4 control-label">Status</label>--}}
-                                {{--<div class="col-md-6">--}}
-                                    {{--<label class="radio-inline"><input type="radio" name="status" value="1" {{ $sprint->status == 1  ? 'checked' : '' }} >toDo</label>--}}
-                                    {{--<label class="radio-inline"><input type="radio" name="status" value="2" {{ $sprint->status ==2  ? 'checked' : '' }}>active</label>--}}
-                                    {{--<label class="radio-inline"><input type="radio" name="status" value="0" {{ $sprint->status ==0  ? 'checked' : '' }}>finish</label>--}}
-                                    {{--@if ($errors->has('status'))--}}
-                                        {{--{{session()->flash('danger',$errors->first('status'))}}--}}
-                                    {{--@endif--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
+                            <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
+                                <label for="status" class="col-md-12">Status</label>
+                                <div class="col-md-12">
+                                    <label id="sprintStatus" class="radio-inline"><input type="radio" name="status" value="1">toDo</label>
+                                    <label id="sprintStatus" class="radio-inline"><input type="radio" name="status" value="2">active</label>
+                                    <label id="sprintStatus" class="radio-inline"><input type="radio" name="status" value="3">finish</label>
+                                    @if ($errors->has('status'))
+                                        {{session()->flash('danger',$errors->first('status'))}}
+                                    @endif
+                                </div>
+                            </div>
 
-                            {{--<div class="form-group">--}}
-                                {{--<label for="projct_id" class="col-md-12">Projects:</label>--}}
-                                {{--<div class="col-md-12">--}}
-                                    {{--<input id="name" type="text" class="form-control" readonly name="project_id" value="{{$sprint->project['name']}}">--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
+                            <div class="form-group">
+                                <label for="project_id" class="col-md-12">Projects:</label>
+                                <div class="col-md-12">
+                                    <input id="sprintProject" type="text" class="form-control" readonly name="project_id" value="">
+                                </div>
+                            </div>
 
-                            {{--<div class="form-group{{ $errors->has('date_start') ? ' has-error' : '' }}">--}}
-                                {{--<label for="date_start" class="col-md-12">Date start:</label>--}}
-                                {{--<div class="col-md-12">--}}
-                                    {{--<input id="date_start" type="datetime" class="form-control" name="date_start" value="{{$sprint->date_start}}">--}}
-                                    {{--@if ($errors->has('date_start'))--}}
-                                        {{--{{session()->flash('danger',$errors->first('date_start'))}}--}}
-                                    {{--@endif--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
+                            <div class="form-group{{ $errors->has('date_start') ? ' has-error' : '' }}">
+                                <label for="date_start" class="col-md-12">Date start:</label>
+                                <div class="col-md-12">
+                                    <input id="sprintDate_start" type="datetime" class="form-control" name="date_start">
+                                    @if ($errors->has('date_start'))
+                                        {{session()->flash('danger',$errors->first('date_start'))}}
+                                    @endif
+                                </div>
+                            </div>
 
-                            {{--<div class="form-group{{ $errors->has('date_finish') ? ' has-error' : '' }}">--}}
-                                {{--<label for="date_finish" class="col-md-12">Date finish:</label>--}}
-                                {{--<div class="col-md-12">--}}
-                                    {{--<input id="date_finish" type="datetime" class="form-control" name="date_finish" value="{{$sprint->date_finish}}">--}}
-                                    {{--@if ($errors->has('date_finish'))--}}
-                                        {{--{{session()->flash('danger',$errors->first('date_finish'))}}--}}
-                                    {{--@endif--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
+                            <div class="form-group{{ $errors->has('date_finish') ? ' has-error' : '' }}">
+                                <label for="date_finish" class="col-md-12">Date finish:</label>
+                                <div class="col-md-12">
+                                    <input id="sprintDate_finish" type="datetime" class="form-control" name="date_finish">
+                                    @if ($errors->has('date_finish'))
+                                        {{session()->flash('danger',$errors->first('date_finish'))}}
+                                    @endif
+                                </div>
+                            </div>
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -316,7 +317,7 @@
                                         </span>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                             {{--<li><a href="/sprint/edit/{{$sprint->id}}/board/{{$board->id}}"><span class="colorShade">Edit Sprint</span></a></li>--}}
-                                            <li><a data-toggle="modal" data-target="#sprintEdit" data-content="{{$sprint->id}}" style="cursor: hand" type="button" class="btn btn-primary"><span class="colorShade">Edit Sprint</span></a></li>
+                                            <li><a data-toggle="modal" data-target="#sprintEdit" data-content="{{$sprint->id}}" style="cursor: hand" ><span class="colorShade">Edit Sprint</span></a></li>
                                             <li><a href="/sprint/delete/{{$sprint->id}}"><span class="colorShade">Delete Sprint</span></a></li>
                                                 @if($sprint->status === 2)
                                                     <li><a href="/sprint/{{$sprint->id}}/makeFinish"><span class="colorShade">Finish Sprint</span></a></li>
