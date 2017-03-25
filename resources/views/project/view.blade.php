@@ -20,7 +20,7 @@
                         </span>
                         <span class="badge floatLeft" style="display: block; width: 100px">{{$project->key}} - {{$issue->id}}</span>
                         <span class="summary">{{$issue->summary}}</span>
-                        <span class="description">{{$issue->description}}</span>
+                        <span class="description">{!! strip_tags($issue->description, '<a><b><strong>') !!} </span>
                         <span class="assign">
                              <span class="marginL">
                                 R:

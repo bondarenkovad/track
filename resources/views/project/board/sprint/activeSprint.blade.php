@@ -66,7 +66,7 @@
                                                 {{$issue->summary}}
                                             <a  href="/project/{{$project->key}}/issue/{{$issue->id}}/view" class="floatR glyphicon glyphicon-eye-open" style="margin-right: 5px"></a>
                                             </span>
-                                            <span class="sprintDescription">{{$issue->description}}</span>
+                                            <span class="sprintDescription">{!! strip_tags($issue->description, '<a><b><strong>') !!}</span>
                                         </div>
                                         <div class="row">
                                             <div style="margin-bottom: 5px">
