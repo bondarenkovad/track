@@ -66,7 +66,7 @@
                         <li><a href="{{ url('/') }}">Home</a></li>
 
                         <li class="dropdown">
-                            <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a id="dLabel"  href="" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Project
                                 <span class="caret"></span>
                             </a>
@@ -82,7 +82,7 @@
                         </li>
 
                         <li class="dropdown">
-                            <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a id="dLabel" href="" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: hand">
                                 Board
                                 <span class="caret"></span>
                             </a>
@@ -97,7 +97,7 @@
 
                         @if( Auth::user()->ifAdmin())
                             <li class="dropdown">
-                                <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a id="dLabel" href="" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: hand">
                                     Administrator panel
                                     <span class="caret"></span>
                                 </a>
