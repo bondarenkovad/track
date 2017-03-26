@@ -335,7 +335,7 @@
                                     @else
                                     Sprint - <span class="userName">{{$sprint->id}}</span>
                                 @endif
-                                     <span class="colorShade">issues:{{count($sprint->getIssueForSprint())}}</span></label><span class="badge baDge-success floatR bWidth marginL">{{$project->getSprintTime($sprint->id)}}h</span><span class="badge baDge-warning floatR bWidth marginL">{{$project->getSprintOE($sprint->id)}}h</span>
+                                     <span><strong>issues:{{count($sprint->getIssueForSprint())}}</strong></span></label><span class="badge baDge-success floatR bWidth marginL">{{$project->getSprintTime($sprint->id)}}h</span><span class="badge baDge-warning floatR bWidth marginL">{{$project->getSprintOE($sprint->id)}}h</span>
                                     <span class="colorShade" style="font-size: 1em">
                                         <span>{{date('d/M/y',strtotime($sprint->date_start))}} &#149</span>
                                         <span>{{date('d/M/y',strtotime($sprint->date_finish))}}</span>
