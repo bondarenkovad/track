@@ -2,11 +2,17 @@
 
 @section('content')
     <div class="container">
-        <span class="text-left text-muted"><span class="userName">{{$project->name}}</span>/<span class="userName">{{$project->key}}</span> Issues:</span>
+        <span class="text-left text-muted">
+            <span class="userName">{{$project->name}}</span>
+            /
+            <span class="userName">{{$project->key}}
+            </span>
+        </span>
+        <span class="colorShade">issues:{{$project->countIssues()}}</span>
         <a href="/issue/add/{{$project->key}}" class="floatR" style="margin-left: 5px; text-decoration: none"><span class="glyphicon glyphicon-plus-sign"></span>Issue</a>
         <span class="badge baDge-success floatR bWidth marginL">{{$project->getProjectTime()}}h</span><span class="badge baDge-warning floatR bWidth marginL">{{$project->getProjectOE()}}h</span>
         <ul class="issue">
-            @if(count( $project->countIssues() > 0))
+            @if( $project->countIssues() > 0)
                 @foreach($issues as $issue)
                     <li class="ui-state-default" data-value="{{$issue->id}}">
                         <span class="imageSpan">
