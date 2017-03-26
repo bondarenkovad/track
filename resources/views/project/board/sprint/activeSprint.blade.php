@@ -5,7 +5,7 @@
         <form class="form-horizontal" role="form" method="POST" action="{{action('ProjectController@updateSprint', ['key'=> $project->key, 'i'=>$board->id, 'id'=>$sprint->id])}}">
             <input type="hidden" name="_method" value="put"/>
             {{ csrf_field() }}
-        <h4 class="text-left text-muted">Sprint -<span class="userName"> {{$sprint->id}}</span></h4>
+        <a href="/project/{{$project->key}}/board/{{$board->id}}/backlog" style="text-decoration: none"><h4 class="text-left text-muted">Sprint -<span class="userName"> {{$sprint->id}}</span></h4></a>
             <input id="projectKey" type="hidden" name="projectKey" value="{{$project->key}}">
             <input id="sprintId" type="hidden" name="sprintId" value="{{$sprint->id}}">
             <input id="boardId" type="hidden" name="boardId" value="{{$board->id}}">
