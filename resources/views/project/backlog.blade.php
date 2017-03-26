@@ -416,7 +416,7 @@
                 @endif
                 <div>
                     @if(Auth::user()->ifAdmin() || Auth::user()->ifPM())
-                        <a class="floatR" style="text-decoration: none; margin-left: 5px" data-toggle="modal" data-target="#sprintCreate"><span class="glyphicon glyphicon-plus-sign"></span>Sprint</a>
+                        <a class="floatR" style="text-decoration: none; margin-left: 5px; cursor: hand" data-toggle="modal" data-target="#sprintCreate"><span class="glyphicon glyphicon-plus-sign"></span>Sprint</a>
                     @endif
                         <span class="floatLeft"><b>Backlog</b> <span class="colorShade"><b>issues: {{count($project->SortIssueByOrder())}}</b></span></span>
                         <span class="badge baDge-success floatR bWidth marginL">{{$project->getBacklogTime()}}h</span><span class="badge baDge-warning floatR bWidth marginL">{{$project->getBacklogOE()}}h</span>
@@ -494,7 +494,7 @@
                         @endforeach
                     </ul>
                         <span class="floatR">
-                            <a style="text-decoration: none" data-toggle="modal" data-target="#issueCreate"><span class="glyphicon glyphicon-plus-sign"></span>Issue</a>
+                            <a style="text-decoration: none; cursor: hand" data-toggle="modal" data-target="#issueCreate"><span class="glyphicon glyphicon-plus-sign"></span>Issue</a>
                         </span>
                 </div>
         </form>
