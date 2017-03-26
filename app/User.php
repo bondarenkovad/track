@@ -227,6 +227,7 @@ class User extends Authenticatable
         $projectIds = $this->projects()->get()->pluck('id');
 
        return $boards = Board::whereIn('project_id', $projectIds)
+           ->orderBy('name', 'desc')
            ->get();
     }
 }
