@@ -333,7 +333,7 @@
                             <li class="list-group-item">no files found</li>
                         @endif
                     </ul>
-                    <a data-toggle="modal" data-target="#issueFile" data-toggle="tooltip" title="Add Files"><span class="glyphicon glyphicon-plus"></span><span class="glyphicon glyphicon-file"></span></a>
+                    <a  href="" data-toggle="modal" data-target="#issueFile" data-toggle="tooltip" title="Add Files"><span class="glyphicon glyphicon-plus"></span><span class="glyphicon glyphicon-file"></span></a>
                 </div>
                 <div class="strike">
                     <span class="bolder">Activity</span>
