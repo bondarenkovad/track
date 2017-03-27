@@ -9,7 +9,14 @@
             @foreach($user->getUserProjects() as $project)
                 @if(count($project->getIssueForUserById($user->id)) > 0)
                     <div class="col-md-12">
-                        <a href="/project/{{$project->id}}/view" style="text-decoration: none">Project - {{$project->key}}</a> <span class="colorShade">issues:{{count($project->getIssueForUserById($user->id))}}</span><span class="badge baDge-success floatR bWidth marginL">{{$project->getUserInProjectTime($user->id)}}h</span><span class="badge baDge-warning floatR bWidth marginL">{{$project->getUserInProjectOE($user->id)}}h</span>
+                        <a href="/project/{{$project->id}}/view" style="text-decoration: none">Project - {{$project->key}}</a>
+                        <span class="colorShade">issues:{{count($project->getIssueForUserById($user->id))}}</span>
+                        @if($project->getUserInProjectTime($user->id) < 0)
+                            <span class="badge baDge-error floatR bWidth marginL">{{$project->getUserInProjectTime($user->id)}}h</span>
+                        @else
+                            <span class="badge baDge-success floatR bWidth marginL">{{$project->getUserInProjectTime($user->id)}}h</span>
+                        @endif
+                        <span class="badge baDge-warning floatR bWidth marginL">{{$project->getUserInProjectOE($user->id)}}h</span>
                         <ul class="issue">
                             @foreach($project->getIssueForUserById($user->id) as $issue)
                                 <li class="ui-state-default" data-value="{{$issue->id}}">
@@ -57,7 +64,7 @@
                                         @endif
                                     </span>
                                     <span>
-                                    <span class="badge marginL bWidth" >{{$issue->remaining_estimate}}h</span>
+                                    <span class="badge marginL bWidth" >{{$issue->calcRE()}}h</span>
                                     </span>
                                     <span class="marginL">
                                         @if($issue->status['name'] === 'open')

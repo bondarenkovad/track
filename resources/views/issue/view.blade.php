@@ -550,7 +550,11 @@
                         <dt>Remaining Estimate:</dt>
                         <dd>
                              <span class="marginLeft">
-                                {{$issue->remaining_estimate}}
+                                 @if($issue->calcRE() < 0)
+                                    <span class="danger">{{$issue->calcRE()}}</span>
+                                 @else
+                                     <span class="low">{{$issue->calcRE()}}</span>
+                                 @endif
                             </span>
                         </dd>
                         <dt>Time Spent:</dt>

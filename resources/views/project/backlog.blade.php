@@ -335,7 +335,16 @@
                                     @else
                                     Sprint - <span class="userName">{{$sprint->id}}</span>
                                 @endif
-                                     <span><strong>issues:{{count($sprint->getIssueForSprint())}}</strong></span></label><span class="badge baDge-success floatR bWidth marginL">{{$project->getSprintTime($sprint->id)}}h</span><span class="badge baDge-warning floatR bWidth marginL">{{$project->getSprintOE($sprint->id)}}h</span>
+                                     <span>
+                                         <strong>issues:{{count($sprint->getIssueForSprint())}}</strong>
+                                     </span>
+                            </label>
+                                @if($project->getSprintTime($sprint->id) < 0)
+                                    <span class="badge baDge-error floatR bWidth marginL">{{$project->getSprintTime($sprint->id)}}h</span>
+                                @else
+                                    <span class="badge baDge-success floatR bWidth marginL">{{$project->getSprintTime($sprint->id)}}h</span>
+                                @endif
+                                <span class="badge baDge-warning floatR bWidth marginL">{{$project->getSprintOE($sprint->id)}}h</span>
                                     <span class="colorShade" style="font-size: 1em">
                                         <span>{{date('d/M/y',strtotime($sprint->date_start))}} &#149</span>
                                         <span>{{date('d/M/y',strtotime($sprint->date_finish))}}</span>
@@ -392,7 +401,7 @@
                                             @endif
                                         </span>
                                         <span>
-                                        <span class="badge marginL bWidth">{{$issue->remaining_estimate}}h</span>
+                                        <span class="badge marginL bWidth">{{$issue->calcRE()}}h</span>
                                         </span>
                                         <span class="marginL">
                                             @if($issue->status['name'] === 'open')
@@ -422,7 +431,12 @@
                         <a class="floatR" style="text-decoration: none; margin-left: 5px; cursor: hand" data-toggle="modal" data-target="#sprintCreate"><span class="glyphicon glyphicon-plus-sign"></span>Sprint</a>
                     @endif
                         <span class="floatLeft"><b>Backlog</b> <span class="colorShade"><b>issues: {{count($project->SortIssueByOrder())}}</b></span></span>
-                        <span class="badge baDge-success floatR bWidth marginL">{{$project->getBacklogTime()}}h</span><span class="badge baDge-warning floatR bWidth marginL">{{$project->getBacklogOE()}}h</span>
+                        @if($project->getBacklogTime() < 0)
+                            <span class="badge baDge-error floatR bWidth marginL">{{$project->getBacklogTime()}}h</span>
+                        @else
+                            <span class="badge baDge-success floatR bWidth marginL">{{$project->getBacklogTime()}}h</span>
+                        @endif
+                        <span class="badge baDge-warning floatR bWidth marginL">{{$project->getBacklogOE()}}h</span>
                     @if($project->order != null)
                         <input id="issueData-backlog" type="hidden" name="issueData[backlog]" value="{{implode(',',json_decode($project->order))}}">
                     @else
@@ -475,7 +489,7 @@
                                         @endif
                                     </span>
                                     <span>
-                                    <span class="badge marginL bWidth">{{$issue->original_estimate}}h</span>
+                                    <span class="badge marginL bWidth">{{$issue->calcRE()}}h</span>
                                     </span>
                                     <span class="marginL">
                                         @if($issue->status['name'] === 'open')

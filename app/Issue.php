@@ -72,7 +72,7 @@ class Issue extends Model
             ->join('issues', 'issues.id', '=', 'comments.issue_id')
             ->where('comments.issue_id', '=', $this->id)
             ->select('comments.text', 'users.name', 'users.image_path','comments.id','comments.created_at')
-//            ->distinct()
+            ->orderBy('comments.created_at')
             ->get();
     }
 
@@ -154,5 +154,11 @@ class Issue extends Model
         return $sum = $this->workLogs()
             ->where('Issue_id', '=', $this->id)
             ->sum('time_spent');
+    }
+
+    public function calcRE()
+    {
+        $timeSpent = $this->TimeSpentSum();
+        return $rE = $this->original_estimate - $timeSpent;
     }
 }

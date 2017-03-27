@@ -173,10 +173,16 @@ class Project extends Model
 
     public function getBacklogTime()
     {
-        $issues = json_decode($this->order);
+        $time = 0;
+        $order = json_decode($this->order);
 
-        $time = Issue::whereIn('id', $issues)
-            ->sum('remaining_estimate');
+        $issues = Issue::whereIn('id', $order)
+            ->get();
+
+        foreach($issues as $issue)
+        {
+            $time+= $issue->calcRE();
+        }
 
         if($time != null)
         {
@@ -207,11 +213,17 @@ class Project extends Model
 
     public function getSprintTime($sprintId)
     {
+        $time = 0;
         $sprint = Sprint::find($sprintId);
-        $issues = json_decode($sprint->order);
+        $orders = json_decode($sprint->order);
 
-        $time = Issue::whereIn('id', $issues)
-            ->sum('remaining_estimate');
+        $issues = Issue::whereIn('id', $orders)
+            ->get();
+
+        foreach($issues as $issue)
+        {
+            $time+= $issue->calcRE();
+        }
 
         if($time != null)
         {
@@ -243,9 +255,16 @@ class Project extends Model
 
     public function getUserInProjectTime($userId)
     {
-        $time = Issue::where('project_id', '=', $this->id)
+        $time = 0;
+        $issues = Issue::where('project_id', '=', $this->id)
             ->where('assigned_id', '=', $userId)
-            ->sum('remaining_estimate');
+            ->get();
+
+        foreach($issues as $issue)
+        {
+            $time+= $issue->calcRE();
+        }
+
 
         if($time != null)
         {
@@ -275,8 +294,14 @@ class Project extends Model
 
     public function getProjectTime()
     {
-         $time = Issue::where('project_id', '=', $this->id)
-            ->sum('remaining_estimate');
+        $time = 0;
+         $issues = Issue::where('project_id', '=', $this->id)
+            ->get();
+
+        foreach($issues as $issue)
+        {
+            $time+= $issue->calcRE();
+        }
 
         if($time != null)
         {

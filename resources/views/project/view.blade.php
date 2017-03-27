@@ -10,7 +10,12 @@
         </span>
         <span class="colorShade">issues:{{$project->countIssues()}}</span>
         <a href="/issue/add/{{$project->key}}" class="floatR" style="margin-left: 5px; text-decoration: none"><span class="glyphicon glyphicon-plus-sign"></span>Issue</a>
-        <span class="badge baDge-success floatR bWidth marginL">{{$project->getProjectTime()}}h</span><span class="badge baDge-warning floatR bWidth marginL">{{$project->getProjectOE()}}h</span>
+        @if($project->getProjectTime() < 0)
+            <span class="badge baDge-error floatR bWidth marginL">{{$project->getProjectTime()}}h</span>
+        @else
+            <span class="badge baDge-success floatR bWidth marginL">{{$project->getProjectTime()}}h</span>
+        @endif
+        <span class="badge baDge-warning floatR bWidth marginL">{{$project->getProjectOE()}}h</span>
         <ul class="issue">
             @if( $project->countIssues() > 0)
                 @foreach($issues as $issue)
@@ -59,7 +64,7 @@
                             @endif
                         </span>
                         <span>
-                        <span class="badge marginL bWidth">{{$issue->remaining_estimate}}h</span>
+                        <span class="badge marginL bWidth">{{$issue->calcRE()}}h</span>
                         </span>
                         <span class="marginL">
                             @if($issue->status['name'] === 'open')
