@@ -32,7 +32,12 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         $issues = $project->issues()->paginate(10);
-        return view('project.view', ['issues'=>$issues,'project'=>$project]);
+        $board = Board::find($id);
+        $statuses = IssueStatus::all();
+        $types = IssueType::all();
+        $priorities = IssuesPriority::all();
+        $users = User::all();
+        return view('project.view', ['issues'=>$issues,'project'=>$project,'board'=> $board, 'statuses'=> $statuses,'types'=>$types, 'priorities'=>$priorities, 'users'=>$users]);
     }
 
     public function showSprint($key,$i, $id)
