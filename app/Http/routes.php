@@ -80,7 +80,6 @@ Route::group(['middleware' => 'group:Administrator,PM'], function () {
     Route::post('/user/index', 'UserController@search');
     Route::get('/user/add', 'UserController@create');
     Route::post('/user/create', 'UserController@store');
-    Route::get('/user/show/{id}', 'UserController@show');
     Route::get('/user/edit/{id}', 'UserController@edit');
     Route::put('/user/edit/{id}', 'UserController@update');
 
@@ -134,6 +133,9 @@ Route::put('/sprint/edit/{id}/board/{i}', 'SprintController@update');
 Route::get('/sprint/{id}/makeActive', 'SprintController@makeStatusIsActive');
 Route::get('/sprint/{id}/makeFinish', 'SprintController@makeStatusIsFinish');
 Route::get('/sprint/delete/{id}', 'SprintController@destroy');
+
+//User routing
+Route::get('/user/show/{id}', 'UserController@show');
 
 Route::post('/store', 'HomeController@store');
 
