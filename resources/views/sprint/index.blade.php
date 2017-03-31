@@ -10,17 +10,15 @@
                 <th>Date start</th>
                 <th>Date finish</th>
                 <th>Project</th>
-                <th></th>
                 </thead>
                 <tbody>
                 @foreach($sprints as $sprint)
                     <tr>
                         <td>{{$sprint->name}}</td>
-                        <td>{{$sprint->description}}</td>
+                        <td>{!! $sprint->description !!}</td>
                         <td>{{$sprint->date_start}}</td>
                         <td>{{$sprint->date_finish}}</td>
                         <td>{{$sprint->project['name']}}</td>
-                        <td><a  href="/sprint/edit/{{$sprint->id}}" class="floatRight"><i class="glyphicon glyphicon-pencil" data-toggle="tooltip" title="Edit"></i></a></td>
                     </tr>
                 @endforeach
                 </tbody>

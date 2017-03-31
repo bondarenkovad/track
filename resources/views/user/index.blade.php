@@ -12,7 +12,7 @@
             </span>
             </div>
         </form>
-        <div class="text-right" style="margin-right: 20px"><a  href="/user/add">User Create</a></div>
+        <div class="text-right" style="margin-right: 20px"><a  href="/user/add" class="textDecorNo">User Create</a></div>
         <table class="table table-hover">
             <thead>
                 <th>Name</th>

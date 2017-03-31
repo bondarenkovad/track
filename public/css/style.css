@@ -180,6 +180,10 @@
     width: 500px;
 }
 
+.textDecorNo:hover{
+    text-decoration: none;
+}
+
 .sprintSummary{
     padding-left: 10px;
     font-weight: bold;

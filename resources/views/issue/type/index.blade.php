@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <span class="text-left text-muted" style="font-size: 1.3em"><span class="userName">Types</span> List</span>
-        <a  href="/issue/type/add" class="floatRight">Type Create</a>
+        <a  href="/issue/type/add" class="floatRight textDecorNo">Type Create</a>
         <table class="table table-hover">
             <thead>
             <th>Name</th>

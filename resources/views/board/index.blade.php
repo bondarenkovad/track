@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
              <span class="text-left text-muted" style="font-size: 1.3em"><span class="userName">Boards</span> List</span>
-            <span class="floatRight"><a  href="/board/add">Board Create</a></span>
+            <span class="floatRight"><a  href="/board/add" class="textDecorNo">Board Create</a></span>
             <table class="table table-hover">
                 <thead>
                 <th>Name</th>
