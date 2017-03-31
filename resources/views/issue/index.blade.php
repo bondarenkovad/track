@@ -23,7 +23,7 @@
                 @foreach($issues as $issue)
                     <tr>
                         <td>{{$issue->summary}}</td>
-                        <td>{{$issue->description}}</td>
+                        <td>{!! $issue->description !!}</td>
                         <td>{{$issue->status['name']}}</td>
                         <td>{{$issue->project['name']}}</td>
                         <td>{{$issue->type['name']}}</td>
@@ -52,5 +52,8 @@
                 @endforeach
                 </tbody>
             </table>
+        <div class="text-center">
+            {{$issues->links()}}
+        </div>
     </div>
 @stop

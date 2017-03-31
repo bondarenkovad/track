@@ -209,6 +209,10 @@
                             <button type="submit" class="btn btn-primary">
                                 Update
                             </button>
+
+                            <a href="/issue/index" class="btn btn-success">
+                                Back To Issue List
+                            </a>
                         </div>
                     </div>
                 </form>

@@ -28,7 +28,7 @@ class IssueController extends Controller
 
     public function index()
     {
-        $issues = Issue::all();
+        $issues = Issue::paginate(10);
         return view('issue.index', ['issues' => $issues]);
     }
 
