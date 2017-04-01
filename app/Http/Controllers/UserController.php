@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Group;
 use App\Project;
+use App\Issue;
 use Validator;
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
@@ -34,7 +35,8 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('user.show', ['user'=>$user]);
+        $issues = Issue::where('assigned_id', '=', $user->id)->paginate(10);
+        return view('user.show', ['user'=>$user, 'issues'=> $issues]);
     }
 
     public function create()

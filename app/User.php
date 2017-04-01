@@ -217,6 +217,14 @@ class User extends Authenticatable
         return $issues;
     }
 
+    public function getUserAllIssues()
+    {
+        return $issues = Issue::where([
+            ['assigned_id', '=', $this->id]
+        ])
+            ->get();
+    }
+
     public function getUserProjects()
     {
         return $projects = $this->projects()->get();
