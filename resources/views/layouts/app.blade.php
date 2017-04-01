@@ -235,10 +235,11 @@
                 });
 
                 $('#sprintName').val('');
-                tinymce.activeEditor.execCommand('mceInsertContent', false, '');
+                tinymce.activeEditor.setContent('');
                 $('#sprintProject').val('');
                 $('#sprintDate_start').val('');
                 $('#sprintDate_finish').val('');
+                $('#sprintId').val('');
             });
 
             $action = function(){

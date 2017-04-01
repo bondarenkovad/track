@@ -146,9 +146,9 @@ class SprintController extends Controller
         return json_encode($sprint);
     }
 
-    public function modalUpdate($id, Request $request)
+    public function modalUpdate( Request $request)
     {
-
+        $id = $request['sprintId'];
         $sprint = Sprint::find($id);
 
         $this->validate($request, [
