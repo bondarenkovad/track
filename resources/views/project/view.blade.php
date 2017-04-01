@@ -170,17 +170,17 @@
                              <span class="marginL">
                                 R:
                                  @if($issue->reporter['image_path'] != null)
-                                     <img src="{{$issue->reporter['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
+                                     <a href="/user/show/{{$issue->reporter['id']}}" style="text-decoration: none"><img src="{{$issue->reporter['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}"></a>
                                  @else
-                                     <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
+                                     <a href="/user/show/{{$issue->reporter['id']}}" style="text-decoration: none"><img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}"></a>
                                  @endif
                             </span>
                             <span class="marginL">
                                 A:
                                 @if($issue->assigned['image_path'] != null)
-                                    <img src="{{$issue->assigned['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
+                                    <a href="/user/show/{{$issue->assigned['id']}}" style="text-decoration: none"><img src="{{$issue->assigned['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}"></a>
                                 @else
-                                    <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
+                                    <a href="/user/show/{{$issue->assigned['id']}}" style="text-decoration: none"><img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}"></a>
                                 @endif
                             </span>
                         </span>

@@ -30,11 +30,13 @@
                             <ul>
                                 @foreach($project->users()->get() as $user)
                                     <li>
+                                        <a href="/user/show/{{$user->id}}" style="text-decoration: none">
                                         @if($user->image_path != null)
                                             <img src="{{$user->image_path}}" class="img img-circle" data-toggle="tooltip" title="{{$user->name}}">
                                         @else
                                             <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$user->name}}">
                                         @endif
+                                        </a>
                                     </li>
                                 @endforeach
                             </ul>

@@ -113,9 +113,9 @@
                                                 <span style="margin-left: 10px;">{{$project->key}} - <span class="userName">{{$issue->id}}</span></span>
                                                 <span style="margin-left: 15px; float: right; margin-right: 5px">
                                                       @if($issue->assigned['image_path'] != null)
-                                                        <img src="{{$issue->assigned['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
+                                                        <a href="/user/show/{{$issue->assigned['id']}}" style="text-decoration: none"><img src="{{$issue->assigned['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}"></a>
                                                     @else
-                                                        <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
+                                                        <a href="/user/show/{{$issue->assigned['id']}}" style="text-decoration: none"><img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}"></a>
                                                     @endif
                                                 </span>
                                             </div>

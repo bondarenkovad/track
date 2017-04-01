@@ -501,23 +501,27 @@
                         <dt>Assignee:</dt>
                         <dd>
                             <span class="marginLeft">
-                            @if($issue->assigned['image_path'] != null)
-                                    <img src="{{$issue->assigned['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
-                                @else
-                                    <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
-                                @endif
-                                {{$issue->assigned['name']}}
+                                <a href="/user/show/{{$issue->assigned['id']}}" style="text-decoration: none">
+                                    @if($issue->assigned['image_path'] != null)
+                                        <img src="{{$issue->assigned['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
+                                    @else
+                                        <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
+                                    @endif
+                                    {{$issue->assigned['name']}}
+                                </a>
                             </span>
                         </dd>
                         <dt>Reporter:</dt>
                         <dd>
                             <span class="marginLeft">
-                            @if($issue->reporter['image_path'] != null)
-                                     <img src="{{$issue->reporter['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
-                                 @else
-                                     <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
-                                 @endif
-                                 {{$issue->reporter['name']}}
+                                <a href="/user/show/{{$issue->reporter['id']}}" style="text-decoration: none">
+                                    @if($issue->reporter['image_path'] != null)
+                                         <img src="{{$issue->reporter['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
+                                     @else
+                                         <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
+                                     @endif
+                                     {{$issue->reporter['name']}}
+                                </a>
                             </span>
                         </dd>
                         <dt>&nbsp;</dt>

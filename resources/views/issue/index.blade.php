@@ -29,18 +29,22 @@
                         <td>{{$issue->type['name']}}</td>
                         <td>{{$issue->priority['name']}}</td>
                         <td>
+                            <a href="/user/show/{{$issue->reporter['id']}}" style="text-decoration: none">
                             @if($issue->reporter['image_path'] != null)
                                 <img src="{{$issue->reporter['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
                                 @else
                                 <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
                             @endif
+                            </a>
                         </td>
                         <td>
+                            <a href="/user/show/{{$issue->assigned['id']}}" style="text-decoration: none">
                             @if($issue->assigned['image_path'] != null)
                                 <img src="{{$issue->assigned['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
                             @else
                                 <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
                             @endif
+                            </a>
                         </td>
                         <td>{{$issue->CountComments()}}</td>
                         <td>{{$issue->CountLogs()}}</td>
