@@ -346,8 +346,8 @@
                                 @endif
                                 <span class="badge baDge-warning floatR bWidth marginL">{{$project->getSprintOE($sprint->id)}}h</span>
                                     <span class="colorShade" style="font-size: 1em">
-                                        <span>{{date('d/M/y',strtotime($sprint->date_start))}} &#149</span>
-                                        <span>{{date('d/M/y',strtotime($sprint->date_finish))}}</span>
+                                        <span>{{date("M j, Y, g:i a",strtotime($sprint->date_start))}} &#149</span>
+                                        <span>{{date("M j, Y, g:i a",strtotime($sprint->date_finish))}}</span>
                                     </span>
                                 @if($sprint->order != null)
                                 <input id="issueData-{{$sprint->id}}" type="hidden" name="issueData[{{$sprint->id}}]" value="{{implode(',',json_decode($sprint->order))}}">

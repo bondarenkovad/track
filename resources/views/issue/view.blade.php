@@ -385,7 +385,7 @@
                                                 @endif
                                             </div>
                                         <div class="media-body">
-                                            <h4 class="media-heading">{{$comment->name}} <span class="dataFormat">{{$comment->created_at}}</span>
+                                            <h4 class="media-heading">{{$comment->name}} <span class="dataFormat">{{date("M j, Y, g:i a",strtotime($comment->created_at))}}</span>
                                                 @if(Auth::user()->name === $comment->name)
                                                 <a data-toggle="modal" data-target="#issueCommentEdit{{$comment->id}}" class="iconBlock"><i class="glyphicon glyphicon-pencil"></i></a>
                                                 @endif
@@ -536,28 +536,28 @@
                         <dt>Created:</dt>
                         <dd>
                             <span class="marginLeft">
-                                {{$issue->created_at}}
+                                {{date("M j, Y, g:i a",strtotime($issue->created_at))}}
                             </span>
                         </dd>
                         <dt>Updated:</dt>
                         <dd>
                              <span class="marginLeft">
-                                {{$issue->updated_at}}
+                                {{date("M j, Y, g:i a",strtotime($issue->updated_at))}}
                             </span>
                         </dd>
                         <dt>Original Estimate:</dt>
                         <dd>
                             <span class="marginLeft">
-                                {{$issue->original_estimate}}
+                                {{$issue->original_estimate}}h
                             </span>
                         </dd>
                         <dt>Remaining Estimate:</dt>
                         <dd>
                              <span class="marginLeft">
                                  @if($issue->calcRE() < 0)
-                                    <span class="danger">{{$issue->calcRE()}}</span>
+                                    <span class="danger">{{$issue->calcRE()}}h</span>
                                  @else
-                                     <span class="low">{{$issue->calcRE()}}</span>
+                                     <span class="low">{{$issue->calcRE()}}h</span>
                                  @endif
                             </span>
                         </dd>
@@ -565,7 +565,7 @@
                         <dd>
                             @if($issue->TimeSpentSum()!= null)
                              <span class="marginLeft">
-                                {{$issue->TimeSpentSum()}}
+                                {{$issue->TimeSpentSum()}}h
                             </span>
                             @else
                             <span class="marginLeft">
