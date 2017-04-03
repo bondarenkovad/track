@@ -225,6 +225,24 @@ class User extends Authenticatable
             ->get();
     }
 
+
+    public function countUserAllIssues()
+    {
+        return $issues = Issue::where([
+            ['assigned_id', '=', $this->id],
+        ])
+            ->count();
+    }
+
+    public function countUserDoneIssues()
+    {
+        return $issues = Issue::where([
+            ['assigned_id', '=', $this->id],
+            ['status_id', '=', '5']
+        ])
+            ->count();
+    }
+
     public function getUserProjects()
     {
         return $projects = $this->projects()->get();

@@ -47,6 +47,14 @@
                                     {{$project->name}}<br>
                                 @endforeach
                             </dd>
+                            <dt>User Issues</dt>
+                            <dd>
+                                {{$user->countUserAllIssues()}}
+                            </dd>
+                            <dt>Done Issues</dt>
+                            <dd>
+                               {{$user->countUserDoneIssues()}}
+                            </dd>
                         </dl>
                     </div>
                 </div>
