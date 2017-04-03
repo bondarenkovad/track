@@ -16,8 +16,8 @@
                     <tr>
                         <td>{{$sprint->name}}</td>
                         <td>{!! $sprint->description !!}</td>
-                        <td>{{$sprint->date_start}}</td>
-                        <td>{{$sprint->date_finish}}</td>
+                        <td>{{date("M j, Y, g:i a",strtotime($sprint->date_start))}}</td>
+                        <td>{{date("M j, Y, g:i a",strtotime($sprint->date_finish))}}</td>
                         <td>{{$sprint->project['name']}}</td>
                     </tr>
                 @endforeach

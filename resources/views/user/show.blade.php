@@ -93,8 +93,8 @@
                                 <td>{{$issue->CountComments()}}</td>
                                 <td>{{$issue->CountLogs()}}</td>
                                 <td>{{$issue->CountAttachments()}}</td>
-                                <td>{{$issue->original_estimate}}</td>
-                                <td>{{$issue->remaining_estimate}}</td>
+                                <td>{{$issue->original_estimate}}h</td>
+                                <td>{{$issue->remaining_estimate}}h</td>
                             </tr>
                         @endforeach
                         </tbody>

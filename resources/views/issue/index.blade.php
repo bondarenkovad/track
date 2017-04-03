@@ -49,8 +49,8 @@
                         <td>{{$issue->CountComments()}}</td>
                         <td>{{$issue->CountLogs()}}</td>
                         <td>{{$issue->CountAttachments()}}</td>
-                        <td>{{$issue->original_estimate}}</td>
-                        <td>{{$issue->remaining_estimate}}</td>
+                        <td>{{$issue->original_estimate}}h</td>
+                        <td>{{$issue->calcRE()}}h</td>
                         <td><a  href="/project/{{$issue->getProjectInfo($issue->project['name'])->key}}/issue/{{$issue->id}}/edit" class="floatRight"><i class="glyphicon glyphicon-pencil" data-toggle="tooltip" title="Edit"></i></a></td>
                     </tr>
                 @endforeach
