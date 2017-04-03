@@ -54,13 +54,11 @@
                     <table class="table table-hover">
                         <thead>
                         <th>Summary</th>
-                        <th>Description</th>
                         <th>Status</th>
                         <th>Project</th>
                         <th>Type</th>
                         <th>Priority</th>
                         <th>Reporter</th>
-                        <th>Assigned</th>
                         <th>Comments</th>
                         <th>Work Log</th>
                         <th>Files</th>
@@ -72,9 +70,8 @@
                         @foreach($issues as $issue)
                             <tr>
                                 <td>{{$issue->summary}}</td>
-                                <td>{!! $issue->description !!}</td>
                                 <td>{{$issue->status['name']}}</td>
-                                <td>{{$issue->project['name']}}</td>
+                                <td>{{$issue->project['key']}}</td>
                                 <td>{{$issue->type['name']}}</td>
                                 <td>{{$issue->priority['name']}}</td>
                                 <td>
@@ -84,18 +81,11 @@
                                         <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
                                     @endif
                                 </td>
-                                <td>
-                                    @if($issue->assigned['image_path'] != null)
-                                        <img src="{{$issue->assigned['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
-                                    @else
-                                        <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
-                                    @endif
-                                </td>
                                 <td>{{$issue->CountComments()}}</td>
                                 <td>{{$issue->CountLogs()}}</td>
                                 <td>{{$issue->CountAttachments()}}</td>
                                 <td>{{$issue->original_estimate}}h</td>
-                                <td>{{$issue->remaining_estimate}}h</td>
+                                <td>{{$issue->calcRE()}}h</td>
                                 <td><a  href="/project/{{$issue->project['key']}}/issue/{{$issue->id}}/view" class="floatR glyphicon glyphicon-eye-open textDecorNo"></a></td>
                             </tr>
                         @endforeach
