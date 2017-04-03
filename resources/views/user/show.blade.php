@@ -66,6 +66,7 @@
                         <th>Files</th>
                         <th>Original estimate</th>
                         <th>Remaining estimate</th>
+                        <th></th>
                         </thead>
                         <tbody>
                         @foreach($issues as $issue)
@@ -95,6 +96,7 @@
                                 <td>{{$issue->CountAttachments()}}</td>
                                 <td>{{$issue->original_estimate}}h</td>
                                 <td>{{$issue->remaining_estimate}}h</td>
+                                <td><a  href="/project/{{$issue->project['key']}}/issue/{{$issue->id}}/view" class="floatR glyphicon glyphicon-eye-open textDecorNo"></a></td>
                             </tr>
                         @endforeach
                         </tbody>
