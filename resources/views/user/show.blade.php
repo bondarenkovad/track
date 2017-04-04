@@ -27,6 +27,8 @@
                         <dl class="dl-horizontal">
                             <dt>E-mail</dt>
                             <dd>{{$user->email}}</dd>
+                            <dt>Created at</dt>
+                            <dd>{{date("M j, Y, g:i a",strtotime($user->created_at))}}</dd>
                             <dt>Status</dt>
                             <dd>
                                 @if($user->active === 1)
