@@ -186,7 +186,7 @@
                             <div class="form-group{{ $errors->has('original_estimate') ? ' has-error' : '' }}">
                                 <label for="name" class="col-md-12">Original Estimate:</label>
                                     <div class="col-md-11">
-                                        <input id="original_estimate" type="number" class="form-control" name="original_estimate">
+                                        <input id="original_estimate" type="number" class="form-control" name="original_estimate" min="0">
                                         @if ($errors->has('original_estimate'))
                                             {{session()->flash('danger',$errors->first('original_estimate'))}}
                                         @endif
@@ -198,7 +198,7 @@
                             <div class="form-group{{ $errors->has('remaining_estimate') ? ' has-error' : '' }}">
                                 <label for="name" class="col-md-12">Remaining Estimate:</label>
                                     <div class="col-md-11">
-                                        <input id="remaining_estimate" type="number" class="form-control" name="remaining_estimate">
+                                        <input id="remaining_estimate" type="number" class="form-control" name="remaining_estimate" min="0">
                                         @if ($errors->has('remaining_estimate'))
                                             {{session()->flash('danger',$errors->first('remaining_estimate'))}}
                                         @endif
