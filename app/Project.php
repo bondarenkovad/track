@@ -100,6 +100,7 @@ class Project extends Model
 
         if($orders != null)
         {
+            $count = 0;
             foreach($orders as $id)
             {
                 foreach($this->issues()->get() as $issue)
@@ -111,11 +112,14 @@ class Project extends Model
 
                     if(!in_array($issue->id, $idIssueInSprint) && !in_array($issue->id, $orders))
                     {
-                        $collection->push($issue);
+                        if($count === 0)
+                        {
+                            $collection->push($issue);
+                            $count++;
+                        }
                     }
                 }
             }
-
             return $collection;
         }
         else
