@@ -188,7 +188,7 @@ class IssueController extends Controller
         $issue->save();
         session()->flash('status', 'Issue successfully updated!');
 
-        return redirect('issue/index');
+        return back();
     }
 
     public function addComment($id)
