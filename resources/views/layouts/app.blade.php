@@ -53,8 +53,8 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/presentation') }}">
-                    TRACKER
+                <a class="navbar-brand" data-toggle="tooltip" title="Tracker">
+                    <img src="/img/status_icon/logo.png" class="logo img-circle">
                 </a>
             </div>
 
