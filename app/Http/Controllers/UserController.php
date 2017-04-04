@@ -70,10 +70,11 @@ class UserController extends Controller
         if($request->hasFile('image_path'))
         {
             $file = $request->file('image_path');
-            $destinationPath = 'img.userPhoto';
+            $destinationPath = '/img/userPhoto';
+            $path = 'C:\wamp\www\track\public\img\userPhoto';
             $extention = $file->getClientOriginalExtension();
             $fileName = rand(11111, 99999).'.'.$extention;
-            $file->move($destinationPath, $fileName);
+            $file->move($path, $fileName);
 
             $userPhoto = $destinationPath.'/'.$fileName;
         }
@@ -223,10 +224,11 @@ class UserController extends Controller
         if($request->hasFile('image_path'))
         {
             $file = $request->file('image_path');
+            $path = 'C:\wamp\www\track\public\img\userPhoto';
             $destinationPath = '/img/userPhoto';
             $extention = $file->getClientOriginalExtension();
             $fileName = rand(11111, 99999).'.'.$extention;
-            $file->move($destinationPath, $fileName);
+            $file->move($path, $fileName);
 
             $userPhoto = $destinationPath.'/'.$fileName;
         }
