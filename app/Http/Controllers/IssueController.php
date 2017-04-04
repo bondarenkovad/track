@@ -105,6 +105,7 @@ class IssueController extends Controller
             'remaining_estimate' => (int)$request['remaining_estimate'],
         ]);
 
+        session()->flash('status', 'Issue successfully added!');
         return back();
     }
 //
