@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
             <span class="text-left text-muted" style="font-size: 1.3em"><span class="userName">Issues</span> List</span>
-            <table class="table table-hover">
+            <table class="table table-hover table-condensed">
                 <thead>
                 <th>Summary</th>
                 <th>Description</th>
@@ -23,7 +23,7 @@
                 @foreach($issues as $issue)
                     <tr>
                         <td>{{$issue->summary}}</td>
-                        <td>{!! $issue->description !!}</td>
+                        <td style="width:100px; overflow: hidden;text-overflow:ellipsis">{!! $issue->description !!}</td>
                         <td>{{$issue->status['name']}}</td>
                         <td>{{$issue->project['name']}}</td>
                         <td>{{$issue->type['name']}}</td>
