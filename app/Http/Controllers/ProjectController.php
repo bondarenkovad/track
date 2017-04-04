@@ -138,7 +138,7 @@ class ProjectController extends Controller
             }
         }
 
-//        return redirect('project/index');
+        return redirect('project/index');
     }
 
     public function destroy($id)
