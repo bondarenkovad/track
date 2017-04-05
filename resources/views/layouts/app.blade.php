@@ -198,7 +198,7 @@
 
                 $('#sprintProject').val(obj.project);
                 $('#sprintDate_start').val(obj.date_start);
-                $('#sprintDate_finish').val(obj.date_start);
+                $('#sprintDate_finish').val(obj.date_finish);
                 $('#sprintId').val(content);
             };
 
