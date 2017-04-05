@@ -31,7 +31,7 @@
                             <dd>{{date("M j, Y, g:i a",strtotime($user->created_at))}}</dd>
                             <dt>Status</dt>
                             <dd>
-                                @if($user->active === 1)
+                                @if($user->active)
                                     <img class="img" src="/img/status_icon//on.png">
                                 @else
                                     <img class="img" src="/img/status_icon/off.png">
