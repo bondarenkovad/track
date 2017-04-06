@@ -70,17 +70,16 @@ class UserController extends Controller
         if($request->hasFile('image_path'))
         {
             $file = $request->file('image_path');
-            $destinationPath = '/img/userPhoto';
-            $path = 'C:\wamp\www\track\public\img\userPhoto';
+            $destinationPath = 'img/userPhoto';
             $extention = $file->getClientOriginalExtension();
             $fileName = rand(11111, 99999).'.'.$extention;
-            $file->move($path, $fileName);
+            $file->move($destinationPath, $fileName);
 
-            $userPhoto = $destinationPath.'/'.$fileName;
+            $userPhoto = '/'.$destinationPath.'/'.$fileName;
         }
         else
         {
-            $userPhoto = 'img/userPhoto/defaultPhoto.png';
+            $userPhoto = '/img/userPhoto/defaultPhoto.png';
         }
 
         $id = DB::table('users')->insertGetId([
@@ -126,7 +125,6 @@ class UserController extends Controller
         if(count($u) == 0 || $search === "")
         {
             $users = User::all();
-            session()->flash('danger', 'No search in database!');
             return view('/user/index', ['users' => $users]);
         }
         else
@@ -224,13 +222,12 @@ class UserController extends Controller
         if($request->hasFile('image_path'))
         {
             $file = $request->file('image_path');
-            $path = 'C:\wamp\www\track\public\img\userPhoto';
-            $destinationPath = '/img/userPhoto';
+            $destinationPath = 'img/userPhoto';
             $extention = $file->getClientOriginalExtension();
             $fileName = rand(11111, 99999).'.'.$extention;
-            $file->move($path, $fileName);
+            $file->move($destinationPath, $fileName);
 
-            $userPhoto = $destinationPath.'/'.$fileName;
+            $userPhoto = '/'.$destinationPath.'/'.$fileName;
         }
         else
         {
