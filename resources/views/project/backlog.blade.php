@@ -318,7 +318,7 @@
                                             {{--<li><a href="/sprint/edit/{{$sprint->id}}/board/{{$board->id}}"><span class="colorShade">Edit Sprint</span></a></li>--}}
                                             <li><a data-toggle="modal" data-target="#sprintEdit" data-content="{{$sprint->id}}" style="cursor: hand" ><span class="colorShade">Edit Sprint</span></a></li>
                                             <li><a href="/sprint/delete/{{$sprint->id}}"><span class="colorShade">Delete Sprint</span></a></li>
-                                                @if($sprint->status === 2)
+                                                @if($sprint->status == 2)
                                                     <li><a href="/sprint/{{$sprint->id}}/makeFinish"><span class="colorShade">Finish Sprint</span></a></li>
                                                 @else
                                                     <li><a href="/sprint/{{$sprint->id}}/makeActive"><span class="colorShade">Start Sprint</span></a></li>
