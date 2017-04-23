@@ -29,7 +29,7 @@ class HomeController extends Controller
         $user = User::where('users.name', '=', Auth::user()->name)
             ->first();
 
-        return view('home', ['user'=>$user]);
+        return view('home.home', ['user'=>$user]);
     }
 
     public function presentation()
@@ -43,7 +43,6 @@ class HomeController extends Controller
 
         if($request->group_user)
         {
-
             echo $user->name." У нас присвоены права юзера!";
         }
 
@@ -56,8 +55,5 @@ class HomeController extends Controller
         {
             echo $user->name."...и админа! Надо что-то с этим делать!";
         }
-
-
-//        echo "Типа этот метод выполняется!";
     }
 }
