@@ -129,7 +129,7 @@ class IssueController extends Controller
         $types = IssueType::all();
         $priorities = IssuesPriority::all();
         $users = User::all();
-        return view('issue.view', ['issue'=>$issue, 'statuses'=>$statuses,
+        return view('issue.view.view', ['issue'=>$issue, 'statuses'=>$statuses,
             'project'=>$project, 'types'=>$types,
             'priorities'=>$priorities, 'users'=>$users, 'projects'=>$projects]);
     }
