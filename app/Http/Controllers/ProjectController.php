@@ -37,7 +37,7 @@ class ProjectController extends Controller
         $types = IssueType::all();
         $priorities = IssuesPriority::all();
         $users = User::all();
-        return view('project.view', ['issues'=>$issues,'project'=>$project,'board'=> $board, 'statuses'=> $statuses,'types'=>$types, 'priorities'=>$priorities, 'users'=>$users]);
+        return view('project.view.view', ['issues'=>$issues,'project'=>$project,'board'=> $board, 'statuses'=> $statuses,'types'=>$types, 'priorities'=>$priorities, 'users'=>$users]);
     }
 
     public function showSprint($key,$i, $id)
