@@ -10,7 +10,7 @@
         <span class="badge baDge-warning floatR bWidth marginL">{{$project->getUserInProjectOE($user->id)}}h</span>
         <ul class="issue">
             @foreach($project->getIssueForUserById($user->id) as $issue)
-                @include('home.homeTemplates.issueView')
+                @include('list.issueView')
             @endforeach
         </ul>
     </div>

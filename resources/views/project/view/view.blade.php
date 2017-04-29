@@ -21,7 +21,7 @@
         <ul class="issue">
             @if( $project->countIssues() > 0)
                 @foreach($issues as $issue)
-                    @include('home.homeTemplates.issueView')
+                    @include('list.issueView')
                 @endforeach
             @else
                 <li class="ui-state-default">No issue assigned to Project </li>

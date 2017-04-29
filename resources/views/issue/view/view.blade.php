@@ -7,10 +7,10 @@
             <a class="btn btn-default floatR" data-toggle="modal" data-target="#issueEdit">Edit</a>
             </h3>
             <hr>
-            @include('issue.view.issueViewTemplates.issueEditModal')
-            @include('issue.view.issueViewTemplates.issueCommentModal')
-            @include('issue.view.issueViewTemplates.issueLogModal')
-            @include('issue.view.issueViewTemplates.issueFileModal')
+            @include('modal.issueEdit')
+            @include('modal.issueComment')
+            @include('modal.issueLog')
+            @include('modal.issueFile')
             @include('issue.view.issueViewTemplates.leftViewPanel')
             @include('issue.view.issueViewTemplates.rightViewPanel')
         @endif
