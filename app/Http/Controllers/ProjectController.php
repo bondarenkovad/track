@@ -50,7 +50,7 @@ class ProjectController extends Controller
             ->where('id', '=', $id)
             ->first();
 
-        return view('project.activeSprint', ['project' => $project, 'sprint'=> $sprint, 'board'=>$board, 'statuses'=>$statuses]);
+        return view('project.board.activeSprint', ['project' => $project, 'sprint'=> $sprint, 'board'=>$board, 'statuses'=>$statuses]);
     }
 
     public function updateSprint($id,Request $request)
