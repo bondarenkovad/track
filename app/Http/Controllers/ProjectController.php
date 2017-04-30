@@ -163,7 +163,7 @@ class ProjectController extends Controller
         $types = IssueType::all();
         $priorities = IssuesPriority::all();
         $users = User::all();
-        return view('project.backlog', ['project'=> $project,'board'=> $board, 'statuses'=> $statuses,'types'=>$types, 'priorities'=>$priorities, 'users'=>$users]);
+        return view('project.backlog.backlog', ['project'=> $project,'board'=> $board, 'statuses'=> $statuses,'types'=>$types, 'priorities'=>$priorities, 'users'=>$users]);
     }
 
     public function refresh($key,$id, Request $request)
