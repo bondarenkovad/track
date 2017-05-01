@@ -9,7 +9,6 @@
                     <input type="hidden" name="_method" value="put"/>
                     {{ csrf_field() }}
 
-
                     <div class="form-group{{ $errors->has('time_spent') ? ' has-error' : '' }}">
                         <label for="time_spent" class="col-md-4 control-label">Time Spent:</label>
                         <div class="col-md-6">
@@ -37,7 +36,6 @@
                             @endif
                         </div>
                     </div>
-
 
                     <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
                         <label for="comment" class="col-md-4 control-label">Comment:</label>
