@@ -1,5 +1,5 @@
 define([
-  'jquery',
+  'jquery.shim',
   'jquery-mousewheel',
 
   './select2/core',

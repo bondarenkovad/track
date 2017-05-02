@@ -51,29 +51,14 @@
     @yield('content')
 
     <!-- JavaScripts -->
-        <script src="/select2-4.0.3/vendor/jquery-2.1.0.js"></script>
-        <script src="/select2-4.0.3/dist/js/select2.js"></script>
+        <script src="/js/select2-4.0.3/vendor/jquery-2.1.0.js"></script>
+        <script src="/js/select2-4.0.3/dist/js/select2.js"></script>
         <script>
-            setTimeout(function(){
-                $('#flash').fadeOut('fast');
-            }, 2000);
-        </script>
-        <script>
-          $("#project").select2({
-              multiply:true,
-              minimumInputLength: 2
-          });
 
-//          $('#LogBtn').on('click', function()
-//          {
-//              $time_spent = $('#timeSpent').val();
-//              $comment = $('#logComment').val();
-//
-//              alert($('#timeSpent').val());
-//
-//              $('#time_spent').val(time_spent);
-//             $('#commentLog').val(comment);
-//          });
+            $("#project").select2({
+                multiply:true,
+                minimumInputLength: 2
+            });
 
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
@@ -338,5 +323,6 @@
                 toolbar: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image'
             });
         </script>
+        <script src="/js/main.js"></script>
 </body>
 </html>
