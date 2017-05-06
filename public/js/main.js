@@ -15,7 +15,6 @@ $(document).ready(function ($) {
         }).disableSelection();
     });
 
-
     $editSprint = function (obj, content) {
 
         $('#sprintName').val(obj.name);
@@ -30,7 +29,6 @@ $(document).ready(function ($) {
         $('#sprintDate_finish').val(obj.date_finish);
         $('#sprintId').val(content);
     };
-
 
     $('#sprintEdit').on('show.bs.modal', function (event) {
         // получить кнопку, которая его открыло
@@ -242,6 +240,19 @@ $(document).ready(function ($) {
         });
 
         $("#statusesId").val($mass);
+    });
+
+    tinyMCE.init({
+        selector: '.mytextarea',
+        resize: false,
+        menubar: false,
+        plugins: [
+            'advlist autolink lists link image charmap print preview anchor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table contextmenu paste code'
+        ],
+        toolbar: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | ' +
+        'bullist numlist outdent indent | link image'
     });
 });
 
