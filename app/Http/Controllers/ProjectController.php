@@ -168,6 +168,14 @@ class ProjectController extends Controller
 
     public function refresh($key,$id, Request $request)
     {
+        $statuses = IssueStatus::all();
+        $board = Board::find($id);
+        $statuses = IssueStatus::all();
+        $types = IssueType::all();
+        $priorities = IssuesPriority::all();
+        $users = User::all();
+
+
         $project = Project::with('issues')
             ->where('key', '=', $key)
             ->first();
@@ -207,8 +215,7 @@ class ProjectController extends Controller
             }
         }
 
-
-        return view('project.backlog', ['project'=>$project,'board'=>$board]);
+        return view('project.backlog.backlog', ['project'=> $project,'board'=> $board, 'statuses'=> $statuses,'types'=>$types, 'priorities'=>$priorities, 'users'=>$users]);
     }
 
     public function search(Request $request)
