@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class Sprint extends Model
 {
     protected $fillable = [
-        'name', 'description', 'status','date_start','date_finish',
+        'name', 'description', 'status', 'date_start', 'date_finish',
         'project_id'
     ];
 
@@ -23,20 +23,16 @@ class Sprint extends Model
     {
         $collection = collect();
 
-        if($this->order != null)
-        {
+        if ($this->order != null) {
             $order = json_decode($this->order);
 
             $allIssues = Issue::where('project_id', '=', $this->project['id'])
-                ->whereIn('id', $order )
+                ->whereIn('id', $order)
                 ->get();
 
-            foreach($order as $id)
-            {
-                foreach($allIssues as $issue)
-                {
-                    if($issue->id === $id+ 0)
-                    {
+            foreach ($order as $id) {
+                foreach ($allIssues as $issue) {
+                    if ($issue->id === $id + 0) {
                         $collection->push($issue);
                     }
                 }
@@ -49,12 +45,11 @@ class Sprint extends Model
 
     public function getIssueByStatus($id)
     {
-        if($this->order != null)
-        {
+        if ($this->order != null) {
             $order = json_decode($this->order);
 
             $issues = Issue::where('project_id', '=', $this->project['id'])
-                ->whereIn('id', $order )
+                ->whereIn('id', $order)
                 ->where('status_id', '=', $id)
                 ->get();
 
@@ -66,8 +61,7 @@ class Sprint extends Model
 
     public function isActive()
     {
-        if($this->status == 2)
-        {
+        if ($this->status == 2) {
             return true;
         }
         return false;
@@ -78,27 +72,21 @@ class Sprint extends Model
         $issueMass = json_decode($this->order);
         $issueIdMass = [];
 
-        if($this->order != null && $this->order != [])
-        {
+        if ($this->order != null && $this->order != []) {
             $allIssues = Issue::where('project_id', '=', $this->project['id'])
                 ->whereIn('id', $issueMass)
                 ->get();
 
-            foreach($issueMass as $id)
-            {
-                foreach($allIssues as $issue)
-                {
-                    if($issue->id === $id+ 0 && $issue->status_id != 5)
-                    {
-                        array_push($issueIdMass, "".$issue->id);
+            foreach ($issueMass as $id) {
+                foreach ($allIssues as $issue) {
+                    if ($issue->id === $id + 0 && $issue->status_id != 5) {
+                        array_push($issueIdMass, "" . $issue->id);
                     }
                 }
             }
 
             return $issueIdMass;
-        }
-        else
-        {
+        } else {
             return [];
         }
     }

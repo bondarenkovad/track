@@ -7,10 +7,11 @@ use App\User;
 use App\Issue;
 use Illuminate\Support\Facades\DB;
 use App\IssueStatus;
+
 class WorkLog extends Model
 {
     protected $fillable = [
-        'comment', 'issue_id','user_id', 'time_spent', 'issue_status_id'
+        'comment', 'issue_id', 'user_id', 'time_spent', 'issue_status_id'
     ];
 
     public function user()

@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','active'
+        'name', 'email', 'password', 'active'
     ];
 
     /**
@@ -66,18 +66,16 @@ class User extends Authenticatable
         $role = "Administrator";
 
 
-       $allRoles = $this->groups()->get();
+        $allRoles = $this->groups()->get();
 
-        foreach($allRoles as $group)
-            {
-                if($group->name === $role)
-                {
-                    return true;
-                }
+        foreach ($allRoles as $group) {
+            if ($group->name === $role) {
+                return true;
             }
+        }
 
         return false;
-   }
+    }
 
     public function ifPM()
     {
@@ -86,10 +84,8 @@ class User extends Authenticatable
 
         $allRoles = $this->groups()->get();
 
-        foreach($allRoles as $group)
-        {
-            if($group->name === $role)
-            {
+        foreach ($allRoles as $group) {
+            if ($group->name === $role) {
                 return true;
             }
         }
@@ -99,11 +95,10 @@ class User extends Authenticatable
 
     public function hasAnyGroup()
     {
-        if( ($this->groups()->exists()) )
-        {
+        if (($this->groups()->exists())) {
             return true;
         }
-            return false;
+        return false;
     }
 
     public function getActions()
@@ -135,8 +130,7 @@ class User extends Authenticatable
 
     public function hasGroup($group)
     {
-        if($this->groups()->where('name', $group)->first())
-        {
+        if ($this->groups()->where('name', $group)->first()) {
             return true;
         }
 
@@ -169,8 +163,7 @@ class User extends Authenticatable
 
     public function hasAnyProject()
     {
-        if( ($this->projects()->exists()) )
-        {
+        if (($this->projects()->exists())) {
             return true;
         }
         return false;
@@ -178,8 +171,7 @@ class User extends Authenticatable
 
     public function hasProject($project)
     {
-        if($this->projects()->where('name', $project)->first())
-        {
+        if ($this->projects()->where('name', $project)->first()) {
             return true;
         }
 
@@ -208,8 +200,8 @@ class User extends Authenticatable
         $projectIds = $this->projects()->get()->pluck('id');
 
         $issues = Issue::where([
-                ['reporter_id', '=', $this->id],
-                ['assigned_id', '=', $this->id]
+            ['reporter_id', '=', $this->id],
+            ['assigned_id', '=', $this->id]
         ])
             ->whereNotIn('project_id', $projectIds)
             ->get();
@@ -252,8 +244,8 @@ class User extends Authenticatable
     {
         $projectIds = $this->projects()->get()->pluck('id');
 
-       return $boards = Board::whereIn('project_id', $projectIds)
-           ->orderBy('name', 'desc')
-           ->get();
+        return $boards = Board::whereIn('project_id', $projectIds)
+            ->orderBy('name', 'desc')
+            ->get();
     }
 }
