@@ -19,22 +19,21 @@ class BoardController extends Controller
 
     public function index()
     {
-        $boards = Board::all();
+        $boards = $this->getBoards();
         return view('board.index', ['boards' => $boards]);
     }
 
     public function create()
     {
-        $projects = Project::all();
-        $statuses = IssueStatus::all();
+        $projects = $this->getProjects();
+        $statuses = $this->getStatuses();
         return view('board.create', ['projects' => $projects, 'statuses' => $statuses]);
     }
 
     public function store(Request $request)
     {
-
         $statuses = explode(',', $request->input('statusesId'));
-        $allStatuses = IssueStatus::all();
+        $allStatuses = $this->getStatuses();
 
         $this->validate($request, [
             'name' => 'required|max:50',
@@ -66,14 +65,14 @@ class BoardController extends Controller
     public function edit($id)
     {
         $board = Board::find($id);
-        $projects = Project::all();
+        $projects = $this->getProjects();
         return view('board.edit', ['board' => $board, 'projects' => $projects]);
     }
 
     public function update($id, Request $request)
     {
         $statuses = explode(',', $request->input('statusesId'));
-        $allStatuses = IssueStatus::all();
+        $allStatuses = $this->getStatuses();
         $board = Board::find($id);
         $key = 0;
 
@@ -88,11 +87,13 @@ class BoardController extends Controller
             foreach ($allStatuses as $status) {
                 if (in_array($status->id, $statuses)) {
                     if (!$board->hasStatus($status->name)) {
+
                         $key++;
                         $board->addStatusToBoard($status->id, $key);
                     }
                 } else {
                     if ($board->hasStatus($status->name)) {
+
                         $board->deleteStatusToBoard($status->id);
                     }
                 }
@@ -124,4 +125,18 @@ class BoardController extends Controller
         return redirect('/board/index');
     }
 
+    public function getBoards()
+    {
+        return $boards = Board::all();
+    }
+
+    public function getProjects()
+    {
+        return $projects = Project::all();
+    }
+
+    public function getStatuses()
+    {
+        return $statuses = IssueStatus::all();
+    }
 }
