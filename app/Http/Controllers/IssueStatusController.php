@@ -49,12 +49,12 @@ class IssueStatusController extends Controller
     public function edit($id)
     {
         $issueStatus = IssueStatus::find($id);
-        return view('issue.status.edit', ['issueStatus'=>$issueStatus]);
+        return view('issue.status.edit', ['issueStatus' => $issueStatus]);
     }
 
     public function update($id, Request $request)
     {
-        $issueStatus=IssueStatus::find($id);
+        $issueStatus = IssueStatus::find($id);
 
         $this->validate($request, [
             'name' => 'required|max:50',

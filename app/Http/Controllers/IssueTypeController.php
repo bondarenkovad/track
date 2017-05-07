@@ -15,10 +15,10 @@ class IssueTypeController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(Request $request)
+    public function index()
     {
-            $issueTypes = IssueType::all();
-            return view('issue.type.index', ['issueTypes' => $issueTypes]);
+        $issueTypes = IssueType::all();
+        return view('issue.type.index', ['issueTypes' => $issueTypes]);
     }
 
     public function create()
@@ -32,8 +32,8 @@ class IssueTypeController extends Controller
             'name' => 'required|max:255|unique:issue_types',
         ]);
 
-      IssueType::create([
-        'name' => $request['name'],
+        IssueType::create([
+            'name' => $request['name'],
         ]);
 
         return redirect('issue/type/index');
@@ -42,9 +42,7 @@ class IssueTypeController extends Controller
     public function destroy($id)
     {
         DB::table('issue_types')->delete($id);
-//        $issueType = IssueType::find($id);
-////        dd( $issueType);
-//        $issueType->delete();
+
 
         return redirect('issue/type/index');
     }
@@ -52,12 +50,12 @@ class IssueTypeController extends Controller
     public function edit($id)
     {
         $issueType = IssueType::find($id);
-        return view('issue.type.edit', ['issueType'=>$issueType]);
+        return view('issue.type.edit', ['issueType' => $issueType]);
     }
 
     public function update($id, Request $request)
     {
-        $issueType=IssueType::find($id);
+        $issueType = IssueType::find($id);
 
         $this->validate($request, [
             'name' => 'required|max:255',

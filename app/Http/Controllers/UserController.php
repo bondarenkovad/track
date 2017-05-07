@@ -20,14 +20,11 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-//        $user = $request->user();
-        if($request->user() != null) {
+        if ($request->user() != null) {
 
             $users = User::all();
             return view('user.index', ['users' => $users]);
-        }
-        else
-        {
+        } else {
             return view('auth.login');
         }
     }
@@ -36,13 +33,13 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $issues = Issue::where('assigned_id', '=', $user->id)->paginate(10);
-        return view('user.show', ['user'=>$user, 'issues'=> $issues]);
+        return view('user.show', ['user' => $user, 'issues' => $issues]);
     }
 
     public function create()
     {
         $projects = Project::all();
-        return view('user.create', ['projects'=>$projects]);
+        return view('user.create', ['projects' => $projects]);
     }
 
     protected function validator(array $data)
@@ -67,18 +64,15 @@ class UserController extends Controller
             'password' => 'required|min:6|confirmed',
         ]);
 
-        if($request->hasFile('image_path'))
-        {
+        if ($request->hasFile('image_path')) {
             $file = $request->file('image_path');
             $destinationPath = 'img/userPhoto';
             $extention = $file->getClientOriginalExtension();
-            $fileName = rand(11111, 99999).'.'.$extention;
+            $fileName = rand(11111, 99999) . '.' . $extention;
             $file->move($destinationPath, $fileName);
 
-            $userPhoto = '/'.$destinationPath.'/'.$fileName;
-        }
-        else
-        {
+            $userPhoto = '/' . $destinationPath . '/' . $fileName;
+        } else {
             $userPhoto = '/img/userPhoto/defaultPhoto.png';
         }
 
@@ -86,22 +80,18 @@ class UserController extends Controller
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => bcrypt($request['password']),
-            'active'=>(int)$request['active'],
-            'image_path'=>$userPhoto,
+            'active' => (int)$request['active'],
+            'image_path' => $userPhoto,
         ]);
 
         $user = User::find($id);
 
         $user->addDefaultUserGroup();
 
-        if($projects != null)
-        {
-            foreach($allProjects as $project)
-            {
-                if(in_array($project->id, $projects))
-                {
-                    if(!$user->hasProject($project->name))
-                    {
+        if ($projects != null) {
+            foreach ($allProjects as $project) {
+                if (in_array($project->id, $projects)) {
+                    if (!$user->hasProject($project->name)) {
                         $user->addInProject($project->id);
                     }
                 }
@@ -114,7 +104,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('user.edit', ['user'=>$user]);
+        return view('user.edit', ['user' => $user]);
     }
 
     public function search(Request $request)
@@ -122,90 +112,57 @@ class UserController extends Controller
         $search = $request->search;
         $u = User::where('name', 'like', "%$search%")->get();
 
-        if(count($u) == 0 || $search === "")
-        {
+        if (count($u) == 0 || $search === "") {
             $users = User::all();
             return view('/user/index', ['users' => $users]);
-        }
-        else
-        {
+        } else {
             return view('/user/index', ['users' => $u]);
         }
-
     }
 
-    /**
-     * @param $id
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
     public function update($id, Request $request)
     {
         $allGroup = Group::all();
-        $user=User::find($id);
+        $user = User::find($id);
         $groups = $request->group;
         $projects = $request->project;
         $allProjects = Project::all();
 
-        if($groups === null)
-        {
-           foreach($user->groups()->get() as $group)
-           {
-               if($user->hasGroup($group->name))
-               {
+        if ($groups === null) {
+            foreach ($user->groups()->get() as $group) {
+                if ($user->hasGroup($group->name)) {
 
-                   $user->deleteGroupToUser($group->id);
-               }
-           }
-        }
-        else
-        {
-            foreach($allGroup as $group)
-                {
-                    if(array_key_exists($group->id, $groups))
-                    {
-                        if(!$user->hasGroup($group->name))
-                        {
-                            $user->addGroupToUser($group->id);
-                        }
-                    }
-                    else
-                    {
-
-                        if($user->hasGroup($group->name))
-                        {
-                            $user->deleteGroupToUser($group->id);
-                        }
-                    }
+                    $user->deleteGroupToUser($group->id);
                 }
-        }
-
-        if($projects === null)
-        {
-            foreach($user->projects()->get() as $project)
-            {
-                if($user->hasProject($project->name))
-                {
-
-                    $user->deleteOfProject($project->id);
+            }
+        } else {
+            foreach ($allGroup as $group) {
+                if (array_key_exists($group->id, $groups)) {
+                    if (!$user->hasGroup($group->name)) {
+                        $user->addGroupToUser($group->id);
+                    }
+                } else {
+                    if ($user->hasGroup($group->name)) {
+                        $user->deleteGroupToUser($group->id);
+                    }
                 }
             }
         }
-        else
-        {
-            foreach($allProjects as $project)
-            {
-                if(in_array($project->id, $projects))
-                {
-                    if(!$user->hasProject($project->name))
-                    {
+
+        if ($projects === null) {
+            foreach ($user->projects()->get() as $project) {
+                if ($user->hasProject($project->name)) {
+                    $user->deleteOfProject($project->id);
+                }
+            }
+        } else {
+            foreach ($allProjects as $project) {
+                if (in_array($project->id, $projects)) {
+                    if (!$user->hasProject($project->name)) {
                         $user->addInProject($project->id);
                     }
-                }
-                else
-                {
-                    if($user->hasProject($project->name))
-                    {
+                } else {
+                    if ($user->hasProject($project->name)) {
                         $user->deleteOfProject($project->id);
                     }
                 }
@@ -219,24 +176,19 @@ class UserController extends Controller
             'password' => 'sometimes|min:6|confirmed',
         ]);
 
-        if($request->hasFile('image_path'))
-        {
+        if ($request->hasFile('image_path')) {
             $file = $request->file('image_path');
             $destinationPath = 'img/userPhoto';
             $extention = $file->getClientOriginalExtension();
-            $fileName = rand(11111, 99999).'.'.$extention;
+            $fileName = rand(11111, 99999) . '.' . $extention;
             $file->move($destinationPath, $fileName);
 
-            $userPhoto = '/'.$destinationPath.'/'.$fileName;
-        }
-        else
-        {
+            $userPhoto = '/' . $destinationPath . '/' . $fileName;
+        } else {
             $userPhoto = '/img/userPhoto/defaultPhoto.png';
         }
 
-
-        if($request->password === "")
-        {
+        if ($request->password === "") {
             $user->update([
                 [$user->name = $request->name],
                 [$user->active = $request->active],
@@ -244,15 +196,13 @@ class UserController extends Controller
                 [$user->active = (int)$request->active],
                 [$user->image_path = $userPhoto],
             ]);
-        }
-        else
-        {
+        } else {
             $user->update([
                 'name' => $request['name'],
                 'email' => $request['email'],
                 'password' => bcrypt($request['password']),
-                'active'=>(int)$request['active'],
-                'image_path'=>$userPhoto,
+                'active' => (int)$request['active'],
+                'image_path' => $userPhoto,
             ]);
         }
 
@@ -261,6 +211,4 @@ class UserController extends Controller
 
         return redirect('user/index');
     }
-
-
 }

@@ -17,20 +17,20 @@ class GroupController extends Controller
 
     public function index()
     {
-            $groups= Group::all();
-            return view('user.group.index', ['groups' => $groups]);
+        $groups = Group::all();
+        return view('user.group.index', ['groups' => $groups]);
     }
 
     public function create()
     {
         $actions = Action::all();
-        return view('user.group.create', ['actions'=>$actions]);
+        return view('user.group.create', ['actions' => $actions]);
     }
 
     public function showUser($id)
     {
         $group = Group::find($id);
-        return view('user.group.show', ['group'=>$group]);
+        return view('user.group.show', ['group' => $group]);
     }
 
     public function store(Request $request)
@@ -42,86 +42,51 @@ class GroupController extends Controller
             'name' => 'required|max:255|unique:groups',
         ]);
 
-//        dd((int)$request['active']);
         $id = DB::table('groups')->insertGetId([
             'name' => $request['name'],
-            ]);
+        ]);
 
         $group = Group::find($id);
 
-        if($actions === null)
-        {
-//            foreach($user->groups()->get() as $group)
-//            {
-//                if($user->hasGroup($group->name))
-//                {
-//
-//                    $user->deleteGroupToUser($group->id);
-//                }
-//            }
-        }
-        else
-        {
-            foreach($allActions as $action)
-            {
-                if(array_key_exists($action->id, $actions))
-                {
-                    if(!$group->hasAction($action->name))
-                    {
+        if ($actions != null) {
+            foreach ($allActions as $action) {
+                if (array_key_exists($action->id, $actions)) {
+                    if (!$group->hasAction($action->name)) {
                         $group->addActionToGroup($action->id);
                     }
                 }
-                else
-                {
-//                    if($group->hasAction($action->name))
-//                    {
-//                        $group->deleteActionInGroup($action->id);
-//                    }
-                }
             }
         }
-
         return redirect('user/group/index');
     }
 
     public function edit($id)
     {
         $group = Group::find($id);
-        return view('user.group.edit', ['group'=>$group]);
+        return view('user.group.edit', ['group' => $group]);
     }
 
     public function update($id, Request $request)
     {
         $allActions = Action::all();
-        $group=Group::find($id);
+        $group = Group::find($id);
         $actions = $request->action;
 
-        if($actions === null)
-        {
-            foreach($group->actions()->get() as $action)
-            {
-                if($group->hasAction($action->name))
-                {
+        if ($actions === null) {
+            foreach ($group->actions()->get() as $action) {
+                if ($group->hasAction($action->name)) {
                     $group->deleteActionInGroup($action->id);
                 }
             }
-        }
-        else
-        {
-            foreach($allActions as $action)
-            {
-                if(array_key_exists($action->id, $actions))
-                {
-                    if(!$group->hasAction($action->name))
-                    {
+        } else {
+            foreach ($allActions as $action) {
+                if (array_key_exists($action->id, $actions)) {
+                    if (!$group->hasAction($action->name)) {
                         $group->addActionToGroup($action->id);
                     }
-                }
-                else
-                {
+                } else {
 
-                    if($group->hasAction($action->name))
-                    {
+                    if ($group->hasAction($action->name)) {
                         $group->deleteActionInGroup($action->id);
                     }
                 }

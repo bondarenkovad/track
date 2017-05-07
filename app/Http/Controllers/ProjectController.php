@@ -37,10 +37,10 @@ class ProjectController extends Controller
         $types = IssueType::all();
         $priorities = IssuesPriority::all();
         $users = User::all();
-        return view('project.view.view', ['issues'=>$issues,'project'=>$project,'board'=> $board, 'statuses'=> $statuses,'types'=>$types, 'priorities'=>$priorities, 'users'=>$users]);
+        return view('project.view.view', ['issues' => $issues, 'project' => $project, 'board' => $board, 'statuses' => $statuses, 'types' => $types, 'priorities' => $priorities, 'users' => $users]);
     }
 
-    public function showSprint($key,$i, $id)
+    public function showSprint($key, $i, $id)
     {
         $project = Project::where('key', '=', $key)
             ->first();
@@ -50,19 +50,18 @@ class ProjectController extends Controller
             ->where('id', '=', $id)
             ->first();
 
-        return view('project.board.activeSprint', ['project' => $project, 'sprint'=> $sprint, 'board'=>$board, 'statuses'=>$statuses]);
+        return view('project.board.activeSprint', ['project' => $project, 'sprint' => $sprint, 'board' => $board, 'statuses' => $statuses]);
     }
 
-    public function updateSprint($id,Request $request)
+    public function updateSprint($id, Request $request)
     {
         $data = $request->input('Data');
         $log = $request->input('log');
 
 
-        if($log != null)
-        {
+        if ($log != null) {
             DB::table('work_logs')->insert(
-                array('comment' => $log['comment'], 'user_id' =>  Auth::user()->id, 'issue_id' => $log['issueId'],'issue_status_id' => (int)$log['status_id'], 'time_spent'=>(int)$log['time_spent'])
+                array('comment' => $log['comment'], 'user_id' => Auth::user()->id, 'issue_id' => $log['issueId'], 'issue_status_id' => (int)$log['status_id'], 'time_spent' => (int)$log['time_spent'])
             );
 
             $issue = Issue::find($log['issueId']);
@@ -78,12 +77,9 @@ class ProjectController extends Controller
             session()->flash('status', 'Work Log added!');
         }
 
-        foreach($data as $key=>$value)
-        {
-            foreach($value as $id)
-            {
-                if($key != null)
-                {
+        foreach ($data as $key => $value) {
+            foreach ($value as $id) {
+                if ($key != null) {
                     $issue = Issue::find($id);
                     $issue->update([
                         [$issue->status_id = json_encode($key)]
@@ -97,7 +93,7 @@ class ProjectController extends Controller
     public function create()
     {
         $users = User::all();
-        return view('project.create', ['users'=>$users]);
+        return view('project.create', ['users' => $users]);
     }
 
     public function store(Request $request)
@@ -120,18 +116,10 @@ class ProjectController extends Controller
 
         $project = Project::find($id);
 
-        if($users === null)
-        {
-
-        }
-        else
-        {
-            foreach($allUsers as $user)
-            {
-                if(in_array($user->id, $users))
-                {
-                    if(!$project->hasUserInProject($user->name))
-                    {
+        if ($users != null) {
+            foreach ($allUsers as $user) {
+                if (in_array($user->id, $users)) {
+                    if (!$project->hasUserInProject($user->name)) {
                         $project->addUserToProject($user->id);
                     }
                 }
@@ -151,10 +139,10 @@ class ProjectController extends Controller
     public function edit($id)
     {
         $project = Project::find($id);
-        return view('project.edit', ['project'=>$project]);
+        return view('project.edit', ['project' => $project]);
     }
 
-    public function backlog($key,$id, Request $request)
+    public function backlog($key, $id, Request $request)
     {
         $project = Project::where('key', '=', $key)
             ->firstOrFail();
@@ -163,10 +151,10 @@ class ProjectController extends Controller
         $types = IssueType::all();
         $priorities = IssuesPriority::all();
         $users = User::all();
-        return view('project.backlog.backlog', ['project'=> $project,'board'=> $board, 'statuses'=> $statuses,'types'=>$types, 'priorities'=>$priorities, 'users'=>$users]);
+        return view('project.backlog.backlog', ['project' => $project, 'board' => $board, 'statuses' => $statuses, 'types' => $types, 'priorities' => $priorities, 'users' => $users]);
     }
 
-    public function refresh($key,$id, Request $request)
+    public function refresh($key, $id, Request $request)
     {
         $statuses = IssueStatus::all();
         $board = Board::find($id);
@@ -182,30 +170,23 @@ class ProjectController extends Controller
 
         $board = Board::find($id);
 
-           $data = $request->input('Data');
+        $data = $request->input('Data');
 
-        foreach($data as $key=>$value)
-        {
-            if($key === 'backlog')
-            {
+        foreach ($data as $key => $value) {
+            if ($key === 'backlog') {
                 $project->update([
                     [$project->order = json_encode($value)],
                 ]);
 
                 $project->save();
-            }
-            elseif(is_numeric($key))
-            {
+            } elseif (is_numeric($key)) {
                 $sprint = Sprint::find($key);
 
-                if($key === null)
-                {
+                if ($key === null) {
                     $sprint->update([
                         [$sprint->order = json_encode(null)],
                     ]);
-                }
-                else
-                {
+                } else {
                     $sprint->update([
                         [$sprint->order = json_encode($value)],
                     ]);
@@ -215,7 +196,7 @@ class ProjectController extends Controller
             }
         }
 
-        return view('project.backlog.backlog', ['project'=> $project,'board'=> $board, 'statuses'=> $statuses,'types'=>$types, 'priorities'=>$priorities, 'users'=>$users]);
+        return view('project.backlog.backlog', ['project' => $project, 'board' => $board, 'statuses' => $statuses, 'types' => $types, 'priorities' => $priorities, 'users' => $users]);
     }
 
     public function search(Request $request)
@@ -223,14 +204,11 @@ class ProjectController extends Controller
         $search = $request->search;
         $p = Project::where('name', 'like', "%$search%")->get();
 
-        if(count($p) == 0 || $search === "")
-        {
+        if (count($p) == 0 || $search === "") {
             $projects = Project::all();
             session()->flash('danger', 'No search in database!');
             return view('/project/index', ['projects' => $projects]);
-        }
-        else
-        {
+        } else {
             return view('/project/index', ['projects' => $p]);
         }
 
@@ -242,31 +220,20 @@ class ProjectController extends Controller
         $project = Project::find($id);
         $users = $request->user;
 
-        if($users === null)
-        {
-            foreach($project->users()->get() as $user)
-            {
-                if($project->hasUserInProject($user->name))
-                {
+        if ($users === null) {
+            foreach ($project->users()->get() as $user) {
+                if ($project->hasUserInProject($user->name)) {
                     $project->deleteUserOfProject($user->id);
                 }
             }
-        }
-        else
-        {
-            foreach($allUsers as $user)
-            {
-                if(in_array($user->id, $users))
-                {
-                    if(!$project->hasUserInProject($user->name))
-                    {
+        } else {
+            foreach ($allUsers as $user) {
+                if (in_array($user->id, $users)) {
+                    if (!$project->hasUserInProject($user->name)) {
                         $project->addUserToProject($user->id);
                     }
-                }
-                else
-                {
-                    if($project->hasUserInProject($user->name))
-                    {
+                } else {
+                    if ($project->hasUserInProject($user->name)) {
                         $project->deleteUserOfProject($user->id);
                     }
                 }

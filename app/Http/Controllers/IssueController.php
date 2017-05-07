@@ -40,9 +40,9 @@ class IssueController extends Controller
         $types = IssueType::all();
         $priorities = IssuesPriority::all();
         $users = User::all();
-        return view('issue.create', ['statuses'=>$statuses,
-            'project'=>$project, 'types'=>$types,
-            'priorities'=>$priorities, 'users'=>$users]);
+        return view('issue.create', ['statuses' => $statuses,
+            'project' => $project, 'types' => $types,
+            'priorities' => $priorities, 'users' => $users]);
     }
 
     public function store($id, Request $request)
@@ -61,17 +61,17 @@ class IssueController extends Controller
         ]);
 
         Issue::create([
-        'summary' => $request['summary'],
-        'description' => $request['description'],
+            'summary' => $request['summary'],
+            'description' => $request['description'],
             'status_id' => $request['status_id'],
-            'project_id' =>$id,
+            'project_id' => $id,
             'type_id' => (int)$request['type_id'],
             'priority_id' => (int)$request['priority_id'],
             'reporter_id' => Auth::user()->id,
             'assigned_id' => (int)$request['assigned_id'],
             'original_estimate' => (int)$request['original_estimate'],
             'remaining_estimate' => (int)$request['remaining_estimate'],
-    ]);
+        ]);
 
         return view('project.view', ['project' => $project]);
     }
@@ -79,8 +79,6 @@ class IssueController extends Controller
 
     public function modalStore($id, Request $request)
     {
-        $project = Project::find($id);
-
         $this->validate($request, [
             'summary' => 'required|max:50',
             'description' => 'required',
@@ -96,7 +94,7 @@ class IssueController extends Controller
             'summary' => $request['summary'],
             'description' => $request['description'],
             'status_id' => $request['status_id'],
-            'project_id' =>$id,
+            'project_id' => $id,
             'type_id' => (int)$request['type_id'],
             'priority_id' => (int)$request['priority_id'],
             'reporter_id' => Auth::user()->id,
@@ -108,16 +106,8 @@ class IssueController extends Controller
         session()->flash('status', 'Issue successfully added!');
         return back();
     }
-//
-//    public function destroy($id)
-//    {
-//        DB::table('projects')->delete($id);
-//
-//        return redirect('project/index');
-//    }
-//
 
-    public function view($key,$id)
+    public function view($key, $id)
     {
         $issue = Issue::find($id);
         $statuses = IssueStatus::all();
@@ -129,12 +119,12 @@ class IssueController extends Controller
         $types = IssueType::all();
         $priorities = IssuesPriority::all();
         $users = User::all();
-        return view('issue.view.view', ['issue'=>$issue, 'statuses'=>$statuses,
-            'project'=>$project, 'types'=>$types,
-            'priorities'=>$priorities, 'users'=>$users, 'projects'=>$projects]);
+        return view('issue.view.view', ['issue' => $issue, 'statuses' => $statuses,
+            'project' => $project, 'types' => $types,
+            'priorities' => $priorities, 'users' => $users, 'projects' => $projects]);
     }
 
-    public function edit($key,$id)
+    public function edit($key, $id)
     {
         $issue = Issue::find($id);
         $statuses = IssueStatus::all();
@@ -143,12 +133,12 @@ class IssueController extends Controller
         $types = IssueType::all();
         $priorities = IssuesPriority::all();
         $users = User::all();
-        return view('issue.edit', ['issue'=>$issue, 'statuses'=>$statuses,
-            'project'=>$project, 'types'=>$types,
-            'priorities'=>$priorities, 'users'=>$users]);
+        return view('issue.edit', ['issue' => $issue, 'statuses' => $statuses,
+            'project' => $project, 'types' => $types,
+            'priorities' => $priorities, 'users' => $users]);
     }
 
-    public function update($id,$key, Request $request)
+    public function update($id, $key, Request $request)
     {
         $issue = Issue::find($id);
         $project = Project::where('key', '=', $key)
@@ -165,12 +155,6 @@ class IssueController extends Controller
             'remaining_estimate' => 'integer',
         ]);
 
-//        if(is_numeric($request->original_estimate) && is_numeric($request->remaining_estimate))
-//        {
-//            $orEst = mktime($request->original_estimate,0,0,0,0,0 );
-//            $remEst = mktime($request->remaining_estimate,0,0,0,0,0 );
-//        }
-
         $issue->update([
             [$issue->summary = $request->summary],
             [$issue->description = $request->description],
@@ -178,7 +162,7 @@ class IssueController extends Controller
             [$issue->project_id = $project->id],
             [$issue->type_id = (int)$request->type_id],
             [$issue->priority_id = (int)$request->priority_id],
-            [$issue->reporter_id =  Auth::user()->id],
+            [$issue->reporter_id = Auth::user()->id],
             [$issue->assigned_id = (int)$request->assigned_id],
             [$issue->status_id = (int)$request->status_id],
             [$issue->original_estimate = (int)$request->original_estimate],
@@ -195,19 +179,19 @@ class IssueController extends Controller
     {
         $issue = Issue::find($id);
 
-        return view('issue.comment.index', ['issue'=>$issue]);
+        return view('issue.comment.index', ['issue' => $issue]);
     }
 
     public function saveComment($id, Request $request)
     {
-        $date = date("Y-m-d H:i:s",time());
+        $date = date("Y-m-d H:i:s", time());
 
         $this->validate($request, [
             'text' => 'required',
         ]);
 
         DB::table('comments')->insert(
-            array('text' => $request->text, 'user_id' =>  Auth::user()->id, 'issue_id' => $id, 'created_at'=>$date)
+            array('text' => $request->text, 'user_id' => Auth::user()->id, 'issue_id' => $id, 'created_at' => $date)
         );
         session()->flash('status', 'Comment added!');
 
@@ -218,27 +202,9 @@ class IssueController extends Controller
     {
         $comment = Comment::find($id);
 
-        return view('issue.comment.edit', ['comment'=>$comment]);
+        return view('issue.comment.edit', ['comment' => $comment]);
     }
 
-//    public function updateComment($id, Request $request)
-//    {
-//        $comment =Comment::find($id);
-//
-//        $this->validate($request, [
-//            'text' => 'required',
-//        ]);
-//
-//        $comment->update([
-//            [$comment->text = $request->text]
-//        ]);
-//
-//
-//        $comment->save();
-//        session()->flash('status', 'Comment successfully updated!');
-//
-//        return redirect('issue/index');
-//    }
 
     public function updateComment($id, Request $request)
     {
@@ -272,14 +238,14 @@ class IssueController extends Controller
         $log = WorkLog::find($id);
         $statuses = IssueStatus::all();
 
-        return view('issue.workLog.edit', ['log'=>$log, 'statuses'=>$statuses]);
+        return view('issue.workLog.edit', ['log' => $log, 'statuses' => $statuses]);
     }
 
     public function addWorkLog($id)
     {
         $issue = Issue::find($id);
         $statuses = IssueStatus::all();
-        return view('issue.workLog.index', ['issue'=>$issue, 'statuses'=>$statuses]);
+        return view('issue.workLog.index', ['issue' => $issue, 'statuses' => $statuses]);
     }
 
     public function updateWorkLog($id, Request $request)
@@ -324,9 +290,8 @@ class IssueController extends Controller
         ]);
 
 
-
         DB::table('work_logs')->insert(
-            array('comment' => $request->comment, 'user_id' =>  Auth::user()->id, 'issue_id' => $id,'issue_status_id' => (int)$request['status_id'], 'time_spent'=>(int)$request['time_spent'] )
+            array('comment' => $request->comment, 'user_id' => Auth::user()->id, 'issue_id' => $id, 'issue_status_id' => (int)$request['status_id'], 'time_spent' => (int)$request['time_spent'])
         );
         session()->flash('status', 'Work Log added!');
 
@@ -344,7 +309,7 @@ class IssueController extends Controller
     public function addFile($id)
     {
         $issue = Issue::find($id);
-        return view('issue.file.index', ['issue'=>$issue]);
+        return view('issue.file.index', ['issue' => $issue]);
     }
 
     public function saveFile($id, Request $request)
@@ -355,14 +320,13 @@ class IssueController extends Controller
             'file' => 'required|max:255',
         ]);
 
-        foreach($files as $file)
-        {
+        foreach ($files as $file) {
             $destinationPath = 'uploads';
             $fileName = $file->getClientOriginalName();
             $file->move($destinationPath, $fileName);
 
             DB::table('attachments')->insert(
-                array('path' => '\uploads\\'.$file->getClientOriginalName(), 'issue_id' => $id)
+                array('path' => '\uploads\\' . $file->getClientOriginalName(), 'issue_id' => $id)
             );
         }
 
@@ -373,9 +337,9 @@ class IssueController extends Controller
 
     public function deleteFile(Request $request)
     {
-       File::delete($request->filename);
+        File::delete($request->filename);
         DB::table('attachments')
-            ->where('attachments.path', '=',$request->filename )
+            ->where('attachments.path', '=', $request->filename)
             ->delete();
 
         session()->flash('danger', 'File has been delete!');

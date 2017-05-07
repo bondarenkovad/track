@@ -70,10 +70,10 @@ class SprintController extends Controller
             ->first();
         $board = Board::find($id);
 
-        return view('sprint.create', ['project'=>$project, 'board'=>$board]);
+        return view('sprint.create', ['project' => $project, 'board' => $board]);
     }
 
-    public function store($key,$id,Request $request)
+    public function store($key, $id, Request $request)
     {
         $project = Project::where('key', '=', $key)
             ->first();
@@ -92,22 +92,19 @@ class SprintController extends Controller
             'status' => (int)$request['status'],
             'project_id' => $project->id,
             'date_start' => $request['date_start'],
-            'date_finish' =>$request['date_start'],
+            'date_finish' => $request['date_start'],
         ]);
 
-        return redirect('/project/'.$project->key.'/board/'.$id.'/backlog');
+        return redirect('/project/' . $project->key . '/board/' . $id . '/backlog');
     }
 
     public function destroy($id)
     {
         $sprint = Sprint::find($id);
 
-        if($sprint->order === null || $sprint->order === [])
-        {
+        if ($sprint->order === null || $sprint->order === []) {
             $sprint->delete();
-        }
-        else
-        {
+        } else {
             $issueIdMass = $sprint->getNotDoneIssues();
             $project = Project::find($sprint->project['id']);
             $issueInProject = json_decode($project->order);
@@ -132,7 +129,7 @@ class SprintController extends Controller
         $projects = Project::all();
         $board = Board::find($i);
 
-        return view('sprint.edit', ['sprint'=>$sprint,'projects'=>$projects, 'board'=>$board]);
+        return view('sprint.edit', ['sprint' => $sprint, 'projects' => $projects, 'board' => $board]);
     }
 
     public function modalEdit($id)
@@ -146,7 +143,7 @@ class SprintController extends Controller
         return json_encode($sprint);
     }
 
-    public function modalUpdate( Request $request)
+    public function modalUpdate(Request $request)
     {
         $id = $request['sprintId'];
         $sprint = Sprint::find($id);
@@ -198,6 +195,6 @@ class SprintController extends Controller
         $sprint->save();
         session()->flash('status', 'Sprint successfully updated!');
 
-        return redirect('/project/'.$sprint->project['key'].'/board/'.$i.'/backlog');
+        return redirect('/project/' . $sprint->project['key'] . '/board/' . $i . '/backlog');
     }
 }

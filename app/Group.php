@@ -64,7 +64,6 @@ class Group extends Model
             ->join('groups', 'groups.id', '=', 'group_user.group_id')
             ->where('groups.name', '=', $this->name)
             ->select('users.name','users.email','users.active')
-//            ->distinct()
             ->get();
 
     }

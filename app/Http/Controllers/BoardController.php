@@ -27,13 +27,13 @@ class BoardController extends Controller
     {
         $projects = Project::all();
         $statuses = IssueStatus::all();
-        return view('board.create', ['projects'=>$projects, 'statuses'=>$statuses]);
+        return view('board.create', ['projects' => $projects, 'statuses' => $statuses]);
     }
 
     public function store(Request $request)
     {
 
-        $statuses = explode(',',$request->input('statusesId'));
+        $statuses = explode(',', $request->input('statusesId'));
         $allStatuses = IssueStatus::all();
 
         $this->validate($request, [
@@ -43,30 +43,23 @@ class BoardController extends Controller
 
         $id = DB::table('boards')->insertGetId([
             'name' => $request['name'],
-            'project_id' =>(int)$request['project_id'],
+            'project_id' => (int)$request['project_id'],
         ]);
 
         $board = Board::find($id);
         $key = 0;
 
-        if($statuses === null)
-        {
-
-        }
-        else
-        {
-            foreach($allStatuses as $status)
-            {
-                if(in_array($status->id, $statuses))
-                {
-                    if(!$board->hasStatus($status->name))
-                    {
+        if ($statuses != null) {
+            foreach ($allStatuses as $status) {
+                if (in_array($status->id, $statuses)) {
+                    if (!$board->hasStatus($status->name)) {
                         $key++;
                         $board->addStatusToBoard($status->id, $key);
                     }
                 }
             }
         }
+
         return redirect('/board/index');
     }
 
@@ -74,43 +67,32 @@ class BoardController extends Controller
     {
         $board = Board::find($id);
         $projects = Project::all();
-        return view('board.edit', ['board'=>$board, 'projects'=>$projects]);
+        return view('board.edit', ['board' => $board, 'projects' => $projects]);
     }
 
     public function update($id, Request $request)
     {
-        $statuses = explode(',',$request->input('statusesId'));
+        $statuses = explode(',', $request->input('statusesId'));
         $allStatuses = IssueStatus::all();
         $board = Board::find($id);
         $key = 0;
 
-        if($statuses[0] === "")
-        {
-            foreach($board->statuses()->get() as $status)
-            {
-                if($board->hasStatus($status->name))
-                {
+        if ($statuses[0] === "") {
+            foreach ($board->statuses()->get() as $status) {
+                if ($board->hasStatus($status->name)) {
 
                     $board->deleteStatusToBoard($status->id);
                 }
             }
-        }
-        else
-        {
-            foreach($allStatuses as $status)
-            {
-                if(in_array($status->id, $statuses))
-                {
-                    if(!$board->hasStatus($status->name))
-                    {
+        } else {
+            foreach ($allStatuses as $status) {
+                if (in_array($status->id, $statuses)) {
+                    if (!$board->hasStatus($status->name)) {
                         $key++;
                         $board->addStatusToBoard($status->id, $key);
                     }
-                }
-                else
-                {
-                    if($board->hasStatus($status->name))
-                    {
+                } else {
+                    if ($board->hasStatus($status->name)) {
                         $board->deleteStatusToBoard($status->id);
                     }
                 }

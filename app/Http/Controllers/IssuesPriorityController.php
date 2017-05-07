@@ -49,12 +49,12 @@ class IssuesPriorityController extends Controller
     public function edit($id)
     {
         $issuesPriority = IssuesPriority::find($id);
-        return view('issue.priority.edit', ['issuesPriority'=>$issuesPriority]);
+        return view('issue.priority.edit', ['issuesPriority' => $issuesPriority]);
     }
 
     public function update($id, Request $request)
     {
-        $issuesPriority=IssuesPriority::find($id);
+        $issuesPriority = IssuesPriority::find($id);
 
         $this->validate($request, [
             'name' => 'required|max:50',
