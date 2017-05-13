@@ -17,7 +17,7 @@ class IssueTypeController extends Controller
 
     public function index()
     {
-        $issueTypes = IssueType::all();
+        $issueTypes = $this->getTypes();
         return view('issue.type.index', ['issueTypes' => $issueTypes]);
     }
 
@@ -42,20 +42,18 @@ class IssueTypeController extends Controller
     public function destroy($id)
     {
         DB::table('issue_types')->delete($id);
-
-
         return redirect('issue/type/index');
     }
 
     public function edit($id)
     {
-        $issueType = IssueType::find($id);
+        $issueType = $this->getTypeById($id);
         return view('issue.type.edit', ['issueType' => $issueType]);
     }
 
     public function update($id, Request $request)
     {
-        $issueType = IssueType::find($id);
+        $issueType = $this->getTypeById($id);
 
         $this->validate($request, [
             'name' => 'required|max:255',
@@ -70,5 +68,15 @@ class IssueTypeController extends Controller
         session()->flash('status', 'Issue Type successfully updated!');
 
         return redirect('issue/type/index');
+    }
+
+    public function getTypes()
+    {
+        return IssueType::all();
+    }
+
+    public function getTypeById($id)
+    {
+        return IssueType::find($id);
     }
 }
