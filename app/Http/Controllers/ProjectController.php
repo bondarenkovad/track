@@ -24,28 +24,27 @@ class ProjectController extends Controller
 
     public function index()
     {
-        $projects = Project::all();
+        $projects = $this->getProjects();
         return view('project.index', ['projects' => $projects]);
     }
 
     public function view($id)
     {
-        $project = Project::find($id);
+        $project = $this->getProjectById($id);
         $issues = $project->issues()->paginate(10);
-        $board = Board::find($id);
-        $statuses = IssueStatus::all();
-        $types = IssueType::all();
-        $priorities = IssuesPriority::all();
-        $users = User::all();
+        $board = $this->getBoardById($id);
+        $statuses = $this->getStatuses();
+        $types = $this->getTypes();
+        $priorities = $this->getPriorities();
+        $users = $this->getUsers();
         return view('project.view.view', ['issues' => $issues, 'project' => $project, 'board' => $board, 'statuses' => $statuses, 'types' => $types, 'priorities' => $priorities, 'users' => $users]);
     }
 
     public function showSprint($key, $i, $id)
     {
-        $project = Project::where('key', '=', $key)
-            ->first();
-        $board = Board::find($i);
-        $statuses = IssueStatus::all();
+        $project = $this->getProjectByKey($key);
+        $board = $this->getProjectById($i);
+        $statuses = $this->getStatuses();
         $sprint = $project->sprints()
             ->where('id', '=', $id)
             ->first();
@@ -53,11 +52,10 @@ class ProjectController extends Controller
         return view('project.board.activeSprint', ['project' => $project, 'sprint' => $sprint, 'board' => $board, 'statuses' => $statuses]);
     }
 
-    public function updateSprint($id, Request $request)
+    public function updateSprint(Request $request)
     {
         $data = $request->input('Data');
         $log = $request->input('log');
-
 
         if ($log != null) {
             DB::table('work_logs')->insert(
@@ -92,13 +90,13 @@ class ProjectController extends Controller
 
     public function create()
     {
-        $users = User::all();
+        $users = $this->getUsers();
         return view('project.create', ['users' => $users]);
     }
 
     public function store(Request $request)
     {
-        $allUsers = User::all();
+        $allUsers = $this->getUsers();
         $users = $request->user;
 
         $this->validate($request, [
@@ -114,7 +112,7 @@ class ProjectController extends Controller
             'key' => $key,
         ]);
 
-        $project = Project::find($id);
+        $project = $this->getProjectById($id);
 
         if ($users != null) {
             foreach ($allUsers as $user) {
@@ -138,37 +136,32 @@ class ProjectController extends Controller
 
     public function edit($id)
     {
-        $project = Project::find($id);
+        $project = $this->getProjectById($id);
         return view('project.edit', ['project' => $project]);
     }
 
-    public function backlog($key, $id, Request $request)
+    public function backlog($key, $id)
     {
-        $project = Project::where('key', '=', $key)
-            ->firstOrFail();
-        $board = Board::find($id);
-        $statuses = IssueStatus::all();
-        $types = IssueType::all();
-        $priorities = IssuesPriority::all();
-        $users = User::all();
+        $project = $this->getProjectByKey($key);
+        $board = $this->getBoardById($id);
+        $statuses = $this->getStatuses();
+        $types = $this->getTypes();
+        $priorities = $this->getPriorities();
+        $users = $this->getUsers();
         return view('project.backlog.backlog', ['project' => $project, 'board' => $board, 'statuses' => $statuses, 'types' => $types, 'priorities' => $priorities, 'users' => $users]);
     }
 
     public function refresh($key, $id, Request $request)
     {
-        $statuses = IssueStatus::all();
-        $board = Board::find($id);
-        $statuses = IssueStatus::all();
-        $types = IssueType::all();
-        $priorities = IssuesPriority::all();
-        $users = User::all();
-
+        $statuses = $this->getStatuses();
+        $types = $this->getTypes();
+        $priorities = $this->getPriorities();
+        $users = $this->getUsers();
+        $board = $this->getBoardById($id);
 
         $project = Project::with('issues')
             ->where('key', '=', $key)
             ->first();
-
-        $board = Board::find($id);
 
         $data = $request->input('Data');
 
@@ -216,8 +209,8 @@ class ProjectController extends Controller
 
     public function update($id, Request $request)
     {
-        $allUsers = User::all();
-        $project = Project::find($id);
+        $allUsers = $this->getUsers();
+        $project = $this->getProjectById($id);
         $users = $request->user;
 
         if ($users === null) {
@@ -260,4 +253,47 @@ class ProjectController extends Controller
 
         return redirect('project/index');
     }
+
+    public function getProjects()
+    {
+        return Project::all();
+    }
+
+    public function getProjectByKey($key)
+    {
+        return Project::where('key', '=', $key)
+            ->first();
+    }
+
+    public function getProjectById($id)
+    {
+        return Project::find($id);
+    }
+
+    public function getBoardById($i)
+    {
+        return Board::find($i);
+    }
+
+    public function getStatuses()
+    {
+        return IssueStatus::all();
+    }
+
+    public function getTypes()
+    {
+        return IssueType::all();
+    }
+
+    public function getPriorities()
+    {
+        return IssuesPriority::all();
+    }
+
+    public function getUsers()
+    {
+        return User::all();
+    }
+
+
 }
