@@ -15,9 +15,9 @@ class IssuesPriorityController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        $issuesPriority = IssuesPriority::all();
+        $issuesPriority = $this->getPriorities();
         return view('issue.priority.index', ['issuesPriority' => $issuesPriority]);
     }
 
@@ -48,13 +48,13 @@ class IssuesPriorityController extends Controller
 
     public function edit($id)
     {
-        $issuesPriority = IssuesPriority::find($id);
+        $issuesPriority = $this->getPriorityById($id);
         return view('issue.priority.edit', ['issuesPriority' => $issuesPriority]);
     }
 
     public function update($id, Request $request)
     {
-        $issuesPriority = IssuesPriority::find($id);
+        $issuesPriority = $this->getPriorityById($id);
 
         $this->validate($request, [
             'name' => 'required|max:50',
@@ -69,5 +69,15 @@ class IssuesPriorityController extends Controller
         session()->flash('status', 'Issue Priority successfully updated!');
 
         return redirect('issue/priority/index');
+    }
+
+    public function getPriorities()
+    {
+        return IssuesPriority::all();
+    }
+
+    public function getPriorityById($id)
+    {
+        return IssuesPriority::find($id);
     }
 }
