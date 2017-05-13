@@ -20,13 +20,13 @@ class SprintController extends Controller
 
     public function index()
     {
-        $sprints = Sprint::all();
+        $sprints = $this->getSprints();
         return view('sprint.index', ['sprints' => $sprints]);
     }
 
     public function makeStatusIsActive($id)
     {
-        $sprint = Sprint::find($id);
+        $sprint = $this->getSprintById($id);
 
         $sprint->update([
             [$sprint->status = 2],
@@ -39,7 +39,7 @@ class SprintController extends Controller
 
     public function makeStatusIsFinish($id)
     {
-        $sprint = Sprint::find($id);
+        $sprint = $this->getSprintById($id);
         $issueIdMass = $sprint->getNotDoneIssues();
         $project = Project::find($sprint->project['id']);
         $issueInProject = json_decode($project->order);
@@ -63,20 +63,17 @@ class SprintController extends Controller
         return back();
     }
 
-
     public function create($key, $id)
     {
-        $project = Project::where('key', '=', $key)
-            ->first();
-        $board = Board::find($id);
+        $project = $this->getProjectByKey($key);
+        $board = $this->getBoardById($id);
 
         return view('sprint.create', ['project' => $project, 'board' => $board]);
     }
 
     public function store($key, $id, Request $request)
     {
-        $project = Project::where('key', '=', $key)
-            ->first();
+        $project = $this->getProjectByKey($key);
 
         $this->validate($request, [
             'name' => 'required|max:50',
@@ -100,7 +97,7 @@ class SprintController extends Controller
 
     public function destroy($id)
     {
-        $sprint = Sprint::find($id);
+        $sprint = $this->getSprintById($id);
 
         if ($sprint->order === null || $sprint->order === []) {
             $sprint->delete();
@@ -125,9 +122,9 @@ class SprintController extends Controller
 
     public function edit($id, $i)
     {
-        $sprint = Sprint::find($id);
-        $projects = Project::all();
-        $board = Board::find($i);
+        $sprint = $this->getSprintById($id);
+        $projects = $this->getProjects();
+        $board = $this->getBoardById($i);
 
         return view('sprint.edit', ['sprint' => $sprint, 'projects' => $projects, 'board' => $board]);
     }
@@ -146,7 +143,7 @@ class SprintController extends Controller
     public function modalUpdate(Request $request)
     {
         $id = $request['sprintId'];
-        $sprint = Sprint::find($id);
+        $sprint = $this->getSprintById($id);
 
         $this->validate($request, [
             'sprintName' => 'required|max:50',
@@ -173,7 +170,7 @@ class SprintController extends Controller
 
     public function update($id, $i, Request $request)
     {
-        $sprint = Sprint::find($id);
+        $sprint = $this->getSprintById($id);
 
         $this->validate($request, [
             'name' => 'required|max:50',
@@ -196,5 +193,31 @@ class SprintController extends Controller
         session()->flash('status', 'Sprint successfully updated!');
 
         return redirect('/project/' . $sprint->project['key'] . '/board/' . $i . '/backlog');
+    }
+
+    public function getSprints()
+    {
+        return Sprint::all();
+    }
+
+    public function getSprintById($id)
+    {
+        return Sprint::find($id);
+    }
+
+    public function getProjectByKey($key)
+    {
+        return Project::where('key', '=', $key)
+            ->first();
+    }
+
+    public function getBoardById($id)
+    {
+        return Board::find($id);
+    }
+
+    public function getProjects()
+    {
+        return Project::all();
     }
 }
