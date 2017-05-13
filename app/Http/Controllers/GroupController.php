@@ -17,25 +17,25 @@ class GroupController extends Controller
 
     public function index()
     {
-        $groups = Group::all();
+        $groups = $this->getGroups();
         return view('user.group.index', ['groups' => $groups]);
     }
 
     public function create()
     {
-        $actions = Action::all();
+        $actions = $this->getActions();
         return view('user.group.create', ['actions' => $actions]);
     }
 
     public function showUser($id)
     {
-        $group = Group::find($id);
+        $group = $this->getGroup($id);
         return view('user.group.show', ['group' => $group]);
     }
 
     public function store(Request $request)
     {
-        $allActions = Action::all();
+        $allActions = $this->getActions();
         $actions = $request->action;
 
         $this->validate($request, [
@@ -46,7 +46,7 @@ class GroupController extends Controller
             'name' => $request['name'],
         ]);
 
-        $group = Group::find($id);
+        $group = $this->getGroup($id);
 
         if ($actions != null) {
             foreach ($allActions as $action) {
@@ -62,14 +62,14 @@ class GroupController extends Controller
 
     public function edit($id)
     {
-        $group = Group::find($id);
+        $group = $this->getGroup($id);
         return view('user.group.edit', ['group' => $group]);
     }
 
     public function update($id, Request $request)
     {
-        $allActions = Action::all();
-        $group = Group::find($id);
+        $allActions = $this->getActions();
+        $group = $this->getGroup($id);
         $actions = $request->action;
 
         if ($actions === null) {
@@ -106,6 +106,21 @@ class GroupController extends Controller
         session()->flash('status', 'Group successfully update!');
 
         return redirect('user/group/index');
+    }
+
+    public function getGroups()
+    {
+        return Group::all();
+    }
+
+    public function getGroup($id)
+    {
+        return Group::find($id);
+    }
+
+    public function getActions()
+    {
+        return Action::all();
     }
 
 }
