@@ -217,7 +217,6 @@ class User extends Authenticatable
             ->get();
     }
 
-
     public function countUserAllIssues()
     {
         return $issues = Issue::where([

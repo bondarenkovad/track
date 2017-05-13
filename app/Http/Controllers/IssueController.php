@@ -34,12 +34,12 @@ class IssueController extends Controller
 
     public function create($key)
     {
-        $statuses = IssueStatus::all();
-        $project = Project::where('key', '=', $key)
-            ->firstOrFail();
-        $types = IssueType::all();
-        $priorities = IssuesPriority::all();
-        $users = User::all();
+        $statuses = $this->getStatuses();
+        $project = $this->getProject($key);
+        $types = $this->getTypes();
+        $priorities = $this->getPriorities();
+        $users = $this->getUsers();
+
         return view('issue.create', ['statuses' => $statuses,
             'project' => $project, 'types' => $types,
             'priorities' => $priorities, 'users' => $users]);
@@ -47,7 +47,7 @@ class IssueController extends Controller
 
     public function store($id, Request $request)
     {
-        $project = Project::find($id);
+        $project = $this->getProjectById($id);
 
         $this->validate($request, [
             'summary' => 'required|max:50',
@@ -75,7 +75,6 @@ class IssueController extends Controller
 
         return view('project.view', ['project' => $project]);
     }
-
 
     public function modalStore($id, Request $request)
     {
@@ -109,16 +108,17 @@ class IssueController extends Controller
 
     public function view($key, $id)
     {
-        $issue = Issue::find($id);
-        $statuses = IssueStatus::all();
+        $issue = $this->getIssueById($id);
+        $statuses = $this->getStatuses();
+        $projects = $this->getProjects();
+        $types = $this->getTypes();
+        $priorities = $this->getPriorities();
+        $users = $this->getUsers();
+
         if ($key != null) {
-            $project = Project::where('key', '=', $key)
-                ->first();
+            $project = $this->getProject($key);
         }
-        $projects = Project::all();
-        $types = IssueType::all();
-        $priorities = IssuesPriority::all();
-        $users = User::all();
+
         return view('issue.view.view', ['issue' => $issue, 'statuses' => $statuses,
             'project' => $project, 'types' => $types,
             'priorities' => $priorities, 'users' => $users, 'projects' => $projects]);
@@ -126,13 +126,13 @@ class IssueController extends Controller
 
     public function edit($key, $id)
     {
-        $issue = Issue::find($id);
-        $statuses = IssueStatus::all();
-        $project = Project::where('key', '=', $key)
-            ->first();
-        $types = IssueType::all();
-        $priorities = IssuesPriority::all();
-        $users = User::all();
+        $issue = $this->getIssueById($id);
+        $statuses = $this->getStatuses();
+        $project = $this->getProject($key);
+        $types = $this->getTypes();
+        $priorities = $this->getPriorities();
+        $users = $this->getUsers();
+
         return view('issue.edit', ['issue' => $issue, 'statuses' => $statuses,
             'project' => $project, 'types' => $types,
             'priorities' => $priorities, 'users' => $users]);
@@ -140,9 +140,8 @@ class IssueController extends Controller
 
     public function update($id, $key, Request $request)
     {
-        $issue = Issue::find($id);
-        $project = Project::where('key', '=', $key)
-            ->first();
+        $issue = $this->getIssueById($id);
+        $project = $this->getProject($key);
 
         $this->validate($request, [
             'summary' => 'required|max:50',
@@ -177,14 +176,14 @@ class IssueController extends Controller
 
     public function addComment($id)
     {
-        $issue = Issue::find($id);
+        $issue = $this->getIssueById($id);
 
         return view('issue.comment.index', ['issue' => $issue]);
     }
 
     public function saveComment($id, Request $request)
     {
-        $date = date("Y-m-d H:i:s", time());
+        $date = $this->getDateTimeNow();
 
         $this->validate($request, [
             'text' => 'required',
@@ -200,15 +199,14 @@ class IssueController extends Controller
 
     public function editComment($id)
     {
-        $comment = Comment::find($id);
+        $comment = $this->getCommentById($id);
 
         return view('issue.comment.edit', ['comment' => $comment]);
     }
 
-
     public function updateComment($id, Request $request)
     {
-        $comment = Comment::find($id);
+        $comment = $this->getCommentById($id);
 
         $this->validate($request, [
             'text' => 'required',
@@ -235,16 +233,16 @@ class IssueController extends Controller
 
     public function editWorkLog($id)
     {
-        $log = WorkLog::find($id);
-        $statuses = IssueStatus::all();
+        $log = $this->getLogById($id);
+        $statuses = $this->getStatuses();
 
         return view('issue.workLog.edit', ['log' => $log, 'statuses' => $statuses]);
     }
 
     public function addWorkLog($id)
     {
-        $issue = Issue::find($id);
-        $statuses = IssueStatus::all();
+        $issue = $this->getIssueById($id);
+        $statuses = $this->getStatuses();
         return view('issue.workLog.index', ['issue' => $issue, 'statuses' => $statuses]);
     }
 
@@ -266,7 +264,7 @@ class IssueController extends Controller
 
         $log->save();
 
-        $issue = Issue::find($id);
+        $issue = $this->getIssueById($id);
 
         $newRem = $issue->remaining_estimate - (int)$request->time_spent;
 
@@ -308,7 +306,7 @@ class IssueController extends Controller
 
     public function addFile($id)
     {
-        $issue = Issue::find($id);
+        $issue = $this->getIssueById($id);
         return view('issue.file.index', ['issue' => $issue]);
     }
 
@@ -344,5 +342,61 @@ class IssueController extends Controller
 
         session()->flash('danger', 'File has been delete!');
         return redirect('issue/index');
+    }
+
+    public function getStatuses()
+    {
+        return IssueStatus::all();
+    }
+
+    public function getProjects()
+    {
+        return Project::all();
+    }
+
+    public function getProject($key)
+    {
+        return Project::where('key', '=', $key)
+            ->first();
+    }
+
+    public function getProjectById($id)
+    {
+        return Project::find($id);
+    }
+
+    public function getTypes()
+    {
+        return IssueType::all();
+    }
+
+    public function getPriorities()
+    {
+        return IssuesPriority::all();
+    }
+
+    public function getUsers()
+    {
+        return User::all();
+    }
+
+    public function getIssueById($id)
+    {
+        return Issue::find($id);
+    }
+
+    public function getCommentById($id)
+    {
+        return Comment::find($id);
+    }
+
+    public function getLogById($id)
+    {
+        return WorkLog::find($id);
+    }
+
+    public function getDateTimeNow()
+    {
+        return date("Y-m-d H:i:s", time());
     }
 }

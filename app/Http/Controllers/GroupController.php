@@ -122,5 +122,4 @@ class GroupController extends Controller
     {
         return Action::all();
     }
-
 }
