@@ -22,7 +22,7 @@ class UserController extends Controller
     {
         if ($request->user() != null) {
 
-            $users = User::all();
+            $users = $this->getUsers();
             return view('user.index', ['users' => $users]);
         } else {
             return view('auth.login');
@@ -31,14 +31,14 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $user = User::find($id);
+        $user = $this->getUserById($id);
         $issues = Issue::where('assigned_id', '=', $user->id)->paginate(10);
         return view('user.show', ['user' => $user, 'issues' => $issues]);
     }
 
     public function create()
     {
-        $projects = Project::all();
+        $projects = $this->getProjects();
         return view('user.create', ['projects' => $projects]);
     }
 
@@ -54,7 +54,7 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $allProjects = Project::all();
+        $allProjects = $this->getProjects();
         $projects = $request->project;
 
         $this->validate($request, [
@@ -84,7 +84,7 @@ class UserController extends Controller
             'image_path' => $userPhoto,
         ]);
 
-        $user = User::find($id);
+        $user = $this->getUserById($id);
 
         $user->addDefaultUserGroup();
 
@@ -103,7 +103,7 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $user = User::find($id);
+        $user = $this-> getUserById($id);
         return view('user.edit', ['user' => $user]);
     }
 
@@ -122,11 +122,11 @@ class UserController extends Controller
 
     public function update($id, Request $request)
     {
-        $allGroup = Group::all();
-        $user = User::find($id);
+        $allGroup = $this->getGroups();
+        $user = $this->getUserById($id);
         $groups = $request->group;
         $projects = $request->project;
-        $allProjects = Project::all();
+        $allProjects = $this->getProjects();
 
         if ($groups === null) {
             foreach ($user->groups()->get() as $group) {
@@ -210,5 +210,25 @@ class UserController extends Controller
         session()->flash('status', 'User successfully updated!');
 
         return redirect('user/index');
+    }
+
+    public function getUsers()
+    {
+        return User::all();
+    }
+
+    public function getUserById($id)
+    {
+        return User::find($id);
+    }
+
+    public function getProjects()
+    {
+        return Project::all();
+    }
+
+    public function getGroups()
+    {
+        return Group::all();
     }
 }
