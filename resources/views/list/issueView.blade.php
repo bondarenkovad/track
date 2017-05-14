@@ -1,5 +1,5 @@
 <li class="ui-state-default" data-value="{{$issue->id}}">
-    <span class="imageSpan">
+    <span class="pull-left">
         @if($issue->type['name'] === 'task')
             <span class="img glyphicon glyphicon-education low" data-toggle="tooltip" title="{{$issue->type['name']}}"></span>
         @elseif($issue->type['name'] === 'story')
