@@ -1,5 +1,5 @@
-<div class="row">
-    <div class="col-md-12">
+<div class="row-fluid">
+    <div>
         <a href="/project/{{$project->id}}/view" style="text-decoration: none">Project - {{$project->key}}</a>
         <span class="colorShade">issues:{{count($project->getIssueForUserById($user->id))}}</span>
         @if($project->getUserInProjectTime($user->id) < 0)

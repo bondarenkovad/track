@@ -8,11 +8,11 @@
             <span class="img glyphicon glyphicon-fire danger" data-toggle="tooltip" title="{{$issue->type['name']}}"></span>
         @endif
     </span>
-    <span class="badge floatLeft" style="display: block; width: 100px">{{$project->key}} - {{$issue->id}}</span>
-    <span class="summary">{{$issue->summary}}</span>
-    <span class="description" >{!! strip_tags($issue->description, '<a><b><strong>') !!}</span>
-    <span class="assign">
-    <span class="marginL">
+    <span class="badge pull-left" style="width: 8%">{{$project->key}} - {{$issue->id}}</span>
+    <span class="summary pull-left">{{$issue->summary}}</span>
+    <span class="description pull-left" >{!! strip_tags($issue->description, '<a><b><strong>') !!}</span>
+    <span class="assign pull-left">
+    <span class="marginL pull-left">
     R:
         @if($issue->reporter['image_path'] != null)
             <a href="/user/show/{{$issue->reporter['id']}}" style="text-decoration: none"><img src="{{$issue->reporter['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}"></a>
@@ -29,7 +29,7 @@
         @endif
     </span>
     </span>
-    <span class="prioritySpan">
+    <span class="pull-left">
         @if($issue->priority['name'] === 'trivial')
             <span class="img glyphicon glyphicon-triangle-bottom low" data-toggle="tooltip" title="{{$issue->priority['name']}}"></span>
         @elseif($issue->priority['name'] === 'minor')
@@ -43,7 +43,7 @@
         @endif
     </span>
     <span>
-        <span class="badge marginL bWidth" >{{$issue->calcRE()}}h</span>
+        <span class="badge pull-left" style="width: 8%">{{$issue->calcRE()}}h</span>
     </span>
     <span class="marginL">
         @if($issue->status['name'] === 'open')
@@ -58,7 +58,7 @@
             <span class="baDge baDge-success">{{$issue->status['name']}}</span>
         @endif
     </span>
-    <span class="linkIssue">
+    <span class="pull-right">
         <a href="/project/{{$project->key}}/issue/{{$issue->id}}/view">View</a>
     </span>
 </li>

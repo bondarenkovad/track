@@ -97,7 +97,6 @@
     border: 1px dotted #c5c5c5;
     border-radius: 5px;
     min-height: 40px;
-    min-width: 1100px;
     list-style-type: none;
     margin-bottom: 10px;
     padding: 5px 0 0 0;
@@ -161,7 +160,6 @@
 .assign{
     color: #737373;
     padding-right: 10px;
-    float: left;
 }
 
 .marginL{
@@ -170,20 +168,19 @@
 
 .summary{
     white-space: nowrap;
-    padding-left: 10px;
+    padding-left: 1%;
     overflow: hidden;
-    float: left;
-    /*display: block;*/
-    width: 200px;
+    min-width: 10%;
+    width: 20%;
 }
 
 .description{
     white-space: nowrap;
-    padding-left: 10px;
+    padding-left: 1%;
     overflow: hidden;
     text-overflow: ellipsis;
-    float: left;
-    width: 500px;
+    min-width: 10%;
+    width: 30%;
 }
 
 .textDecorNo:hover{
