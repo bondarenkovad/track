@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row ui-state-default" data-value="{{$issue->id}}">
         <div class="col-lg-2 col-sm-2 col-xs-12">
-        @if($issue->type['name'] === 'task')
+            @if($issue->type['name'] === 'task')
                 <span class="img glyphicon glyphicon-education low" data-toggle="tooltip" title="{{$issue->type['name']}}"></span>
             @elseif($issue->type['name'] === 'story')
                 <span class="img glyphicon glyphicon-file high" data-toggle="tooltip" title="{{$issue->type['name']}}"></span>
@@ -11,7 +11,7 @@
             <span class="badge">{{$project->key}} - {{$issue->id}}</span>
         </div>
         <div class="col-lg-2 col-sm-10 col-xs-12">
-            <strong class="summary">{{$issue->summary}}</strong>
+            <div class="summary"><strong>{{$issue->summary}}</strong></div>
         </div>
         <div class="col-lg-4 col-sm-12 col-xs-12">
             <div class="description">{!! strip_tags($issue->description, '<a><b><strong>') !!}</div>
