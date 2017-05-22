@@ -6,7 +6,8 @@
         @include('modal.issueCreate')
         @include('modal.sprintEdit')
 
-        <h4 class="text-left text-muted"><a href="/project/{{$project->id}}/view" style="text-decoration: none"><span class="userName">{{$project->name}}</span></a> Board</h4>
+        <h4 class="text-left text-muted"><a href="/project/{{$project->id}}/view" style="text-decoration: none"><span class="userName text-capitalize">{{$project->name}}</span></a> Board</h4>
+        <hr>
         <form role="form" method="POST" action="{{action('ProjectController@refresh', ['key'=> $project->key, 'id'=>$board->id])}}">
             <input type="hidden" name="_method" value="put"/>
             <input id="projectKey" type="hidden" name="projectKey" value="{{$project->key}}">
