@@ -200,19 +200,6 @@
     color: #aaaaaa;
 }
 
-.leftDivDetails{
-    float: left;
-    width: 65%;
-    margin-top: 10px;
-}
-
-.rightDivPeople{
-    float: right;
-    width: 30%;
-    height: 500px;
-    margin-top: 10px;
-}
-
 .marginLeft{
     margin-left: 40px;
 }
