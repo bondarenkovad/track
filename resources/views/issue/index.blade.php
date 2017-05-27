@@ -1,7 +1,8 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-            <span class="text-left text-muted" style="font-size: 1.3em"><span class="userName">Issues</span> List</span>
+        <span class="text-left text-muted" style="font-size: 1.3em"><span class="userName">Issues</span> List</span>
+        <div class="table-responsive">
             <table class="table table-hover table-condensed">
                 <thead>
                 <th>Summary</th>
@@ -29,20 +30,20 @@
                         <td>{{$issue->priority['name']}}</td>
                         <td>
                             <a href="/user/show/{{$issue->reporter['id']}}" style="text-decoration: none">
-                            @if($issue->reporter['image_path'] != null)
-                                <img src="{{$issue->reporter['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
+                                @if($issue->reporter['image_path'] != null)
+                                    <img src="{{$issue->reporter['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
                                 @else
-                                <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
-                            @endif
+                                    <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
+                                @endif
                             </a>
                         </td>
                         <td>
                             <a href="/user/show/{{$issue->assigned['id']}}" style="text-decoration: none">
-                            @if($issue->assigned['image_path'] != null)
-                                <img src="{{$issue->assigned['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
-                            @else
-                                <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
-                            @endif
+                                @if($issue->assigned['image_path'] != null)
+                                    <img src="{{$issue->assigned['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
+                                @else
+                                    <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->assigned['name']}}">
+                                @endif
                             </a>
                         </td>
                         <td>{{$issue->CountComments()}}</td>
@@ -54,6 +55,7 @@
                 @endforeach
                 </tbody>
             </table>
+        </div>
         <div class="text-center">
             {{$issues->links()}}
         </div>

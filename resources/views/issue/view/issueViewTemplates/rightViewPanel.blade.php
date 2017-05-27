@@ -18,16 +18,16 @@
             </dd>
             <dt>Reporter:</dt>
             <dd>
-                            <span class="marginLeft">
-                                <a href="/user/show/{{$issue->reporter['id']}}" style="text-decoration: none">
-                                    @if($issue->reporter['image_path'] != null)
-                                        <img src="{{$issue->reporter['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
-                                    @else
-                                        <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
-                                    @endif
-                                    {{$issue->reporter['name']}}
-                                </a>
-                            </span>
+                <span class="marginLeft">
+                    <a href="/user/show/{{$issue->reporter['id']}}" style="text-decoration: none">
+                        @if($issue->reporter['image_path'] != null)
+                            <img src="{{$issue->reporter['image_path']}}" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
+                        @else
+                            <img src="/img/userPhoto/defaultPhoto.png" class="img img-circle" data-toggle="tooltip" title="{{$issue->reporter['name']}}">
+                        @endif
+                        {{$issue->reporter['name']}}
+                    </a>
+                </span>
             </dd>
             <dt>&nbsp;</dt>
             <dd>&nbsp;</dd>
@@ -76,9 +76,5 @@
                     </span>
                 @endif
             </dd>
-            <dt>&nbsp;</dt>
-            <dd>&nbsp;</dd>
-            <dt>&nbsp;</dt>
-            <dd>&nbsp;</dd>
         </dl>
 </div>

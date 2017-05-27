@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <span class="text-left text-muted" style="font-size: 1.3em"><span class="userName">Groups</span> List</span>
-        <span class="floatRight"><a  href="/user/group/add" class="textDecorNo">Group Create</a></span>
+        <span class="pull-right"><a  href="/user/group/add" class="textDecorNo">Group Create</a></span>
         <table class="table table-hover">
             <thead>
             <th>Name</th>

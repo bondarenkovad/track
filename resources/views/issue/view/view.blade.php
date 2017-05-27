@@ -30,7 +30,7 @@
             <div class="col-lg-6 col-sm-12 col-xs-12">
                 @include('issue.view.issueViewTemplates.rightViewPanel')
             </div>
-            <div class="col-lg-6 col-sm-12 col-xs-12">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
                 @include('issue.view.issueViewTemplates.activityTab')
             </div>
         </div>
