@@ -13,7 +13,7 @@
         <hr>
         <div class="issue">
             @foreach($boards as $board)
-               @include('board.BoardsTemplate.boardList')
+               @include('board.BoardTemplates.boardList')
             @endforeach
         </div>
     </div>

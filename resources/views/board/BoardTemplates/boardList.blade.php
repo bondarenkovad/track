@@ -9,7 +9,7 @@
         <div class="col-lg-3 col-sm-5 col-xs-12">
             @foreach($board->orderByOrders() as $status)
                 <span>
-            @if($status->name === 'open')
+                    @if($status->name === 'open')
                         <span class="baDge baDge-warning">{{$status->name}}</span>
                     @elseif($status->name === 'inProgress')
                         <span class="baDge baDge-info">{{$status->name}}</span>
@@ -20,7 +20,7 @@
                     @elseif($status->name === 'done')
                         <span class="baDge baDge-success">{{$status->name}}</span>
                     @endif
-            </span>
+                </span>
             @endforeach
         </div>
         <div class="col-lg-1 col-sm-2 col-xs-12">

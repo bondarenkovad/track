@@ -2,29 +2,19 @@
 
 @section('content')
     <div class="container">
-        <span class="text-left text-muted" style="font-size: 1.3em"><span class="userName">Groups</span> List</span>
-        <span class="pull-right"><a  href="/user/group/add" class="textDecorNo">Group Create</a></span>
-        <table class="table table-hover">
-            <thead>
-            <th>Name</th>
-            <th>Actions</th>
-            <th></th>
-            <th></th>
-            </thead>
-            <tbody>
+        <div class="row">
+            <div class="col-lg-6 col-sm-6 col-xs-6">
+                <span class="text-left text-muted" style="font-size: 1.3em"><span class="userName">Groups</span> List</span>
+            </div>
+            <div class="col-lg-6 col-sm-6 col-xs-6">
+                <a  href="/user/group/add" class="textDecorNo btn btn-success pull-right">Group Create</a>
+            </div>
+        </div>
+        <hr>
+        <div class="issue">
             @foreach($groups as $group)
-                <tr>
-                    <td>{{$group->name}}</td>
-                    <td>
-                        <ul> @foreach($group->actions()->get() as $action)</ul>
-                        <li>{{$action->name}}</li>
-                        @endforeach
-                    </td>
-                    <td><a  href="/user/group/show/{{$group->id}}" class="floatRight"><i class="glyphicon glyphicon-eye-open" data-toggle="tooltip" title="Show"></i></a></td>
-                    <td><a  href="/user/group/edit/{{$group->id}}" class="floatRight"><i class="glyphicon glyphicon-pencil" data-toggle="tooltip" title="Edit"></i></a></td>
-                </tr>
+                @include('user.group.GroupTemplates.groupList')
             @endforeach
-            </tbody>
-        </table>
+        </div>
     </div>
 @endsection
