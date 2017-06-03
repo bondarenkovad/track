@@ -14,11 +14,14 @@
         <div class="issue">
             <div class="container-fluid">
                 <div class="row ui-state-default">
-                    <div class="col-lg-4 col-sm-4 col-xs-12">
+                    <div class="col-lg-4 col-sm-2 col-xs-12">
                         <strong>Board Name</strong>
                     </div>
                     <div class="col-lg-4 col-sm-3 col-xs-12">
                         <span>Project Name</span>
+                    </div>
+                    <div class="col-lg-3 col-sm-5 col-xs-12">
+                        <span class="badge baDge-success">Statuses</span>
                     </div>
                     <div class="col-lg-1 col-sm-2 col-xs-12"></div>
                 </div>
